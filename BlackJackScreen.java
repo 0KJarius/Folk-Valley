@@ -99,12 +99,13 @@ public class BlackJackScreen extends JFrame
 
         if (player.getScore() == 21){
             updateHealth(enemy, enemyHpLabel, "ENEMY");
-            showBetTable();
+            
 
         } else if (player.getScore() > 21){
             updateHealth(player, playerHpLabel, "PLAYER");
-            showBetTable();
+            
         }
+        showBetTable();
     }
     
     public void onStandButtonPressed()
