@@ -64,17 +64,7 @@ public class BlackJackScreen extends JFrame
         middleThing.add(hitButton);
         hitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                player.addNewCard();
-                player.revalidate();
-
-                if (player.getScore() == 21){
-                    updateHealth(enemy, enemyHpLabel, "ENEMY");
-                    showBetTable();
-
-                } else if (player.getScore() > 21){
-                    updateHealth(player, playerHpLabel, "PLAYER");
-                    showBetTable();
-                }
+            	onHitButtonPressed();
             }
             
         });
@@ -82,25 +72,7 @@ public class BlackJackScreen extends JFrame
         middleThing.add(standButton);
         standButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                enemy.reveal();
-
-                if (enemy.getScore() == 21){
-                    updateHealth(player, playerHpLabel, "PLAYER");
-                    showBetTable();
-                } else if (enemy.getScore() > 21){
-                    updateHealth(enemy, enemyHpLabel, "ENEMY");
-                    showBetTable();
-                } else if (enemy.getScore() > player.getScore()){
-                    updateHealth(player, playerHpLabel, "PLAYER");
-                    showBetTable();
-
-                } else if (enemy.getScore() < player.getScore()){
-                    updateHealth(enemy, enemyHpLabel, "ENEMY");
-                    showBetTable();
-
-                } else if (enemy.getScore() == player.getScore()){
-                    showBetTable();
-                }
+            	onStandButtonPressed();
             }
             
         });
@@ -118,6 +90,44 @@ public class BlackJackScreen extends JFrame
         player.addNewCard();
         playerPointLabel.setText("PLAYER P : " + player.getScore());
         enemyPointLabel.setText("ENEMY P : " + enemy.getScore());
+    }
+    
+    public void onHitButtonPressed()
+    {
+    	player.addNewCard();
+        player.revalidate();
+
+        if (player.getScore() == 21){
+            updateHealth(enemy, enemyHpLabel, "ENEMY");
+            showBetTable();
+
+        } else if (player.getScore() > 21){
+            updateHealth(player, playerHpLabel, "PLAYER");
+            showBetTable();
+        }
+    }
+    
+    public void onStandButtonPressed()
+    {
+    	enemy.reveal();
+
+        if (enemy.getScore() == 21){
+            updateHealth(player, playerHpLabel, "PLAYER");
+            showBetTable();
+        } else if (enemy.getScore() > 21){
+            updateHealth(enemy, enemyHpLabel, "ENEMY");
+            showBetTable();
+        } else if (enemy.getScore() > player.getScore()){
+            updateHealth(player, playerHpLabel, "PLAYER");
+            showBetTable();
+
+        } else if (enemy.getScore() < player.getScore()){
+            updateHealth(enemy, enemyHpLabel, "ENEMY");
+            showBetTable();
+
+        } else if (enemy.getScore() == player.getScore()){
+            showBetTable();
+        }
     }
 
     private void updateHealth(Hand hand, JLabel hpLabel, String text)
