@@ -14,6 +14,13 @@ public class Card extends JButton
         score = rng.nextInt(1, 11);
         this.setText("" + score);
         this.setPreferredSize(new Dimension(150, 200));
+        this.repaint();
+    }
+    
+    public Card(int score) {
+    	this.score = score; 
+    	this.setText("" + this.score);
+        this.setPreferredSize(new Dimension(150, 200));
     }
     
     public int getCardScore()

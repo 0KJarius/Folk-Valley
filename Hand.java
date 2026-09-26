@@ -11,20 +11,55 @@ public class Hand extends Panel
     private ArrayList<Card> cards;
     private int score = 0;
     private int debt = 0;
-    private Hand thisHand;
     private int health = 100;
 
     public Hand(BlackJackScreen handler)
     {
         blackJackHandler = handler;
         health = 100;
-        thisHand = this;
         cards = new ArrayList<Card>();
         this.setPreferredSize(new Dimension(600,200));
         this.setBackground(Color.BLACK);
-        
+        this.repaint();
     }
+    
+    public void addNewCard(Card card) 
+    {
+    	cards.add(card);
+        this.add(card);
+        score += card.getCardScore() - debt;
+        
+        if (debt > 0){
+            debt -= card.getCardScore();
+        }
+        
+        if(cards.size() == 2 && cards.get(0).getCardScore() == cards.get(1).getCardScore()) {
+        	blackJackHandler.setSplitButton(true);
+        } else {
+        	blackJackHandler.setSplitButton(false);
+        }
 
+        card.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (cards.size() == 1){
+                    return;
+                }
+                removeCard(card);
+                debt += card.getCardScore();
+                score -= debt;
+                
+                blackJackHandler.updateDebtLabel(debt);
+            }
+            
+        });
+        blackJackHandler.updatePlayerPointLabel(score);
+        this.revalidate();
+        this.repaint();
+    }
+    
+    //will probably be removed once deck system is added
     public void addNewCard()
     {
         Card addedCard = new Card();
@@ -35,6 +70,12 @@ public class Hand extends Panel
         if (debt > 0){
             debt -= addedCard.getCardScore();
         }
+        
+        if(cards.size() == 2 && cards.get(0).getCardScore() == cards.get(1).getCardScore()) {
+        	blackJackHandler.setSplitButton(true);
+        } else {
+        	blackJackHandler.setSplitButton(false);
+        }
 
         addedCard.addActionListener(new ActionListener() {
 
@@ -43,9 +84,7 @@ public class Hand extends Panel
                 if (cards.size() == 1){
                     return;
                 }
-                cards.remove(addedCard);
-                addedCard.hideCard();
-                thisHand.remove(addedCard);
+                removeCard(addedCard);
                 debt += addedCard.getCardScore();
                 score -= debt;
                 
@@ -54,7 +93,16 @@ public class Hand extends Panel
             
         });
         blackJackHandler.updatePlayerPointLabel(score);
-
+        this.revalidate();
+        this.repaint();
+    }
+    
+    public void removeCard(Card cardToRemove) 
+    {
+    	score -= cardToRemove.getCardScore();
+    	cards.remove(cardToRemove);
+    	cardToRemove.hideCard();
+        this.remove(cardToRemove);
     }
 
     public void resetHand()
@@ -81,9 +129,6 @@ public class Hand extends Panel
         return debt;
     }
 
-    public Hand getThisHand() {
-        return thisHand;
-    }
 
     public void setCards(ArrayList<Card> cards) {
         this.cards = cards;
@@ -97,10 +142,6 @@ public class Hand extends Panel
         this.debt = debt;
     }
 
-    public void setThisHand(Hand thisHand) {
-        this.thisHand = thisHand;
-    }
-
     public int getHealth() {
         return health;
     }
@@ -110,7 +151,6 @@ public class Hand extends Panel
     }
 
     public void subHealth(int amount){
-        System.out.println(amount);
         health -= amount;
     }
 

@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,9 +12,11 @@ import javax.swing.JPanel;
 public class BlackJackScreen extends JFrame
 {
     private Hand player;
+    private LinkedList<Hand> playerHands;
     private EnemyHand enemy;
     private JButton hitButton;
     private JButton standButton;
+    private JButton splitButton;
     private JLabel playerHpLabel;
     private JLabel enemyHpLabel;
     private JLabel playerPointLabel;
@@ -33,8 +37,10 @@ public class BlackJackScreen extends JFrame
         rootPanel = new JPanel();
         this.setContentPane(rootPanel);
         rootPanel.setLayout(new BorderLayout());
-
-        player = new Hand(this);
+        
+        playerHands = new LinkedList<Hand>();
+        playerHands.addLast(new Hand(this));
+        player = playerHands.getFirst();
         enemy = new EnemyHand(this);
         playerHpLabel = new JLabel("PLAYER: " + player.getHealth());
         enemyHpLabel = new JLabel("ENEMY: " + player.getHealth());
@@ -42,10 +48,15 @@ public class BlackJackScreen extends JFrame
         enemyPointLabel = new JLabel("ENEMY P : " + enemy.getCards());
         debtLabel = new JLabel("DEBT: " + player.getDebt());
         betPoolLabel = new JLabel("BET POOL: " + betPool);
+        hitButton = new JButton("HIT");
+        standButton = new JButton("STAND");
+        splitButton = new JButton("SPLIT");
+        splitButton.setEnabled(false);
+        
         betTable = new BetTable(this);
         initializeTable();
-        this.add(betTable);
-        showBetTable();
+        rootPanel.add(betTable);
+        reset();
         this.pack();
         this.setSize(new Dimension(1280, 720));
         this.setResizable(false);
@@ -64,7 +75,6 @@ public class BlackJackScreen extends JFrame
         middleThing.add(enemyHpLabel);
         middleThing.add(betPoolLabel);
         
-        hitButton = new JButton("HIT");
         middleThing.add(hitButton);
         hitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -72,7 +82,7 @@ public class BlackJackScreen extends JFrame
             }
             
         });
-        standButton = new JButton("STAND");
+        
         middleThing.add(standButton);
         standButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -80,18 +90,26 @@ public class BlackJackScreen extends JFrame
             }
             
         });
+        
+        middleThing.add(splitButton);
+        splitButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		onSplitPressed();
+            }
+        });
+        
         middleThing.add(playerPointLabel);
         middleThing.add(enemyPointLabel);
         middleThing.add(debtLabel);
 
     }
     
-    private void resetTable(){
+    private void setTable(){
         enemy.addNewCard();
         enemy.addNewCard();
         
-        player.addNewCard();
-        player.addNewCard();
+        player.addNewCard(new Card(1));
+        player.addNewCard(new Card(1));
         playerPointLabel.setText("PLAYER P : " + player.getScore());
         enemyPointLabel.setText("ENEMY P : " + enemy.getScore());
     }
@@ -103,13 +121,11 @@ public class BlackJackScreen extends JFrame
 
         if (player.getScore() == 21){
             updateHealth(enemy, enemyHpLabel, "ENEMY");
-            
-
+            splitCheck();
         } else if (player.getScore() > 21){
             updateHealth(player, playerHpLabel, "PLAYER");
-            
+            reset();
         }
-        showBetTable();
     }
     
     public void onStandButtonPressed()
@@ -129,9 +145,73 @@ public class BlackJackScreen extends JFrame
             updateHealth(enemy, enemyHpLabel, "ENEMY");
             
         }
-        showBetTable();
+        splitCheck();
+    }
+    
+    private void onSplitPressed() {
+    	playerHands.addLast(new Hand(this));
+    	playerHands.getLast().addNewCard(playerHands.getFirst().getCards().get(1));
+    	playerHands.getFirst().removeCard(playerHands.getFirst().getCards().get(1));
+    	player.revalidate();
+    }
+    
+    public void splitCheck() 
+    {
+    	System.out.println(playerHands.size());
+    	if(playerHands.size() == 1) {
+    		reset();
+    	} else {
+    		enemy.resetHand();
+    		enemy.addNewCard();
+    		enemy.addNewCard();
+    		
+    		rootPanel.remove(player);
+    		playerHands.remove(player);
+    		player = playerHands.getFirst();
+    		rootPanel.add(player, BorderLayout.SOUTH);
+    		
+    		playerPointLabel.setText("PLAYER P : " + player.getScore());
+    		rootPanel.repaint();
+    		rootPanel.revalidate();
+    		System.out.println("SIZE " + playerHands.size());
+    	}
+    	
+    }
+    
+
+    public void hideBetTable()
+    {
+    	rootPanel.remove(betTable);
+    	rootPanel.add(middleThing);
+        middleThing.add(betPoolLabel);
+        setTable();
+        rootPanel.revalidate();
+        rootPanel.repaint();
     }
 
+    public void reset()
+    {
+    	System.out.println("RESET");
+        betPool = 0;
+        playerHands.clear();
+		playerHands.addLast(player);
+
+        enemy.resetHand();
+        player.resetHand();
+        betPoolLabel.setText("BET POOL: " + betPool);
+        betTable.add(betPoolLabel);
+        rootPanel.remove(middleThing);
+        rootPanel.add(betTable);
+        rootPanel.revalidate();
+        rootPanel.repaint();
+        
+    }
+    
+    public void setSplitButton(Boolean isEnabled) 
+    {
+    	splitButton.setEnabled(isEnabled);
+    }
+    
     private void updateHealth(Hand hand, JLabel hpLabel, String text)
     {
         hand.subHealth(betPool);
@@ -159,31 +239,5 @@ public class BlackJackScreen extends JFrame
         betPool += amount;
         betPoolLabel.setText("BET POOL: " + betPool);
 
-    }
-
-    public void hideBetTable()
-    {
-    	rootPanel.remove(betTable);
-    	rootPanel.add(middleThing);
-        middleThing.add(betPoolLabel);
-        resetTable();
-        System.out.println(betPool);
-        this.revalidate();
-        this.repaint();
-    }
-
-    public void showBetTable()
-    {
-        betPool = 0;
-
-        enemy.resetHand();
-        player.resetHand();
-        betPoolLabel.setText("BET POOL: " + betPool);
-        betTable.add(betPoolLabel);
-        rootPanel.remove(middleThing);
-        rootPanel.add(betTable);
-        rootPanel.revalidate();
-        rootPanel.repaint();
-        
     }
 }
