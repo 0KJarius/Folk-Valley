@@ -130,6 +130,7 @@ public class BlackJackScreen extends JFrame
     
     public void onStandButtonPressed()
     {
+    	player.applyDebt();
     	enemy.reveal();
 
         if (enemy.getScore() == 21){

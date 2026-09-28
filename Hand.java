@@ -10,7 +10,7 @@ public class Hand extends Panel
     private BlackJackScreen blackJackHandler;
     private ArrayList<Card> cards;
     private int score = 0;
-    private int debt = 0;
+    private static int debt = 0;
     private int health = 100;
 
     public Hand(BlackJackScreen handler)
@@ -66,10 +66,7 @@ public class Hand extends Panel
 
         cards.add(addedCard);
         this.add(addedCard);
-        score += addedCard.getCardScore() - debt;
-        if (debt > 0){
-            debt -= addedCard.getCardScore();
-        }
+        score += addedCard.getCardScore();
         
         if(cards.size() == 2 && cards.get(0).getCardScore() == cards.get(1).getCardScore()) {
         	blackJackHandler.setSplitButton(true);
@@ -86,7 +83,6 @@ public class Hand extends Panel
                 }
                 removeCard(addedCard);
                 debt += addedCard.getCardScore();
-                score -= debt;
                 
                 blackJackHandler.updateDebtLabel(debt);
             }
@@ -116,46 +112,36 @@ public class Hand extends Panel
         this.revalidate();
         this.repaint();
     }
-
-    public ArrayList<Card> getCards() {
-        return cards;
+    
+    public void applyDebt() 
+    {
+    	score -= debt;
+    	debt -= score;
+    	if (debt < 0) {
+    		debt = 0;
+    	}
+    	blackJackHandler.updatePlayerPointLabel(score);
+    	blackJackHandler.updateDebtLabel(debt);
     }
 
-    public int getScore() {
-        return score;
-    }
+    public ArrayList<Card> getCards() {return cards;}
 
-    public int getDebt() {
-        return debt;
-    }
+    public int getScore() {return score;}
 
+    public int getDebt() {return debt;}
 
-    public void setCards(ArrayList<Card> cards) {
-        this.cards = cards;
-    }
+    public void setCards(ArrayList<Card> cards) {this.cards = cards;}
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+    public void setScore(int score) {this.score = score;}
 
-    public void setDebt(int debt) {
-        this.debt = debt;
-    }
+    public void setDebt(int debt) {this.debt = debt;}
 
-    public int getHealth() {
-        return health;
-    }
+    public int getHealth() {return health;}
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
+    public void setHealth(int health) {this.health = health;}
 
-    public void subHealth(int amount){
-        health -= amount;
-    }
+    public void subHealth(int amount){health -= amount;}
 
-    public BlackJackScreen getBlackJackHandler() {
-        return blackJackHandler;
-    }
+    public BlackJackScreen getBlackJackHandler() {return blackJackHandler;}
     
 }
