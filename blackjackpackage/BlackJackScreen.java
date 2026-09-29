@@ -28,8 +28,9 @@ public class BlackJackScreen extends JFrame
     private JLabel betPoolLabel;
     private JPanel middleThing;
     private JPanel rootPanel;
+    private Deck deck;
 
-    public BlackJackScreen()
+    public BlackJackScreen(Deck playerDeck)
     {
 
         this.setVisible(true);
@@ -39,6 +40,7 @@ public class BlackJackScreen extends JFrame
         this.setContentPane(rootPanel);
         rootPanel.setLayout(new BorderLayout());
         
+        this.deck = playerDeck;
         playerHands = new LinkedList<Hand>();
         playerHands.addLast(new Hand(this));
         player = playerHands.getFirst();
@@ -106,18 +108,18 @@ public class BlackJackScreen extends JFrame
     }
     
     private void setTable(){
-        enemy.addNewCard();
-        enemy.addNewCard();
+        addCard(enemy);
+        addCard(enemy);
         
-        player.addNewCard(new Card(1));
-        player.addNewCard(new Card(1));
+        addCard(player);
+        addCard(player);
         playerPointLabel.setText("PLAYER P : " + player.getScore());
         enemyPointLabel.setText("ENEMY P : " + enemy.getScore());
     }
     
     public void onHitButtonPressed()
     {
-    	player.addNewCard();
+    	addCard(player);
         player.revalidate();
 
         if (player.getScore() == 21){
@@ -127,6 +129,12 @@ public class BlackJackScreen extends JFrame
             updateHealth(player, playerHpLabel, "PLAYER");
             reset();
         }
+    }
+    
+    public void addCard(Hand hand) {
+    	Card addedCard = deck.getCard();
+    	hand.addNewCard(addedCard);
+    	deck.removeCard(addedCard);
     }
     
     public void onStandButtonPressed()
@@ -164,8 +172,8 @@ public class BlackJackScreen extends JFrame
     		reset();
     	} else {
     		enemy.resetHand();
-    		enemy.addNewCard();
-    		enemy.addNewCard();
+    		addCard(enemy);
+            addCard(enemy);
     		
     		rootPanel.remove(player);
     		playerHands.remove(player);
@@ -208,6 +216,7 @@ public class BlackJackScreen extends JFrame
         rootPanel.repaint();
         
     }
+    
     
     public void setSplitButton(Boolean isEnabled) 
     {

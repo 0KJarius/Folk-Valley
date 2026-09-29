@@ -5,7 +5,8 @@ public class Main
 
     public static void main(String[] args)
     {
-        BlackJackScreen blackjack = new BlackJackScreen();
+    	Player player = new Player();
+        BlackJackScreen blackjack = new BlackJackScreen(player.playerDeck.cloneDeck());
     }
 
 

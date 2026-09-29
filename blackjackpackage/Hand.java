@@ -60,46 +60,18 @@ public class Hand extends Panel
         this.repaint();
     }
     
-    //will probably be removed once deck system is added
-    public void addNewCard()
-    {
-        Card addedCard = new Card();
-
-        cards.add(addedCard);
-        this.add(addedCard);
-        score += addedCard.getCardScore();
-        
-        if(cards.size() == 2 && cards.get(0).getCardScore() == cards.get(1).getCardScore()) {
-        	blackJackHandler.setSplitButton(true);
-        } else {
-        	blackJackHandler.setSplitButton(false);
-        }
-
-        addedCard.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (cards.size() == 1){
-                    return;
-                }
-                removeCard(addedCard);
-                debt += addedCard.getCardScore();
-                
-                blackJackHandler.updateDebtLabel(debt);
-            }
-            
-        });
-        blackJackHandler.updatePlayerPointLabel(score);
-        this.revalidate();
-        this.repaint();
-    }
-    
     public void removeCard(Card cardToRemove) 
     {
     	score -= cardToRemove.getCardScore();
     	cards.remove(cardToRemove);
     	cardToRemove.hideCard();
         this.remove(cardToRemove);
+        
+        if(cards.size() == 2 && cards.get(0).getCardScore() == cards.get(1).getCardScore()) {
+        	blackJackHandler.setSplitButton(true);
+        } else {
+        	blackJackHandler.setSplitButton(false);
+        }
     }
 
     public void resetHand()

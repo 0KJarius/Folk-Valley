@@ -1,5 +1,7 @@
 package blackjackpackage;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class EnemyHand extends Hand{
 
@@ -8,9 +10,8 @@ public class EnemyHand extends Hand{
         super(handler);
     }
 
-    public void addNewCard()
+    public void addNewCard(Card addedCard)
     {
-        Card addedCard = new Card();
 
         super.getCards().add(addedCard);
         this.add(addedCard);
@@ -26,6 +27,7 @@ public class EnemyHand extends Hand{
         }
         super.getBlackJackHandler().updatePlayerPointLabel(super.getScore());
     }
+    
 
     public void reveal(){
         super.getCards().get(1).showCardScore();
@@ -37,7 +39,7 @@ public class EnemyHand extends Hand{
     }
     
     public void hitIt(){
-        addNewCard();
+        super.getBlackJackHandler().addCard(this);
         if (super.getScore() <= 16){
             hitIt();
         }
