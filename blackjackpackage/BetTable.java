@@ -29,6 +29,7 @@ public class BetTable extends JPanel
         }
 
         JButton confirmButton = new JButton("CONFIRM BET");
+        confirmButton.setFocusPainted(false);
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
