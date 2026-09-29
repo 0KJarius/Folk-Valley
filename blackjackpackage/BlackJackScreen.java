@@ -54,6 +54,11 @@ public class BlackJackScreen extends JFrame
         hitButton = new JButton("HIT");
         standButton = new JButton("STAND");
         splitButton = new JButton("SPLIT");
+        
+        hitButton.setFocusPainted(false);
+        standButton.setFocusPainted(false);
+        splitButton.setFocusPainted(false);
+        
         splitButton.setEnabled(false);
         
         betTable = new BetTable(this);
