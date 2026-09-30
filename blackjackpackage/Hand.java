@@ -12,12 +12,10 @@ public class Hand extends Panel
     private ArrayList<Card> cards;
     private int score = 0;
     private static int debt = 0;
-    private int health = 100;
 
     public Hand(BlackJackScreen handler)
     {
         blackJackHandler = handler;
-        health = 100;
         cards = new ArrayList<Card>();
         this.setPreferredSize(new Dimension(600,200));
         this.setBackground(Color.BLACK);
@@ -49,7 +47,7 @@ public class Hand extends Panel
                 }
                 removeCard(card);
                 debt += card.getCardScore();
-                score -= debt;
+                score -= card.getCardScore();
                 
                 blackJackHandler.updateDebtLabel(debt);
             }
@@ -108,12 +106,6 @@ public class Hand extends Panel
     public void setScore(int score) {this.score = score;}
 
     public void setDebt(int debt) {this.debt = debt;}
-
-    public int getHealth() {return health;}
-
-    public void setHealth(int health) {this.health = health;}
-
-    public void subHealth(int amount){health -= amount;}
 
     public BlackJackScreen getBlackJackHandler() {return blackJackHandler;}
     

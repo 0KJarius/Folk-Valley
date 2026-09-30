@@ -10,16 +10,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entitypackage.Entity;
+import entitypackage.Player;
+
 public class BlackJackScreen extends JFrame
 {
-    private Hand player;
+	private Player player;
+	private Entity enemy;
+    private Hand playerHand;
     private LinkedList<Hand> playerHands;
-    private EnemyHand enemy;
+    private EnemyHand enemyHand;
     private JButton hitButton;
     private JButton standButton;
     private JButton splitButton;
-    private JLabel playerHpLabel;
-    private JLabel enemyHpLabel;
+    private JLabel playerMoneyLabel;
+    private JLabel enemyMoneyLabel;
     private JLabel playerPointLabel;
     private JLabel enemyPointLabel;
     private JLabel debtLabel;
@@ -30,9 +35,9 @@ public class BlackJackScreen extends JFrame
     private JPanel rootPanel;
     private Deck deck;
 
-    public BlackJackScreen(Deck playerDeck)
+    public BlackJackScreen(Deck playerDeck, Player player, Entity enemy)
     {
-
+    	
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -41,15 +46,17 @@ public class BlackJackScreen extends JFrame
         rootPanel.setLayout(new BorderLayout());
         
         this.deck = playerDeck;
+        this.player = player;
+        this.enemy = enemy;
         playerHands = new LinkedList<Hand>();
         playerHands.addLast(new Hand(this));
-        player = playerHands.getFirst();
-        enemy = new EnemyHand(this);
-        playerHpLabel = new JLabel("PLAYER: " + player.getHealth());
-        enemyHpLabel = new JLabel("ENEMY: " + player.getHealth());
-        playerPointLabel = new JLabel("PLAYER P : " + player.getCards());
-        enemyPointLabel = new JLabel("ENEMY P : " + enemy.getCards());
-        debtLabel = new JLabel("DEBT: " + player.getDebt());
+        playerHand = playerHands.getFirst();
+        enemyHand = new EnemyHand(this);
+        playerMoneyLabel = new JLabel("PLAYER: " + player.getMoney());
+        enemyMoneyLabel = new JLabel("ENEMY: " + enemy.getMoney());
+        playerPointLabel = new JLabel("PLAYER P : " + playerHand.getCards());
+        enemyPointLabel = new JLabel("ENEMY P : " + enemyHand.getCards());
+        debtLabel = new JLabel("DEBT: " + playerHand.getDebt());
         betPoolLabel = new JLabel("BET POOL: " + betPool);
         hitButton = new JButton("HIT");
         standButton = new JButton("STAND");
@@ -68,14 +75,14 @@ public class BlackJackScreen extends JFrame
     public void initializeTable()
     {
 
-    	rootPanel.add(enemy, BorderLayout.NORTH);
+    	rootPanel.add(enemyHand, BorderLayout.NORTH);
 
-    	rootPanel.add(player,  BorderLayout.SOUTH);
+    	rootPanel.add(playerHand,  BorderLayout.SOUTH);
 
         middleThing = new JPanel();
         rootPanel.add(middleThing);
-        middleThing.add(playerHpLabel);
-        middleThing.add(enemyHpLabel);
+        middleThing.add(playerMoneyLabel);
+        middleThing.add(enemyMoneyLabel);
         middleThing.add(betPoolLabel);
         
         middleThing.add(hitButton);
@@ -108,25 +115,25 @@ public class BlackJackScreen extends JFrame
     }
     
     private void setTable(){
-        addCard(enemy);
-        addCard(enemy);
+        addCard(enemyHand);
+        addCard(enemyHand);
         
-        addCard(player);
-        addCard(player);
-        playerPointLabel.setText("PLAYER P : " + player.getScore());
-        enemyPointLabel.setText("ENEMY P : " + enemy.getScore());
+        addCard(playerHand);
+        addCard(playerHand);
+        playerPointLabel.setText("PLAYER P : " + playerHand.getScore());
+        enemyPointLabel.setText("ENEMY P : " + enemyHand.getScore());
     }
     
     public void onHitButtonPressed()
     {
-    	addCard(player);
-        player.revalidate();
+    	addCard(playerHand);
+        playerHand.revalidate();
 
-        if (player.getScore() == 21){
-            updateHealth(enemy, enemyHpLabel, "ENEMY");
+        if (playerHand.getScore() == 21){
+        	addMoney(player, playerMoneyLabel, betPool);
             splitCheck();
-        } else if (player.getScore() > 21){
-            updateHealth(player, playerHpLabel, "PLAYER");
+        } else if (playerHand.getScore() > 21){
+        	addMoney(enemy, enemyMoneyLabel, betPool);
             reset();
         }
     }
@@ -139,20 +146,20 @@ public class BlackJackScreen extends JFrame
     
     public void onStandButtonPressed()
     {
-    	player.applyDebt();
-    	enemy.reveal();
+    	playerHand.applyDebt();
+    	enemyHand.reveal();
 
-        if (enemy.getScore() == 21){
-            updateHealth(player, playerHpLabel, "PLAYER");
+        if (enemyHand.getScore() == 21){
+        	addMoney(enemy, enemyMoneyLabel, betPool);
             
-        } else if (enemy.getScore() > 21){
-            updateHealth(enemy, enemyHpLabel, "ENEMY");
+        } else if (enemyHand.getScore() > 21){
+        	addMoney(player, playerMoneyLabel, betPool);
             
-        } else if (enemy.getScore() > player.getScore()){
-            updateHealth(player, playerHpLabel, "PLAYER");
+        } else if (enemyHand.getScore() > playerHand.getScore()){
+        	addMoney(enemy, enemyMoneyLabel, betPool);
             
-        } else if (enemy.getScore() < player.getScore()){
-            updateHealth(enemy, enemyHpLabel, "ENEMY");
+        } else if (enemyHand.getScore() < playerHand.getScore()){
+        	addMoney(player, playerMoneyLabel, betPool);
             
         }
         splitCheck();
@@ -162,7 +169,7 @@ public class BlackJackScreen extends JFrame
     	playerHands.addLast(new Hand(this));
     	playerHands.getLast().addNewCard(playerHands.getFirst().getCards().get(1));
     	playerHands.getFirst().removeCard(playerHands.getFirst().getCards().get(1));
-    	player.revalidate();
+    	playerHand.revalidate();
     }
     
     public void splitCheck() 
@@ -171,16 +178,16 @@ public class BlackJackScreen extends JFrame
     	if(playerHands.size() == 1) {
     		reset();
     	} else {
-    		enemy.resetHand();
-    		addCard(enemy);
-            addCard(enemy);
+    		enemyHand.resetHand();
+    		addCard(enemyHand);
+            addCard(enemyHand);
     		
-    		rootPanel.remove(player);
-    		playerHands.remove(player);
-    		player = playerHands.getFirst();
-    		rootPanel.add(player, BorderLayout.SOUTH);
+    		rootPanel.remove(playerHand);
+    		playerHands.remove(playerHand);
+    		playerHand = playerHands.getFirst();
+    		rootPanel.add(playerHand, BorderLayout.SOUTH);
     		
-    		playerPointLabel.setText("PLAYER P : " + player.getScore());
+    		playerPointLabel.setText("PLAYER P : " + playerHand.getScore());
     		rootPanel.repaint();
     		rootPanel.revalidate();
     		System.out.println("SIZE " + playerHands.size());
@@ -204,10 +211,10 @@ public class BlackJackScreen extends JFrame
     	System.out.println("RESET");
         betPool = 0;
         playerHands.clear();
-		playerHands.addLast(player);
+		playerHands.addLast(playerHand);
 
-        enemy.resetHand();
-        player.resetHand();
+        enemyHand.resetHand();
+        playerHand.resetHand();
         betPoolLabel.setText("BET POOL: " + betPool);
         betTable.add(betPoolLabel);
         rootPanel.remove(middleThing);
@@ -223,12 +230,20 @@ public class BlackJackScreen extends JFrame
     	splitButton.setEnabled(isEnabled);
     }
     
-    private void updateHealth(Hand hand, JLabel hpLabel, String text)
+    private void subMoney(Entity entity, JLabel hpLabel, int amount)
     {
-        hand.subHealth(betPool);
-        hpLabel.setText(text + ": " + hand.getHealth());
-
+    	entity.subMoney(amount);
+        hpLabel.setText(entity.getName() + ": " + entity.getMoney());
+        
     }
+    
+    private void addMoney(Entity entity, JLabel hpLabel, int amount)
+    {
+    	entity.addMoney(amount);
+        hpLabel.setText(entity.getName() + ": " + entity.getMoney());
+        
+    }
+    
 
     public void updatePlayerPointLabel(int points)
     {
@@ -243,12 +258,14 @@ public class BlackJackScreen extends JFrame
     public void updateDebtLabel(int debtAmount)
     {
         debtLabel.setText("DEBT: " + debtAmount);
+        updatePlayerPointLabel(playerHand.getScore());
     }
 
     public void addBetPool(int amount)
     {
-        betPool += amount;
+        betPool += (amount * 2);
         betPoolLabel.setText("BET POOL: " + betPool);
-
+        subMoney(enemy, enemyMoneyLabel, amount);
+        subMoney(player, playerMoneyLabel, amount);
     }
 }
