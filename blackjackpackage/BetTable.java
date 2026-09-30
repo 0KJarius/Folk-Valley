@@ -16,6 +16,7 @@ public class BetTable extends JPanel
         {
             int j = i;
             JButton betButton = new JButton("BET " + (i * 5));
+            betButton.setFocusPainted(false);
             betButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -28,6 +29,7 @@ public class BetTable extends JPanel
         }
 
         JButton confirmButton = new JButton("CONFIRM BET");
+        confirmButton.setFocusPainted(false);
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
