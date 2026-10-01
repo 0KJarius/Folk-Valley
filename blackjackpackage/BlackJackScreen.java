@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import entitypackage.Entity;
 import entitypackage.Player;
 
-public class BlackJackScreen extends JFrame
+public class BlackJackScreen extends JPanel
 {
 	private Player player;
 	private Entity enemy;
@@ -32,18 +32,12 @@ public class BlackJackScreen extends JFrame
     int betPool;
     private JLabel betPoolLabel;
     private JPanel middleThing;
-    private JPanel rootPanel;
     private Deck deck;
 
     public BlackJackScreen(Deck playerDeck, Player player, Entity enemy)
     {
     	
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        rootPanel = new JPanel();
-        this.setContentPane(rootPanel);
-        rootPanel.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout());
         
         this.deck = playerDeck;
         this.player = player;
@@ -70,22 +64,21 @@ public class BlackJackScreen extends JFrame
         
         betTable = new BetTable(this);
         initializeTable();
-        rootPanel.add(betTable);
+        this.add(betTable);
         reset();
-        this.pack();
+        //this.pack();
         this.setSize(new Dimension(1280, 720));
-        this.setResizable(false);
     }
 
     public void initializeTable()
     {
 
-    	rootPanel.add(enemyHand, BorderLayout.NORTH);
+    	this.add(enemyHand, BorderLayout.NORTH);
 
-    	rootPanel.add(playerHand,  BorderLayout.SOUTH);
+    	this.add(playerHand,  BorderLayout.SOUTH);
 
         middleThing = new JPanel();
-        rootPanel.add(middleThing);
+        this.add(middleThing);
         middleThing.add(playerMoneyLabel);
         middleThing.add(enemyMoneyLabel);
         middleThing.add(betPoolLabel);
@@ -187,14 +180,14 @@ public class BlackJackScreen extends JFrame
     		addCard(enemyHand);
             addCard(enemyHand);
     		
-    		rootPanel.remove(playerHand);
+            this.remove(playerHand);
     		playerHands.remove(playerHand);
     		playerHand = playerHands.getFirst();
-    		rootPanel.add(playerHand, BorderLayout.SOUTH);
+    		this.add(playerHand, BorderLayout.SOUTH);
     		
     		playerPointLabel.setText("PLAYER P : " + playerHand.getScore());
-    		rootPanel.repaint();
-    		rootPanel.revalidate();
+    		this.repaint();
+    		this.revalidate();
     		System.out.println("SIZE " + playerHands.size());
     	}
     	
@@ -203,12 +196,12 @@ public class BlackJackScreen extends JFrame
 
     public void hideBetTable()
     {
-    	rootPanel.remove(betTable);
-    	rootPanel.add(middleThing);
+    	this.remove(betTable);
+    	this.add(middleThing);
         middleThing.add(betPoolLabel);
         setTable();
-        rootPanel.revalidate();
-        rootPanel.repaint();
+        this.revalidate();
+        this.repaint();
     }
 
     public void reset()
@@ -222,10 +215,10 @@ public class BlackJackScreen extends JFrame
         playerHand.resetHand();
         betPoolLabel.setText("BET POOL: " + betPool);
         betTable.add(betPoolLabel);
-        rootPanel.remove(middleThing);
-        rootPanel.add(betTable);
-        rootPanel.revalidate();
-        rootPanel.repaint();
+        this.remove(middleThing);
+        this.add(betTable);
+        this.revalidate();
+        this.repaint();
         
     }
     
