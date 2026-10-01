@@ -12,7 +12,9 @@ public class Main
     	Player player = new Player(100, "Alejandro");
         BlackJackScreen blackjack = new BlackJackScreen(player.playerDeck.cloneDeck(), player, new Entity(100, "Protosuer"));
         MainFrame frame = new MainFrame();
+        
         frame.setScreen(blackjack);
+        
         
     }
 
