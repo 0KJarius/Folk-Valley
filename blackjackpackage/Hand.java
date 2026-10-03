@@ -1,12 +1,14 @@
 package blackjackpackage;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Panel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Hand extends Panel
+public class Hand extends JPanel
 {
     private BlackJackScreen blackJackHandler;
     private ArrayList<Card> cards;
@@ -17,7 +19,7 @@ public class Hand extends Panel
     {
         blackJackHandler = handler;
         cards = new ArrayList<Card>();
-        this.setPreferredSize(new Dimension(600,200));
+        this.setPreferredSize(new Dimension(804,130));
         this.setBackground(Color.BLACK);
         this.repaint();
     }
