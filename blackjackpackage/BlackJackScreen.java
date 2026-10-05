@@ -9,11 +9,14 @@ import java.util.LinkedList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 import entitypackage.Entity;
 import entitypackage.Player;
+import menuPackage.GameOverScreen;
+import utilites.MainFrame;
 import utilites.SwingUtils;
 
 public class BlackJackScreen extends JPanel
@@ -22,8 +25,8 @@ public class BlackJackScreen extends JPanel
 	private JPanel blackJackArea;
 	private JPanel rightArea;
 	
-	private Player player;
-	private Entity enemy;
+	public Player player;
+	public Entity enemy;
     private Hand playerHand;
     private LinkedList<Hand> playerHands;
     private EnemyHand enemyHand;
@@ -40,12 +43,13 @@ public class BlackJackScreen extends JPanel
     private JLabel betPoolLabel;
     private Deck deck;
     public Font mainFont = new Font("DejaVu Sans", Font.PLAIN, 10);
+    MainFrame frame;
 
-    public BlackJackScreen(Deck playerDeck, Player player, Entity enemy)
+    public BlackJackScreen(Deck playerDeck, Player player, Entity enemy, MainFrame frame)
     {
     	
         this.setLayout(new BorderLayout());
-        
+        this.frame = frame;
         this.deck = playerDeck;
         this.player = player;
         this.enemy = enemy;
@@ -59,8 +63,8 @@ public class BlackJackScreen extends JPanel
         playerPointLabel = SwingUtils.createJLabel(""+playerHand.getScore(), mainFont, 30, Color.BLUE);
         enemyPointLabel = SwingUtils.createJLabel(""+enemyHand.getScore(), mainFont, 30, Color.RED);
         
-        playerMoneyProgressBar = SwingUtils.createJProgressBar(0, player.getMoney(), true,player.getName()+" "+player.getMoney(), player.getMoney(), Color.BLACK, Color.white, new Dimension(50, 480));
-        enemyMoneyProgressBar = SwingUtils.createJProgressBar(0, enemy.getMoney(), true,enemy.getName()+" "+enemy.getMoney(), player.getMoney(), Color.BLACK, Color.white, new Dimension(50, 480));
+        playerMoneyProgressBar = SwingUtils.createJProgressBar(0, player.getCurrentMoney(), true,player.getName()+" "+player.getCurrentMoney(), player.getCurrentMoney(), Color.BLACK, Color.white, new Dimension(50, 480));
+        enemyMoneyProgressBar = SwingUtils.createJProgressBar(0, enemy.getCurrentMoney(), true,enemy.getName()+" "+enemy.getCurrentMoney(), player.getCurrentMoney(), Color.BLACK, Color.white, new Dimension(50, 480));
         
         debtLabel = SwingUtils.createJLabel(""+playerHand.getDebt(), mainFont, 30, Color.RED, Color.BLACK);
         betPoolLabel = SwingUtils.createJLabel("V " + betPool, mainFont, 30, Color.GREEN, Color.BLACK);
@@ -177,7 +181,7 @@ public class BlackJackScreen extends JPanel
         	addMoney(player, playerMoneyProgressBar, betPool);
             splitCheck();
         } else if (playerHand.getScore() > 21){
-        	addMoney(enemy, playerMoneyProgressBar, betPool);
+        	addMoney(enemy, enemyMoneyProgressBar, betPool);
             reset();
         }
     }
@@ -206,7 +210,14 @@ public class BlackJackScreen extends JPanel
         	addMoney(player, playerMoneyProgressBar, betPool);
             
         }
-        splitCheck();
+        if (player.getCurrentMoney() <= 0) {
+        	System.out.println("LOSE");
+        	frame.layerOnScreen(new GameOverScreen(this, frame), JLayeredPane.POPUP_LAYER);
+        } else {
+        	splitCheck();
+        }
+        
+        
     }
     
     private void onSplitPressed() {
@@ -259,6 +270,8 @@ public class BlackJackScreen extends JPanel
         enemyHand.resetHand();
         playerHand.resetHand();
         betPoolLabel.setText("" + betPool);
+        updateMoneyBar(player, playerMoneyProgressBar);
+        updateMoneyBar(enemy, enemyMoneyProgressBar);
         this.add(betTable);
         this.remove(blackJackArea);
         this.revalidate();
@@ -275,17 +288,21 @@ public class BlackJackScreen extends JPanel
     private void subMoney(Entity entity, JProgressBar progressBar, int amount)
     {
     	entity.subMoney(amount);
-        progressBar.setValue(entity.getMoney());
-        progressBar.setString(entity.getName()+" "+entity.getMoney());
+        progressBar.setValue(entity.getCurrentMoney());
+        progressBar.setString(entity.getName()+" "+entity.getCurrentMoney());
     }
     
     private void addMoney(Entity entity, JProgressBar progressBar, int amount)
     {
     	entity.addMoney(amount);
-    	progressBar.setValue(entity.getMoney());
-    	progressBar.setString(entity.getName()+" "+entity.getMoney());
+    	progressBar.setValue(entity.getCurrentMoney());
+    	progressBar.setString(entity.getName()+" "+entity.getCurrentMoney());
     }
     
+    private void updateMoneyBar(Entity entity, JProgressBar progressBar) {
+    	progressBar.setValue(entity.getCurrentMoney());
+    	progressBar.setString(entity.getName()+" "+entity.getCurrentMoney());
+    }
 
     public void updatePlayerPointLabel(int points)
     {

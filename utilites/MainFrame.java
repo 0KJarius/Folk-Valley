@@ -1,3 +1,5 @@
+package utilites;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -5,7 +7,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame{
-	JPanel currentPanel;
+	private JPanel currentPanel;
 	JLayeredPane baseLayer;
 	
 	public MainFrame() {
@@ -14,10 +16,11 @@ public class MainFrame extends JFrame{
         this.setLocationRelativeTo(null);
         this.setPreferredSize(new Dimension(1280, 720));
         this.setResizable(false);
+        this.setLayout(null);
         
         baseLayer = new JLayeredPane();
+        baseLayer.setSize(GlobalConstants.SCREEN_SIZE);
         currentPanel = new JPanel();
-        
         this.add(baseLayer);
 	}
 	
@@ -29,18 +32,22 @@ public class MainFrame extends JFrame{
 		
 		currentPanel = panel;
 		baseLayer.add(currentPanel, JLayeredPane.DEFAULT_LAYER);
+		
 		this.pack();
 		baseLayer.repaint();
 		baseLayer.revalidate();
 	}
 	
-	public void layerOnScreen(JPanel panel, int layer) 
+	public void layerOnScreen(JPanel panel, Integer layer) 
 	{
 		baseLayer.add(panel, layer);
-		
+		baseLayer.repaint();
+		baseLayer.revalidate();
 	}
 	
 	public void removeLayer(JPanel panel) {
 		baseLayer.remove(panel);
+		baseLayer.repaint();
+		baseLayer.revalidate();
 	}
 }

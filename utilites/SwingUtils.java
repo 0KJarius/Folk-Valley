@@ -2,7 +2,9 @@ package utilites;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Rectangle;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -14,6 +16,12 @@ public abstract class SwingUtils {
     	JPanel panel = new JPanel();
     	panel.setPreferredSize(size);
     	panel.setBackground(bgColor);
+    	return panel;
+    }
+    
+    public static JPanel createJPanel(Rectangle pane, Color bgColor) {
+    	JPanel panel = new JPanel();
+    	panel.setBounds(pane);
     	return panel;
     }
     
@@ -48,5 +56,14 @@ public abstract class SwingUtils {
     	}
     	
     	return progressBar;
+    }
+    
+    public static JButton createJButton(Dimension size, String text, Color buttonColor) 
+    {
+    	JButton button = new JButton(text);
+    	button.setPreferredSize(size);
+    	button.setBackground(buttonColor);
+    	
+    	return button;
     }
 }
