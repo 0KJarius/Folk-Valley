@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame{
 	JPanel currentPanel;
+	JLayeredPane baseLayer;
 	
 	public MainFrame() {
 		this.setVisible(true);
@@ -14,19 +15,28 @@ public class MainFrame extends JFrame{
         this.setPreferredSize(new Dimension(1280, 720));
         this.setResizable(false);
         
+        baseLayer = new JLayeredPane();
         currentPanel = new JPanel();
+        
+        this.add(baseLayer);
 	}
 	
 	public void setScreen(JPanel panel) 
 	{
 		if (currentPanel != null) {
-			this.remove(currentPanel);
+			baseLayer.remove(currentPanel);
 		}
 		
 		currentPanel = panel;
-		this.add(currentPanel);
+		baseLayer.add(currentPanel, JLayeredPane.DEFAULT_LAYER);
 		this.pack();
-		this.repaint();
-		this.revalidate();
+		baseLayer.repaint();
+		baseLayer.revalidate();
+	}
+	
+	public void layerOnScreen(JPanel panel, int layer) 
+	{
+		baseLayer.add(panel, layer);
+		
 	}
 }
