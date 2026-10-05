@@ -39,4 +39,8 @@ public class MainFrame extends JFrame{
 		baseLayer.add(panel, layer);
 		
 	}
+	
+	public void removeLayer(JPanel panel) {
+		baseLayer.remove(panel);
+	}
 }
