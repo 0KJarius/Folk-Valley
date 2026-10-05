@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame{
 	JPanel currentPanel;
-	JLayeredPane baseLayer;
 	
 	public MainFrame() {
 		this.setVisible(true);
