@@ -1,10 +1,12 @@
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame{
 	JPanel currentPanel;
+	JLayeredPane baseLayer;
 	
 	public MainFrame() {
 		this.setVisible(true);
