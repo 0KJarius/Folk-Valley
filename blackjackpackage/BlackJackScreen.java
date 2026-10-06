@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import entitypackage.Entity;
 import entitypackage.Player;
 import menuPackage.GameOverScreen;
+import utilites.EventBus;
 import utilites.MainFrame;
 import utilites.SwingUtils;
 
@@ -43,13 +44,15 @@ public class BlackJackScreen extends JPanel
     private JLabel betPoolLabel;
     private Deck deck;
     public Font mainFont = new Font("DejaVu Sans", Font.PLAIN, 10);
-    MainFrame frame;
+    private EventBus eventBus;
 
-    public BlackJackScreen(Deck playerDeck, Player player, Entity enemy, MainFrame frame)
+    public BlackJackScreen(Deck playerDeck, Player player, Entity enemy, EventBus eventBus)
     {
     	
         this.setLayout(new BorderLayout());
-        this.frame = frame;
+        this.eventBus = eventBus;
+        eventBus.setCurrentMatch(this);
+        eventBus.setEnemy(enemy);
         this.deck = playerDeck;
         this.player = player;
         this.enemy = enemy;
@@ -212,7 +215,7 @@ public class BlackJackScreen extends JPanel
         }
         if (player.getCurrentMoney() <= 0) {
         	System.out.println("LOSE");
-        	frame.layerOnScreen(new GameOverScreen(this, frame), JLayeredPane.POPUP_LAYER);
+        	eventBus.addLayerToFrame(new GameOverScreen(eventBus), JLayeredPane.POPUP_LAYER);
         } else {
         	splitCheck();
         }

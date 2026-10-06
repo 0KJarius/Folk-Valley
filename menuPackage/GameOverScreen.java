@@ -9,26 +9,22 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import blackjackpackage.BlackJackScreen;
+import utilites.EventBus;
 import utilites.GlobalConstants;
-import utilites.MainFrame;
 import utilites.SwingUtils;
 
 public class GameOverScreen extends JPanel
 {
-	private BlackJackScreen blackJackHandler;
-	private MainFrame mainFrame;
+	private EventBus eventBus;
 	
-	public GameOverScreen(BlackJackScreen blackJackHandler, MainFrame mainFrame) 
+	public GameOverScreen(EventBus eventBus) 
 	{
 		this.setSize(GlobalConstants.SCREEN_SIZE);
 		this.setLocation(0, 1);
 		this.setBackground(new Color(0,0,255, 200));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.blackJackHandler = blackJackHandler;
-		this.mainFrame = mainFrame;
-		
+		this.eventBus = eventBus;
+		eventBus.setGameOverScreen(this);
 		JLabel text = SwingUtils.createJLabel("GAME OVER", GlobalConstants.MAINFONT, 50, Color.RED);
 		text.setAlignmentY(CENTER_ALIGNMENT);
 		text.setAlignmentX(CENTER_ALIGNMENT);
@@ -46,9 +42,7 @@ public class GameOverScreen extends JPanel
 	
 	private void onRetry() 
 	{
-		blackJackHandler.player.resetWallet();
-		blackJackHandler.enemy.resetWallet();
-		blackJackHandler.reset();
-		mainFrame.removeLayer(this);
+		eventBus.hardResetMatch();
+		eventBus.removeLayerFromFrame(this);
 	}
 }
