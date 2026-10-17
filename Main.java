@@ -1,5 +1,7 @@
 
 import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
+
 import blackjackpackage.BlackJackScreen;
 import entitypackage.Entity;
 import entitypackage.Player;
@@ -13,13 +15,12 @@ public class Main
     public static void main(String[] args)
     {
     	Player player = new Player(100, "Alejandro");
-        MainFrame frame = new MainFrame();
-        EventBus eventBus = new EventBus(frame);
-        eventBus.setPlayer(player);
+    	
+    	SwingUtilities.invokeLater(()->{
+    		MainFrame frame = new MainFrame();
+            BlackJackScreen blackjack = new BlackJackScreen(player.playerDeck.cloneDeck(), player, new Entity(100, "Protosuer"));
+            frame.setScreen(blackjack);
+    	});
         
-        BlackJackScreen blackjack = new BlackJackScreen(player.playerDeck.cloneDeck(), player, new Entity(100, "Protosuer"), eventBus);
-        
-        
-        frame.setScreen(blackjack);
     }
 }

@@ -17,14 +17,12 @@ public class GameOverScreen extends JPanel
 {
 	private EventBus eventBus;
 	
-	public GameOverScreen(EventBus eventBus) 
+	public GameOverScreen() 
 	{
 		this.setSize(GlobalConstants.SCREEN_SIZE);
 		this.setLocation(0, 1);
 		this.setBackground(new Color(0,0,255, 200));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.eventBus = eventBus;
-		eventBus.setGameOverScreen(this);
 		JLabel text = SwingUtils.createJLabel("GAME OVER", GlobalConstants.MAINFONT, 50, Color.RED);
 		text.setAlignmentY(CENTER_ALIGNMENT);
 		text.setAlignmentX(CENTER_ALIGNMENT);

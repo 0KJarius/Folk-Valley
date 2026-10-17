@@ -1,12 +1,14 @@
 package entitypackage;
 import blackjackpackage.Card;
 import blackjackpackage.Deck;
+import utilites.EventBus;
 
 public class Player extends Entity{
 	public Deck playerDeck;
 	
 	public Player(int money, String name) {
 		super(money, name);
+		EventBus.player = this;
 		playerDeck = new Deck();
 		initializeTestDeck();
 	}

@@ -11,6 +11,7 @@ public class MainFrame extends JFrame{
 	JLayeredPane baseLayer;
 	
 	public MainFrame() {
+		EventBus.frame = this;
 		this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
