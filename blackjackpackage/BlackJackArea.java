@@ -45,8 +45,6 @@ public class BlackJackArea extends JPanel{
 
         enemyHand.resetHand();
         playerHand.resetHand();
-        //this.add(betTable);
-        //this.remove(blackJackArea);
         this.revalidate();
         this.repaint();   
     }

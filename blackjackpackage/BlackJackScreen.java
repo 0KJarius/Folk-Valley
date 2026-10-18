@@ -55,6 +55,13 @@ public class BlackJackScreen extends JPanel{
 		Card addedCard = deck.getCard();
 		deck.removeCard(addedCard);
 		hand.addNewCard(addedCard);
+		
+		if (hand.getCards().size() == 2 && hand.getCards().get(0).getCardScore() == hand.getCards().get(1).getCardScore()) 
+		{
+			blackJack.buttonArea.split.setEnabled(true);
+		} else {
+			blackJack.buttonArea.split.setEnabled(false);
+		}
 	}
 	
 	public void reset() {
