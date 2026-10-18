@@ -74,6 +74,14 @@ public class ButtonArea extends JPanel{
 		}
 		EventBus.currentMatch.blackJack.playerHand.removeSelectedCards();
 		EventBus.currentMatch.infoArea.updateDebtLabel(EventBus.currentMatch.blackJack.playerHand.getDebt());
+		
+		if (EventBus.currentMatch.blackJack.playerHand.getCards().size() == 2 
+			&& EventBus.currentMatch.blackJack.playerHand.getCards().get(0).getCardScore() == EventBus.currentMatch.blackJack.playerHand.getCards().get(1).getCardScore()) 
+		{
+			EventBus.currentMatch.blackJack.buttonArea.split.setEnabled(true);
+		} else {
+			EventBus.currentMatch.blackJack.buttonArea.split.setEnabled(false);
+		}
 	}
 	
 	private void onStand() {
