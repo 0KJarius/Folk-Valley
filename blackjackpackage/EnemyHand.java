@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 public class EnemyHand extends Hand{
 
 
-    public EnemyHand(BlackJackScreen handler) {
-        super(handler);
+    public EnemyHand() {
+        super();
     }
 
     public void addNewCard(Card addedCard)
@@ -25,21 +25,20 @@ public class EnemyHand extends Hand{
         if (super.getDebt() > 0){
             super.setDebt(super.getDebt() - addedCard.getCardScore());
         }
-        super.getBlackJackHandler().updatePlayerPointLabel(super.getScore());
     }
     
 
     public void reveal(){
         super.getCards().get(1).showCardScore();
         super.setScore(super.getScore() + (super.getCards().get(1).getCardScore() - super.getDebt()));
-        super.getBlackJackHandler().updatePlayerPointLabel(super.getScore());
         if (super.getScore() <= 16){
             hitIt();
         }
     }
     
     public void hitIt(){
-        super.getBlackJackHandler().addCard(this);
+    	System.out.println(super.getScore());
+        addNewCard(new Card());
         if (super.getScore() <= 16){
             hitIt();
         }

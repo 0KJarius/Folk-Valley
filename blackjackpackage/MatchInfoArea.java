@@ -23,7 +23,7 @@ public class MatchInfoArea extends JPanel{
 		this.setBackground(Color.YELLOW);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     	this.add(SwingUtils.createJLabel("BET POOL", getFont(), 40, Color.black));
-    	debtLabel = SwingUtils.createJLabel(""+ EventBus.currentMatch.playerHand.getDebt(), getFont(), 30, Color.RED, Color.BLACK);
+    	debtLabel = SwingUtils.createJLabel(""+ EventBus.currentMatch.blackJack.playerHand.getDebt(), getFont(), 30, Color.RED, Color.BLACK);
         betPoolLabel = SwingUtils.createJLabel("V " + EventBus.currentMatch.betPool, getFont(), 30, Color.GREEN, Color.BLACK);
     	
     	this.add(betPoolLabel);
@@ -31,8 +31,22 @@ public class MatchInfoArea extends JPanel{
     	this.add(debtLabel);
     	
     	JPanel progressBarArea = SwingUtils.createJPanel(new Dimension(0, 1003), Color.MAGENTA);
-    	playerMoneyProgressBar = SwingUtils.createJProgressBar(0, EventBus.player.getCurrentMoney(), true, EventBus.player.getName()+" "+EventBus.player.getCurrentMoney(), EventBus.player.getCurrentMoney(), Color.BLACK, Color.white, new Dimension(50, 480));
-        enemyMoneyProgressBar = SwingUtils.createJProgressBar(0, EventBus.enemy.getCurrentMoney(), true, EventBus.enemy.getName()+" "+EventBus.enemy.getCurrentMoney(), EventBus.enemy.getCurrentMoney(), Color.BLACK, Color.white, new Dimension(50, 480));
+    	playerMoneyProgressBar = SwingUtils.createJProgressBar(
+    			0, 
+    			EventBus.player.getCurrentMoney(), 
+    			true, 
+    			EventBus.player.getName()+" "+EventBus.player.getCurrentMoney(), 
+    			EventBus.player.getCurrentMoney(), Color.BLACK, 
+    			Color.white, 
+    			new Dimension(50, 480));
+        enemyMoneyProgressBar = SwingUtils.createJProgressBar(
+        		0, 
+        		EventBus.enemy.getCurrentMoney(), 
+        		true, EventBus.enemy.getName()+" "+EventBus.enemy.getCurrentMoney(), 
+        		EventBus.enemy.getCurrentMoney(), 
+        		Color.BLACK, 
+        		Color.white, 
+        		new Dimension(50, 480));
     	
     	progressBarArea.add(playerMoneyProgressBar);
     	progressBarArea.add(enemyMoneyProgressBar);
@@ -68,7 +82,17 @@ public class MatchInfoArea extends JPanel{
         debtLabel.setText("" + debtAmount);
     }
 	
+	public void updateBetLabel() {
+		betPoolLabel.setText("" + EventBus.currentMatch.betPool);
+	}
+	
 	public void setBetLabelText(String text) {
 		betPoolLabel.setText(text);
+	}
+	
+	public void reset() {
+		setBetLabelText("" + EventBus.currentMatch.betPool);
+        updateMoneyBar(EventBus.player, true);
+        updateMoneyBar(EventBus.enemy, false);
 	}
 }

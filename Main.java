@@ -1,5 +1,4 @@
 
-import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
 import blackjackpackage.BlackJackScreen;
@@ -18,8 +17,8 @@ public class Main
     	
     	SwingUtilities.invokeLater(()->{
     		MainFrame frame = new MainFrame();
-            BlackJackScreen blackjack = new BlackJackScreen(player.playerDeck.cloneDeck(), player, new Entity(100, "Protosuer"));
-            frame.setScreen(blackjack);
+            //BlackJackScreen blackjack = new BlackJackScreen(player.playerDeck.cloneDeck(), player, new Entity(100, "Protosuer"));
+            frame.setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
     	});
         
     }

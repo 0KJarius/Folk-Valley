@@ -1,7 +1,6 @@
 package utilites;
 
 import javax.swing.JPanel;
-
 import blackjackpackage.BlackJackScreen;
 import entitypackage.Entity;
 import entitypackage.Player;
@@ -17,7 +16,7 @@ public abstract class EventBus {
 	{
 		player.resetWallet();
 		enemy.resetWallet();
-		currentMatch.reset();
+		//currentMatch.reset();
 	}
 	
 	public void removeLayerFromFrame(JPanel panel) 

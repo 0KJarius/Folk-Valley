@@ -6,11 +6,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import utilites.EventBus;
+
 public class BetTable extends JPanel
 {
 
-    public BetTable(BlackJackScreen handler)
+    public BetTable()
     {
+    	
+    	this.setBounds(248, 350, 784, 300);
         this.setBackground(Color.ORANGE);
         for (int i = 1; i < 6; i++)
         {
@@ -20,7 +24,7 @@ public class BetTable extends JPanel
             betButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    handler.addBetPool(5 * j);
+                    EventBus.currentMatch.addBetPool(5 * j);
                 }
                 
             });
@@ -33,12 +37,17 @@ public class BetTable extends JPanel
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (handler.betPool == 0){
-                    return;
-                }
-                handler.hideBetTable();
+            	confirmBet();
             }
         });
         this.add(confirmButton);
     }
+    
+    private void confirmBet() {
+    	if (EventBus.currentMatch.betPool == 0){
+            return;
+        }
+        EventBus.frame.removeLayer(this);
+    }
+    
 }

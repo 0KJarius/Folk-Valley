@@ -10,14 +10,12 @@ import java.util.ArrayList;
 
 public class Hand extends JPanel
 {
-    private BlackJackScreen blackJackHandler;
     private ArrayList<Card> cards;
     private int score = 0;
     private static int debt = 0;
 
-    public Hand(BlackJackScreen handler)
+    public Hand()
     {
-        blackJackHandler = handler;
         cards = new ArrayList<Card>();
         this.setPreferredSize(new Dimension(804,130));
         this.setBackground(Color.BLACK);
@@ -35,9 +33,9 @@ public class Hand extends JPanel
         }
         
         if(cards.size() == 2 && cards.get(0).getCardScore() == cards.get(1).getCardScore()) {
-        	blackJackHandler.setSplitButton(true);
+        	//blackJackHandler.setSplitButton(true);
         } else {
-        	blackJackHandler.setSplitButton(false);
+        	//blackJackHandler.setSplitButton(false);
         }
 
         card.addActionListener(new ActionListener() {
@@ -51,11 +49,11 @@ public class Hand extends JPanel
                 debt += card.getCardScore();
                 score -= card.getCardScore();
                 
-                blackJackHandler.updateDebtLabel(debt);
+                //blackJackHandler.updateDebtLabel(debt);
             }
             
         });
-        blackJackHandler.updatePlayerPointLabel(score);
+        //blackJackHandler.updatePlayerPointLabel(score);
         this.revalidate();
         this.repaint();
     }
@@ -68,9 +66,9 @@ public class Hand extends JPanel
         this.remove(cardToRemove);
         
         if(cards.size() == 2 && cards.get(0).getCardScore() == cards.get(1).getCardScore()) {
-        	blackJackHandler.setSplitButton(true);
+        	//blackJackHandler.setSplitButton(true);
         } else {
-        	blackJackHandler.setSplitButton(false);
+        	//blackJackHandler.setSplitButton(false);
         }
     }
 
@@ -80,8 +78,8 @@ public class Hand extends JPanel
         cards.removeAll(cards);
         score = 0;
         debt = 0;
-        blackJackHandler.updatePlayerPointLabel(score);
-        blackJackHandler.updateDebtLabel(debt);
+        //blackJackHandler.updatePlayerPointLabel(score);
+        //blackJackHandler.updateDebtLabel(debt);
         this.revalidate();
         this.repaint();
     }
@@ -93,8 +91,8 @@ public class Hand extends JPanel
     	if (debt < 0) {
     		debt = 0;
     	}
-    	blackJackHandler.updatePlayerPointLabel(score);
-    	blackJackHandler.updateDebtLabel(debt);
+    	//blackJackHandler.updatePlayerPointLabel(score);
+    	//blackJackHandler.updateDebtLabel(debt);
     }
 
     public ArrayList<Card> getCards() {return cards;}
@@ -109,6 +107,6 @@ public class Hand extends JPanel
 
     public void setDebt(int debt) {this.debt = debt;}
 
-    public BlackJackScreen getBlackJackHandler() {return blackJackHandler;}
+    //public BlackJackScreen getBlackJackHandler() {return blackJackHandler;}
     
 }
