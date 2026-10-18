@@ -89,7 +89,6 @@ public abstract class SwingUtils {
     
     public static ImageIcon getImage(String filePath, int width, int height)
     {
-
         ImageIcon icon = new ImageIcon(SwingUtils.class.getResource(ASSETS_PATH + filePath));
         Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(image);
