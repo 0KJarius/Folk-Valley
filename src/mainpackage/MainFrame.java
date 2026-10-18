@@ -1,10 +1,13 @@
-package utilites;
+package mainpackage;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
+import utilites.EventBus;
+import utilites.GlobalConstants;
 
 public class MainFrame extends JFrame{
 	private JPanel currentPanel;
