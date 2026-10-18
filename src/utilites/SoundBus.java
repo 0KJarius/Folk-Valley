@@ -11,6 +11,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public abstract class SoundBus {
     //Common SFX
+	private static final String SFX_PATH = "../Assets/sfx/";
+	private static final String SONG_PATH = "../Assets/songs/";
 
     private static Clip currentSong;
     private static boolean isPaused = false;
@@ -20,7 +22,7 @@ public abstract class SoundBus {
     public static void playSFX(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
         Clip sound = AudioSystem.getClip();   
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(SoundBus.class.getResource(filePath));
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(SoundBus.class.getResource(SFX_PATH + filePath));
         sound.open(audioStream);
         sound.setFramePosition(0);
 
@@ -39,7 +41,14 @@ public abstract class SoundBus {
     }
 
     public static void playSong(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
-        
+        if (currentSong != null) {
+        	currentSong.close();
+        }
+        currentSong = AudioSystem.getClip();
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(SoundBus.class.getResource(SONG_PATH + filePath));
+        currentSong.open(audioStream);
+        currentSong.setFramePosition(0);
+        currentSong.start();
     }
 
     public static void pauseSong(){
@@ -54,5 +63,9 @@ public abstract class SoundBus {
             isPaused = false;
             currentSong.start();
         }
+    }
+    
+    public static void closeCurrentSong() {
+    	currentSong.close();
     }
 }
