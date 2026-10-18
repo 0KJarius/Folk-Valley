@@ -25,6 +25,7 @@ public class ButtonArea extends JPanel{
 		setUpHit();
 		setUpStand();
 		setUpSplit();
+		setUpDiscard();
 	}
 	
 	private void setUpHit() {
@@ -55,7 +56,29 @@ public class ButtonArea extends JPanel{
 		});
 	}
 	
+	private void setUpDiscard() {
+		discard.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				onDiscard();
+			}
+			
+		});
+	}
+	
+	private void onDiscard() {
+		if (EventBus.currentMatch.blackJack.playerHand.getSelectedCards().size() == EventBus.currentMatch.blackJack.playerHand.getCards().size() 
+			|| EventBus.currentMatch.blackJack.playerHand.getSelectedCards().isEmpty()) {
+			return;
+		}
+		EventBus.currentMatch.blackJack.playerHand.removeSelectedCards();
+		EventBus.currentMatch.infoArea.updateDebtLabel(EventBus.currentMatch.blackJack.playerHand.getDebt());
+	}
+	
 	private void onStand() {
+		EventBus.currentMatch.blackJack.playerHand.setScore(EventBus.currentMatch.blackJack.playerHand.getScore() - EventBus.currentMatch.blackJack.playerHand.getDebt());
+		
 		EventBus.currentMatch.blackJack.enemyHand.reveal();
 		EventBus.currentMatch.blackJack.scoreArea.updateScoreLabel();
 		

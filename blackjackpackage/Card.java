@@ -1,10 +1,9 @@
 package blackjackpackage;
 import java.awt.Dimension;
 import java.util.Random;
+import javax.swing.JToggleButton;
 
-import javax.swing.JButton;
-
-public class Card extends JButton 
+public class Card extends JToggleButton 
 {
     private int score;
     private Random rng;

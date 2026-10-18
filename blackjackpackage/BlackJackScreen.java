@@ -101,6 +101,8 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void onRoundOver(boolean playerWin, boolean isTie) {
+		blackJack.playerHand.setDebt(Math.max(blackJack.playerHand.getDebt() - blackJack.playerHand.getScore(), 0));
+		
 		if (isTie) {
 			return;
 		}

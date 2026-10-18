@@ -92,6 +92,7 @@ public class MatchInfoArea extends JPanel{
 	
 	public void reset() {
 		setBetLabelText("" + EventBus.currentMatch.betPool);
+		updateDebtLabel(EventBus.currentMatch.blackJack.playerHand.getDebt());
         updateMoneyBar(EventBus.player, true);
         updateMoneyBar(EventBus.enemy, false);
 	}
