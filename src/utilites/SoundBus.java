@@ -40,7 +40,7 @@ public abstract class SoundBus {
         sound.start();
     }
 
-    public static void playSong(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+    public static void playSong(String filePath, boolean loop) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
         if (currentSong != null) {
         	currentSong.close();
         }
@@ -49,6 +49,13 @@ public abstract class SoundBus {
         currentSong.open(audioStream);
         currentSong.setFramePosition(0);
         currentSong.start();
+        
+        if (!loop) {
+        	currentSong.loop(0);
+        } else {
+        	currentSong.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+        
     }
 
     public static void pauseSong(){
