@@ -18,8 +18,8 @@ import javax.swing.JToggleButton;
 public abstract class SwingUtils {
 	public static final String ASSETS_PATH = "../Assets/";
 	public static final String FONT_PATH = "../Assets/fonts/";
-	public static final String MARTIAN_MONO = FONT_PATH + "MartianMono-VariableFont_wdth,wght.ttf";// INSERT FONT FILE PATH HERE
-	
+	public static final String MARTIAN_MONO = FONT_PATH + "MartianMono-VariableFont_wdth,wght.ttf";
+	public static final String HONK = FONT_PATH + "Honk-Regular-VariableFont_MORF,SHLN.ttf";
     public static JPanel createJPanel(Dimension size, Color bgColor) 
     {
     	JPanel panel = new JPanel();
@@ -37,7 +37,7 @@ public abstract class SwingUtils {
     public static JLabel createJLabel(String text, int size, Color textColor){
         JLabel label = new JLabel(text);
         try {
-            label.setFont(createFont(MARTIAN_MONO, size));
+            label.setFont(createFont(HONK, size));
         } catch (FontFormatException | IOException e) {}
         label.setForeground(textColor);
 

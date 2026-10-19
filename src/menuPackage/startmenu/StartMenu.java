@@ -39,7 +39,6 @@ public class StartMenu extends JPanel{
 		setUpPlayButton(playButton);
 		
 		basePane.add(playButton, JLayeredPane.PALETTE_LAYER);
-		
 		try {
 			SoundBus.playSong("mainMenuSong.wav", false);
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}

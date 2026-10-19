@@ -17,7 +17,7 @@ public class MainFrame extends JFrame{
 		EventBus.frame = this;
 		this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         this.setPreferredSize(new Dimension(1280, 720));
         this.setResizable(false);
         this.setLayout(null);
