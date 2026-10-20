@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
 import blackjackpackage.BlackJackScreen;
+import blackjackpackage.PokerCard;
 import entitypackage.Entity;
 import entitypackage.Player;
 import menuPackage.GameOverScreen;
@@ -19,7 +20,6 @@ public class Main
     	
     	//test pubert for getResource
     	ImageIcon testPubert = new ImageIcon(Main.class.getResource("../Assets/kid-named-pubert.png"));
-    	
     	SwingUtilities.invokeLater(()->{
     		MainFrame frame = new MainFrame();
     		frame.setScreen(new StartMenu());

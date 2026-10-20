@@ -41,4 +41,8 @@ public class Card extends JToggleButton
         this.setText("" + score);
     }
     
+    public void setCardScore(int setScore) {
+    	this.score = setScore;
+    }
+    
 }
