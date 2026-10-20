@@ -17,7 +17,7 @@ public class Player extends Entity{
 	private void initializeTestDeck() 
 	{
 		for (int i = 0; i < 54; i++) {
-			playerDeck.addCard(new PokerCard(2, "heart"));
+			playerDeck.addCard(new PokerCard());
 		}
 		
 	}
