@@ -63,6 +63,7 @@ public class BlackJackScreen extends JPanel{
 		} else {
 			blackJack.buttonArea.split.setEnabled(false);
 		}
+		System.out.println(blackJack.playerHands.getFirst().getCards().size());
 	}
 	
 	public void reset() {
@@ -76,7 +77,7 @@ public class BlackJackScreen extends JPanel{
 	
 	public void splitCheck() 
     {
-    	System.out.println(blackJack.playerHands.size());
+		System.out.println(" INITIAL SIZE " + blackJack.playerHands.getFirst().getCards().size());
     	if(blackJack.playerHands.size() == 1) {
     		reset();
     	} else {
@@ -89,7 +90,7 @@ public class BlackJackScreen extends JPanel{
             blackJack.scoreArea.updateScoreLabel();
     		this.repaint();
     		this.revalidate();
-    		System.out.println("SIZE " + blackJack.playerHands.size());
+    		System.out.println("SIZE " + blackJack.playerHands.getFirst().getCards().size());
     	}
     	
     }

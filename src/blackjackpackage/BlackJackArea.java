@@ -58,6 +58,7 @@ public class BlackJackArea extends JPanel{
     }
 	
 	public void replacePlayerHand() {
+		buttonArea.split.setEnabled(false);
 		this.remove(playerHand);
         playerHands.remove(playerHand);
         playerHand = playerHands.getFirst();

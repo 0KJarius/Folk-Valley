@@ -117,6 +117,7 @@ public class ButtonArea extends JPanel{
 
 		EventBus.currentMatch.blackJack.scoreArea.updateScoreLabel();
 		
+		
 		if (EventBus.currentMatch.blackJack.playerHand.getScore() > 21) {
 			EventBus.currentMatch.onRoundOver(false, false);
 			EventBus.currentMatch.reset();
@@ -129,12 +130,13 @@ public class ButtonArea extends JPanel{
 	private void onSplitPressed() {
 		EventBus.currentMatch.blackJack.playerHands.addLast(new Hand());
 		EventBus.currentMatch.blackJack.playerHands.getLast().addNewCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
-		EventBus.currentMatch.blackJack.playerHands.getLast().repaint();
 		EventBus.currentMatch.blackJack.playerHands.getFirst().removeCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
-		EventBus.currentMatch.blackJack.scoreArea.setEnemyLabelText("" + EventBus.currentMatch.blackJack.enemyHand.getScore());
+		EventBus.currentMatch.blackJack.scoreArea.setPlayerLabelText("" + EventBus.currentMatch.blackJack.playerHand.getScore());
 		EventBus.currentMatch.blackJack.playerHand.revalidate();
 		EventBus.currentMatch.blackJack.playerHand.repaint();
 		
+		
 		EventBus.currentMatch.blackJack.scoreArea.updateScoreLabel();
+		split.setEnabled(false);
     }
 }
