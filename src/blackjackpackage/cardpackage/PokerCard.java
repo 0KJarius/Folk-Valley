@@ -13,7 +13,6 @@ import utilites.GlobalConstants;
 import utilites.SwingUtils;
 
 public class PokerCard extends Card{
-	//public static final String[] SUITS = {"spade", "diamond", "heart", "club"};
 	public static String currentSkin = "placeHolderCards/";
 	protected static enum Suit{
 		CLUB,
