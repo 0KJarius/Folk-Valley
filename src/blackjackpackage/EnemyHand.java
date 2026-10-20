@@ -3,6 +3,8 @@ package blackjackpackage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import blackjackpackage.cardpackage.Card;
+
 public class EnemyHand extends Hand{
 
 

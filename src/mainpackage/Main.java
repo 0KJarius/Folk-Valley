@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
 import blackjackpackage.BlackJackScreen;
-import blackjackpackage.PokerCard;
+import blackjackpackage.cardpackage.PokerCard;
 import entitypackage.Entity;
 import entitypackage.Player;
 import menuPackage.GameOverScreen;

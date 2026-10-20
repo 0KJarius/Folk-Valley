@@ -3,6 +3,8 @@ package blackjackpackage;
 import java.util.ArrayList;
 import java.util.Random;
 
+import blackjackpackage.cardpackage.Card;
+
 public class Deck {
 	private ArrayList<Card> cardDeck;
 	

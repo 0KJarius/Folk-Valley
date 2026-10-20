@@ -1,4 +1,4 @@
-package blackjackpackage;
+package blackjackpackage.cardpackage;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -9,18 +9,24 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
+import utilites.GlobalConstants;
 import utilites.SwingUtils;
 
 public class PokerCard extends Card{
-	public static final String[] SUITS = {"spade", "diamond", "heart", "club"};
-	private final String POKERCARD = "Cards/Poker Cards/";
-	private String currentSkin = "placeHolderCards/";
-	private String suit;
+	//public static final String[] SUITS = {"spade", "diamond", "heart", "club"};
+	public static String currentSkin = "placeHolderCards/";
+	protected static enum Suit{
+		CLUB,
+		DIAMOND,
+		HEART,
+		SPADE
+	};
+	private Suit cardSuit;
 	
-	public PokerCard(int score, String suit) {
-		ImageIcon cardImg = SwingUtils.getImage(POKERCARD + currentSkin + suit + "/" + score + ".png");
+	public PokerCard(int score, Suit suit) {
+		ImageIcon cardImg = SwingUtils.getImage(GlobalConstants.POKERCARD + currentSkin + suit.toString().toLowerCase() + "/" + score + ".png");
 		
-		this.suit = suit;
+		cardSuit = suit;
 		super.setCardScore(score);
 		this.setIcon(cardImg);
 		this.setBorderPainted(false);
@@ -34,12 +40,12 @@ public class PokerCard extends Card{
 		Random rng = new Random();
 		int score = rng.nextInt(2, 10);
 		
-		String suit = SUITS[rng.nextInt(0, 3)];
+		Suit suit = Suit.values()[rng.nextInt(0, Suit.values().length)];
 		this(score, suit);
 	}
 	
 	
-	private void createSelectImage(ImageIcon cardImg) {
+	protected void createSelectImage(ImageIcon cardImg) {
 		Image card = cardImg.getImage();
 		BufferedImage cardBuff = new BufferedImage(cardImg.getIconWidth(), cardImg.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D draw = cardBuff.createGraphics();
@@ -52,6 +58,7 @@ public class PokerCard extends Card{
 		draw.dispose();
 		
 		this.setSelectedIcon(new ImageIcon(cardBuff));
-		//return selectImage;
 	}
+	
+	
 }

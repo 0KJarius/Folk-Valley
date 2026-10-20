@@ -1,7 +1,8 @@
 package entitypackage;
-import blackjackpackage.Card;
 import blackjackpackage.Deck;
-import blackjackpackage.PokerCard;
+import blackjackpackage.cardpackage.Card;
+import blackjackpackage.cardpackage.PokerCard;
+import blackjackpackage.cardpackage.PokerCardSpecial;
 import utilites.EventBus;
 
 public class Player extends Entity{
@@ -17,7 +18,7 @@ public class Player extends Entity{
 	private void initializeTestDeck() 
 	{
 		for (int i = 0; i < 54; i++) {
-			playerDeck.addCard(new PokerCard());
+			playerDeck.addCard(new PokerCardSpecial());
 		}
 		
 	}

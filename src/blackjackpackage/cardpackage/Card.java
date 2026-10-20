@@ -1,4 +1,4 @@
-package blackjackpackage;
+package blackjackpackage.cardpackage;
 import java.awt.Dimension;
 import java.util.Random;
 import javax.swing.JToggleButton;

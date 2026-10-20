@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import blackjackpackage.cardpackage.Card;
 import entitypackage.Entity;
 import entitypackage.Player;
 import utilites.EventBus;

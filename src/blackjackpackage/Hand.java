@@ -2,6 +2,9 @@ package blackjackpackage;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+
+import blackjackpackage.cardpackage.Card;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
