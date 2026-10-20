@@ -14,7 +14,7 @@ import utilites.SwingUtils;
 
 public class PokerCard extends Card{
 	public static String currentSkin = "placeHolderCards/";
-	protected static enum Suit{
+	public static enum Suit{
 		CLUB,
 		DIAMOND,
 		HEART,
