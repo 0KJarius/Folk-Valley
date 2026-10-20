@@ -21,12 +21,11 @@ public class PokerCardSpecial extends PokerCard{
 	}
 	
 	Type cardType;
-	Suit cardSuit;
 	
 	public PokerCardSpecial(Suit cardSuit, Type cardType) 
 	{
 		this.cardType = cardType;
-		this.cardSuit = cardSuit;
+		super.setSuit(cardSuit);
 		super.setCardScore(cardType.getScore());
 		ImageIcon cardImg = SwingUtils.getImage(GlobalConstants.POKERCARD + currentSkin + cardSuit.toString().toLowerCase() + "/" + cardType.toString().toLowerCase() + ".png");
 		

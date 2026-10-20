@@ -59,5 +59,13 @@ public class PokerCard extends Card{
 		this.setSelectedIcon(new ImageIcon(cardBuff));
 	}
 	
+	public Suit getSuit() {
+		return cardSuit;
+	}
+	
+	public void setSuit(Suit suit) {
+		cardSuit = suit;
+	}
+	
 	
 }
