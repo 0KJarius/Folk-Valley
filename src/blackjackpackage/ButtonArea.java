@@ -10,9 +10,12 @@ import javax.swing.JPanel;
 import utilites.EventBus;
 
 public class ButtonArea extends JPanel{
-	JButton hit, stand, split, discard;	
-	public ButtonArea() 
+	JButton hit, stand, split, discard;
+	BlackJackArea blackJack;
+	
+	public ButtonArea(BlackJackArea blackJackArea) 
 	{
+		this.blackJack = blackJackArea;
 		this.setBackground(Color.RED);
 		hit = new JButton("HIT");
 		stand = new JButton("STAND");
@@ -68,41 +71,41 @@ public class ButtonArea extends JPanel{
 	}
 	
 	private void onDiscard() {
-		if (EventBus.currentMatch.blackJack.playerHand.getSelectedCards().size() == EventBus.currentMatch.blackJack.playerHand.getCards().size() 
-			|| EventBus.currentMatch.blackJack.playerHand.getSelectedCards().isEmpty()) {
+		if (blackJack.playerHand.getSelectedCards().size() == blackJack.playerHand.getCards().size() 
+			||blackJack.playerHand.getSelectedCards().isEmpty()) {
 			return;
 		}
-		EventBus.currentMatch.blackJack.playerHand.removeSelectedCards();
-		EventBus.currentMatch.infoArea.updateDebtLabel(EventBus.currentMatch.blackJack.playerHand.getDebt());
+		blackJack.playerHand.removeSelectedCards();
+		EventBus.currentMatch.infoArea.updateDebtLabel(blackJack.playerHand.getDebt());
 		
-		if (EventBus.currentMatch.blackJack.playerHand.getCards().size() == 2 
-			&& EventBus.currentMatch.blackJack.playerHand.getCards().get(0).getCardScore() == EventBus.currentMatch.blackJack.playerHand.getCards().get(1).getCardScore()) 
+		if (blackJack.playerHand.getCards().size() == 2 
+			&& blackJack.playerHand.getCards().get(0).getCardScore() == blackJack.playerHand.getCards().get(1).getCardScore()) 
 		{
-			EventBus.currentMatch.blackJack.buttonArea.split.setEnabled(true);
+			blackJack.buttonArea.split.setEnabled(true);
 		} else {
-			EventBus.currentMatch.blackJack.buttonArea.split.setEnabled(false);
+			blackJack.buttonArea.split.setEnabled(false);
 		}
 	}
 	
 	private void onStand() {
-		EventBus.currentMatch.blackJack.playerHand.setScore(EventBus.currentMatch.blackJack.playerHand.getScore() - EventBus.currentMatch.blackJack.playerHand.getDebt());
+		blackJack.playerHand.setScore(blackJack.playerHand.getScore() - blackJack.playerHand.getDebt());
 		
-		EventBus.currentMatch.blackJack.enemyHand.reveal();
-		EventBus.currentMatch.blackJack.scoreArea.updateScoreLabel();
+		blackJack.enemyHand.reveal();
+		blackJack.scoreArea.updateScoreLabel();
 		
-		if(EventBus.currentMatch.blackJack.enemyHand.getScore() > 21) {
+		if(blackJack.enemyHand.getScore() > 21) {
 			EventBus.currentMatch.onRoundOver(true, false);
 			EventBus.currentMatch.splitCheck();
 			
-		} else if (EventBus.currentMatch.blackJack.enemyHand.getScore() == 21) {
+		} else if (blackJack.enemyHand.getScore() == 21) {
 			EventBus.currentMatch.onRoundOver(false, false);
 			EventBus.currentMatch.reset();
 			
-		} else if (EventBus.currentMatch.blackJack.enemyHand.getScore() > EventBus.currentMatch.blackJack.playerHand.getScore()) {
+		} else if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()) {
 			EventBus.currentMatch.onRoundOver(false, false);
 			EventBus.currentMatch.reset();
 			
-		} else if (EventBus.currentMatch.blackJack.enemyHand.getScore() < EventBus.currentMatch.blackJack.playerHand.getScore()) {
+		} else if (blackJack.enemyHand.getScore() < blackJack.playerHand.getScore()) {
 			EventBus.currentMatch.onRoundOver(true, false);
 			EventBus.currentMatch.splitCheck();
 			
@@ -113,27 +116,27 @@ public class ButtonArea extends JPanel{
 	}
 	
 	private void onHit() {
-		EventBus.currentMatch.addCard(EventBus.currentMatch.blackJack.playerHand);
+		EventBus.currentMatch.addCard(blackJack.playerHand);
 
-		EventBus.currentMatch.blackJack.scoreArea.updateScoreLabel();
+		blackJack.scoreArea.updateScoreLabel();
 		
 		
-		if (EventBus.currentMatch.blackJack.playerHand.getScore() > 21) {
+		if (blackJack.playerHand.getScore() > 21) {
 			EventBus.currentMatch.onRoundOver(false, false);
 			EventBus.currentMatch.reset();
-		} else if (EventBus.currentMatch.blackJack.playerHand.getScore() == 21) {
+		} else if (blackJack.playerHand.getScore() == 21) {
 			EventBus.currentMatch.onRoundOver(true, false);
 			EventBus.currentMatch.splitCheck();
 		}
 	}
 	
 	private void onSplitPressed() {
-		EventBus.currentMatch.blackJack.playerHands.addLast(new Hand());
-		EventBus.currentMatch.blackJack.playerHands.getLast().addNewCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
-		EventBus.currentMatch.blackJack.playerHands.getFirst().removeCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
-		EventBus.currentMatch.blackJack.scoreArea.setPlayerLabelText("" + EventBus.currentMatch.blackJack.playerHand.getScore());
-		EventBus.currentMatch.blackJack.playerHand.revalidate();
-		EventBus.currentMatch.blackJack.playerHand.repaint();
+		blackJack.playerHands.addLast(new Hand());
+		blackJack.playerHands.getLast().addNewCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
+		blackJack.playerHands.getFirst().removeCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
+		blackJack.scoreArea.setPlayerLabelText("" + EventBus.currentMatch.blackJack.playerHand.getScore());
+		blackJack.playerHand.revalidate();
+		blackJack.playerHand.repaint();
 		
 		
 		EventBus.currentMatch.blackJack.scoreArea.updateScoreLabel();

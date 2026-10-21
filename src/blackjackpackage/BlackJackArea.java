@@ -24,7 +24,7 @@ public class BlackJackArea extends JPanel{
     	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     	
     	scoreArea = new ScoreArea();
-    	buttonArea = new ButtonArea();
+    	buttonArea = new ButtonArea(this);
     	
     	playerHands = new LinkedList<Hand>();
         playerHands.addLast(new Hand());
