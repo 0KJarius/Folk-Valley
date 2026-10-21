@@ -1,4 +1,5 @@
 package mainpackage;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -17,14 +18,14 @@ public class MainFrame extends JFrame{
 		this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setLocationRelativeTo(null);
-        this.setPreferredSize(new Dimension(1280, 720));
         this.setResizable(false);
-        this.setLayout(null);
+        this.setLayout(new BorderLayout());
         
         baseLayer = new JLayeredPane();
-        baseLayer.setSize(GlobalConstants.SCREEN_SIZE);
+        baseLayer.setPreferredSize(GlobalConstants.SCREEN_SIZE);
         currentPanel = new JPanel();
-        this.add(baseLayer);
+        this.add(baseLayer, BorderLayout.CENTER);
+        this.pack();
 	}
 	
 	public void setScreen(JPanel panel) 
@@ -35,10 +36,10 @@ public class MainFrame extends JFrame{
 		
 		currentPanel = panel;
 		baseLayer.add(currentPanel, JLayeredPane.DEFAULT_LAYER);
-		
 		this.pack();
 		baseLayer.repaint();
 		baseLayer.revalidate();
+		
 	}
 	
 	public void layerOnScreen(JPanel panel, Integer layer) 

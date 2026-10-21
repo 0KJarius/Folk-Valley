@@ -1,10 +1,13 @@
 package blackjackpackage;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
@@ -21,14 +24,21 @@ public class MatchInfoArea extends JPanel{
 	public MatchInfoArea() {
 		this.setPreferredSize(new Dimension(238, 0));
 		this.setBackground(Color.YELLOW);
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    	this.add(SwingUtils.createJLabel("BET POOL", getFont(), 40, Color.black));
+		this.setLayout(new BorderLayout());
+		JLayeredPane basePane = new JLayeredPane();
+		basePane.setPreferredSize(new Dimension(283, 720));
+		this.add(basePane, BorderLayout.CENTER);
+		
+		basePane.add(SwingUtils.createImageAt("BlackJack/infoArea.png", new Point(0,0)));
+		
+		//this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    	//this.add(SwingUtils.createJLabel("BET POOL", getFont(), 40, Color.black));
     	debtLabel = SwingUtils.createJLabel(""+ EventBus.currentMatch.blackJack.playerHand.getDebt(), getFont(), 30, Color.RED, Color.BLACK);
         betPoolLabel = SwingUtils.createJLabel("V " + EventBus.currentMatch.betPool, getFont(), 30, Color.GREEN, Color.BLACK);
     	
-    	this.add(betPoolLabel);
-    	this.add(SwingUtils.createJLabel("DEBT", getFont(), 40, Color.black));
-    	this.add(debtLabel);
+    	//this.add(betPoolLabel);
+    	//this.add(SwingUtils.createJLabel("DEBT", getFont(), 40, Color.black));
+    	//this.add(debtLabel);
     	
     	JPanel progressBarArea = SwingUtils.createJPanel(new Dimension(0, 1003), Color.MAGENTA);
     	playerMoneyProgressBar = SwingUtils.createJProgressBar(
@@ -50,7 +60,7 @@ public class MatchInfoArea extends JPanel{
     	
     	progressBarArea.add(playerMoneyProgressBar);
     	progressBarArea.add(enemyMoneyProgressBar);
-    	this.add(progressBarArea);
+    	//this.add(progressBarArea);
 	}
 	
 	public void subMoney(Entity entity, boolean isPlayer, int amount)
