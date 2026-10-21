@@ -28,16 +28,16 @@ public class Card extends JToggleButton
         return score;
     }
 
-    public void hideCard(){
+    public void removeThis(){
         this.setVisible(false);
         this.remove(this);
     }
 
-    public void hideCardScore(){
+    public void flipCard(){
         this.setText("");
     }
 
-    public void showCardScore(){
+    public void unflipCard(){
         this.setText("" + score);
     }
     

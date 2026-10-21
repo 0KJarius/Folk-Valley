@@ -27,14 +27,13 @@ public class PokerCardSpecial extends PokerCard{
 		this.cardType = cardType;
 		super.setSuit(cardSuit);
 		super.setCardScore(cardType.getScore());
-		ImageIcon cardImg = SwingUtils.getImage(GlobalConstants.POKERCARD + currentSkin + cardSuit.toString().toLowerCase() + "/" + cardType.toString().toLowerCase() + ".png");
-		
-		this.setIcon(cardImg);
+		super.setCardImg(SwingUtils.getImage(GlobalConstants.POKERCARD + currentSkin + cardSuit.toString().toLowerCase() + "/" + cardType.toString().toLowerCase() + ".png"));
+
 		this.setBorderPainted(false);
 		this.setFocusPainted(false);
 		this.setContentAreaFilled(false);
 		
-		createSelectImage(cardImg);
+		super.setSelectedCardImg(createSelectImage(super.getCardImg()));
 	}
 	
 	public PokerCardSpecial(){

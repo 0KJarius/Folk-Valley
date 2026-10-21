@@ -51,7 +51,7 @@ public class Hand extends JPanel
     {
     	score -= cardToRemove.getCardScore();
     	cards.remove(cardToRemove);
-    	cardToRemove.hideCard();
+    	cardToRemove.removeThis();
         this.remove(cardToRemove);
     }
     
@@ -72,6 +72,7 @@ public class Hand extends JPanel
     public void resetHand()
     {
         this.removeAll();
+        selectedCards.removeAll(selectedCards);
         cards.removeAll(cards);
         score = 0;
         debt = 0;

@@ -14,6 +14,11 @@ import utilites.SwingUtils;
 
 public class PokerCard extends Card{
 	public static String currentSkin = "placeHolderCards/";
+	private ImageIcon cardImg;
+	private ImageIcon cardSelectImg;
+	private final ImageIcon FLIP_IMG = SwingUtils.getImage(GlobalConstants.POKERCARD + currentSkin + "back.png");
+	private ImageIcon flipSelectImg;
+	
 	public static enum Suit{
 		CLUB,
 		DIAMOND,
@@ -23,16 +28,19 @@ public class PokerCard extends Card{
 	private Suit cardSuit;
 	
 	public PokerCard(int score, Suit suit) {
-		ImageIcon cardImg = SwingUtils.getImage(GlobalConstants.POKERCARD + currentSkin + suit.toString().toLowerCase() + "/" + score + ".png");
-		
+		cardImg = SwingUtils.getImage(GlobalConstants.POKERCARD + currentSkin + suit.toString().toLowerCase() + "/" + score + ".png");
 		cardSuit = suit;
+		
 		super.setCardScore(score);
 		this.setIcon(cardImg);
 		this.setBorderPainted(false);
 		this.setFocusPainted(false);
 		this.setContentAreaFilled(false);
 		
-		createSelectImage(cardImg);
+		cardSelectImg = createSelectImage(cardImg);
+		this.setSelectedIcon(cardSelectImg);
+		
+		flipSelectImg = createSelectImage(FLIP_IMG);
 	}
 	
 	public PokerCard() {
@@ -44,7 +52,7 @@ public class PokerCard extends Card{
 	}
 	
 	
-	protected void createSelectImage(ImageIcon cardImg) {
+	protected ImageIcon createSelectImage(ImageIcon cardImg) {
 		Image card = cardImg.getImage();
 		BufferedImage cardBuff = new BufferedImage(cardImg.getIconWidth(), cardImg.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D draw = cardBuff.createGraphics();
@@ -56,7 +64,7 @@ public class PokerCard extends Card{
 		
 		draw.dispose();
 		
-		this.setSelectedIcon(new ImageIcon(cardBuff));
+		return new ImageIcon(cardBuff);
 	}
 	
 	public Suit getSuit() {
@@ -67,5 +75,31 @@ public class PokerCard extends Card{
 		cardSuit = suit;
 	}
 	
+	public void setCardImg(ImageIcon cardImg) {
+		this.cardImg = cardImg;
+		this.setIcon(cardImg);
+	}
 	
+	public void setSelectedCardImg(ImageIcon cardSelectImg) {
+		this.cardSelectImg = cardSelectImg;
+		this.setSelectedIcon(cardSelectImg);
+	}
+	
+	public ImageIcon getCardImg() {
+		return cardImg;
+	}
+	
+	@Override
+	public void flipCard() {
+		this.setIcon(FLIP_IMG);
+		this.setSelectedIcon(flipSelectImg);
+		this.repaint();
+	}
+	
+	@Override
+	public void unflipCard() {
+		this.setIcon(cardImg);
+		this.setSelectedIcon(cardSelectImg);
+		this.repaint();
+	}
 }

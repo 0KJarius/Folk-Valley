@@ -19,7 +19,7 @@ public class EnemyHand extends Hand{
         this.add(addedCard);
 
         if (super.getCards().indexOf(addedCard) == 1){
-            addedCard.hideCardScore();
+            addedCard.flipCard();
         } else{
             super.setScore(super.getScore() + (addedCard.getCardScore() - super.getDebt()));
         }
@@ -31,7 +31,7 @@ public class EnemyHand extends Hand{
     
 
     public void reveal(){
-        super.getCards().get(1).showCardScore();
+        super.getCards().get(1).unflipCard();
         super.setScore(super.getScore() + (super.getCards().get(1).getCardScore() - super.getDebt()));
         if (super.getScore() <= 16){
             hitIt();
