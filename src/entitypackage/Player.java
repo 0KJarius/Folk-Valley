@@ -1,6 +1,5 @@
 package entitypackage;
 import blackjackpackage.Deck;
-import blackjackpackage.cardpackage.Card;
 import blackjackpackage.cardpackage.PokerCard;
 import blackjackpackage.cardpackage.PokerCardSpecial;
 import utilites.EventBus;

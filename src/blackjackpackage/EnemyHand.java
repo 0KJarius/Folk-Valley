@@ -1,8 +1,5 @@
 package blackjackpackage;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import blackjackpackage.cardpackage.Card;
 
 public class EnemyHand extends Hand{
@@ -11,7 +8,8 @@ public class EnemyHand extends Hand{
     public EnemyHand() {
         super();
     }
-
+    
+    @Override
     public void addNewCard(Card addedCard)
     {
 

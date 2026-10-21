@@ -1,9 +1,6 @@
 package blackjackpackage.cardpackage;
 
 import java.util.Random;
-
-import javax.swing.ImageIcon;
-
 import utilites.GlobalConstants;
 import utilites.SwingUtils;
 
