@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Rectangle;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -20,47 +23,68 @@ public class MatchInfoArea extends JPanel{
     private JProgressBar enemyMoneyProgressBar;
     private JLabel debtLabel;
     private JLabel betPoolLabel;
+    
+    private JLayeredPane basePane;
 	
 	public MatchInfoArea() {
-		this.setPreferredSize(new Dimension(238, 0));
-		this.setBackground(Color.YELLOW);
+		this.setPreferredSize(new Dimension(260, 0));
+		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
-		JLayeredPane basePane = new JLayeredPane();
-		basePane.setPreferredSize(new Dimension(283, 720));
+		basePane = new JLayeredPane();
+		basePane.setPreferredSize(new Dimension(260, 720));
 		this.add(basePane, BorderLayout.CENTER);
 		
 		basePane.add(SwingUtils.createImageAt("BlackJack/infoArea.png", new Point(0,0)));
 		
-		//this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    	//this.add(SwingUtils.createJLabel("BET POOL", getFont(), 40, Color.black));
-    	debtLabel = SwingUtils.createJLabel(""+ EventBus.currentMatch.blackJack.playerHand.getDebt(), getFont(), 30, Color.RED, Color.BLACK);
-        betPoolLabel = SwingUtils.createJLabel("V " + EventBus.currentMatch.betPool, getFont(), 30, Color.GREEN, Color.BLACK);
+		JPanel topInfoContainer = SwingUtils.createJPanel(new Rectangle(5, 6, 251,189), getBackground());
+		setUpTopPanel(topInfoContainer);
+		
+		basePane.add(topInfoContainer, JLayeredPane.PALETTE_LAYER);
     	
-    	//this.add(betPoolLabel);
-    	//this.add(SwingUtils.createJLabel("DEBT", getFont(), 40, Color.black));
-    	//this.add(debtLabel);
+    	JPanel progressBarArea = SwingUtils.createJPanel(new Rectangle(5, 204, 249, 512), Color.MAGENTA);
+    	setUpProgressPanel(progressBarArea);
     	
-    	JPanel progressBarArea = SwingUtils.createJPanel(new Dimension(0, 1003), Color.MAGENTA);
-    	playerMoneyProgressBar = SwingUtils.createJProgressBar(
+        basePane.add(progressBarArea, JLayeredPane.PALETTE_LAYER);
+	}
+	
+	private void setUpTopPanel(JPanel topPanel) {
+		topPanel.setOpaque(false);
+		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+		
+		debtLabel = SwingUtils.createJLabel(""+ EventBus.currentMatch.blackJack.playerHand.getDebt(), 40, Color.RED, SwingUtils.VCR_MONO);
+        betPoolLabel = SwingUtils.createJLabel("V" + EventBus.currentMatch.betPool, 40, Color.GREEN, SwingUtils.VCR_MONO);
+        debtLabel.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 0));
+        betPoolLabel.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 0));
+        
+        topPanel.add(Box.createRigidArea(new Dimension(0, 48)));
+        topPanel.add(betPoolLabel);
+        topPanel.add(Box.createRigidArea(new Dimension(0, 53)));
+        topPanel.add(debtLabel);
+	}
+	
+	private void setUpProgressPanel(JPanel progPanel) {
+		progPanel.setOpaque(false);
+		
+		playerMoneyProgressBar = SwingUtils.createJProgressBar(
     			0, 
     			EventBus.player.getCurrentMoney(), 
     			true, 
-    			EventBus.player.getName()+" "+EventBus.player.getCurrentMoney(), 
-    			EventBus.player.getCurrentMoney(), Color.BLACK, 
-    			Color.white, 
+    			EventBus.player.getName(), 
+    			EventBus.player.getCurrentMoney(), 
+    			new Color(125, 212, 63), 
+    			Color.BLACK, 
     			new Dimension(50, 480));
         enemyMoneyProgressBar = SwingUtils.createJProgressBar(
         		0, 
         		EventBus.enemy.getCurrentMoney(), 
-        		true, EventBus.enemy.getName()+" "+EventBus.enemy.getCurrentMoney(), 
+        		true, EventBus.enemy.getName(), 
         		EventBus.enemy.getCurrentMoney(), 
+        		new Color(125, 212, 63), 
         		Color.BLACK, 
-        		Color.white, 
         		new Dimension(50, 480));
-    	
-    	progressBarArea.add(playerMoneyProgressBar);
-    	progressBarArea.add(enemyMoneyProgressBar);
-    	//this.add(progressBarArea);
+       
+        progPanel.add(playerMoneyProgressBar);
+        progPanel.add(enemyMoneyProgressBar);
 	}
 	
 	public void subMoney(Entity entity, boolean isPlayer, int amount)
@@ -79,10 +103,12 @@ public class MatchInfoArea extends JPanel{
 	public void updateMoneyBar(Entity entity, boolean isPlayer) {
 		if (isPlayer) {
 			playerMoneyProgressBar.setValue(entity.getCurrentMoney());
-			playerMoneyProgressBar.setString(entity.getName()+" "+entity.getCurrentMoney());
+			playerMoneyProgressBar.setString(entity.getName());
+			playerMoneyProgressBar.repaint();
 		} else {
 			enemyMoneyProgressBar.setValue(entity.getCurrentMoney());
-    		enemyMoneyProgressBar.setString(entity.getName()+" "+entity.getCurrentMoney());
+    		enemyMoneyProgressBar.setString(entity.getName());
+    		enemyMoneyProgressBar.repaint();
 		}
     	
     }
@@ -93,7 +119,7 @@ public class MatchInfoArea extends JPanel{
     }
 	
 	public void updateBetLabel() {
-		betPoolLabel.setText("" + EventBus.currentMatch.betPool);
+		betPoolLabel.setText("V" + EventBus.currentMatch.betPool);
 	}
 	
 	public void setBetLabelText(String text) {

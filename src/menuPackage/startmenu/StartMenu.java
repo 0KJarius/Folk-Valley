@@ -32,10 +32,10 @@ public class StartMenu extends JPanel{
 		this.setBackground(Color.GREEN);
 		
 		JLayeredPane basePane = new JLayeredPane();
-		basePane.setPreferredSize(new Dimension(1280, 720));
+		
 		basePane.add(SwingUtils.createImageAt("mainmenu/startmenuAnim.gif", new Point(0,0)));
 		this.add(basePane);
-		JLabel playButton = SwingUtils.createImageAt(PLAYBUTTON, new Point(0, 439));
+		JLabel playButton = SwingUtils.createImageAt(PLAYBUTTON, new Point(0, 488));
 		setUpPlayButton(playButton);
 		
 		basePane.add(playButton, JLayeredPane.PALETTE_LAYER);

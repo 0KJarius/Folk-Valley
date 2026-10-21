@@ -23,7 +23,7 @@ public class GameOverScreen extends JPanel
 		this.setLocation(0, 1);
 		this.setBackground(new Color(0,0,255, 200));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		JLabel text = SwingUtils.createJLabel("GAME OVER", 25, Color.red);
+		JLabel text = SwingUtils.createJLabel("GAME OVER", 25, Color.red, SwingUtils.VCR_MONO);
 		text.setAlignmentY(CENTER_ALIGNMENT);
 		text.setAlignmentX(CENTER_ALIGNMENT);
 		

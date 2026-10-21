@@ -14,12 +14,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JToggleButton;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 
 public abstract class SwingUtils {
 	public static final String ASSETS_PATH = "../Assets/";
 	public static final String FONT_PATH = "../Assets/fonts/";
 	public static final String MARTIAN_MONO = FONT_PATH + "MartianMono-VariableFont_wdth,wght.ttf";
 	public static final String HONK = FONT_PATH + "Honk-Regular-VariableFont_MORF,SHLN.ttf";
+	public static final String VCR_MONO = FONT_PATH + "VCR_OSD_MONO_1.001.ttf";
+	public static final String RUBIC_MONO = FONT_PATH + "RubikMonoOne-Regular.ttf";
+	
+	
     public static JPanel createJPanel(Dimension size, Color bgColor) 
     {
     	JPanel panel = new JPanel();
@@ -34,10 +39,10 @@ public abstract class SwingUtils {
     	return panel;
     }
     
-    public static JLabel createJLabel(String text, int size, Color textColor){
+    public static JLabel createJLabel(String text, int size, Color textColor, String font){
         JLabel label = new JLabel(text);
         try {
-            label.setFont(createFont(HONK, size));
+            label.setFont(createFont(font, size));
         } catch (FontFormatException | IOException e) {}
         label.setForeground(textColor);
 
@@ -71,6 +76,16 @@ public abstract class SwingUtils {
     	progressBar.setBackground(backColor);
     	progressBar.setPreferredSize(size);
     	progressBar.setValue(defaultValue);
+    	progressBar.setBorderPainted(false);
+    	
+    	progressBar.setUI(new BasicProgressBarUI() {
+    		protected Color getSelectionBackground() { return Color.WHITE; }
+    	    protected Color getSelectionForeground() { return Color.BLACK; } 
+    	});
+    	
+    	try {
+			progressBar.setFont(createFont(RUBIC_MONO, 30));
+		} catch (FontFormatException | IOException e) {}
     	if(isVertical) {
     		progressBar.setOrientation(JProgressBar.VERTICAL);
     	}
