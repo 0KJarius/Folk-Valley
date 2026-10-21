@@ -23,6 +23,7 @@ public abstract class SwingUtils {
 	public static final String HONK = FONT_PATH + "Honk-Regular-VariableFont_MORF,SHLN.ttf";
 	public static final String VCR_MONO = FONT_PATH + "VCR_OSD_MONO_1.001.ttf";
 	public static final String RUBIC_MONO = FONT_PATH + "RubikMonoOne-Regular.ttf";
+	public static final String NIKKYOU_SANS = FONT_PATH + "NikkyouSans-B6aV.ttf";
 	
 	
     public static JPanel createJPanel(Dimension size, Color bgColor) 

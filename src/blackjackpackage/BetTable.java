@@ -14,7 +14,7 @@ public class BetTable extends JPanel
     public BetTable()
     {
     	
-    	this.setBounds(248, 350, 784, 300);
+    	this.setBounds(270, 350, 765, 300);
         this.setBackground(Color.ORANGE);
         for (int i = 1; i < 6; i++)
         {
