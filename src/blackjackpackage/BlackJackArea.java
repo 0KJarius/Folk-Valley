@@ -2,6 +2,7 @@ package blackjackpackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Point;
@@ -22,6 +23,7 @@ public class BlackJackArea extends JPanel{
     protected EnemyHand enemyHand;
     protected ScoreArea scoreArea;
     protected ButtonArea buttonArea;
+    private JPanel contentPanel;
 	
 	public BlackJackArea() 
 	{
@@ -33,7 +35,7 @@ public class BlackJackArea extends JPanel{
     	basePane.setPreferredSize(new Dimension(805, 712));
     	this.add(basePane);
     	
-    	JPanel contentPanel = SwingUtils.createJPanel(new Rectangle(805, 712), Color.cyan);
+    	contentPanel = SwingUtils.createJPanel(new Rectangle(805, 712), Color.cyan);
     	basePane.add(contentPanel, JLayeredPane.PALETTE_LAYER);
     	basePane.add(SwingUtils.createImageAt("BlackJack/playArea.png", new Point(0,0)), JLayeredPane.DEFAULT_LAYER);
     	
@@ -87,13 +89,14 @@ public class BlackJackArea extends JPanel{
 	
 	public void replacePlayerHand() {
 		buttonArea.split.setEnabled(false);
-		this.remove(playerHand);
+		contentPanel.remove(playerHand);
         playerHands.remove(playerHand);
         playerHand = playerHands.getFirst();
         
-        this.remove(buttonArea);
-        this.add(playerHand);
-        this.add(buttonArea);
+
+        contentPanel.remove(buttonArea);
+        contentPanel.add(playerHand);
+        contentPanel.add(buttonArea);
         
         playerHand.repaint();
         playerHand.revalidate();

@@ -55,7 +55,7 @@ public class MatchInfoArea extends JPanel{
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 		
 		debtLabel = SwingUtils.createJLabel(""+ EventBus.currentMatch.blackJack.playerHand.getDebt(), 40, Color.RED, SwingUtils.VCR_MONO);
-        betPoolLabel = SwingUtils.createJLabel("V" + EventBus.currentMatch.betPool, 40, Color.GREEN, SwingUtils.VCR_MONO);
+        betPoolLabel = SwingUtils.createJLabel("V" + EventBus.currentMatch.betPool, 40, new Color(255, 214, 55), SwingUtils.VCR_MONO);
         debtLabel.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 0));
         betPoolLabel.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 0));
         
@@ -153,4 +153,5 @@ public class MatchInfoArea extends JPanel{
         updateMoneyBar(EventBus.player, true);
         updateMoneyBar(EventBus.enemy, false);
 	}
+	
 }

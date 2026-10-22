@@ -16,17 +16,21 @@ public class Player extends Entity{
 	
 	private void initializeTestDeck() 
 	{
+//		for (int i = 0; i < 40; i++) {
+//			playerDeck.addCard(new PokerCard());
+//		}
+		
 		for (int i = 0; i < 40; i++) {
-			playerDeck.addCard(new PokerCard());
+			playerDeck.addCard(new PokerCardSpecial(PokerCard.Suit.CLUB, PokerCardSpecial.Type.QUEEN));
 		}
 		
 		
-		for (int i = 0; i < PokerCard.Suit.values().length; i++) 
-		{
-			playerDeck.addCard(new PokerCardSpecial(PokerCard.Suit.values()[i], PokerCardSpecial.Type.ACE));
-			playerDeck.addCard(new PokerCardSpecial(PokerCard.Suit.values()[i], PokerCardSpecial.Type.QUEEN));
-			playerDeck.addCard(new PokerCardSpecial(PokerCard.Suit.values()[i], PokerCardSpecial.Type.KING));
-			playerDeck.addCard(new PokerCardSpecial(PokerCard.Suit.values()[i], PokerCardSpecial.Type.JACK));
-		}
+//		for (int i = 0; i < PokerCard.Suit.values().length; i++) 
+//		{
+//			playerDeck.addCard(new PokerCardSpecial(PokerCard.Suit.values()[i], PokerCardSpecial.Type.ACE));
+//			playerDeck.addCard(new PokerCardSpecial(PokerCard.Suit.values()[i], PokerCardSpecial.Type.QUEEN));
+//			playerDeck.addCard(new PokerCardSpecial(PokerCard.Suit.values()[i], PokerCardSpecial.Type.KING));
+//			playerDeck.addCard(new PokerCardSpecial(PokerCard.Suit.values()[i], PokerCardSpecial.Type.JACK));
+//		}
 	}
 }

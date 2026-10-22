@@ -99,6 +99,11 @@ public class BlackJackScreen extends JPanel{
     	
     }
 	
+	public void addNatural(int amount) {
+		natural += amount;
+		rightArea.updateNaturalLabel();
+	}
+	
 	public void addBetPool(int amount) {
 		betPool += amount * 2;
 		infoArea.updateBetLabel();
