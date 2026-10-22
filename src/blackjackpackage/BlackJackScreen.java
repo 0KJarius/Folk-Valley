@@ -20,6 +20,7 @@ public class BlackJackScreen extends JPanel{
 	public Deck deck;
 	protected int betPool;
 	public BetTable betTable;
+	protected int natural = 21;
 	
 	public BlackJackScreen(Entity enemy) {
 		EventBus.enemy = enemy;
@@ -40,6 +41,11 @@ public class BlackJackScreen extends JPanel{
 		this.add(blackJack, BorderLayout.CENTER);
 		this.add(rightArea, BorderLayout.EAST);
 		setTable();
+	}
+	
+	public BlackJackScreen(Entity enemy, int natural) {
+		this(enemy);
+		this.natural = natural;
 	}
 	
 	private void setTable(){

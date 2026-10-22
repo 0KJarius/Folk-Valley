@@ -106,11 +106,11 @@ public class ButtonArea extends JPanel{
 		blackJack.enemyHand.reveal();
 		blackJack.scoreArea.updateScoreLabel();
 		
-		if(blackJack.enemyHand.getScore() > 21) {
+		if(blackJack.enemyHand.getScore() > EventBus.currentMatch.natural) {
 			EventBus.currentMatch.onRoundOver(true, false);
 			EventBus.currentMatch.splitCheck();
 			
-		} else if (blackJack.enemyHand.getScore() == 21) {
+		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural) {
 			EventBus.currentMatch.onRoundOver(false, false);
 			EventBus.currentMatch.reset();
 			
@@ -134,16 +134,19 @@ public class ButtonArea extends JPanel{
 		blackJack.scoreArea.updateScoreLabel();
 		
 		
-		if (blackJack.playerHand.getScore() > 21) {
+		if (blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
 			EventBus.currentMatch.onRoundOver(false, false);
 			EventBus.currentMatch.reset();
-		} else if (blackJack.playerHand.getScore() == 21) {
+		} else if (blackJack.playerHand.getScore() == EventBus.currentMatch.natural) {
 			EventBus.currentMatch.onRoundOver(true, false);
 			EventBus.currentMatch.splitCheck();
 		}
 	}
 	
 	private void onSplitPressed() {
+		blackJack.playerHand.setDebt(blackJack.playerHand.getDebt() / 2);
+		EventBus.currentMatch.natural += blackJack.playerHand.getDebt() % 2;
+		
 		blackJack.playerHands.addLast(new Hand());
 		blackJack.playerHands.getLast().addNewCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
 		blackJack.playerHands.getFirst().removeCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
@@ -151,7 +154,7 @@ public class ButtonArea extends JPanel{
 		blackJack.playerHand.revalidate();
 		blackJack.playerHand.repaint();
 		
-		
+		EventBus.currentMatch.infoArea.updateDebtLabel(blackJack.playerHand.getDebt());
 		EventBus.currentMatch.blackJack.scoreArea.updateScoreLabel();
 		split.setEnabled(false);
     }
