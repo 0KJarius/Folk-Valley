@@ -137,7 +137,7 @@ public class ButtonArea extends JPanel{
 		if (blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
 			EventBus.currentMatch.onRoundOver(false, false);
 			EventBus.currentMatch.reset();
-		} else if (blackJack.playerHand.getScore() == EventBus.currentMatch.natural) {
+		} else if (blackJack.playerHand.getScore() == EventBus.currentMatch.natural && blackJack.playerHand.getDebt() <= 0) {
 			EventBus.currentMatch.onRoundOver(true, false);
 			EventBus.currentMatch.splitCheck();
 		}
