@@ -7,6 +7,7 @@ import blackjackpackage.BlackJackScreen;
 import entitypackage.Entity;
 import entitypackage.Player;
 import menuPackage.startmenu.StartMenu;
+import shoppackage.ShopTable;
 
 public class Main
 {
@@ -20,6 +21,7 @@ public class Main
     	SwingUtilities.invokeLater(()->{
     		MainFrame frame = new MainFrame();
     		//frame.setScreen(new StartMenu());
+    		//frame.setScreen(new ShopTable());
             frame.setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
     	});
         
