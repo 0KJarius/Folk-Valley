@@ -16,7 +16,8 @@ public class ButtonArea extends JPanel{
 	public ButtonArea(BlackJackArea blackJackArea) 
 	{
 		this.blackJack = blackJackArea;
-		this.setBackground(Color.RED);
+		this.setOpaque(false);
+		//this.setBackground(Color.RED);
 		hit = new JButton("HIT");
 		stand = new JButton("STAND");
 		split = new JButton("SPLIT");

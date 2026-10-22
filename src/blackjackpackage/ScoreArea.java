@@ -7,17 +7,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import utilites.EventBus;
+import utilites.SwingUtils;
 
 public class ScoreArea extends JPanel{
-	private JLabel playerLabel = new JLabel("0");
-	private JLabel enemyLabel = new JLabel("0");
+	private JLabel playerLabel = SwingUtils.createJLabel("0", 55, Color.BLUE, SwingUtils.M6XPLUS);
+	private JLabel enemyLabel = SwingUtils.createJLabel("0", 55, Color.RED, SwingUtils.M6XPLUS);
 	
 	public ScoreArea() {
 		this.setPreferredSize(new Dimension(0, 70));
-		this.setBackground(Color.DARK_GRAY);
+		this.setOpaque(false);
+		//this.setBackground(Color.DARK_GRAY);
 		playerLabel.setForeground(Color.BLUE);
 		enemyLabel.setForeground(Color.RED);
 		this.add(playerLabel);
+		this.add(SwingUtils.createJLabel(":", 55, Color.WHITE, SwingUtils.M6XPLUS));
 		this.add(enemyLabel);
 	}
 	

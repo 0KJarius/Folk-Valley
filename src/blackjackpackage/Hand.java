@@ -21,7 +21,9 @@ public class Hand extends JPanel
         cards = new ArrayList<Card>();
         selectedCards= new ArrayList<Card>();
         this.setPreferredSize(new Dimension(804,130));
-        this.setBackground(Color.BLACK);
+        this.setOpaque(false);
+        
+        //this.setBackground(Color.BLACK);
         this.repaint();
     }
     

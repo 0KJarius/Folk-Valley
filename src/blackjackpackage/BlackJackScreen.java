@@ -26,7 +26,10 @@ public class BlackJackScreen extends JPanel{
 		EventBus.currentMatch = this;
 		this.setLayout(new BorderLayout());
 		this.setBounds(new Rectangle(1280, 720));
-		JPanel rightArea = SwingUtils.createJPanel(new Dimension(238, 0), Color.WHITE);
+		this.setBackground(new Color(88, 47, 44));
+		
+		
+		JPanel rightArea = SwingUtils.createJPanel(new Dimension(215, 0), Color.WHITE);
 		deck = EventBus.player.playerDeck.cloneDeck();
 		
 		blackJack = new BlackJackArea();

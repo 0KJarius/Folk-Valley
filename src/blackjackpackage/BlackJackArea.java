@@ -1,27 +1,41 @@
 package blackjackpackage;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import utilites.EventBus;
+import utilites.SwingUtils;
 
 public class BlackJackArea extends JPanel{
-    public Hand playerHand;
-    public LinkedList<Hand> playerHands;
-    public EnemyHand enemyHand;
-    public ScoreArea scoreArea;
-    public ButtonArea buttonArea;
+    protected Hand playerHand;
+    protected LinkedList<Hand> playerHands;
+    protected EnemyHand enemyHand;
+    protected ScoreArea scoreArea;
+    protected ButtonArea buttonArea;
 	
 	public BlackJackArea() 
 	{
-		this.setPreferredSize(new Dimension(804, 0));
-		this.setBackground(Color.CYAN);
-		this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-    	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setPreferredSize(new Dimension(805, 0));
+		this.setOpaque(false);
+    	this.setLayout(new BorderLayout());
+    	
+    	JLayeredPane basePane = new JLayeredPane();
+    	basePane.setPreferredSize(new Dimension(805, 712));
+    	this.add(basePane);
+    	
+    	JPanel contentPanel = SwingUtils.createJPanel(new Rectangle(805, 712), Color.cyan);
+    	basePane.add(contentPanel, JLayeredPane.PALETTE_LAYER);
+    	basePane.add(SwingUtils.createImageAt("BlackJack/playArea.png", new Point(0,0)), JLayeredPane.DEFAULT_LAYER);
     	
     	scoreArea = new ScoreArea();
     	buttonArea = new ButtonArea(this);
@@ -30,11 +44,25 @@ public class BlackJackArea extends JPanel{
         playerHands.addLast(new Hand());
         playerHand = playerHands.getFirst();
         enemyHand = new EnemyHand();
+        setUpContentPanel(contentPanel);
         
-        this.add(enemyHand);
-        this.add(scoreArea);
-        this.add(playerHand);
-        this.add(buttonArea);
+	}
+	
+	private void setUpContentPanel(JPanel contentPanel) 
+	{
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+		contentPanel.setOpaque(false);
+		
+		contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		contentPanel.add(enemyHand);
+		
+		scoreArea.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+		contentPanel.add(scoreArea);
+		contentPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+		
+		contentPanel.add(playerHand);
+		//buttonArea.setBorder(BorderFactory.createEmptyBorder(200, 0, 0, 0));
+		contentPanel.add(buttonArea);
 	}
 	
 	public void reset()
