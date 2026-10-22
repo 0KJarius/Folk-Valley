@@ -50,24 +50,7 @@ public abstract class SwingUtils {
 
         return label;
     }
-
     
-    public static JLabel createJLabel(String text, Font textStyle, int size, Color textColor) 
-    {
-    	JLabel label = new JLabel();
-    	label.setText(text);
-    	label.setFont(new Font(textStyle.getFontName(), textStyle.getStyle(), size));
-    	label.setForeground(textColor);
-    	return label;
-    }
-    
-    public static JLabel createJLabel(String text, Font textStyle, int size,  Color textColor , Color backgroundColor) 
-    {
-    	JLabel label = createJLabel(text, textStyle, size, textColor);
-    	label.setOpaque(true);
-    	label.setBackground(backgroundColor);
-    	return label;
-    }
     
     public static JProgressBar createJProgressBar(int min, int max, boolean isVertical, String text, int defaultValue, Color fillColor, Color backColor, Dimension size) 
     {
@@ -137,9 +120,9 @@ public abstract class SwingUtils {
     }
 
 
-    public static JButton createJButton(String normal, String highlight){
-        ImageIcon buttonImg = getImage(normal, 2);
-        ImageIcon buttonImgHigh = getImage(highlight, 2);
+    public static JButton createJButton(String normal, String pressed){
+        ImageIcon buttonImg = getImage(normal);
+        ImageIcon buttonImgPress = getImage(pressed);
 
         JButton button = new JButton(buttonImg);
         button.setPreferredSize(new Dimension(buttonImg.getIconWidth(), buttonImg.getIconHeight()));
@@ -148,9 +131,21 @@ public abstract class SwingUtils {
         button.setBorderPainted(false);
         button.setFocusPainted(false);
         button.setContentAreaFilled(false);
-        button.setPressedIcon(buttonImgHigh);
+        button.setPressedIcon(buttonImgPress);
 
         return button;
+    }
+    
+    public static JButton createJButton(String normal, String highlight, String pressed, String disable) {
+    	JButton button = createJButton(normal, pressed);
+    	ImageIcon buttonImgHigh = getImage(highlight);
+        ImageIcon buttonImgDisable = getImage(disable);
+    	
+    	button.setRolloverEnabled(true);
+    	button.setRolloverIcon(buttonImgHigh);
+    	button.setDisabledIcon(buttonImgDisable);
+    	
+    	return button;
     }
     
     public static JToggleButton createJToggleButton(String normal, String toggle){
