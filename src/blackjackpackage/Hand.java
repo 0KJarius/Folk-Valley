@@ -105,4 +105,9 @@ public class Hand extends JPanel
 
     public void setDebt(int debt) {this.debt = debt;}
     
+    @Override
+    public void addNotify() {
+    	super.addNotify();
+    }
+    
 }

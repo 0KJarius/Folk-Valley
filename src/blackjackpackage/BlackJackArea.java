@@ -63,7 +63,6 @@ public class BlackJackArea extends JPanel{
 		contentPanel.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		contentPanel.add(playerHand);
-		//buttonArea.setBorder(BorderFactory.createEmptyBorder(200, 0, 0, 0));
 		contentPanel.add(buttonArea);
 	}
 	

@@ -45,4 +45,11 @@ public class Card extends JToggleButton
     	this.score = setScore;
     }
     
+    @Override
+    public void addNotify() {
+    	this.setVisible(true);
+    	this.repaint();
+    	this.revalidate();
+    	super.addNotify();
+    }
 }
