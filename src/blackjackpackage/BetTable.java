@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.util.LinkedHashMap;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -38,7 +39,7 @@ public class BetTable extends JPanel
 		put(SwingUtils.createJButton(TWENTY + "20.png", TWENTY + "20_pressed.png"), 20);
 		put(SwingUtils.createJButton(HUNDRED + "100.png", HUNDRED + "100_pressed.png"), 100);
 		put(SwingUtils.createJButton(FIVE_HUNDO + "500.png", FIVE_HUNDO + "500_pressed.png"), 500);
-		put(SwingUtils.createJButton(ALL_IN + "allIn.png", ALL_IN + "allIn_pressed.png"), EventBus.player.getCurrentMoney());
+		
 	}};
 	
     public BetTable()
@@ -80,12 +81,52 @@ public class BetTable extends JPanel
     
     private void setUpBody(JPanel body) {
     	body.setOpaque(false);
-    	body.setBorder(BorderFactory.createEmptyBorder(140, 29, 0, 29));
+    	body.setBorder(BorderFactory.createEmptyBorder(29, 29, 0, 29));
     	for (JButton chip : betChips.keySet()) {
     		setUpBetChip(chip, betChips.get(chip));
     		body.add(chip);
     	}
     	
+    	//miraculously, these boxes keep everything in format
+    	body.add(Box.createRigidArea(new Dimension(450, 0)));
+    	body.add(Box.createRigidArea(new Dimension(60, 0)));
+    	body.add(Box.createRigidArea(new Dimension(40, 0)));
+    	body.add(Box.createRigidArea(new Dimension(40, 0)));
+    	body.add(Box.createRigidArea(new Dimension(60, 0)));
+    	
+    	JButton allIn = SwingUtils.createJButton(ALL_IN + "allIn.png", ALL_IN + "allIn_pressed.png");
+    	setUpAllInButton(allIn);
+    	body.add(allIn);
+    	
+    }
+    
+    private void setUpAllInButton(JButton allIn) {
+    	allIn.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (EventBus.player.getCurrentMoney() >= EventBus.player.getCurrentMoney()) {
+					EventBus.currentMatch.addBetPool(EventBus.player.getCurrentMoney());
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				allIn.setLocation(allIn.getX(), allIn.getY() - 10);
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				allIn.setLocation(allIn.getX(), allIn.getY() + 10);
+			}
+    		
+    	});
     }
     
     private void setUpConfirmButton(JButton confirmButton) {
@@ -99,7 +140,6 @@ public class BetTable extends JPanel
     
     private void setUpBetChip(JButton chip, int betAmount) {
     	chip.addMouseListener(new MouseListener() {
-
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (EventBus.player.getCurrentMoney() >= betAmount) {
