@@ -15,11 +15,12 @@ import utilites.SwingUtils;
 
 public class BlackJackScreen extends JPanel{
 	
-	public MatchInfoArea infoArea;
-	public BlackJackArea blackJack;
-	public Deck deck;
+	protected MatchInfoArea infoArea;
+	protected BlackJackArea blackJack;
+	protected RightInfoArea rightArea;
+	protected  Deck deck;
 	protected int betPool;
-	public BetTable betTable;
+	protected BetTable betTable;
 	protected int natural = 21;
 	
 	public BlackJackScreen(Entity enemy) {
@@ -29,10 +30,8 @@ public class BlackJackScreen extends JPanel{
 		this.setBounds(new Rectangle(1280, 720));
 		this.setBackground(new Color(88, 47, 44));
 		
-		
-		JPanel rightArea = SwingUtils.createJPanel(new Dimension(215, 0), Color.WHITE);
 		deck = EventBus.player.playerDeck.cloneDeck();
-		
+		rightArea = new RightInfoArea();
 		blackJack = new BlackJackArea();
 		infoArea = new MatchInfoArea();
 		betTable = new BetTable();
