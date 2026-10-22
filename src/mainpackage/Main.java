@@ -19,8 +19,8 @@ public class Main
     	ImageIcon testPubert = new ImageIcon(Main.class.getResource("../Assets/kid-named-pubert.png"));
     	SwingUtilities.invokeLater(()->{
     		MainFrame frame = new MainFrame();
-    		//frame.setScreen(new StartMenu());
-            frame.setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
+    		frame.setScreen(new StartMenu());
+            //frame.setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
     	});
         
     }
