@@ -68,7 +68,6 @@ public class BlackJackArea extends JPanel{
 	
 	public void reset()
     {	
-    	System.out.println("RESET");
         playerHands.clear();
 		playerHands.addLast(playerHand);
 

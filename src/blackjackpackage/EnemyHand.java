@@ -37,7 +37,6 @@ public class EnemyHand extends Hand{
     }
     
     public void hitIt(){
-    	System.out.println(super.getScore());
         addNewCard(new Card());
         if (super.getScore() <= 16){
             hitIt();
