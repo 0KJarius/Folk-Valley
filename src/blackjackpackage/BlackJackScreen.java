@@ -115,6 +115,8 @@ public class BlackJackScreen extends JPanel{
 		blackJack.playerHand.setDebt(Math.max(blackJack.playerHand.getDebt() - blackJack.playerHand.getScore(), 0));
 		
 		if (isTie) {
+			infoArea.addMoney(EventBus.player, playerWin, betPool / 2);
+			infoArea.addMoney(EventBus.enemy, playerWin, betPool / 2);
 			return;
 		}
 		
