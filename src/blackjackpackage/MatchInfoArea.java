@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
+import utilites.AnimationUtils;
 import entitypackage.Entity;
 import utilites.EventBus;
 import utilites.SwingUtils;
@@ -136,10 +137,15 @@ public class MatchInfoArea extends JPanel{
 	
 	public void updateDebtLabel(int debtAmount)
     {
+		
+		 AnimationUtils.popup(debtLabel, 1.15, 100, 5);
+		   
         debtLabel.setText("" + debtAmount);
     }
 	
 	public void updateBetLabel() {
+		 AnimationUtils.popup(betPoolLabel, 1.15, 100, 5);
+		 
 		betPoolLabel.setText("V" + EventBus.currentMatch.betPool);
 	}
 	

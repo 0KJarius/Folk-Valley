@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import utilites.AnimationUtils;
 import utilites.EventBus;
 import utilites.SwingUtils;
 
@@ -42,6 +43,10 @@ public class ScoreArea extends JPanel{
 	}
 	
 	public void updateScoreLabel() {
+		 AnimationUtils.popup(playerLabel, 1.15, 100, 5);
+		 AnimationUtils.popup(enemyLabel, 1.15, 100, 5);
+		 
+		 
 		playerLabel.setText("" + EventBus.currentMatch.blackJack.playerHand.getScore());
 		enemyLabel.setText("" + EventBus.currentMatch.blackJack.enemyHand.getScore());
 	}
