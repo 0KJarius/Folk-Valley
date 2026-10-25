@@ -16,7 +16,8 @@ import utilites.SwingUtils;
 
 public class GameOverScreen extends JPanel
 {
-	private EventBus eventBus;
+	private JPanel statsArea = SwingUtils.createJPanel(new Rectangle(), getBackground());
+	private JPanel gameOverArea ;
 	
 	public GameOverScreen() 
 	{
@@ -29,7 +30,7 @@ public class GameOverScreen extends JPanel
 		
 		Signal retryTask = new Signal() {
 			@Override
-			public void doThing() {
+			public void doTask() {
 				EventBus.frame.setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
 				
 			}
@@ -37,11 +38,5 @@ public class GameOverScreen extends JPanel
 		
 		basePane.add(SwingUtils.createImageAt("MenuStuff/gameOverLayout.png", new Point(0, 0)), JLayeredPane.DEFAULT_LAYER);
 		basePane.add(new JarButton(new Point(100,100), false, "RETRY", 60, retryTask), JLayeredPane.PALETTE_LAYER);
-	}
-	
-	private void onRetry() 
-	{
-		eventBus.hardResetMatch();
-		eventBus.removeLayerFromFrame(this);
 	}
 }

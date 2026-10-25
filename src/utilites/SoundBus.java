@@ -58,14 +58,14 @@ public abstract class SoundBus {
     }
 
     public static void pauseSong(){
-        if (currentSong != null){
+        if (currentSong != null && !isPaused){
             isPaused = true;
             currentSong.stop();
         }
     }
 
     public static void resumeSong(){
-        if (currentSong != null){
+        if (currentSong != null && isPaused){
             isPaused = false;
             currentSong.start();
         }

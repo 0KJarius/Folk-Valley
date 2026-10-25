@@ -35,9 +35,9 @@ public abstract class SwingUtils {
     	return panel;
     }
     
-    public static JPanel createJPanel(Rectangle pane, Color bgColor) {
+    public static JPanel createJPanel(Rectangle bounds, Color bgColor) {
     	JPanel panel = new JPanel();
-    	panel.setBounds(pane);
+    	panel.setBounds(bounds);
     	return panel;
     }
     
@@ -78,14 +78,12 @@ public abstract class SwingUtils {
     	return progressBar;
     }
     
-    public static JButton createJButton(Dimension size, String text, Color buttonColor) 
+    public static ImageIcon getImage(String filePath)
     {
-    	JButton button = new JButton(text);
-    	button.setPreferredSize(size);
-    	button.setBackground(buttonColor);
-    	
-    	return button;
+        ImageIcon icon = new ImageIcon(SwingUtils.class.getResource(ASSETS_PATH + filePath));
+        return icon;
     }
+    
     
     public static ImageIcon getImage(String filePath, int width, int height)
     {
@@ -100,11 +98,6 @@ public abstract class SwingUtils {
         return new ImageIcon(image);
     }
 
-    public static ImageIcon getImage(String filePath)
-    {
-        ImageIcon icon = new ImageIcon(SwingUtils.class.getResource(ASSETS_PATH + filePath));
-        return icon;
-    }
 
     public static JLabel createImageAt(String filePath, Point location){
         ImageIcon image = getImage(ASSETS_PATH + filePath);
@@ -113,10 +106,20 @@ public abstract class SwingUtils {
         return imageLabel;
     }
 
-    public static JLabel createImageAt(ImageIcon image, Point location){
+    public static JLabel createImageAt(String filePath, Point location, int mult){
+    	ImageIcon image = getImage(ASSETS_PATH + filePath, mult);
         JLabel imageLabel = new JLabel(image);
         imageLabel.setBounds(location.x, location.y, image.getIconWidth(), image.getIconHeight());
         return imageLabel;
+    }
+    
+    public static JButton createJButton(Dimension size, String text, Color buttonColor) 
+    {
+    	JButton button = new JButton(text);
+    	button.setPreferredSize(size);
+    	button.setBackground(buttonColor);
+    	
+    	return button;
     }
 
 
