@@ -38,6 +38,7 @@ public abstract class SwingUtils {
     public static JPanel createJPanel(Rectangle bounds, Color bgColor) {
     	JPanel panel = new JPanel();
     	panel.setBounds(bounds);
+    	panel.setBackground(bgColor);
     	return panel;
     }
     
