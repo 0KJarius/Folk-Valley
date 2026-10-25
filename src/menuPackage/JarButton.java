@@ -88,7 +88,7 @@ public class JarButton extends JPanel implements MouseListener{
 	public void mouseReleased(MouseEvent e) {
 		buttonImg.setIcon(SwingUtils.getImage(type + "hover.png"));
 		buttonText.setLocation(buttonText.getX() + 5, buttonText.getY() - 10);
-		task.doThing();
+		task.doTask();
 	}
 
 	@Override

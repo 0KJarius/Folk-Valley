@@ -90,6 +90,7 @@ public class ButtonArea extends JPanel{
 		}
 		blackJack.playerHand.removeSelectedCards();
 		EventBus.currentMatch.infoArea.updateDebtLabel(blackJack.playerHand.getDebt());
+		EventBus.currentMatch.debtCounter =  blackJack.playerHand.getDebt();
 		blackJack.scoreArea.updateScoreLabel();
 		
 		if (blackJack.playerHand.getCards().size() == 2 
