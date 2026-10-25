@@ -12,16 +12,10 @@ public abstract class EventBus {
 	public static BlackJackScreen currentMatch;
 	public static MainFrame frame;
 	
-	public void hardResetMatch() 
+	public static void hardResetMatch() 
 	{
 		player.resetWallet();
 		enemy.resetWallet();
-		//currentMatch.reset();
+		currentMatch.reset();
 	}
-	
-	public void removeLayerFromFrame(JPanel panel) 
-	{
-		frame.removeLayer(panel);	
-	}
-	
 }

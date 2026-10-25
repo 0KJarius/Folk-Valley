@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import blackjackpackage.cardpackage.Card;
 import entitypackage.Entity;
+import menuPackage.GameOverScreen;
 import utilites.EventBus;
 import utilites.SwingUtils;
 
@@ -124,6 +125,10 @@ public class BlackJackScreen extends JPanel{
 			infoArea.addMoney(EventBus.player, playerWin, betPool);
 		} else {
 			infoArea.addMoney(EventBus.enemy, playerWin, betPool);
+		}
+		
+		if (EventBus.player.getCurrentMoney() <= 0) {
+			EventBus.frame.layerOnScreen(new GameOverScreen(), JLayeredPane.POPUP_LAYER);
 		}
 	}
 	

@@ -23,8 +23,8 @@ public class Main
             System.setProperty("swing.aatext", "false");
     		MainFrame frame = new MainFrame();
     		//frame.setScreen(new StartMenu());
-    		frame.setScreen(new GameOverScreen());
-            //frame.setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
+    		//frame.setScreen(new GameOverScreen());
+            frame.setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
     	});
         
     }
