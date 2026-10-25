@@ -44,11 +44,7 @@ public class PokerCard extends Card{
 	}
 	
 	public PokerCard() {
-		Random rng = new Random();
-		int score = rng.nextInt(2, 10);
-		
-		Suit suit = Suit.values()[rng.nextInt(0, Suit.values().length)];
-		this(score, suit);
+		this(new Random().nextInt(2, 10), Suit.values()[new Random().nextInt(0, Suit.values().length)]);
 	}
 	
 	

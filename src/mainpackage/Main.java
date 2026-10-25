@@ -24,7 +24,7 @@ public class Main
     		MainFrame frame = new MainFrame();
     		//frame.setScreen(new StartMenu());
     		//frame.setScreen(new GameOverScreen());
-            frame.setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
+            frame.setScreen(new BlackJackScreen(new Entity(500, "Protosuer")));
     	});
         
     }
