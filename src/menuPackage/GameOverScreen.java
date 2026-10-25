@@ -1,13 +1,9 @@
 package menuPackage;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import java.awt.Point;
+import java.awt.Rectangle;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import utilites.EventBus;
 import utilites.GlobalConstants;
@@ -19,23 +15,14 @@ public class GameOverScreen extends JPanel
 	
 	public GameOverScreen() 
 	{
-		this.setSize(GlobalConstants.SCREEN_SIZE);
-		this.setLocation(0, 1);
-		this.setBackground(new Color(0,0,255, 200));
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		JLabel text = SwingUtils.createJLabel("GAME OVER", 25, Color.red, SwingUtils.VCR_MONO);
-		text.setAlignmentY(CENTER_ALIGNMENT);
-		text.setAlignmentX(CENTER_ALIGNMENT);
+		this.setBounds(new Rectangle(GlobalConstants.SCREEN_SIZE));
+		this.setBackground(new Color(0, 0, 0, 200));
 		
-		JButton retryButton = SwingUtils.createJButton(new Dimension(300, 60), "RETRY", Color.CYAN);
-		retryButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				onRetry();
-			}
-			
-		});
-		this.add(text);
-		this.add(retryButton);
+		JLayeredPane basePane = new JLayeredPane();
+		basePane.setPreferredSize(GlobalConstants.SCREEN_SIZE);
+		this.add(basePane);
+		
+		basePane.add(SwingUtils.createImageAt("MenuStuff/gameOverLayout.png", new Point(0, 0)), JLayeredPane.DEFAULT_LAYER);
 	}
 	
 	private void onRetry() 
