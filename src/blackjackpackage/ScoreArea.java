@@ -8,8 +8,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import utilites.EventBus;
-import utilites.SwingUtils;
+import utilities.EventBus;
+import utilities.SwingUtils;
 
 public class ScoreArea extends JPanel{
 	private JLabel playerLabel = SwingUtils.createJLabel("0", 65, new Color(82, 208, 234), SwingUtils.M6XPLUS);

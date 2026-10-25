@@ -1,8 +1,9 @@
 package blackjackpackage.cardpackage;
 
 import java.util.Random;
-import utilites.GlobalConstants;
-import utilites.SwingUtils;
+
+import utilities.GlobalConstants;
+import utilities.SwingUtils;
 
 public class PokerCardSpecial extends PokerCard{
 	public static enum Type{

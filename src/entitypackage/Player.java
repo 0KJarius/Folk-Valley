@@ -2,7 +2,7 @@ package entitypackage;
 import blackjackpackage.Deck;
 import blackjackpackage.cardpackage.PokerCard;
 import blackjackpackage.cardpackage.PokerCardSpecial;
-import utilites.EventBus;
+import utilities.EventBus;
 
 public class Player extends Entity{
 	public Deck playerDeck;

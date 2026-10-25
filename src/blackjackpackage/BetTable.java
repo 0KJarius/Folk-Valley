@@ -16,8 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import utilites.EventBus;
-import utilites.SwingUtils;
+import utilities.EventBus;
+import utilities.SwingUtils;
 
 public class BetTable extends JPanel
 {

@@ -1,4 +1,4 @@
-package utilites;
+package utilities;
 
 import javax.swing.JPanel;
 import blackjackpackage.BlackJackScreen;

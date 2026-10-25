@@ -1,4 +1,4 @@
-package utilites;
+package utilities;
 
 import java.awt.Dimension;
 

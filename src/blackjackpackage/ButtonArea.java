@@ -9,8 +9,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import utilites.EventBus;
-import utilites.SwingUtils;
+import utilities.EventBus;
+import utilities.SwingUtils;
 
 public class ButtonArea extends JPanel{
 	JButton hit, stand, split, discard;

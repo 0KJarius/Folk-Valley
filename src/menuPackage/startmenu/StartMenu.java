@@ -17,9 +17,9 @@ import javax.swing.JPanel;
 
 import blackjackpackage.BlackJackScreen;
 import entitypackage.Entity;
-import utilites.EventBus;
-import utilites.SoundBus;
-import utilites.SwingUtils;
+import utilities.EventBus;
+import utilities.SoundBus;
+import utilities.SwingUtils;
 
 public class StartMenu extends JPanel{
 	private final String PLAYBUTTON = "mainmenu/playButton.png";

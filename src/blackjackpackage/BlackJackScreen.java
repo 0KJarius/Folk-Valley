@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 import blackjackpackage.cardpackage.Card;
 import entitypackage.Entity;
 import menuPackage.GameOverScreen;
-import utilites.EventBus;
-import utilites.SwingUtils;
+import utilities.EventBus;
+import utilities.SwingUtils;
 
 public class BlackJackScreen extends JPanel{
 	

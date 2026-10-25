@@ -14,8 +14,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import utilites.EventBus;
-import utilites.SwingUtils;
+
+import utilities.EventBus;
+import utilities.SwingUtils;
 
 public class BlackJackArea extends JPanel{
     protected Hand playerHand;

@@ -11,8 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import utilites.EventBus;
-import utilites.SwingUtils;
+import utilities.EventBus;
+import utilities.SwingUtils;
 
 public class RightInfoArea extends JPanel{
 	private JLabel naturalLabel;

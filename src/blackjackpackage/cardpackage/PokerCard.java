@@ -9,8 +9,8 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-import utilites.GlobalConstants;
-import utilites.SwingUtils;
+import utilities.GlobalConstants;
+import utilities.SwingUtils;
 
 public class PokerCard extends Card{
 	public static String currentSkin = "placeHolderCards/";

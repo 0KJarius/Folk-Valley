@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import utilites.EventBus;
-import utilites.GlobalConstants;
+import utilities.EventBus;
+import utilities.GlobalConstants;
 
 public class MainFrame extends JFrame{
 	private JPanel currentPanel;

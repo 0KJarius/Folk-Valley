@@ -16,8 +16,8 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
 import entitypackage.Entity;
-import utilites.EventBus;
-import utilites.SwingUtils;
+import utilities.EventBus;
+import utilities.SwingUtils;
 
 public class MatchInfoArea extends JPanel{
 	private JProgressBar playerMoneyProgressBar;

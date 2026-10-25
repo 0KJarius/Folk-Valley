@@ -15,10 +15,10 @@ import javax.swing.JPanel;
 import blackjackpackage.BlackJackScreen;
 import entitypackage.Entity;
 import menuPackage.startmenu.StartMenu;
-import utilites.EventBus;
-import utilites.GlobalConstants;
-import utilites.Signal;
-import utilites.SwingUtils;
+import utilities.EventBus;
+import utilities.GlobalConstants;
+import utilities.Signal;
+import utilities.SwingUtils;
 
 public class GameOverScreen extends JPanel
 {
