@@ -15,7 +15,7 @@ public class ShopTable extends JPanel
 {
 	public ShopTable()
 	{
-		this.setPreferredSize(new Dimension(300, 300));
+		this.setPreferredSize(new Dimension(1080, 720));
 		this.setLayout(new BorderLayout(10,10));
 		this.setBackground(Color.BLACK);
 		
