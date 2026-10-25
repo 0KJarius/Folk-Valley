@@ -23,6 +23,9 @@ public class BlackJackScreen extends JPanel{
 	protected int betPool;
 	protected BetTable betTable;
 	protected int natural = 21;
+	private int maxMoney = EventBus.player.getCurrentMoney();
+	private int roundCounter = 0;
+	protected int debtCounter = 0;
 	
 	public BlackJackScreen(Entity enemy) {
 		EventBus.enemy = enemy;
@@ -114,6 +117,7 @@ public class BlackJackScreen extends JPanel{
 	
 	public void onRoundOver(boolean playerWin, boolean isTie) {
 		blackJack.playerHand.setDebt(Math.max(blackJack.playerHand.getDebt() - blackJack.playerHand.getScore(), 0));
+		roundCounter++;
 		
 		if (isTie) {
 			infoArea.addMoney(EventBus.player, playerWin, betPool / 2);
@@ -127,8 +131,12 @@ public class BlackJackScreen extends JPanel{
 			infoArea.addMoney(EventBus.enemy, playerWin, betPool);
 		}
 		
+		if (EventBus.player.getCurrentMoney() >= maxMoney) {
+			maxMoney = EventBus.player.getCurrentMoney();
+		}
+		
 		if (EventBus.player.getCurrentMoney() <= 0) {
-			EventBus.frame.layerOnScreen(new GameOverScreen(), JLayeredPane.POPUP_LAYER);
+			EventBus.frame.layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
 		}
 	}
 	

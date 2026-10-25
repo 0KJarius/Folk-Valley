@@ -29,7 +29,7 @@ public class GameOverScreen extends JPanel
 	private JLabel debtLabel = SwingUtils.createJLabel("0000", 50, Color.RED, SwingUtils.VCR_MONO);
 	private JLabel roundsLabel = SwingUtils.createJLabel("5", 50, new Color(69, 211, 76), SwingUtils.VCR_MONO);
 	
-	public GameOverScreen() 
+	public GameOverScreen(int maxMoney, int totalDebt, int roundCount) 
 	{
 		this.setBounds(new Rectangle(GlobalConstants.SCREEN_SIZE));
 		this.setBackground(new Color(0, 0, 0, 100));
@@ -38,6 +38,10 @@ public class GameOverScreen extends JPanel
 		JLayeredPane basePane = new JLayeredPane();
 		basePane.setPreferredSize(GlobalConstants.SCREEN_SIZE);
 		this.add(basePane);
+		
+		moneyLabel.setText("V" + maxMoney);
+		debtLabel.setText("" + totalDebt);
+		roundsLabel.setText("" + roundCount);
 		
 		setUpStatsArea();
 		setUpGameOverPanel();
