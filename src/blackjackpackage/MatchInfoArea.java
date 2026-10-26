@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
-import utilites.AnimationUtils;
+import utilities.AnimationUtils;
 import entitypackage.Entity;
 import utilities.EventBus;
 import utilities.SwingUtils;

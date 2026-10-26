@@ -1,4 +1,4 @@
-package utilites;
+package utilities;
 
 import javax.swing.Timer;
 import javax.swing.*;
