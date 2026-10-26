@@ -3,7 +3,7 @@ package utilities;
 import javax.swing.Timer;
 import javax.swing.*;
 import java.util.function.*;
-public class AnimationUtils {
+public abstract class AnimationUtils {
 
     public static final String KEY_SCALE = "anim_scale";
     public static final String KEY_ANGLE = "anim_angle";
