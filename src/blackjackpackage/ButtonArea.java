@@ -173,25 +173,11 @@ public class ButtonArea extends JPanel{
 		
 		if (blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
 			setButtonsActivated(false);
-			EventBus.currentMatch.onRoundOver(false, false);
-			EventBus.executeAfterTime(1000, new Signal() {
-				@Override
-				public void doTask() {
-					EventBus.currentMatch.reset();
-				}
-			});
-			
+			EventBus.currentMatch.onRoundOver(false, false, false);			
 			
 		} else if (blackJack.playerHand.getScore() == EventBus.currentMatch.natural && blackJack.playerHand.getDebt() <= 0) {
 			setButtonsActivated(false);
-			EventBus.currentMatch.onRoundOver(true, false);
-			EventBus.executeAfterTime(1000, new Signal() {
-				@Override
-				public void doTask() {
-					EventBus.currentMatch.splitCheck();
-				}
-			});
-			
+			EventBus.currentMatch.onRoundOver(true, false, true);
 		}
 		
 	}

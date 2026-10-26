@@ -28,10 +28,10 @@ public abstract class SoundBus {
         sound.setFramePosition(0);
         sfxCount++;
         
-        if (sfxCount > 2) {
+        if (sfxCount > 3) {
         	setVolume(sound, 0.5f);
-        } else if (sfxCount > 4) {
-        	
+        } else if (sfxCount > 6) {
+        	setVolume(sound, 0.4f);
         }else {
         	setVolume(sound, 1.0f);
         }

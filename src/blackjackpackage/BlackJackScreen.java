@@ -162,7 +162,7 @@ public class BlackJackScreen extends JPanel{
 		infoArea.subMoney(EventBus.player, true, amount);
 	}
 	
-	public void onRoundOver(boolean playerWin, boolean isTie) {
+	public void onRoundOver(boolean playerWin, boolean isTie, boolean isSplit) {
 		blackJack.playerHand.setDebt(Math.max(blackJack.playerHand.getDebt() - blackJack.playerHand.getScore(), 0));
 		roundCounter++;
 		
@@ -174,8 +174,21 @@ public class BlackJackScreen extends JPanel{
 		
 		if (playerWin) {
 			infoArea.addMoney(EventBus.player, playerWin, betPool);
+			blackJack.scoreArea.setPlayerLabelText("WIN");
+			blackJack.scoreArea.setEnemyLabelText("LOSE");
+			
+			
+			try {
+				SoundBus.playSFX("blackJack/winCheer.wav");
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		} else {
 			infoArea.addMoney(EventBus.enemy, playerWin, betPool);
+			blackJack.scoreArea.setPlayerLabelText("LOSE");
+			blackJack.scoreArea.setEnemyLabelText("WIN");
+			
+			try {
+				SoundBus.playSFX("blackJack/loseBoo.wav");
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		}
 		
 		if (EventBus.player.getCurrentMoney() >= maxMoney) {
@@ -185,28 +198,34 @@ public class BlackJackScreen extends JPanel{
 		if (EventBus.player.getCurrentMoney() <= 0) {
 			EventBus.frame.layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
 		}
+		
+		EventBus.executeAfterTime(2000, new Signal() {
+			@Override
+			public void doTask() {
+				if (isSplit) {
+					splitCheck();
+				} else {
+					reset();
+				}
+			}
+		});
 	}
 	
 	public void checkResults() {
 		if(blackJack.enemyHand.getScore() > EventBus.currentMatch.natural) {
-			EventBus.currentMatch.onRoundOver(true, false);
-			EventBus.currentMatch.splitCheck();
+			onRoundOver(true, false, true);
 			
 		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural) {
-			EventBus.currentMatch.onRoundOver(false, false);
-			EventBus.currentMatch.reset();
+			onRoundOver(false, false, false);
 			
 		} else if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()) {
-			EventBus.currentMatch.onRoundOver(false, false);
-			EventBus.currentMatch.reset();
+			onRoundOver(false, false, false);
 			
 		} else if (blackJack.enemyHand.getScore() < blackJack.playerHand.getScore()) {
-			EventBus.currentMatch.onRoundOver(true, false);
-			EventBus.currentMatch.splitCheck();
+			onRoundOver(true, false, true);
 			
 		} else {
-			EventBus.currentMatch.onRoundOver(false, true);
-			EventBus.currentMatch.splitCheck();
+			onRoundOver(false, true, true);
 		}
 	}
 	
