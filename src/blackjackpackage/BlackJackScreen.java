@@ -135,6 +135,7 @@ public class BlackJackScreen extends JPanel{
             blackJack.replacePlayerHand();
     		
             blackJack.scoreArea.updateScoreLabel();
+            blackJack.buttonArea.setButtonsActivated(true);
     		this.repaint();
     		this.revalidate();
     	}

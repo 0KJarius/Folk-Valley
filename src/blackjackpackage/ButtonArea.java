@@ -16,6 +16,10 @@ import utilities.SwingUtils;
 public class ButtonArea extends JPanel{
 	JButton hit, stand, split, discard;
 	private final String BUTTON_PATH = "BlackJack/blackJackButtons/";
+	private final String SFX_PATH = "button/";
+	private final String HOVER_SFX = SFX_PATH + "hover.wav";
+	private final String PRESSED_SFX = SFX_PATH + "pressed.wav";
+	private final String RELEASE_SFX = SFX_PATH + "release.wav";
 	private final String HIT_PATH = BUTTON_PATH + "hit/";
 	private final String STAND_PATH = BUTTON_PATH + "stand/";
 	private final String SPLIT_PATH = BUTTON_PATH + "split/";
@@ -31,10 +35,42 @@ public class ButtonArea extends JPanel{
 		this.setOpaque(false);
 		this.setBackground(Color.RED);
 		
-		hit = SwingUtils.createJButton(HIT_PATH + "hit.png", HIT_PATH + "hit_highlight.png", HIT_PATH + "hit_pressed.png", HIT_PATH + "hit_disable.png");
-		stand = SwingUtils.createJButton(STAND_PATH + "stand.png", STAND_PATH + "stand_highlight.png", STAND_PATH + "stand_pressed.png", STAND_PATH + "stand_disable.png");
-		split = SwingUtils.createJButton(SPLIT_PATH + "split.png", SPLIT_PATH + "split_highlight.png", SPLIT_PATH + "split_pressed.png", SPLIT_PATH + "split_disable.png");
-		discard = SwingUtils.createJButton(DISCARD_PATH + "discard.png", DISCARD_PATH + "discard_highlight.png", DISCARD_PATH + "discard_pressed.png", DISCARD_PATH + "discard_disable.png");
+		hit = SwingUtils.createJButton(
+				HIT_PATH + "hit.png",
+				HIT_PATH + "hit_highlight.png",
+				HIT_PATH + "hit_pressed.png", 
+				HIT_PATH + "hit_disable.png",
+				HOVER_SFX,
+				PRESSED_SFX,
+				RELEASE_SFX
+		);
+		stand = SwingUtils.createJButton(
+				STAND_PATH + "stand.png",
+				STAND_PATH + "stand_highlight.png",
+				STAND_PATH + "stand_pressed.png", 
+				STAND_PATH + "stand_disable.png",
+				HOVER_SFX,
+				PRESSED_SFX,
+				RELEASE_SFX
+		);
+		split = SwingUtils.createJButton(
+				SPLIT_PATH + "split.png",
+				SPLIT_PATH + "split_highlight.png", 
+				SPLIT_PATH + "split_pressed.png", 
+				SPLIT_PATH + "split_disable.png",
+				HOVER_SFX,
+				PRESSED_SFX,
+				RELEASE_SFX
+		);
+		discard = SwingUtils.createJButton(
+				DISCARD_PATH + "discard.png", 
+				DISCARD_PATH + "discard_highlight.png",
+				DISCARD_PATH + "discard_pressed.png",
+				DISCARD_PATH + "discard_disable.png",
+				HOVER_SFX,
+				PRESSED_SFX,
+				RELEASE_SFX
+		);
 		this.add(hit);
 		this.add(stand);
 		this.add(split);

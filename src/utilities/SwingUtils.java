@@ -6,8 +6,12 @@ import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -192,6 +196,42 @@ public abstract class SwingUtils {
     	button.setRolloverEnabled(true);
     	button.setRolloverIcon(buttonImgHigh);
     	button.setDisabledIcon(buttonImgDisable);
+    	
+    	return button;
+    }
+    
+    public static JButton createJButton(String normal, String highlight, String pressed, String disable, String hoverSFX, String pressedSFX, String releaseSFX) {
+    	JButton button = createJButton(normal, highlight, pressed, disable);
+    	button.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				try {
+					SoundBus.playSFX(pressedSFX);
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (releaseSFX != null) {
+					try {
+						SoundBus.playSFX(releaseSFX);
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
+				}
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				try {
+					SoundBus.playSFX(hoverSFX);
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
+				
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+    	});
     	
     	return button;
     }
