@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import utilities.EventBus;
+import utilities.Signal;
 import utilities.SwingUtils;
 
 public class ButtonArea extends JPanel{
@@ -42,6 +43,13 @@ public class ButtonArea extends JPanel{
 		setUpStand();
 		setUpSplit();
 		setUpDiscard();
+	}
+	
+	public void setButtonsActivated(boolean isEnabled) {
+		hit.setEnabled(isEnabled);
+		stand.setEnabled(isEnabled);
+		split.setEnabled(isEnabled);
+		discard.setEnabled(isEnabled);
 	}
 	
 	private void setUpHit() {
@@ -107,27 +115,10 @@ public class ButtonArea extends JPanel{
 		
 		blackJack.enemyHand.reveal();
 		blackJack.scoreArea.updateScoreLabel();
-		
-		if(blackJack.enemyHand.getScore() > EventBus.currentMatch.natural) {
-			EventBus.currentMatch.onRoundOver(true, false);
-			EventBus.currentMatch.splitCheck();
-			
-		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural) {
-			EventBus.currentMatch.onRoundOver(false, false);
-			EventBus.currentMatch.reset();
-			
-		} else if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()) {
-			EventBus.currentMatch.onRoundOver(false, false);
-			EventBus.currentMatch.reset();
-			
-		} else if (blackJack.enemyHand.getScore() < blackJack.playerHand.getScore()) {
-			EventBus.currentMatch.onRoundOver(true, false);
-			EventBus.currentMatch.splitCheck();
-			
-		} else {
-			EventBus.currentMatch.onRoundOver(false, true);
-			EventBus.currentMatch.splitCheck();
+		if (blackJack.enemyHand.getScore() > 16) {
+			EventBus.currentMatch.checkTimer();
 		}
+		
 	}
 	
 	private void onHit() {
@@ -135,14 +126,29 @@ public class ButtonArea extends JPanel{
 
 		blackJack.scoreArea.updateScoreLabel();
 		
-		
 		if (blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
+			setButtonsActivated(false);
 			EventBus.currentMatch.onRoundOver(false, false);
-			EventBus.currentMatch.reset();
+			EventBus.executeAfterTime(1000, new Signal() {
+				@Override
+				public void doTask() {
+					EventBus.currentMatch.reset();
+				}
+			});
+			
+			
 		} else if (blackJack.playerHand.getScore() == EventBus.currentMatch.natural && blackJack.playerHand.getDebt() <= 0) {
+			setButtonsActivated(false);
 			EventBus.currentMatch.onRoundOver(true, false);
-			EventBus.currentMatch.splitCheck();
+			EventBus.executeAfterTime(1000, new Signal() {
+				@Override
+				public void doTask() {
+					EventBus.currentMatch.splitCheck();
+				}
+			});
+			
 		}
+		
 	}
 	
 	private void onSplitPressed() {

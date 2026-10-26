@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -11,7 +13,9 @@ import javax.swing.JPanel;
 import blackjackpackage.cardpackage.Card;
 import entitypackage.Entity;
 import menuPackage.GameOverScreen;
+import utilities.AnimationUtils;
 import utilities.EventBus;
+import utilities.Signal;
 import utilities.SwingUtils;
 
 public class BlackJackScreen extends JPanel{
@@ -26,6 +30,30 @@ public class BlackJackScreen extends JPanel{
 	private int maxMoney = EventBus.player.getCurrentMoney();
 	private int roundCounter = 0;
 	protected int debtCounter = 0;
+	
+	protected Signal onStand = new Signal() {
+
+		public void doTask() {
+			
+			Timer hitTimer = new Timer();
+            TimerTask hitTask = new TimerTask() {
+				@Override
+				public void run() {
+					hitTimer.cancel();
+					addCard(blackJack.enemyHand);
+					blackJack.scoreArea.setEnemyLabelText("" + blackJack.enemyHand.getScore());
+					
+					if (blackJack.enemyHand.getScore() < 16) {
+						doTask();
+					} else {
+						checkTimer();
+					}
+				}	
+            };
+            
+            hitTimer.scheduleAtFixedRate(hitTask, 1000, 1);
+		}
+	};
 	
 	public BlackJackScreen(Entity enemy) {
 		EventBus.enemy = enemy;
@@ -68,7 +96,8 @@ public class BlackJackScreen extends JPanel{
 		deck.removeCard(addedCard);
 		hand.addNewCard(addedCard);
 		
-		if (hand.getCards().size() == 2 && hand.getCards().get(0).getCardScore() == hand.getCards().get(1).getCardScore()) 
+		
+		if (hand.getCards().size() == 2 && hand.getCards().get(0).getCardScore() == hand.getCards().get(1).getCardScore() && !(hand instanceof EnemyHand)) 
 		{
 			blackJack.buttonArea.split.setEnabled(true);
 		} else {
@@ -136,8 +165,45 @@ public class BlackJackScreen extends JPanel{
 		}
 		
 		if (EventBus.player.getCurrentMoney() <= 0) {
-			EventBus.frame.layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
+			EventBus.executeAfterTime(1000, new Signal() {
+				@Override
+				public void doTask() {
+					EventBus.frame.layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
+					
+				}});
 		}
 	}
 	
+	public void checkResults() {
+		if(blackJack.enemyHand.getScore() > EventBus.currentMatch.natural) {
+			EventBus.currentMatch.onRoundOver(true, false);
+			EventBus.currentMatch.splitCheck();
+			
+		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural) {
+			EventBus.currentMatch.onRoundOver(false, false);
+			EventBus.currentMatch.reset();
+			
+		} else if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()) {
+			EventBus.currentMatch.onRoundOver(false, false);
+			EventBus.currentMatch.reset();
+			
+		} else if (blackJack.enemyHand.getScore() < blackJack.playerHand.getScore()) {
+			EventBus.currentMatch.onRoundOver(true, false);
+			EventBus.currentMatch.splitCheck();
+			
+		} else {
+			EventBus.currentMatch.onRoundOver(false, true);
+			EventBus.currentMatch.splitCheck();
+		}
+	}
+	
+	protected void checkTimer() {
+		EventBus.executeAfterTime(1000, new Signal() {
+			@Override
+			public void doTask() {
+				checkResults();								
+			}
+		});
+		
+	}
 }

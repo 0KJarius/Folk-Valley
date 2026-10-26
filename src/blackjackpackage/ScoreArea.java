@@ -36,17 +36,15 @@ public class ScoreArea extends JPanel{
 	
 	public void setPlayerLabelText(String text) {
 		playerLabel.setText(text);
+		AnimationUtils.popup(playerLabel, 1.15, 100, 5);
 	}
 	
 	public void setEnemyLabelText(String text) {
 		enemyLabel.setText(text);
+		AnimationUtils.popup(enemyLabel, 1.15, 100, 5);
 	}
 	
-	public void updateScoreLabel() {
-		 AnimationUtils.popup(playerLabel, 1.15, 100, 5);
-		 AnimationUtils.popup(enemyLabel, 1.15, 100, 5);
-		 
-		 
+	public void updateScoreLabel() {		 
 		playerLabel.setText("" + EventBus.currentMatch.blackJack.playerHand.getScore());
 		enemyLabel.setText("" + EventBus.currentMatch.blackJack.enemyHand.getScore());
 	}

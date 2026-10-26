@@ -16,6 +16,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import utilities.EventBus;
+import utilities.Signal;
 import utilities.SwingUtils;
 
 public class BlackJackArea extends JPanel{
@@ -46,7 +47,9 @@ public class BlackJackArea extends JPanel{
     	playerHands = new LinkedList<Hand>();
         playerHands.addLast(new Hand());
         playerHand = playerHands.getFirst();
-        enemyHand = new EnemyHand();
+        
+        
+        enemyHand = new EnemyHand(EventBus.currentMatch.onStand);
         setUpContentPanel(contentPanel);
         
 	}
@@ -74,6 +77,7 @@ public class BlackJackArea extends JPanel{
 
         enemyHand.resetHand();
         playerHand.resetHand();
+        buttonArea.setButtonsActivated(true);
         this.revalidate();
         this.repaint();   
     }
@@ -84,6 +88,7 @@ public class BlackJackArea extends JPanel{
         
         EventBus.currentMatch.addCard(playerHand);
         EventBus.currentMatch.addCard(playerHand);
+        buttonArea.setButtonsActivated(true);
     }
 	
 	public void replacePlayerHand() {

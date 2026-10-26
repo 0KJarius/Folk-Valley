@@ -1,6 +1,8 @@
 package utilities;
 
-import javax.swing.JPanel;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import blackjackpackage.BlackJackScreen;
 import entitypackage.Entity;
 import entitypackage.Player;
@@ -17,5 +19,18 @@ public abstract class EventBus {
 		player.resetWallet();
 		enemy.resetWallet();
 		currentMatch.reset();
+	}
+	
+	public static void executeAfterTime(int miliSeconds, Signal task) {
+		Timer waitTimer = new Timer();
+		TimerTask timeTask = new TimerTask() {
+			@Override
+			public void run() {
+				waitTimer.cancel();
+				task.doTask();
+			}
+		};
+		
+		waitTimer.scheduleAtFixedRate(timeTask, miliSeconds, 1);
 	}
 }

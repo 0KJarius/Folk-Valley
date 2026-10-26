@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import blackjackpackage.cardpackage.Card;
+import utilities.AnimationUtils;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +33,7 @@ public class Hand extends JPanel
     	cards.add(card);
         this.add(card);
         score += card.getCardScore();
+        
         
         card.addActionListener(new ActionListener() {
 

@@ -1,12 +1,17 @@
 package blackjackpackage;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import blackjackpackage.cardpackage.Card;
+import utilities.Signal;
 
 public class EnemyHand extends Hand{
+	private Signal task;
 
-
-    public EnemyHand() {
+    public EnemyHand(Signal task) {
         super();
+        this.task = task;
     }
     
     @Override
@@ -32,14 +37,14 @@ public class EnemyHand extends Hand{
         super.getCards().get(1).unflipCard();
         super.setScore(super.getScore() + (super.getCards().get(1).getCardScore() - super.getDebt()));
         if (super.getScore() <= 16){
-            hitIt();
+            task.doTask();
         }
     }
     
     public void hitIt(){
-        addNewCard(new Card());
         if (super.getScore() <= 16){
             hitIt();
+            
         }
     }
 }

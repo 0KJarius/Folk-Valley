@@ -3,7 +3,9 @@ import java.awt.Dimension;
 import java.util.Random;
 import javax.swing.JToggleButton;
 
-public class Card extends JToggleButton 
+import utilities.AnimationUtils;
+
+public abstract class Card extends JToggleButton 
 {
     private int score;
     private Random rng;
@@ -48,8 +50,7 @@ public class Card extends JToggleButton
     @Override
     public void addNotify() {
     	this.setVisible(true);
-    	this.repaint();
-    	this.revalidate();
+    	AnimationUtils.popup(this, 4.5, 500, 19);
     	super.addNotify();
     }
 }

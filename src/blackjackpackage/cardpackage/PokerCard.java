@@ -9,6 +9,7 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
+import utilities.AnimationUtils;
 import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
@@ -96,6 +97,8 @@ public class PokerCard extends Card{
 	public void unflipCard() {
 		this.setIcon(cardImg);
 		this.setSelectedIcon(cardSelectImg);
+		AnimationUtils.popup(this, 2, 500, 29);
+		
 		this.repaint();
 	}
 }
