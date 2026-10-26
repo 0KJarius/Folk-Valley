@@ -43,7 +43,51 @@ public abstract class SwingUtils {
     }
     
     public static JLabel createJLabel(String text, int size, Color textColor, String font){
-        JLabel label = new JLabel(text);
+        JLabel label = new JLabel(text) {
+        	//ggraohic s2d
+        	
+        	
+        	@Override 
+        	protected void paintComponent(java.awt.Graphics g) {
+        		   Double scaleObj = (Double) getClientProperty(AnimationUtils.KEY_SCALE);
+        	        Double angleObj = (Double) getClientProperty(AnimationUtils.KEY_ANGLE);
+        	        
+        	        double scale = (scaleObj != null) ? scaleObj : 1.0;
+        	        double angle = (angleObj != null) ? angleObj : 0.0;
+
+        	        java.awt.Graphics2D g2d = (java.awt.Graphics2D) g.create();
+        	        g2d.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+        	        
+        	        
+        	        
+        	        int cx = getWidth() / 2;
+        	        int cy = getHeight() / 2;
+        	        g2d.translate(cx, cy);
+        	        g2d.scale(scale, scale);
+        	        g2d.rotate(angle);
+        	        g2d.translate(-cx, -cy);
+        	        
+        	        super.paintComponent(g2d);
+        	        g2d.dispose();
+        	}
+        	
+        	@Override
+        	protected void paintBorder(java.awt.Graphics g) {
+        		
+        		
+        		
+        		  Double scaleObj = (Double) getClientProperty(AnimationUtils.KEY_SCALE);
+        	        Double angleObj = (Double) getClientProperty(AnimationUtils.KEY_ANGLE);
+        	        double scale = (scaleObj != null) ? scaleObj : 1.0;
+        	        double angle = (angleObj != null) ? angleObj : 0.0;
+
+        	        java.awt.Graphics2D g2d = (java.awt.Graphics2D) g.create();
+        	        int cx = getWidth() / 2; int cy = getHeight() / 2;
+        	        g2d.translate(cx, cy); g2d.scale(scale, scale); g2d.rotate(angle); g2d.translate(-cx, -cy);
+        	        super.paintBorder(g2d);
+        	        g2d.dispose();
+        	}
+        };
         try {
             label.setFont(createFont(font, size));
         } catch (FontFormatException | IOException e) {}
