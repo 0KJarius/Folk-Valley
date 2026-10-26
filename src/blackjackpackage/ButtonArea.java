@@ -184,7 +184,7 @@ public class ButtonArea extends JPanel{
 			
 		} else if (blackJack.playerHand.getScore() == EventBus.currentMatch.natural && blackJack.playerHand.getDebt() <= 0) {
 			setButtonsActivated(false);
-			EventBus.currentMatch.onRoundOver(true, false, true);
+			EventBus.currentMatch.onRoundOver(true, false, false);
 		}
 		
 	}

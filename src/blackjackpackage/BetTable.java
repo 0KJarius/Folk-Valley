@@ -211,10 +211,10 @@ public class BetTable extends JPanel
     }
     
     private void confirmBet() {
-    	if (EventBus.currentMatch.betPool == 0){
-            return;
+    	if (EventBus.currentMatch.betPool >= 0){
+            EventBus.frame.removeLayer(this);
         }
-        EventBus.frame.removeLayer(this);
+        
     }
     
 }
