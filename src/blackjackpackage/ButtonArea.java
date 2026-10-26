@@ -20,11 +20,14 @@ import utilities.SwingUtils;
 public class ButtonArea extends JPanel{
 	JButton hit, stand, split, discard;
 	private final String BUTTON_PATH = "BlackJack/blackJackButtons/";
+	
 	private final String SFX_PATH = "button/";
 	private final String HOVER_SFX = SFX_PATH + "hover.wav";
 	private final String PRESSED_SFX = SFX_PATH + "pressed.wav";
 	private final String RELEASE_SFX = SFX_PATH + "release.wav";
-	private final String NO_SFX = "button/no.wav";
+	private final String NO_SFX =  SFX_PATH + "no.wav";
+	private final String DISCARD_SFX = SFX_PATH + "discard.wav";
+	
 	private final String HIT_PATH = BUTTON_PATH + "hit/";
 	private final String STAND_PATH = BUTTON_PATH + "stand/";
 	private final String SPLIT_PATH = BUTTON_PATH + "split/";
@@ -145,6 +148,10 @@ public class ButtonArea extends JPanel{
 		EventBus.currentMatch.infoArea.updateDebtLabel(blackJack.playerHand.getDebt());
 		EventBus.currentMatch.debtCounter =  blackJack.playerHand.getDebt();
 		blackJack.scoreArea.updateScoreLabel();
+		
+		try {
+			SoundBus.playSFX(DISCARD_SFX);
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		
 		if (blackJack.playerHand.getCards().size() == 2 
 			&& blackJack.playerHand.getCards().get(0).getCardScore() == blackJack.playerHand.getCards().get(1).getCardScore()) 

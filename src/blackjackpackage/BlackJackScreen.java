@@ -169,10 +169,15 @@ public class BlackJackScreen extends JPanel{
 		if (isTie) {
 			infoArea.addMoney(EventBus.player, playerWin, betPool / 2);
 			infoArea.addMoney(EventBus.enemy, playerWin, betPool / 2);
-			return;
+			blackJack.scoreArea.setPlayerLabelText("TIE");
+			blackJack.scoreArea.setEnemyLabelText("TIE");
+			
+			try {
+				SoundBus.playSFX("blackJack/tie.wav");
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		}
 		
-		if (playerWin) {
+		if (playerWin && !isTie) {
 			infoArea.addMoney(EventBus.player, playerWin, betPool);
 			blackJack.scoreArea.setPlayerLabelText("WIN");
 			blackJack.scoreArea.setEnemyLabelText("LOSE");
@@ -181,7 +186,8 @@ public class BlackJackScreen extends JPanel{
 			try {
 				SoundBus.playSFX("blackJack/winCheer.wav");
 			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
-		} else {
+			
+		} else if (!playerWin && !isTie){
 			infoArea.addMoney(EventBus.enemy, playerWin, betPool);
 			blackJack.scoreArea.setPlayerLabelText("LOSE");
 			blackJack.scoreArea.setEnemyLabelText("WIN");
@@ -197,6 +203,7 @@ public class BlackJackScreen extends JPanel{
 		
 		if (EventBus.player.getCurrentMoney() <= 0) {
 			EventBus.frame.layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
+			return;
 		}
 		
 		EventBus.executeAfterTime(2000, new Signal() {
@@ -237,5 +244,13 @@ public class BlackJackScreen extends JPanel{
 			}
 		});
 		
+	}
+	
+	@Override
+	public void addNotify() {
+		try {
+			SoundBus.playSong("letsPlay.wav", true);
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
+		super.addNotify();
 	}
 }
