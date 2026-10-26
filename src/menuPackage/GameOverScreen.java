@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import blackjackpackage.BlackJackScreen;
 import entitypackage.Entity;
 import menuPackage.startmenu.StartMenu;
+import utilities.AnimationUtils;
 import utilities.EventBus;
 import utilities.GlobalConstants;
 import utilities.Signal;
@@ -85,5 +86,9 @@ public class GameOverScreen extends JPanel
 		gameOverArea.add(mainMenuButton);
 	}
 	
-	
+	@Override
+	public void addNotify() {
+		//this.setLocation(new Point(0, 720));
+		super.addNotify();
+	}
 }

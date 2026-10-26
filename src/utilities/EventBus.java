@@ -19,6 +19,8 @@ public abstract class EventBus {
 		player.resetWallet();
 		enemy.resetWallet();
 		currentMatch.reset();
+		currentMatch.resetDeck();
+		currentMatch.hardResetStats();
 	}
 	
 	public static void executeAfterTime(int miliSeconds, Signal task) {

@@ -34,7 +34,6 @@ public class BlackJackScreen extends JPanel{
 	protected Signal onStand = new Signal() {
 
 		public void doTask() {
-			
 			Timer hitTimer = new Timer();
             TimerTask hitTask = new TimerTask() {
 				@Override
@@ -114,6 +113,16 @@ public class BlackJackScreen extends JPanel{
 		infoArea.reset();
 	}
 	
+	public void hardResetStats() {
+		roundCounter = 0;
+		debtCounter = 0;
+		maxMoney = EventBus.player.getCurrentMoney();
+	}
+	
+	public void resetDeck() {
+		deck = EventBus.player.playerDeck.cloneDeck();
+	}
+	
 	public void splitCheck() 
     {
     	if(blackJack.playerHands.size() == 1) {
@@ -165,12 +174,7 @@ public class BlackJackScreen extends JPanel{
 		}
 		
 		if (EventBus.player.getCurrentMoney() <= 0) {
-			EventBus.executeAfterTime(1000, new Signal() {
-				@Override
-				public void doTask() {
-					EventBus.frame.layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
-					
-				}});
+			EventBus.frame.layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
 		}
 	}
 	

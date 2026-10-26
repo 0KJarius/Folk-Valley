@@ -112,7 +112,7 @@ public class ButtonArea extends JPanel{
 	
 	private void onStand() {
 		blackJack.playerHand.setScore(blackJack.playerHand.getScore() - blackJack.playerHand.getDebt());
-		
+		setButtonsActivated(false);
 		blackJack.enemyHand.reveal();
 		blackJack.scoreArea.updateScoreLabel();
 		if (blackJack.enemyHand.getScore() > 16) {

@@ -18,7 +18,7 @@ public abstract class AnimationUtils {
 
     
     
-    private static double easeOutCubic(double t) {
+    public static double easeOutCubic(double t) {
         return 1 - Math.pow(1 - t, 3);
     }
 
