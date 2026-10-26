@@ -4,13 +4,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import utilities.EventBus;
 import utilities.Signal;
+import utilities.SoundBus;
 import utilities.SwingUtils;
 
 public class ButtonArea extends JPanel{
@@ -20,6 +24,7 @@ public class ButtonArea extends JPanel{
 	private final String HOVER_SFX = SFX_PATH + "hover.wav";
 	private final String PRESSED_SFX = SFX_PATH + "pressed.wav";
 	private final String RELEASE_SFX = SFX_PATH + "release.wav";
+	private final String NO_SFX = "button/no.wav";
 	private final String HIT_PATH = BUTTON_PATH + "hit/";
 	private final String STAND_PATH = BUTTON_PATH + "stand/";
 	private final String SPLIT_PATH = BUTTON_PATH + "split/";
@@ -130,6 +135,10 @@ public class ButtonArea extends JPanel{
 	private void onDiscard() {
 		if (blackJack.playerHand.getSelectedCards().size() == blackJack.playerHand.getCards().size() 
 			||blackJack.playerHand.getSelectedCards().isEmpty()) {
+			
+			try {
+				SoundBus.playSFX(NO_SFX);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 			return;
 		}
 		blackJack.playerHand.removeSelectedCards();
@@ -151,7 +160,7 @@ public class ButtonArea extends JPanel{
 		setButtonsActivated(false);
 		blackJack.enemyHand.reveal();
 		blackJack.scoreArea.updateScoreLabel();
-		if (blackJack.enemyHand.getScore() > 16) {
+		if (blackJack.enemyHand.getScore() > ((EventBus.currentMatch.natural * 16) / 21)) {
 			EventBus.currentMatch.checkTimer();
 		}
 		

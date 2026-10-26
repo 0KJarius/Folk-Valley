@@ -91,6 +91,7 @@ public class PokerCard extends Card{
 		this.setIcon(FLIP_IMG);
 		this.setSelectedIcon(flipSelectImg);
 		this.repaint();
+		super.flipCard();
 	}
 	
 	@Override
@@ -100,5 +101,7 @@ public class PokerCard extends Card{
 		AnimationUtils.popup(this, 2, 500, 29);
 		
 		this.repaint();
+		super.unflipCard();
 	}
+	
 }

@@ -4,9 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -16,6 +19,7 @@ import menuPackage.GameOverScreen;
 import utilities.AnimationUtils;
 import utilities.EventBus;
 import utilities.Signal;
+import utilities.SoundBus;
 import utilities.SwingUtils;
 
 public class BlackJackScreen extends JPanel{
@@ -42,7 +46,11 @@ public class BlackJackScreen extends JPanel{
 					addCard(blackJack.enemyHand);
 					blackJack.scoreArea.setEnemyLabelText("" + blackJack.enemyHand.getScore());
 					
-					if (blackJack.enemyHand.getScore() < 16) {
+					try {
+						SoundBus.playSFX("blackJack/reveal.wav");
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
+					
+					if (blackJack.enemyHand.getScore() < ((natural * 16) / 21)) {
 						doTask();
 					} else {
 						checkTimer();
