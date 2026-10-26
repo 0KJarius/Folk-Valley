@@ -78,7 +78,15 @@ public class BetTable extends JPanel
     	JPanel footer = SwingUtils.createJPanel(new Dimension(819, 103), getBackground());
     	footer.setOpaque(false);
     	
-    	JButton confirmButton = SwingUtils.createJButton(CONFIRM_PATH + "confirm.png", CONFIRM_PATH + "confirm_highlight.png", CONFIRM_PATH + "confirm_pressed.png", CONFIRM_PATH + "confirm_disable.png");
+    	JButton confirmButton = SwingUtils.createJButton(
+    			CONFIRM_PATH + "confirm.png",
+    			CONFIRM_PATH + "confirm_highlight.png", 
+    			CONFIRM_PATH + "confirm_pressed.png", 
+    			CONFIRM_PATH + "confirm_disable.png",
+    			"playButtonHover.wav",
+    			"playButtonSelect.wav",
+    			null
+    	);
     	setUpConfirmButton(confirmButton);
         
         footer.add(confirmButton);
