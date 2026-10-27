@@ -97,8 +97,9 @@ public abstract class Hand extends JPanel
     public boolean verifySplit() {
     	if (cards.size() < 2 || cards.size() > 2) {return false;}
     	if (cards.get(0) instanceof UnoCard || cards.get(1) instanceof UnoCard) {return false;}
+    	if (cards.get(0).getCardScore() == cards.get(1).getCardScore()){return true;}
     	
-    	return true;
+    	return false;
     }
     
     public void applyUnoCards() {
