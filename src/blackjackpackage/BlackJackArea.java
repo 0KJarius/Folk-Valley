@@ -97,10 +97,13 @@ public class BlackJackArea extends JPanel{
 	public void replacePlayerHand() {
 		buttonArea.split.setEnabled(false);
 		contentPanel.remove(playerHand);
+		
+		int inheritDebt = playerHand.getDebt();
+		
         playerHands.remove(playerHand);
         playerHand = playerHands.getFirst();
+        playerHand.setDebt(inheritDebt);
         
-
         contentPanel.remove(buttonArea);
         contentPanel.add(playerHand);
         contentPanel.add(buttonArea);

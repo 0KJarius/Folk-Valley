@@ -11,6 +11,11 @@ public class PlayerHand extends Hand{
 		super();
 	}
 	
+	public PlayerHand(int debtAmount) {
+		super();
+		super.setDebt(debtAmount);
+	}
+	
 	@Override
 	public void addNewCard(Card card) 
     {

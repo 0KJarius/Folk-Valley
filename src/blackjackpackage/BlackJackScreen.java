@@ -107,7 +107,7 @@ public class BlackJackScreen extends JPanel{
 		hand.addNewCard(addedCard);
 		
 		
-		if (hand.getCards().size() == 2 && hand.getCards().get(0).getCardScore() == hand.getCards().get(1).getCardScore() && !(hand instanceof EnemyHand)) 
+		if (!(hand instanceof EnemyHand) && hand.verifySplit()) 
 		{
 			blackJack.buttonArea.split.setEnabled(true);
 		} else {

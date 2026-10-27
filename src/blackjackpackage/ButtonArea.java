@@ -155,8 +155,7 @@ public class ButtonArea extends JPanel{
 			SoundBus.playSFX(DISCARD_SFX);
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		
-		if (blackJack.playerHand.getCards().size() == 2 
-			&& blackJack.playerHand.getCards().get(0).getCardScore() == blackJack.playerHand.getCards().get(1).getCardScore()) 
+		if (blackJack.playerHand.verifySplit()) 
 		{
 			blackJack.buttonArea.split.setEnabled(true);
 		} else {

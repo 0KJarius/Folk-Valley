@@ -18,7 +18,7 @@ public abstract class Hand extends JPanel
     private ArrayList<Card> cards;
     private ArrayList<Card> selectedCards;
     private int score = 0;
-    private static int debt = 0;
+    private int debt = 0;
     private ArrayList<UnoCard> unoCards;
 
     public Hand()
