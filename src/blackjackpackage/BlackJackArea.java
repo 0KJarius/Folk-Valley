@@ -15,13 +15,16 @@ import javax.swing.BoxLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import blackjackpackage.handpackage.EnemyHand;
+import blackjackpackage.handpackage.Hand;
+import blackjackpackage.handpackage.PlayerHand;
 import utilities.EventBus;
 import utilities.Signal;
 import utilities.SwingUtils;
 
 public class BlackJackArea extends JPanel{
-    protected Hand playerHand;
-    protected LinkedList<Hand> playerHands;
+    protected PlayerHand playerHand;
+    protected LinkedList<PlayerHand> playerHands;
     protected EnemyHand enemyHand;
     protected ScoreArea scoreArea;
     protected ButtonArea buttonArea;
@@ -44,8 +47,8 @@ public class BlackJackArea extends JPanel{
     	scoreArea = new ScoreArea();
     	buttonArea = new ButtonArea(this);
     	
-    	playerHands = new LinkedList<Hand>();
-        playerHands.addLast(new Hand());
+    	playerHands = new LinkedList<PlayerHand>();
+        playerHands.addLast(new PlayerHand());
         playerHand = playerHands.getFirst();
         
         

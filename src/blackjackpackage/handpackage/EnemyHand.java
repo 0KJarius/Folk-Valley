@@ -1,4 +1,4 @@
-package blackjackpackage;
+package blackjackpackage.handpackage;
 
 import java.util.Timer;
 import java.util.TimerTask;

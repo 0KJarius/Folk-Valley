@@ -14,6 +14,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import blackjackpackage.cardpackage.Card;
+import blackjackpackage.handpackage.EnemyHand;
+import blackjackpackage.handpackage.Hand;
 import entitypackage.Entity;
 import menuPackage.GameOverScreen;
 import utilities.AnimationUtils;

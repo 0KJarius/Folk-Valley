@@ -12,6 +12,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import blackjackpackage.handpackage.Hand;
+import blackjackpackage.handpackage.PlayerHand;
 import utilities.EventBus;
 import utilities.Signal;
 import utilities.SoundBus;
@@ -193,7 +195,7 @@ public class ButtonArea extends JPanel{
 		blackJack.playerHand.setDebt(blackJack.playerHand.getDebt() / 2);
 		EventBus.currentMatch.addNatural(blackJack.playerHand.getDebt() % 2);
 		
-		blackJack.playerHands.addLast(new Hand());
+		blackJack.playerHands.addLast(new PlayerHand());
 		blackJack.playerHands.getLast().addNewCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
 		blackJack.playerHands.getFirst().removeCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
 		blackJack.scoreArea.setPlayerLabelText("" + EventBus.currentMatch.blackJack.playerHand.getScore());

@@ -1,16 +1,18 @@
-package blackjackpackage;
+package blackjackpackage.handpackage;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import blackjackpackage.cardpackage.Card;
+import blackjackpackage.cardpackage.PokerCardSpecial;
+import blackjackpackage.cardpackage.UnoCard;
 import utilities.AnimationUtils;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Hand extends JPanel
+public abstract class Hand extends JPanel
 {
     private ArrayList<Card> cards;
     private ArrayList<Card> selectedCards;
@@ -23,8 +25,6 @@ public class Hand extends JPanel
         selectedCards= new ArrayList<Card>();
         this.setPreferredSize(new Dimension(804,130));
         this.setOpaque(false);
-        
-        //this.setBackground(Color.BLACK);
         this.repaint();
     }
     
@@ -32,21 +32,11 @@ public class Hand extends JPanel
     {
     	cards.add(card);
         this.add(card);
-        score += card.getCardScore();
         
+        if (!(card instanceof UnoCard)) {
+        	score += card.getCardScore();
+        } 
         
-        card.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (card.isSelected()) {
-                	selectedCards.add(card);
-                } else {
-                	selectedCards.remove(card);
-                }
-            }
-            
-        });
         this.revalidate();
         this.repaint();
     }
@@ -92,7 +82,14 @@ public class Hand extends JPanel
     		debt = 0;
     	}
     }
-
+    
+    public boolean verifySplit() {
+    	if (cards.size() < 2 || cards.size() > 2) {return false;}
+    	if (cards.get(0) instanceof UnoCard || cards.get(1) instanceof UnoCard) {return false;}
+    	
+    	return true;
+    }
+    
     public ArrayList<Card> getCards() {return cards;}
     
     public ArrayList<Card> getSelectedCards() {return selectedCards;}
@@ -107,9 +104,5 @@ public class Hand extends JPanel
 
     public void setDebt(int debt) {this.debt = debt;}
     
-    @Override
-    public void addNotify() {
-    	super.addNotify();
-    }
     
 }
