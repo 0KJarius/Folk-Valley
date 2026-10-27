@@ -18,13 +18,11 @@ public class EnemyHand extends Hand{
     public void addNewCard(Card addedCard)
     {
 
-        super.getCards().add(addedCard);
-        this.add(addedCard);
+        super.addNewCard(addedCard);
 
         if (super.getCards().indexOf(addedCard) == 1){
             addedCard.flipCard();
-        } else{
-            super.setScore(super.getScore() + (addedCard.getCardScore() - super.getDebt()));
+            super.setScore(super.getScore() - addedCard.getCardScore());
         }
         
         if (super.getDebt() > 0){
