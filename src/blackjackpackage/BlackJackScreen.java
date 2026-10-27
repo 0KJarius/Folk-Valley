@@ -46,6 +46,7 @@ public class BlackJackScreen extends JPanel{
 				public void run() {
 					hitTimer.cancel();
 					addCard(blackJack.enemyHand);
+					
 					blackJack.scoreArea.setEnemyLabelText("" + blackJack.enemyHand.getScore());
 					
 					try {
@@ -224,6 +225,9 @@ public class BlackJackScreen extends JPanel{
 			onRoundOver(true, false, true);
 			
 		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural) {
+			onRoundOver(false, false, false);
+			
+		} else if (blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
 			onRoundOver(false, false, false);
 			
 		} else if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()) {

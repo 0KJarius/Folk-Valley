@@ -14,15 +14,17 @@ import utilities.SwingUtils;
 
 public class UnoCard extends Card{
 	public enum CardColor{
-		RED(Color.decode("#FF362F")),
-		BLUE(Color.decode("#52D0EA")),
-		YELLOW(Color.decode("#FFD72F")),
-		GREEN(Color.decode("#45D34C"));
+		RED(Color.decode("#FF362F"), PokerCard.Suit.HEART),
+		BLUE(Color.decode("#52D0EA"), PokerCard.Suit.DIAMOND),
+		YELLOW(Color.decode("#FFD72F"), PokerCard.Suit.SPADE),
+		GREEN(Color.decode("#45D34C"), PokerCard.Suit.CLUB);
 		
 		private Color color;
-		private CardColor(Color color) {this.color = color;}
+		private PokerCard.Suit equivalent;
+		private CardColor(Color color, PokerCard.Suit equivalent) {this.color = color; this.equivalent = equivalent;}
 		
 		public Color getColor() {return color;}
+		public PokerCard.Suit getEquivalent() {return equivalent;}
 	}
 	
 	private CardColor color;
@@ -61,6 +63,10 @@ public class UnoCard extends Card{
 	
 	public UnoCard() {
 		this(CardColor.values()[new Random().nextInt(0, CardColor.values().length - 1)], new Random().nextInt(0, 10));
+	}
+	
+	public CardColor getColor() {
+		return color;
 	}
 	
 	@Override

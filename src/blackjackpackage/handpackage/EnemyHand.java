@@ -9,6 +9,7 @@ import utilities.Signal;
 
 public class EnemyHand extends Hand{
 	private Signal task;
+	private boolean isHitting = false;
 
     public EnemyHand(Signal task) {
         super();
@@ -26,24 +27,23 @@ public class EnemyHand extends Hand{
             if (!(addedCard instanceof UnoCard)) {super.setScore(super.getScore() - addedCard.getCardScore());}
         }
         
-        if (super.getDebt() > 0){
-            super.setDebt(super.getDebt() - addedCard.getCardScore());
+        if (isHitting && addedCard instanceof UnoCard) {
+        	super.applySingleUnoCard((UnoCard)addedCard);
         }
     }
     
 
     public void reveal(){
         super.getCards().get(1).unflipCard();
-        super.setScore(super.getScore() + (super.getCards().get(1).getCardScore() - super.getDebt()));
-        if (super.getScore() <= 16){
-            task.doTask();
+        if (super.getCards().get(1) instanceof UnoCard) {
+        	applyUnoCards();
+        } else {
+        	super.setScore(super.getScore() + (super.getCards().get(1).getCardScore() - super.getDebt()));
         }
-    }
-    
-    public void hitIt(){
+        
         if (super.getScore() <= 16){
-            hitIt();
-            
+        	isHitting = true;
+            task.doTask();
         }
     }
 }

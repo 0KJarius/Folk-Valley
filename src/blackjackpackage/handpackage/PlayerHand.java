@@ -21,7 +21,8 @@ public class PlayerHand extends Hand{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (card.isSelected()) {
-                	getSelectedCards().add(card);
+                	if (!(card instanceof UnoCard)) {getSelectedCards().add(card);}
+                	
                 } else {
                 	getSelectedCards().remove(card);
                 }
