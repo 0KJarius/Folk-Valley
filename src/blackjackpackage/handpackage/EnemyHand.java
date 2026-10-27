@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import blackjackpackage.cardpackage.Card;
+import blackjackpackage.cardpackage.UnoCard;
 import utilities.Signal;
 
 public class EnemyHand extends Hand{
@@ -22,7 +23,7 @@ public class EnemyHand extends Hand{
 
         if (super.getCards().indexOf(addedCard) == 1){
             addedCard.flipCard();
-            super.setScore(super.getScore() - addedCard.getCardScore());
+            if (!(addedCard instanceof UnoCard)) {super.setScore(super.getScore() - addedCard.getCardScore());}
         }
         
         if (super.getDebt() > 0){
