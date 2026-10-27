@@ -29,11 +29,11 @@ public class BlackJackScreen extends JPanel{
 	protected RightInfoArea rightArea;
 	protected  Deck deck;
 	protected int betPool;
-	protected BetTable betTable;
 	protected int natural = 21;
 	private int maxMoney = EventBus.player.getCurrentMoney();
 	private int roundCounter = 0;
 	protected int debtCounter = 0;
+	private BetTable betTable = new BetTable();
 	
 	protected Signal onStand = new Signal() {
 
@@ -113,7 +113,6 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void reset() {
-		EventBus.frame.layerOnScreen(new BetTable(), JLayeredPane.PALETTE_LAYER);
 		betPool = 0;
 		blackJack.reset();
 		infoArea.reset();
