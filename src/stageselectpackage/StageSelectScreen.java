@@ -12,21 +12,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
-import blackjackpackage.BlackJackScreen;
-import entitypackage.Entity;
-import shoppackage.ShopTable;
 import utilities.EventBus;
 import utilities.SwingUtils;
 
 public class StageSelectScreen extends JPanel{
+	private static final StageSelectScreen STAGE_SELECT = new StageSelectScreen();
 	private JLayeredPane basePane = new JLayeredPane();
 	private JLabel balanceLabel;
 	private JPanel contentPanel = SwingUtils.createJPanel(new Rectangle(1280, 720), getBackground());
 	
 	private final String DECK_BUTTON_PATH = "stageSelect/deck/";
 	
-	public StageSelectScreen() {
+	private StageSelectScreen() {
 		this.setBounds(new Rectangle(1280, 720));
 		this.setLayout(new BorderLayout());
 		basePane.setPreferredSize(this.getSize());
@@ -81,16 +78,13 @@ public class StageSelectScreen extends JPanel{
 	
 	private void setUpCenterHud(JPanel center) {
 		center.setOpaque(false);
-		Stage testStage = new Stage("protosuer", new Color(255, 177, 177), "fight.png", false, new BlackJackScreen(new Entity(100, "Protosuer")));
-		Stage shopStage = new Stage("Shop", Color.white, "shop.png" ,false, new ShopTable());
-		center.add(testStage);
-		center.add(shopStage);
-		center.add(testStage.copyStage("Thing", true, new BlackJackScreen(new Entity(100, "Protosuer"))));
+		center.setLayout(new BorderLayout());
+		center.add(new StagePage());
 	}
 	
-	@Override
-	public void addNotify() {
-		balanceLabel.setText("V" + EventBus.player.getCurrentMoney());
-		super.addNotify();
-	} 
+	public static StageSelectScreen getInstance() {
+		return STAGE_SELECT;
+	}
+	
+
 }

@@ -12,6 +12,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import mainpackage.MainFrame;
+import stageselectpackage.StageSelectScreen;
 import utilities.EventBus;
 import utilities.GlobalConstants;
 import utilities.Signal;
@@ -74,8 +75,19 @@ public class GameOverScreen extends JPanel
 			}
 		};
 		
+		Signal menuTask = new Signal() {
+			@Override
+			public void doTask() {
+				EventBus.player.resetWallet();
+				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
+				EventBus.currentMatch = null;
+				MainFrame.getInstance().removeLayer(self);
+			}
+		};
+		
+		
 		JarButton retryButton = new JarButton(false, "RETRY", 60, retryTask);
-		JarButton mainMenuButton = new JarButton(false, "RETRY", 60, retryTask);
+		JarButton mainMenuButton = new JarButton(false, "MAIN MENU", 60, menuTask);
 		
 		gameOverArea.add(Box.createRigidArea(new Dimension(356, 180)));
 		gameOverArea.add(retryButton);

@@ -68,11 +68,16 @@ public class BlackJackScreen extends JPanel{
 	};
 	
 	public BlackJackScreen(Entity enemy) {
-		EventBus.enemy = enemy;
-		EventBus.currentMatch = this;
 		this.setLayout(new BorderLayout());
 		this.setBounds(new Rectangle(1280, 720));
 		this.setBackground(new Color(88, 47, 44));
+		EventBus.enemy = enemy;
+		
+		
+	}
+	
+	private void startMatch() {
+		EventBus.currentMatch = this;
 		
 		deck = EventBus.player.playerDeck.cloneDeck();
 		rightArea = new RightInfoArea();
@@ -83,6 +88,7 @@ public class BlackJackScreen extends JPanel{
 		this.add(infoArea, BorderLayout.WEST);
 		this.add(blackJack, BorderLayout.CENTER);
 		this.add(rightArea, BorderLayout.EAST);
+		setTable();
 	}
 	
 	public BlackJackScreen(Entity enemy, int natural) {
@@ -267,10 +273,17 @@ public class BlackJackScreen extends JPanel{
 	
 	@Override
 	public void addNotify() {
-		setTable();
+		startMatch();
+		
 		try {
 			SoundBus.playSong("letsPlay.wav", true);
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		super.addNotify();
+	}
+	
+	@Override
+	public void removeNotify() {
+		SoundBus.closeCurrentSong();
+		super.removeNotify();
 	}
 }
