@@ -48,4 +48,15 @@ public class Entity {
 		currentMoney = maxMoney;
 	}
 	
+	public Entity copy() {
+		return new Entity(maxMoney, name);
+	}
+	
+	public Entity copy(String name) {
+		return new Entity(maxMoney, name);
+	}
+	
+	public Entity Copy(int money) {
+		return new Entity(money, name);
+	}
 }
