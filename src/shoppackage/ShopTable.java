@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import utilites.SwingUtils;
+import utilities.SwingUtils;
 
 public class ShopTable extends JPanel
 {

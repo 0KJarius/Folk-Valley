@@ -8,6 +8,7 @@ import entitypackage.Entity;
 import entitypackage.Player;
 import menuPackage.GameOverScreen;
 import menuPackage.startmenu.StartMenu;
+import stageselectpackage.StageSelectScreen;
 
 public class Main
 {
@@ -22,7 +23,8 @@ public class Main
     		System.setProperty("awt.useSystemAAFontSettings","off"); 
             System.setProperty("swing.aatext", "false");
     		MainFrame frame = MainFrame.getInstance();
-    		frame.setScreen(new StartMenu());
+    		//frame.setScreen(new StartMenu());
+    		frame.setScreen(new StageSelectScreen());
             //frame.setScreen(new BlackJackScreen(new Entity(500, "Protosuer")));
     	});
         

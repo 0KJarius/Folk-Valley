@@ -55,20 +55,14 @@ public class StartMenu extends JPanel{
 				try {
 					SoundBus.playSFX("playButtonSelect.wav");
 				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
-				MainFrame.getInstance().setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
+				MainFrame.getInstance().setScreen(new BlackJackScreen(new Entity(500, "Protosuer")));
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mousePressed(MouseEvent e) {}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseReleased(MouseEvent e) {}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {

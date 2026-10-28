@@ -83,7 +83,6 @@ public class BlackJackScreen extends JPanel{
 		this.add(infoArea, BorderLayout.WEST);
 		this.add(blackJack, BorderLayout.CENTER);
 		this.add(rightArea, BorderLayout.EAST);
-		setTable();
 	}
 	
 	public BlackJackScreen(Entity enemy, int natural) {
@@ -268,6 +267,7 @@ public class BlackJackScreen extends JPanel{
 	
 	@Override
 	public void addNotify() {
+		setTable();
 		try {
 			SoundBus.playSong("letsPlay.wav", true);
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}

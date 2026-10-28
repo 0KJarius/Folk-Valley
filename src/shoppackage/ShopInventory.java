@@ -3,7 +3,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import blackjackpackage.cardpackage.*;
-import utilites.SwingUtils;
+import utilities.SwingUtils;
 import entitypackage.Player;
 
 public class ShopInventory extends JPanel{

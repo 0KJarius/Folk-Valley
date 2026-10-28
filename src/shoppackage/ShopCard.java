@@ -4,8 +4,8 @@ package shoppackage;
 import blackjackpackage.cardpackage.*;
 import javax.swing.*;
 import java.awt.*;
-import utilites.SwingUtils;
-import utilites.EventBus;
+import utilities.SwingUtils;
+import utilities.EventBus;
 
 public class ShopCard extends JPanel{
 
