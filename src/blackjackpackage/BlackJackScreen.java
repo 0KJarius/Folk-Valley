@@ -249,7 +249,10 @@ public class BlackJackScreen extends JPanel{
 			onRoundOver(false, false, false);
 		} else if (blackJack.enemyHand.getScore() < blackJack.playerHand.getScore()){
 			onRoundOver(true, false, true);
+		} else {
+			onRoundOver(false, true, true);
 		}
+		
 	}
 	
 	protected void checkTimer() {

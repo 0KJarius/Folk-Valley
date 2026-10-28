@@ -14,7 +14,7 @@ import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
 public class PokerCard extends Card{
-	public static String currentSkin = "placeHolderCards/";
+	public static String currentSkin = "msPlaceHolder/";
 	private ImageIcon cardImg;
 	private ImageIcon cardSelectImg;
 	private final ImageIcon FLIP_IMG = SwingUtils.getImage(GlobalConstants.POKERCARD + currentSkin + "back.png");
