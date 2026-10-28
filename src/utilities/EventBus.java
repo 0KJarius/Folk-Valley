@@ -10,13 +10,11 @@ import mainpackage.MainFrame;
 
 public abstract class EventBus {
 	public static Player player;
-	public static Entity enemy;
 	public static BlackJackScreen currentMatch;
 	
 	public static void hardResetMatch() 
 	{
 		player.resetWallet();
-		enemy.resetWallet();
 		currentMatch.resetDeck();
 		currentMatch.reset();
 		currentMatch.hardResetStats();

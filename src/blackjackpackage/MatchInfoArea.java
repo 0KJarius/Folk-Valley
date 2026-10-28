@@ -71,7 +71,7 @@ public class MatchInfoArea extends JPanel{
 		progPanel.setLayout(new BorderLayout());
 		
 		playerMoney = SwingUtils.createJLabel(EventBus.player.getCurrentMoney() + "/" + EventBus.player.getMaxMoney(), 45, new Color(125, 212, 63), SwingUtils.NIKKYOU_SANS);
-		enemyMoney = SwingUtils.createJLabel(EventBus.enemy.getCurrentMoney() + "/" + EventBus.enemy.getMaxMoney(), 45, new Color(125, 212, 63), SwingUtils.NIKKYOU_SANS);
+		enemyMoney = SwingUtils.createJLabel(EventBus.currentMatch.enemy.getCurrentMoney() + "/" + EventBus.currentMatch.enemy.getMaxMoney(), 45, new Color(125, 212, 63), SwingUtils.NIKKYOU_SANS);
 		enemyMoney.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		enemyMoney.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 5));
@@ -91,9 +91,9 @@ public class MatchInfoArea extends JPanel{
     			new Dimension(50, 404));
         enemyMoneyProgressBar = SwingUtils.createJProgressBar(
         		0, 
-        		EventBus.enemy.getCurrentMoney(), 
-        		true, EventBus.enemy.getName(), 
-        		EventBus.enemy.getCurrentMoney(), 
+        		EventBus.currentMatch.enemy.getCurrentMoney(), 
+        		true, EventBus.currentMatch.enemy.getName(), 
+        		EventBus.currentMatch.enemy.getCurrentMoney(), 
         		new Color(125, 212, 63), 
         		Color.BLACK, 
         		new Dimension(50, 404));
@@ -157,7 +157,7 @@ public class MatchInfoArea extends JPanel{
 		setBetLabelText("" + EventBus.currentMatch.betPool);
 		updateDebtLabel(EventBus.currentMatch.blackJack.playerHand.getDebt());
         updateMoneyBar(EventBus.player, true);
-        updateMoneyBar(EventBus.enemy, false);
+        updateMoneyBar(EventBus.currentMatch.enemy, false);
 	}
 	
 }

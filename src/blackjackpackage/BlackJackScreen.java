@@ -20,6 +20,7 @@ import blackjackpackage.handpackage.PlayerHand;
 import entitypackage.Entity;
 import mainpackage.MainFrame;
 import menuPackage.GameOverScreen;
+import menuPackage.WinScreen;
 import utilities.AnimationUtils;
 import utilities.EventBus;
 import utilities.Signal;
@@ -38,6 +39,7 @@ public class BlackJackScreen extends JPanel{
 	private int roundCounter = 0;
 	protected int debtCounter = 0;
 	private BetTable betTable = new BetTable();
+	protected Entity enemy;
 	
 	protected Signal onStand = new Signal() {
 
@@ -71,7 +73,7 @@ public class BlackJackScreen extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.setBounds(new Rectangle(1280, 720));
 		this.setBackground(new Color(88, 47, 44));
-		EventBus.enemy = enemy;
+		this.enemy = enemy;
 		
 		
 	}
@@ -132,6 +134,7 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void hardResetStats() {
+		enemy.resetWallet();
 		roundCounter = 0;
 		debtCounter = 0;
 		maxMoney = EventBus.player.getCurrentMoney();
@@ -168,7 +171,7 @@ public class BlackJackScreen extends JPanel{
 	public void addBetPool(int amount) {
 		betPool += amount * 2;
 		infoArea.updateBetLabel();
-		infoArea.subMoney(EventBus.enemy, false, amount);
+		infoArea.subMoney(enemy, false, amount);
 		infoArea.subMoney(EventBus.player, true, amount);
 	}
 	
@@ -178,7 +181,7 @@ public class BlackJackScreen extends JPanel{
 		
 		if (isTie) {
 			infoArea.addMoney(EventBus.player, playerWin, betPool / 2);
-			infoArea.addMoney(EventBus.enemy, playerWin, betPool / 2);
+			infoArea.addMoney(enemy, playerWin, betPool / 2);
 			blackJack.scoreArea.setPlayerLabelText("TIE");
 			blackJack.scoreArea.setEnemyLabelText("TIE");
 			
@@ -198,7 +201,7 @@ public class BlackJackScreen extends JPanel{
 			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 			
 		} else if (!playerWin && !isTie){
-			infoArea.addMoney(EventBus.enemy, playerWin, betPool);
+			infoArea.addMoney(enemy, playerWin, betPool);
 			blackJack.scoreArea.setPlayerLabelText("LOSE");
 			blackJack.scoreArea.setEnemyLabelText("WIN");
 			
@@ -213,6 +216,11 @@ public class BlackJackScreen extends JPanel{
 		
 		if (EventBus.player.getCurrentMoney() <= 0) {
 			MainFrame.getInstance().layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
+			return;
+		}
+		
+		if (enemy.getCurrentMoney() <= 0) {
+			MainFrame.getInstance().layerOnScreen(new WinScreen(debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
 			return;
 		}
 		
