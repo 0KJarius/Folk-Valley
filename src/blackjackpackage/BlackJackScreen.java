@@ -221,23 +221,32 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void checkResults() {
-		if(blackJack.enemyHand.getScore() > EventBus.currentMatch.natural) {
+		if (blackJack.enemyHand.getScore() > EventBus.currentMatch.natural && blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
+			if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()) {
+				onRoundOver(false, false, false);
+			} else if (blackJack.enemyHand.getScore() == blackJack.playerHand.getScore()) {
+				onRoundOver(false, true, true);
+			} else {
+				onRoundOver(true, false, true);
+			}
+		} else if (blackJack.enemyHand.getScore() > EventBus.currentMatch.natural || blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
+			if(blackJack.enemyHand.getScore() > EventBus.currentMatch.natural) {
+				onRoundOver(true, false, true);
+			} else {
+				onRoundOver(false, false, false);
+			}
+		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural || blackJack.playerHand.getScore() == EventBus.currentMatch.natural) {
+			if (blackJack.enemyHand.getScore() == blackJack.playerHand.getScore()) {
+				onRoundOver(false, true, true);
+			} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural) {
+				onRoundOver(false, false, false);
+			} else {
+				onRoundOver(true, false, true);
+			}
+		} else if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()){
+			onRoundOver(false, false, false);
+		} else if (blackJack.enemyHand.getScore() < blackJack.playerHand.getScore()){
 			onRoundOver(true, false, true);
-			
-		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural) {
-			onRoundOver(false, false, false);
-			
-		} else if (blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
-			onRoundOver(false, false, false);
-			
-		} else if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()) {
-			onRoundOver(false, false, false);
-			
-		} else if (blackJack.enemyHand.getScore() < blackJack.playerHand.getScore()) {
-			onRoundOver(true, false, true);
-			
-		} else {
-			onRoundOver(false, true, true);
 		}
 	}
 	
