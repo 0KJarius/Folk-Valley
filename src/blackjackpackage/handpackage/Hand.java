@@ -41,7 +41,7 @@ public abstract class Hand extends JPanel
         } else {
         	unoCards.add((UnoCard) card);
         }
-        
+        card.unflipCard();
         this.revalidate();
         this.repaint();
     }

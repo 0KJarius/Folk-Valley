@@ -59,4 +59,8 @@ public class Deck {
 		return clone;
 	}
 	
+	public int getSize() {
+		return cardDeck.size();
+	}
+	
 }

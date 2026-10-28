@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import blackjackpackage.cardpackage.Card;
 import blackjackpackage.handpackage.EnemyHand;
 import blackjackpackage.handpackage.Hand;
+import blackjackpackage.handpackage.PlayerHand;
 import entitypackage.Entity;
 import menuPackage.GameOverScreen;
 import utilities.AnimationUtils;
@@ -107,12 +108,13 @@ public class BlackJackScreen extends JPanel{
 		hand.addNewCard(addedCard);
 		
 		
-		if (!(hand instanceof EnemyHand) && hand.verifySplit()) 
+		if (hand instanceof PlayerHand && hand.verifySplit()) 
 		{
 			blackJack.buttonArea.split.setEnabled(true);
 		} else {
 			blackJack.buttonArea.split.setEnabled(false);
 		}
+		System.out.println(deck.getSize());
 	}
 	
 	public void reset() {
