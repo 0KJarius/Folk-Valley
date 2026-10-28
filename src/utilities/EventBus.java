@@ -18,8 +18,8 @@ public abstract class EventBus {
 	{
 		player.resetWallet();
 		enemy.resetWallet();
-		currentMatch.reset();
 		currentMatch.resetDeck();
+		currentMatch.reset();
 		currentMatch.hardResetStats();
 	}
 	
