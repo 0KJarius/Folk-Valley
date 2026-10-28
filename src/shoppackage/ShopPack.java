@@ -19,18 +19,8 @@ public class ShopPack {
 	}
 	
 	private void generateCards() {
-		Random random = new Random();
-		
-		for(int index = 0; index < 5; index++) {
-			int generate = random.nextInt(2);
-			
-			if (generate == 0) {
-				cards.add(new PokerCard());
-			} else {
-				cards.add(new PokerCardSpecial());
-			}
-					
-			
+		for (int index = 0; index < 5; index++) {
+			cards.add(ShopCardPrototype.createRandomCopy());
 		}
 		
 		
