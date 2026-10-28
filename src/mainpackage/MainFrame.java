@@ -10,10 +10,12 @@ import utilities.EventBus;
 import utilities.GlobalConstants;
 
 public class MainFrame extends JFrame{
+	public static final MainFrame FRAME = new MainFrame();
+	
 	private JPanel currentPanel;
 	JLayeredPane baseLayer;
 	
-	public MainFrame() {
+	private MainFrame() {
 		EventBus.frame = this;
 		this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,6 +28,10 @@ public class MainFrame extends JFrame{
         currentPanel = new JPanel();
         this.add(baseLayer, BorderLayout.CENTER);
         this.pack();
+	}
+	
+	public static MainFrame getInstance() {
+		return FRAME;
 	}
 	
 	public void setScreen(JPanel panel) 

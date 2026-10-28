@@ -21,10 +21,9 @@ public class Main
     	SwingUtilities.invokeLater(()->{
     		System.setProperty("awt.useSystemAAFontSettings","off"); 
             System.setProperty("swing.aatext", "false");
-    		MainFrame frame = new MainFrame();
-    		//frame.setScreen(new StartMenu());
-    		//frame.setScreen(new GameOverScreen());
-            frame.setScreen(new BlackJackScreen(new Entity(500, "Protosuer")));
+    		MainFrame frame = MainFrame.getInstance();
+    		frame.setScreen(new StartMenu());
+            //frame.setScreen(new BlackJackScreen(new Entity(500, "Protosuer")));
     	});
         
     }
