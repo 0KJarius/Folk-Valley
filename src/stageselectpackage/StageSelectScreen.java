@@ -96,7 +96,7 @@ public class StageSelectScreen extends JPanel{
 		try {
 			SoundBus.playSong("waiting.wav", true);
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
-		
+		balanceLabel.setText("V" + EventBus.player.getCurrentMoney());
 		super.addNotify();
 	}
 }

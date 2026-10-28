@@ -16,6 +16,7 @@ public class MainFrame extends JFrame{
 	JLayeredPane baseLayer;
 	
 	private MainFrame() {
+		this.setTitle("Folk Valley 2: Reign Of The Monopoly Man");
 		this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setLocationRelativeTo(null);

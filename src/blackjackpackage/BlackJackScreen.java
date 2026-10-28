@@ -291,6 +291,8 @@ public class BlackJackScreen extends JPanel{
 	
 	@Override
 	public void removeNotify() {
+		betPool = 0;
+		infoArea.updateBetLabel();
 		SoundBus.closeCurrentSong();
 		super.removeNotify();
 	}

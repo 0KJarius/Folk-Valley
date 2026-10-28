@@ -78,5 +78,7 @@ public class WinScreen extends JPanel{
 		winArea.add(Box.createRigidArea(new Dimension(356, 180)));
 		winArea.add(mainMenuButton);
 	}
+	
+	
 		
 }

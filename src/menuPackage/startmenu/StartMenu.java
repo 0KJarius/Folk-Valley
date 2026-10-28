@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import blackjackpackage.BlackJackScreen;
 import entitypackage.Entity;
 import mainpackage.MainFrame;
+import stageselectpackage.StageSelectScreen;
 import utilities.EventBus;
 import utilities.SoundBus;
 import utilities.SwingUtils;
@@ -55,7 +56,7 @@ public class StartMenu extends JPanel{
 				try {
 					SoundBus.playSFX("playButtonSelect.wav");
 				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
-				MainFrame.getInstance().setScreen(new BlackJackScreen(new Entity(500, "Protosuer")));
+				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
 			}
 
 			@Override
