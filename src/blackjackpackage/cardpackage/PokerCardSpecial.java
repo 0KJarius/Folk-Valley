@@ -37,4 +37,8 @@ public class PokerCardSpecial extends PokerCard{
 	public PokerCardSpecial(){
 		this(Suit.values()[new Random().nextInt(0, Suit.values().length)], Type.values()[new Random().nextInt(0, Type.values().length)]);
 	}
+
+		public Type getType() {
+		return cardType;
+	}
 }
