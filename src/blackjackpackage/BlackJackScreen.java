@@ -18,6 +18,7 @@ import blackjackpackage.handpackage.EnemyHand;
 import blackjackpackage.handpackage.Hand;
 import blackjackpackage.handpackage.PlayerHand;
 import entitypackage.Entity;
+import mainpackage.MainFrame;
 import menuPackage.GameOverScreen;
 import utilities.AnimationUtils;
 import utilities.EventBus;
@@ -99,7 +100,7 @@ public class BlackJackScreen extends JPanel{
         blackJack.scoreArea.setPlayerLabelText("" + blackJack.playerHand.getScore());
         blackJack.scoreArea.setEnemyLabelText("" + blackJack.enemyHand.getScore());
         
-        EventBus.frame.layerOnScreen(betTable, JLayeredPane.PALETTE_LAYER);
+        MainFrame.getInstance().layerOnScreen(betTable, JLayeredPane.PALETTE_LAYER);
     }
 	
 	public void addCard(Hand hand) {
@@ -206,7 +207,7 @@ public class BlackJackScreen extends JPanel{
 		}
 		
 		if (EventBus.player.getCurrentMoney() <= 0) {
-			EventBus.frame.layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
+			MainFrame.getInstance().layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
 			return;
 		}
 		

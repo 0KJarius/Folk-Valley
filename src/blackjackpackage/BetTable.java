@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import mainpackage.MainFrame;
 import utilities.EventBus;
 import utilities.SoundBus;
 import utilities.SwingUtils;
@@ -212,7 +213,7 @@ public class BetTable extends JPanel
     
     private void confirmBet() {
     	if (EventBus.currentMatch.betPool >= 0){
-            EventBus.frame.removeLayer(this);
+            MainFrame.getInstance().removeLayer(this);
         }
         
     }

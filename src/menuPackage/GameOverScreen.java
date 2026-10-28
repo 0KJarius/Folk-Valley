@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import mainpackage.MainFrame;
 import utilities.EventBus;
 import utilities.GlobalConstants;
 import utilities.Signal;
@@ -69,7 +70,7 @@ public class GameOverScreen extends JPanel
 			@Override
 			public void doTask() {
 				EventBus.hardResetMatch();
-				EventBus.frame.removeLayer(self);
+				MainFrame.getInstance().removeLayer(self);
 			}
 		};
 		
