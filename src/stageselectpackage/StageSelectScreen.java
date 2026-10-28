@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -13,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import utilities.EventBus;
+import utilities.SoundBus;
 import utilities.SwingUtils;
 
 public class StageSelectScreen extends JPanel{
@@ -86,5 +90,13 @@ public class StageSelectScreen extends JPanel{
 		return STAGE_SELECT;
 	}
 	
-
+	
+	@Override
+	public void addNotify() {
+		try {
+			SoundBus.playSong("waiting.wav", true);
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
+		
+		super.addNotify();
+	}
 }
