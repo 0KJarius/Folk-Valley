@@ -7,12 +7,20 @@ import blackjackpackage.BlackJackScreen;
 import entitypackage.Entity;
 import entitypackage.Player;
 import mainpackage.MainFrame;
+import stageselectpackage.Stage;
 
 public abstract class EventBus {
 	public static Player player;
 	public static BlackJackScreen currentMatch;
+	public static Stage selectedStage;
 	
-
+	public static void hardResetMatch() 
+	{
+		player.resetWallet();
+		currentMatch.resetDeck();
+		currentMatch.reset();
+		currentMatch.hardResetStats();
+	}
 	
 	public static void executeAfterTime(int miliSeconds, Signal task) {
 		Timer waitTimer = new Timer();
