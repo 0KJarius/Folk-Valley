@@ -63,9 +63,7 @@ public abstract class Hand extends JPanel
     {
     	for (Card selected : selectedCards) 
     	{	
-    		this.remove(selected);
-    		cards.remove(selected);
-    		score -= selected.getCardScore();
+    		removeCard(selected);
     		debt += selected.getCardScore();
     	}
     	selectedCards.clear();
