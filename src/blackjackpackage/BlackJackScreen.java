@@ -35,6 +35,7 @@ public class BlackJackScreen extends JPanel{
 	protected  Deck deck;
 	protected int betPool;
 	protected int natural = 21;
+	protected int baseNat = 21;
 	private int maxMoney = EventBus.player.getCurrentMoney();
 	private int roundCounter = 0;
 	protected int debtCounter = 0;
@@ -95,6 +96,7 @@ public class BlackJackScreen extends JPanel{
 	
 	public BlackJackScreen(Entity enemy, int natural) {
 		this(enemy);
+		baseNat = natural;
 		this.natural = natural;
 	}
 	
@@ -279,6 +281,14 @@ public class BlackJackScreen extends JPanel{
 		
 	}
 	
+	public void leaveMatch() {
+		betPool = 0;
+		blackJack.reset();
+		infoArea.reset();
+		natural = baseNat;
+		this.removeAll();
+	}
+	
 	@Override
 	public void addNotify() {
 		startMatch();
@@ -291,8 +301,7 @@ public class BlackJackScreen extends JPanel{
 	
 	@Override
 	public void removeNotify() {
-		betPool = 0;
-		infoArea.updateBetLabel();
+		leaveMatch();
 		SoundBus.closeCurrentSong();
 		super.removeNotify();
 	}

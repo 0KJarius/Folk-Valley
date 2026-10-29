@@ -80,6 +80,7 @@ public class BlackJackArea extends JPanel{
 
         enemyHand.resetHand();
         playerHand.resetHand();
+        scoreArea.updateScoreLabel();
         buttonArea.setButtonsActivated(true);
         this.revalidate();
         this.repaint();   
