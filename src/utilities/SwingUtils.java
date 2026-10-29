@@ -1,13 +1,16 @@
 package utilities;
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -161,6 +164,21 @@ public abstract class SwingUtils {
         imageLabel.setBounds(location.x, location.y, image.getIconWidth(), image.getIconHeight());
         return imageLabel;
     }
+    
+    public static ImageIcon createTintedImage(ImageIcon image, Color tint) {
+		Image img = image.getImage();
+		BufferedImage imgBuff = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+		Graphics2D draw = imgBuff.createGraphics();
+		
+		draw.drawImage(img, 0, 0, null);
+		draw.setComposite(AlphaComposite.SrcAtop);
+		draw.setColor(tint);
+		draw.fillRect(0, 0, imgBuff.getWidth(), imgBuff.getHeight());
+		
+		draw.dispose();
+		
+		return new ImageIcon(imgBuff);
+	}
     
     public static JButton createJButton(Dimension size, String text, Color buttonColor) 
     {

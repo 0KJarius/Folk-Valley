@@ -68,6 +68,8 @@ public class WinScreen extends JPanel{
 			@Override
 			public void doTask() {
 				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
+				EventBus.selectedStage.completeStage();
+				EventBus.selectedStage = null;
 				EventBus.currentMatch = null;
 				MainFrame.getInstance().removeLayer(self);
 			}

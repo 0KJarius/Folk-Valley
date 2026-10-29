@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import mainpackage.MainFrame;
+import utilities.EventBus;
 import utilities.SoundBus;
 import utilities.SwingUtils;
 
@@ -23,9 +24,11 @@ public class Stage extends JButton implements MouseListener{
 	private String stageName;
 	private final ImageIcon LOCKED_ICON = SwingUtils.getImage(STAGE_BUTTON_PATH + "locked.png");
 	private ImageIcon stageFrame;
+	private ImageIcon completeStageFrame;
 	private Color textColor;
 	private String stageFrameName;
 	private boolean isLocked;
+	private boolean isComplete = false;
 	private JPanel destination;
 	
 	public Stage(String stageName, Color textColor, String stageFrameName, boolean isLocked, JPanel destination) {
@@ -41,6 +44,7 @@ public class Stage extends JButton implements MouseListener{
         this.destination = destination;
         
         stageFrame = SwingUtils.getImage(STAGE_BUTTON_PATH + stageFrameName);
+        completeStageFrame = SwingUtils.createTintedImage(stageFrame, new Color(100, 255, 100, 100));
         
         try {
 			this.setFont(SwingUtils.createFont(SwingUtils.RUBIC_MONO, 60));
@@ -63,6 +67,12 @@ public class Stage extends JButton implements MouseListener{
 		this.setText(stageName);
 	}
 	
+	public void completeStage() {
+		isComplete = true;
+		this.setIcon(completeStageFrame);
+		this.setText("");
+	}
+	
 	public Stage copyStage(String stageName, boolean isLocked, JPanel destination) {
 		return new Stage(stageName, textColor, stageFrameName, isLocked, destination);
 	}
@@ -78,8 +88,9 @@ public class Stage extends JButton implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (!isLocked) {
+		if (!isLocked && !isComplete) {
 			MainFrame.getInstance().setScreen(destination);
+			EventBus.selectedStage = this;
 		} else {
 			try {
 				SoundBus.playSFX("button/no.wav");
@@ -97,7 +108,7 @@ public class Stage extends JButton implements MouseListener{
 	public void mouseEntered(MouseEvent e) {
 		this.setForeground(textColor);
 		
-		if (!isLocked) {
+		if (!isLocked && !isComplete) {
 			try {
 				SoundBus.playSFX("playButtonHover.wav");
 			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
