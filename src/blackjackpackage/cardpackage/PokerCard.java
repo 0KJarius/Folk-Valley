@@ -38,32 +38,16 @@ public class PokerCard extends Card{
 		this.setFocusPainted(false);
 		this.setContentAreaFilled(false);
 		
-		cardSelectImg = createSelectImage(cardImg);
+		cardSelectImg = SwingUtils.createTintedImage(cardImg, new Color(50, 50, 50, (int)(0.7f * 255)));
 		this.setSelectedIcon(cardSelectImg);
 		
-		flipSelectImg = createSelectImage(FLIP_IMG);
+		flipSelectImg = SwingUtils.createTintedImage(FLIP_IMG, new Color(50, 50, 50, (int)(0.7f * 255)));
 	}
 	
 	public PokerCard() {
 		this(new Random().nextInt(2, 10), Suit.values()[new Random().nextInt(0, Suit.values().length)]);
 	}
-	
-	
-	protected ImageIcon createSelectImage(ImageIcon cardImg) {
-		Image card = cardImg.getImage();
-		BufferedImage cardBuff = new BufferedImage(cardImg.getIconWidth(), cardImg.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-		Graphics2D draw = cardBuff.createGraphics();
 		
-		draw.drawImage(card, 0, 0, null);
-		draw.setComposite(AlphaComposite.SrcAtop);
-		draw.setColor(new Color(50, 50, 50, (int)(0.7f * 255)));
-		draw.fillRect(0, 0, cardBuff.getWidth(), cardBuff.getHeight());
-		
-		draw.dispose();
-		
-		return new ImageIcon(cardBuff);
-	}
-	
 	public Suit getSuit() {
 		return cardSuit;
 	}
