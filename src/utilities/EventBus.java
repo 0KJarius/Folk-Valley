@@ -12,13 +12,7 @@ public abstract class EventBus {
 	public static Player player;
 	public static BlackJackScreen currentMatch;
 	
-	public static void hardResetMatch() 
-	{
-		player.resetWallet();
-		currentMatch.resetDeck();
-		currentMatch.reset();
-		currentMatch.hardResetStats();
-	}
+
 	
 	public static void executeAfterTime(int miliSeconds, Signal task) {
 		Timer waitTimer = new Timer();
