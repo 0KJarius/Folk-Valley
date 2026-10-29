@@ -1,5 +1,6 @@
 package blackjackpackage.cardpackage;
 
+import java.awt.Color;
 import java.util.Random;
 
 import utilities.GlobalConstants;
@@ -31,7 +32,7 @@ public class PokerCardSpecial extends PokerCard{
 		this.setFocusPainted(false);
 		this.setContentAreaFilled(false);
 		
-		super.setSelectedCardImg(createSelectImage(super.getCardImg()));
+		super.setSelectedCardImg(SwingUtils.createTintedImage(super.getCardImg(), new Color(50, 50, 50, (int)(0.7f * 255))));
 	}
 	
 	public PokerCardSpecial(){

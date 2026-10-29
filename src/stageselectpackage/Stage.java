@@ -44,7 +44,7 @@ public class Stage extends JButton implements MouseListener{
         this.destination = destination;
         
         stageFrame = SwingUtils.getImage(STAGE_BUTTON_PATH + stageFrameName);
-        completeStageFrame = SwingUtils.createTintedImage(stageFrame, new Color(100, 255, 100, 100));
+        completeStageFrame = SwingUtils.createTintedImage(stageFrame, new Color(100, 255, 100, 200));
         
         try {
 			this.setFont(SwingUtils.createFont(SwingUtils.RUBIC_MONO, 60));
