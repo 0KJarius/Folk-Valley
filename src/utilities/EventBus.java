@@ -4,9 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import blackjackpackage.BlackJackScreen;
-import entitypackage.Entity;
 import entitypackage.Player;
-import mainpackage.MainFrame;
 import stageselectpackage.Stage;
 
 public abstract class EventBus {

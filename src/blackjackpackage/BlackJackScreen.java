@@ -2,30 +2,24 @@ package blackjackpackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
 import blackjackpackage.cardpackage.Card;
-import blackjackpackage.handpackage.EnemyHand;
 import blackjackpackage.handpackage.Hand;
 import blackjackpackage.handpackage.PlayerHand;
 import entitypackage.Entity;
 import mainpackage.MainFrame;
 import menuPackage.GameOverScreen;
 import menuPackage.WinScreen;
-import utilities.AnimationUtils;
 import utilities.EventBus;
 import utilities.Signal;
 import utilities.SoundBus;
-import utilities.SwingUtils;
 
 public class BlackJackScreen extends JPanel{
 	

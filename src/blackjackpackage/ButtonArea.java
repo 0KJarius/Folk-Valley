@@ -12,10 +12,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import blackjackpackage.handpackage.Hand;
 import blackjackpackage.handpackage.PlayerHand;
 import utilities.EventBus;
-import utilities.Signal;
 import utilities.SoundBus;
 import utilities.SwingUtils;
 
@@ -182,11 +180,11 @@ public class ButtonArea extends JPanel{
 		
 		if (blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
 			setButtonsActivated(false);
-			EventBus.currentMatch.onRoundOver(false, false, false);			
+			EventBus.currentMatch.checkTimer();		
 			
 		} else if (blackJack.playerHand.getScore() == EventBus.currentMatch.natural && blackJack.playerHand.getDebt() <= 0) {
 			setButtonsActivated(false);
-			EventBus.currentMatch.onRoundOver(true, false, false);
+			EventBus.currentMatch.checkTimer();
 		}
 		
 	}

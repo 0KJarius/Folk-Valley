@@ -2,24 +2,18 @@ package menuPackage.startmenu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
-import blackjackpackage.BlackJackScreen;
-import entitypackage.Entity;
 import mainpackage.MainFrame;
 import stageselectpackage.StageSelectScreen;
-import utilities.EventBus;
 import utilities.SoundBus;
 import utilities.SwingUtils;
 

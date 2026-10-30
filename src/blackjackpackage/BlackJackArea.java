@@ -2,9 +2,7 @@ package blackjackpackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.LinkedList;
@@ -16,10 +14,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import blackjackpackage.handpackage.EnemyHand;
-import blackjackpackage.handpackage.Hand;
 import blackjackpackage.handpackage.PlayerHand;
 import utilities.EventBus;
-import utilities.Signal;
 import utilities.SwingUtils;
 
 public class BlackJackArea extends JPanel{

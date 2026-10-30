@@ -8,8 +8,6 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
-import utilities.AnimationUtils;
-import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
 public class UnoCard extends Card{

@@ -1,7 +1,5 @@
 package blackjackpackage.handpackage;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 import blackjackpackage.cardpackage.Card;
 import blackjackpackage.cardpackage.UnoCard;

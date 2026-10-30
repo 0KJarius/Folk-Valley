@@ -1,12 +1,9 @@
 package mainpackage;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
-import utilities.EventBus;
 import utilities.GlobalConstants;
 
 public class MainFrame extends JFrame{
