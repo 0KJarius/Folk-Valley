@@ -47,6 +47,7 @@ public abstract class Hand extends JPanel
     		unoCards.remove(cardToRemove);
     	}
     	
+    	cardToRemove.setSelected(false);
     	cards.remove(cardToRemove);
     	cardToRemove.removeThis();
         this.remove(cardToRemove);
@@ -67,6 +68,7 @@ public abstract class Hand extends JPanel
     public void resetHand()
     {
         this.removeAll();
+        System.out.print(cards);
         for (Card card : cards)
         	card.setSelected(false);
         selectedCards.clear();
