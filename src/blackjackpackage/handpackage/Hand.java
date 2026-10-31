@@ -67,9 +67,9 @@ public abstract class Hand extends JPanel
     public void resetHand()
     {
         this.removeAll();
-        selectedCards.removeAll(selectedCards);
-        cards.removeAll(cards);
-        unoCards.removeAll(unoCards);
+        selectedCards.clear();
+        cards.clear();
+        unoCards.clear();
         score = 0;
         debt = 0;
         this.revalidate();
