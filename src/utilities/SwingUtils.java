@@ -208,10 +208,11 @@ public abstract class SwingUtils {
         return button;
     }
     
-    public static JTextArea creatJTextArea(Dimension size, String fontPath, int fontSize, int padding, Color textColor) {
+    public static JTextArea creatJTextArea(Dimension size, String fontPath, int fontSize, int padding, Color textColor, Color bgColor) {
     	JTextArea textArea = new JTextArea();
     	textArea.setPreferredSize(size);
     	textArea.setSize(size);
+    	textArea.setBackground(bgColor);
     	
     	textArea.setBorder(BorderFactory.createEmptyBorder(padding, padding, padding, padding));
 
