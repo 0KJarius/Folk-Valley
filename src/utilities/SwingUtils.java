@@ -15,11 +15,13 @@ import java.io.IOException;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
@@ -204,6 +206,27 @@ public abstract class SwingUtils {
         button.setPressedIcon(buttonImgPress);
 
         return button;
+    }
+    
+    public static JTextArea creatJTextArea(Dimension size, String fontPath, int fontSize, int padding, Color textColor) {
+    	JTextArea textArea = new JTextArea();
+    	textArea.setPreferredSize(size);
+    	textArea.setSize(size);
+    	
+    	textArea.setBorder(BorderFactory.createEmptyBorder(padding, padding, padding, padding));
+
+        try {
+            textArea.setFont(SwingUtils.createFont(fontPath, fontSize));
+        } catch (FontFormatException | IOException e) {}
+
+        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(true);
+        textArea.setOpaque(false);
+        textArea.setEditable(false);
+        textArea.setEnabled(false);
+        textArea.setDisabledTextColor(textColor);
+    	
+    	return textArea;
     }
     
     public static JButton createJButton(String normal, String highlight, String pressed, String disable) {
