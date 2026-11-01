@@ -108,8 +108,7 @@ public class TerminalButtons extends JPanel{
 			if (!EventBus.player.inventory.isEmpty() && (itemIndex < EventBus.player.inventory.size() - 1 || itemIndex == 0)) {
 				terminal.getItemSelect().add(EventBus.player.inventory.get(itemIndex));
 				terminal.currentItemLabel.setText(EventBus.player.inventory.get(itemIndex).getName());
-				
-			} else if (!EventBus.player.inventory.isEmpty() && itemIndex == EventBus.player.inventory.size() - 1) {
+			} else if (!EventBus.player.inventory.isEmpty() && itemIndex > EventBus.player.inventory.size() - 1) {
 				itemIndex--;
 				terminal.getItemSelect().add(EventBus.player.inventory.get(itemIndex));
 				terminal.currentItemLabel.setText(EventBus.player.inventory.get(itemIndex).getName());
