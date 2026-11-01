@@ -128,20 +128,24 @@ public abstract class Hand extends JPanel
     		return false;
     	}
     	
-    	
-    	int deletedCards = 0;   	
+    	ArrayList<UnoCard> toDelete = new ArrayList<UnoCard>();	
     	for (int i = 0; i < unoCards.size(); i++) {
     		if (unoCards.get(i).getColor() == color) {
-    			cards.remove(unoCards.get(i));
-    			unoCards.get(i).removeThis();
-    			this.remove(unoCards.get(i));
-    			unoCards.remove(unoCards.get(i));
-    			deletedCards++;
+    			toDelete.add(unoCards.get(i));
     		}
     	}
+    	System.out.println(toDelete.size());
+    	for (int i = 0; i < toDelete.size(); i++) {
+    		cards.remove(toDelete.get(i));
+    		toDelete.get(i).removeThis();
+    		this.remove(toDelete.get(i));
+    		unoCards.remove(toDelete.get(i));
+    	}
+    	
+    	
     	repaint();
     	revalidate();
-    	if (deletedCards == 0) {
+    	if (toDelete.size() == 0) {
     		return true;
     	} else {
     		return false;
