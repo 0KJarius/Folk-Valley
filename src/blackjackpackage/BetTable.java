@@ -8,22 +8,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import utilites.EventBus;
-import utilites.SwingUtils;
+import mainpackage.MainFrame;
+import utilities.EventBus;
+import utilities.SoundBus;
+import utilities.SwingUtils;
 
 public class BetTable extends JPanel
 {
 	private final String BET_TABLE_PATH = "BlackJack/betTable/";
 	private final String CONFIRM_PATH = "BlackJack/confirmButton/";
 	private final String CHIP_BUTTON_PATH = BET_TABLE_PATH + "chipButtons/";
+	private final String CHIP_HOVER_SFX = "blackJack/pokerChip.wav";
+	private final String BET_SFX = "blackJack/bet.wav";
+	private final String ALLIN_SFX = "blackJack/allIN.wav";
+	private final String NO_SFX = "button/no.wav";
 	private final String ONE = CHIP_BUTTON_PATH + "1/";
 	private final String FIVE = CHIP_BUTTON_PATH + "5/";
 	private final String TEN = CHIP_BUTTON_PATH + "10/";
@@ -70,7 +79,15 @@ public class BetTable extends JPanel
     	JPanel footer = SwingUtils.createJPanel(new Dimension(819, 103), getBackground());
     	footer.setOpaque(false);
     	
-    	JButton confirmButton = SwingUtils.createJButton(CONFIRM_PATH + "confirm.png", CONFIRM_PATH + "confirm_highlight.png", CONFIRM_PATH + "confirm_pressed.png", CONFIRM_PATH + "confirm_disable.png");
+    	JButton confirmButton = SwingUtils.createJButton(
+    			CONFIRM_PATH + "confirm.png",
+    			CONFIRM_PATH + "confirm_highlight.png", 
+    			CONFIRM_PATH + "confirm_pressed.png", 
+    			CONFIRM_PATH + "confirm_disable.png",
+    			"playButtonHover.wav",
+    			"playButtonSelect.wav",
+    			null
+    	);
     	setUpConfirmButton(confirmButton);
         
         footer.add(confirmButton);
@@ -105,8 +122,20 @@ public class BetTable extends JPanel
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (EventBus.player.getCurrentMoney() >= EventBus.player.getCurrentMoney()) {
+				if (EventBus.player.getCurrentMoney() >= EventBus.player.getCurrentMoney() && EventBus.player.getCurrentMoney() > 0) {
 					EventBus.currentMatch.addBetPool(EventBus.player.getCurrentMoney());
+					
+					try {
+						SoundBus.playSFX(BET_SFX);
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
+					
+					try {
+						SoundBus.playSFX(ALLIN_SFX);
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
+				} else {
+					try {
+						SoundBus.playSFX(NO_SFX);
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
 				}
 			}
 
@@ -118,6 +147,9 @@ public class BetTable extends JPanel
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				allIn.setLocation(allIn.getX(), allIn.getY() - 10);
+				try {
+					SoundBus.playSFX(CHIP_HOVER_SFX);
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
 				
 			}
 
@@ -144,6 +176,16 @@ public class BetTable extends JPanel
 			public void mouseClicked(MouseEvent e) {
 				if (EventBus.player.getCurrentMoney() >= betAmount) {
 					EventBus.currentMatch.addBetPool(betAmount);
+					
+					
+					try {
+						SoundBus.playSFX(BET_SFX);
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
+					
+				}  else {
+						try {
+							SoundBus.playSFX(NO_SFX);
+						} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
 				}
 			}
 
@@ -156,6 +198,9 @@ public class BetTable extends JPanel
 			public void mouseEntered(MouseEvent e) {
 				chip.setLocation(chip.getX(), chip.getY() - 10);
 				
+				try {
+					SoundBus.playSFX(CHIP_HOVER_SFX);
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
 			}
 
 			@Override
@@ -167,10 +212,10 @@ public class BetTable extends JPanel
     }
     
     private void confirmBet() {
-    	if (EventBus.currentMatch.betPool == 0){
-            return;
+    	if (EventBus.currentMatch.betPool >= 0){
+            MainFrame.getInstance().removeLayer(this);
         }
-        EventBus.frame.removeLayer(this);
+        
     }
     
 }

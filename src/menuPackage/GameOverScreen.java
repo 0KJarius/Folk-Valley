@@ -5,20 +5,18 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import blackjackpackage.BlackJackScreen;
-import entitypackage.Entity;
-import menuPackage.startmenu.StartMenu;
-import utilites.EventBus;
-import utilites.GlobalConstants;
-import utilites.Signal;
-import utilites.SwingUtils;
+import mainpackage.MainFrame;
+import stageselectpackage.StageSelectScreen;
+import utilities.EventBus;
+import utilities.GlobalConstants;
+import utilities.Signal;
+import utilities.SwingUtils;
 
 public class GameOverScreen extends JPanel
 {
@@ -73,17 +71,32 @@ public class GameOverScreen extends JPanel
 			@Override
 			public void doTask() {
 				EventBus.hardResetMatch();
-				EventBus.frame.removeLayer(self);
+				MainFrame.getInstance().removeLayer(self);
 			}
 		};
 		
+		Signal menuTask = new Signal() {
+			@Override
+			public void doTask() {
+				EventBus.player.resetWallet();
+				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
+				EventBus.currentMatch = null;
+				MainFrame.getInstance().removeLayer(self);
+			}
+		};
+		
+		
 		JarButton retryButton = new JarButton(false, "RETRY", 60, retryTask);
-		JarButton mainMenuButton = new JarButton(false, "RETRY", 60, retryTask);
+		JarButton mainMenuButton = new JarButton(false, "MAIN MENU", 60, menuTask);
 		
 		gameOverArea.add(Box.createRigidArea(new Dimension(356, 180)));
 		gameOverArea.add(retryButton);
 		gameOverArea.add(mainMenuButton);
 	}
 	
-	
+	@Override
+	public void addNotify() {
+		//this.setLocation(new Point(0, 720));
+		super.addNotify();
+	}
 }

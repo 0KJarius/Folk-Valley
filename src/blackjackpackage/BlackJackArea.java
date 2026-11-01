@@ -2,9 +2,7 @@ package blackjackpackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.LinkedList;
@@ -14,12 +12,15 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import utilites.EventBus;
-import utilites.SwingUtils;
+
+import blackjackpackage.handpackage.EnemyHand;
+import blackjackpackage.handpackage.PlayerHand;
+import utilities.EventBus;
+import utilities.SwingUtils;
 
 public class BlackJackArea extends JPanel{
-    protected Hand playerHand;
-    protected LinkedList<Hand> playerHands;
+    protected PlayerHand playerHand;
+    protected LinkedList<PlayerHand> playerHands;
     protected EnemyHand enemyHand;
     protected ScoreArea scoreArea;
     protected ButtonArea buttonArea;
@@ -42,10 +43,12 @@ public class BlackJackArea extends JPanel{
     	scoreArea = new ScoreArea();
     	buttonArea = new ButtonArea(this);
     	
-    	playerHands = new LinkedList<Hand>();
-        playerHands.addLast(new Hand());
+    	playerHands = new LinkedList<PlayerHand>();
+        playerHands.addLast(new PlayerHand());
         playerHand = playerHands.getFirst();
-        enemyHand = new EnemyHand();
+        
+        
+        enemyHand = new EnemyHand(EventBus.currentMatch.onStand);
         setUpContentPanel(contentPanel);
         
 	}
@@ -73,6 +76,8 @@ public class BlackJackArea extends JPanel{
 
         enemyHand.resetHand();
         playerHand.resetHand();
+        scoreArea.updateScoreLabel();
+        buttonArea.setButtonsActivated(true);
         this.revalidate();
         this.repaint();   
     }
@@ -83,15 +88,19 @@ public class BlackJackArea extends JPanel{
         
         EventBus.currentMatch.addCard(playerHand);
         EventBus.currentMatch.addCard(playerHand);
+        buttonArea.setButtonsActivated(true);
     }
 	
 	public void replacePlayerHand() {
 		buttonArea.split.setEnabled(false);
 		contentPanel.remove(playerHand);
+		
+		int inheritDebt = playerHand.getDebt();
+		
         playerHands.remove(playerHand);
         playerHand = playerHands.getFirst();
+        playerHand.setDebt(inheritDebt);
         
-
         contentPanel.remove(buttonArea);
         contentPanel.add(playerHand);
         contentPanel.add(buttonArea);

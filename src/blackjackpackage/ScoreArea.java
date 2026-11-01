@@ -1,6 +1,5 @@
 package blackjackpackage;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -8,8 +7,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import utilites.EventBus;
-import utilites.SwingUtils;
+import utilities.AnimationUtils;
+import utilities.EventBus;
+import utilities.SwingUtils;
 
 public class ScoreArea extends JPanel{
 	private JLabel playerLabel = SwingUtils.createJLabel("0", 65, new Color(82, 208, 234), SwingUtils.M6XPLUS);
@@ -35,13 +35,15 @@ public class ScoreArea extends JPanel{
 	
 	public void setPlayerLabelText(String text) {
 		playerLabel.setText(text);
+		AnimationUtils.popup(playerLabel, 1.15, 100, 5);
 	}
 	
 	public void setEnemyLabelText(String text) {
 		enemyLabel.setText(text);
+		AnimationUtils.popup(enemyLabel, 1.15, 100, 5);
 	}
 	
-	public void updateScoreLabel() {
+	public void updateScoreLabel() {		 
 		playerLabel.setText("" + EventBus.currentMatch.blackJack.playerHand.getScore());
 		enemyLabel.setText("" + EventBus.currentMatch.blackJack.enemyHand.getScore());
 	}

@@ -1,0 +1,29 @@
+package stageselectpackage;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.JPanel;
+
+import blackjackpackage.BlackJackScreen;
+import entitypackage.Entity;
+import shoppackage.ShopTable;
+
+public class StagePage extends JPanel{
+	public StagePage() {
+		FlowLayout layout = new FlowLayout();
+		layout.setVgap(0);
+		this.setPreferredSize(new Dimension(673, 0));
+		this.setLayout(layout);
+		this.setOpaque(false);
+		
+		Stage testStage = new Stage("protosuer", new Color(255, 177, 177), "fight.png", false, new BlackJackScreen(new Entity(100, "Protosuer")));
+		Stage shopStage = new Stage("Shop", Color.white, "shop.png" ,false, new ShopTable());
+		this.add(testStage);
+		this.add(shopStage);
+		this.add(testStage.copyStage("Thing", true, new BlackJackScreen(new Entity(100, "Protosuer"))));
+		this.add(shopStage.copyStage(true));
+		this.add(testStage.copyStage(true));
+	}
+}

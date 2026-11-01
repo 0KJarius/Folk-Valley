@@ -1,19 +1,16 @@
 package blackjackpackage.cardpackage;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-import utilites.GlobalConstants;
-import utilites.SwingUtils;
+import utilities.AnimationUtils;
+import utilities.GlobalConstants;
+import utilities.SwingUtils;
 
 public class PokerCard extends Card{
-	public static String currentSkin = "placeHolderCards/";
+	public static String currentSkin = "msPlaceHolder/";
 	private ImageIcon cardImg;
 	private ImageIcon cardSelectImg;
 	private final ImageIcon FLIP_IMG = SwingUtils.getImage(GlobalConstants.POKERCARD + currentSkin + "back.png");
@@ -37,32 +34,16 @@ public class PokerCard extends Card{
 		this.setFocusPainted(false);
 		this.setContentAreaFilled(false);
 		
-		cardSelectImg = createSelectImage(cardImg);
+		cardSelectImg = SwingUtils.createTintedImage(cardImg, new Color(50, 50, 50, (int)(0.7f * 255)));
 		this.setSelectedIcon(cardSelectImg);
 		
-		flipSelectImg = createSelectImage(FLIP_IMG);
+		flipSelectImg = SwingUtils.createTintedImage(FLIP_IMG, new Color(50, 50, 50, (int)(0.7f * 255)));
 	}
 	
 	public PokerCard() {
 		this(new Random().nextInt(2, 10), Suit.values()[new Random().nextInt(0, Suit.values().length)]);
 	}
-	
-	
-	protected ImageIcon createSelectImage(ImageIcon cardImg) {
-		Image card = cardImg.getImage();
-		BufferedImage cardBuff = new BufferedImage(cardImg.getIconWidth(), cardImg.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-		Graphics2D draw = cardBuff.createGraphics();
 		
-		draw.drawImage(card, 0, 0, null);
-		draw.setComposite(AlphaComposite.SrcAtop);
-		draw.setColor(new Color(50, 50, 50, (int)(0.7f * 255)));
-		draw.fillRect(0, 0, cardBuff.getWidth(), cardBuff.getHeight());
-		
-		draw.dispose();
-		
-		return new ImageIcon(cardBuff);
-	}
-	
 	public Suit getSuit() {
 		return cardSuit;
 	}
@@ -90,12 +71,17 @@ public class PokerCard extends Card{
 		this.setIcon(FLIP_IMG);
 		this.setSelectedIcon(flipSelectImg);
 		this.repaint();
+		super.flipCard();
 	}
 	
 	@Override
 	public void unflipCard() {
 		this.setIcon(cardImg);
 		this.setSelectedIcon(cardSelectImg);
+		AnimationUtils.popup(this, 2, 500, 29);
+		
 		this.repaint();
+		super.unflipCard();
 	}
+	
 }

@@ -14,8 +14,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import utilites.Signal;
-import utilites.SwingUtils;
+import utilities.Signal;
+import utilities.SwingUtils;
 
 public class JarButton extends JPanel implements MouseListener{
 	private final String TYPE_ONE = "UIButtons/typeOne/";

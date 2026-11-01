@@ -1,8 +1,10 @@
 package blackjackpackage.cardpackage;
 
+import java.awt.Color;
 import java.util.Random;
-import utilites.GlobalConstants;
-import utilites.SwingUtils;
+
+import utilities.GlobalConstants;
+import utilities.SwingUtils;
 
 public class PokerCardSpecial extends PokerCard{
 	public static enum Type{
@@ -30,10 +32,14 @@ public class PokerCardSpecial extends PokerCard{
 		this.setFocusPainted(false);
 		this.setContentAreaFilled(false);
 		
-		super.setSelectedCardImg(createSelectImage(super.getCardImg()));
+		super.setSelectedCardImg(SwingUtils.createTintedImage(super.getCardImg(), new Color(50, 50, 50, (int)(0.7f * 255))));
 	}
 	
 	public PokerCardSpecial(){
 		this(Suit.values()[new Random().nextInt(0, Suit.values().length)], Type.values()[new Random().nextInt(0, Type.values().length)]);
+	}
+
+		public Type getType() {
+		return cardType;
 	}
 }

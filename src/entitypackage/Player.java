@@ -2,7 +2,8 @@ package entitypackage;
 import blackjackpackage.Deck;
 import blackjackpackage.cardpackage.PokerCard;
 import blackjackpackage.cardpackage.PokerCardSpecial;
-import utilites.EventBus;
+import blackjackpackage.cardpackage.UnoCard;
+import utilities.EventBus;
 
 public class Player extends Entity{
 	public Deck playerDeck;
@@ -20,6 +21,9 @@ public class Player extends Entity{
 			playerDeck.addCard(new PokerCard());
 		}
 		
+		for (int i = 0; i < 40; i++) {
+			playerDeck.addCard(new UnoCard());
+		}
 		
 		for (int i = 0; i < PokerCard.Suit.values().length; i++) 
 		{

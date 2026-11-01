@@ -1,20 +1,19 @@
 package mainpackage;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
-import utilites.EventBus;
-import utilites.GlobalConstants;
+import utilities.GlobalConstants;
 
 public class MainFrame extends JFrame{
+	public static final MainFrame FRAME = new MainFrame();
+	
 	private JPanel currentPanel;
 	JLayeredPane baseLayer;
 	
-	public MainFrame() {
-		EventBus.frame = this;
+	private MainFrame() {
+		this.setTitle("Folk Valley 2: Reign Of The Monopoly Man");
 		this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setLocationRelativeTo(null);
@@ -26,6 +25,10 @@ public class MainFrame extends JFrame{
         currentPanel = new JPanel();
         this.add(baseLayer, BorderLayout.CENTER);
         this.pack();
+	}
+	
+	public static MainFrame getInstance() {
+		return FRAME;
 	}
 	
 	public void setScreen(JPanel panel) 

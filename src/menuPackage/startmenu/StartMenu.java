@@ -2,24 +2,20 @@ package menuPackage.startmenu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
-import blackjackpackage.BlackJackScreen;
-import entitypackage.Entity;
-import utilites.EventBus;
-import utilites.SoundBus;
-import utilites.SwingUtils;
+import mainpackage.MainFrame;
+import stageselectpackage.StageSelectScreen;
+import utilities.SoundBus;
+import utilities.SwingUtils;
 
 public class StartMenu extends JPanel{
 	private final String PLAYBUTTON = "mainmenu/playButton.png";
@@ -54,20 +50,14 @@ public class StartMenu extends JPanel{
 				try {
 					SoundBus.playSFX("playButtonSelect.wav");
 				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
-				EventBus.frame.setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
+				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mousePressed(MouseEvent e) {}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseReleased(MouseEvent e) {}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
