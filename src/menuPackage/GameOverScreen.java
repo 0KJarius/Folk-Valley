@@ -72,19 +72,21 @@ public class GameOverScreen extends OverlayMenu
 		gameOverArea.setOpaque(false);
 		Signal retryTask = new Signal() {
 			@Override
-			public void doTask() {
+			public boolean doTask() {
 				EventBus.hardResetMatch();
 				MainFrame.getInstance().removeLayer(self);
+				return true;
 			}
 		};
 		
 		Signal menuTask = new Signal() {
 			@Override
-			public void doTask() {
+			public boolean doTask() {
 				EventBus.player.resetWallet();
 				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
 				EventBus.currentMatch = null;
 				MainFrame.getInstance().removeLayer(self);
+				return true;
 			}
 		};
 		

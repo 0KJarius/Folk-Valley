@@ -39,7 +39,7 @@ public class BlackJackScreen extends JPanel{
 	
 	protected Signal onStand = new Signal() {
 
-		public void doTask() {
+		public boolean doTask() {
 			Timer hitTimer = new Timer();
             TimerTask hitTask = new TimerTask() {
 				@Override
@@ -62,6 +62,7 @@ public class BlackJackScreen extends JPanel{
             };
             
             hitTimer.scheduleAtFixedRate(hitTask, 1000, 1);
+            return true;
 		}
 	};
 	
@@ -226,12 +227,13 @@ public class BlackJackScreen extends JPanel{
 		
 		EventBus.executeAfterTime(2000, new Signal() {
 			@Override
-			public void doTask() {
+			public boolean doTask() {
 				if (isSplit) {
 					splitCheck();
 				} else {
 					reset();
 				}
+				return true;
 			}
 		});
 	}
@@ -272,8 +274,9 @@ public class BlackJackScreen extends JPanel{
 	protected void checkTimer() {
 		EventBus.executeAfterTime(1000, new Signal() {
 			@Override
-			public void doTask() {
-				checkResults();								
+			public boolean doTask() {
+				checkResults();	
+				return true;
 			}
 		});
 		

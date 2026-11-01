@@ -15,11 +15,12 @@ import utilities.EventBus;
 import utilities.SwingUtils;
 
 public class BottomInfoArea extends JPanel{
-	int maxCards = EventBus.player.playerDeck.getSize();
-	JLabel cardCountLabel = SwingUtils.createJLabel(maxCards + "/" + maxCards, 40, Color.WHITE, SwingUtils.M6XPLUS);
-	JLabel currentItemLabel = SwingUtils.createJLabel("Color", 30, Color.WHITE, SwingUtils.M6XPLUS);
-	TerminalScreen terminalScreen = new TerminalScreen();
-	JPanel itemSelect = SwingUtils.createJPanel(new Dimension(201, 150), Color.cyan);
+	protected int maxCards = EventBus.player.playerDeck.getSize();
+	protected JLabel cardCountLabel = SwingUtils.createJLabel(maxCards + "/" + maxCards, 40, Color.WHITE, SwingUtils.M6XPLUS);
+	protected JLabel currentItemLabel = SwingUtils.createJLabel("Color", 30, Color.WHITE, SwingUtils.M6XPLUS);
+	protected TerminalScreen terminalScreen = new TerminalScreen();
+	protected TerminalButtons buttons = new TerminalButtons(this);
+	protected JPanel itemSelect = SwingUtils.createJPanel(new Dimension(201, 150), Color.cyan);
 	
 	public BottomInfoArea() {
 		this.setBounds(new Rectangle(4, 313, 201,398));
@@ -64,7 +65,7 @@ public class BottomInfoArea extends JPanel{
 		
 		terminal.add(terminalScreen, BorderLayout.CENTER);
 		terminal.add(itemLabelContainer, BorderLayout.NORTH);
-		terminal.add(new TerminalButtons(), BorderLayout.SOUTH);
+		terminal.add(buttons, BorderLayout.SOUTH);
 		
 		terminalScreen.setTerminalScreen(itemSelect);
 	}

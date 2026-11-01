@@ -111,12 +111,13 @@ public abstract class Hand extends JPanel
     		return;
     	}
     	
-    	for (UnoCard uno : unoCards) {
-    		cards.remove(uno);
-    		uno.removeThis();
-            this.remove(uno);
-            unoCards.remove(uno);
+    	for (int i = 0; i < unoCards.size(); i++) {
+    		cards.remove(unoCards.get(i));
+    		unoCards.get(i).removeThis();
+    		this.remove(unoCards.get(i));
+    		unoCards.remove(unoCards.get(i));
     	}
+    	
     	repaint();
     	revalidate();
     }
@@ -125,13 +126,13 @@ public abstract class Hand extends JPanel
     	if (unoCards.isEmpty()) {
     		return;
     	}
-    	
-    	for (UnoCard uno : unoCards) {
-    		if (uno.getColor() == color) {
-    			cards.remove(uno);
-        		uno.removeThis();
-                this.remove(uno);
-                unoCards.remove(uno);
+    	    	
+    	for (int i = 0; i < unoCards.size(); i++) {
+    		if (unoCards.get(i).getColor() == color) {
+    			cards.remove(unoCards.get(i));
+    			unoCards.get(i).removeThis();
+    			this.remove(unoCards.get(i));
+    			unoCards.remove(unoCards.get(i));
     		}
     	}
     	repaint();

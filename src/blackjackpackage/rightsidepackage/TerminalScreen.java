@@ -30,12 +30,13 @@ public class TerminalScreen extends JPanel{
 		this.add(staticTransition);
 		EventBus.executeAfterTime(500, new Signal() {
 			@Override
-			public void doTask() {
+			public boolean doTask() {
 				self.remove(staticTransition);
 				self.add(screen);
 				currentScreen = screen;
 				self.repaint();
 				self.revalidate();
+				return true;
 			}
 		});
 		

@@ -19,6 +19,7 @@ public class Player extends Entity{
 		playerDeck = new Deck();
 		initializeTestDeck();
 		inventory.add(new ColorPicker());
+		inventory.add(new ColorPicker());
 	}
 	
 	private void initializeTestDeck() 

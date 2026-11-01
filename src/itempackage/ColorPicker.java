@@ -13,8 +13,9 @@ public class ColorPicker extends Item{
 	}
 
 	@Override
-	public void doTask() {
+	public boolean doTask() {
 		EventBus.currentMatch.blackJack.playerHand.deleteUnoCards();
+		return true;
 	}
 
 }
