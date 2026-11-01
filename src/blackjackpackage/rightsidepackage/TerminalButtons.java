@@ -79,7 +79,26 @@ public class TerminalButtons extends JPanel{
 			return;
 		}
 		
-		EventBus.player.inventory.get(itemIndex).doTask();
-		System.out.println("USE");
+		boolean isSuccessful = EventBus.player.inventory.get(itemIndex).doTask();
+		if (isSuccessful) {
+			terminal.itemSelect.remove(EventBus.player.inventory.get(itemIndex));
+			EventBus.player.inventory.remove(itemIndex);
+			
+			if (!EventBus.player.inventory.isEmpty()) {
+				terminal.itemSelect.add(EventBus.player.inventory.get(itemIndex));
+			}
+						
+			
+			terminal.repaint();
+			terminal.revalidate();
+		} else {
+			System.out.println("UNUSED");
+		}
+	}
+	
+	public void setButtonActivity(boolean isActive) {
+		for (JButton button : buttons) {
+			button.setEnabled(isActive);
+		}
 	}
 }

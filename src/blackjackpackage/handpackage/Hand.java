@@ -106,9 +106,9 @@ public abstract class Hand extends JPanel
     	}
     }
     
-    public void deleteUnoCards() {
+    public boolean deleteUnoCards() {
     	if (unoCards.isEmpty()) {
-    		return;
+    		return false;
     	}
     	
     	for (int i = 0; i < unoCards.size(); i++) {
@@ -120,11 +120,12 @@ public abstract class Hand extends JPanel
     	
     	repaint();
     	revalidate();
+    	return true;
     }
     
-    public void deleteUnoCards(UnoCard.CardColor color) {
+    public boolean deleteUnoCards(UnoCard.CardColor color) {
     	if (unoCards.isEmpty()) {
-    		return;
+    		return false;
     	}
     	    	
     	for (int i = 0; i < unoCards.size(); i++) {
@@ -137,6 +138,7 @@ public abstract class Hand extends JPanel
     	}
     	repaint();
     	revalidate();
+    	return true;
     }
     
     public void applySingleUnoCard(UnoCard uno) {

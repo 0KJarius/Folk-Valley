@@ -14,8 +14,10 @@ public class ColorPicker extends Item{
 
 	@Override
 	public boolean doTask() {
-		EventBus.currentMatch.blackJack.playerHand.deleteUnoCards();
-		return true;
+		boolean canDelete = EventBus.currentMatch.blackJack.playerHand.deleteUnoCards();
+		
+		
+		return canDelete;
 	}
 
 }
