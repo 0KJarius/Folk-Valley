@@ -47,6 +47,8 @@ public class WinScreen extends OverlayMenu{
 		basePane.add(SwingUtils.createImageAt("MenuStuff/winLayout.png", new Point(0, 0)), JLayeredPane.PALETTE_LAYER);
 		basePane.add(statsArea, JLayeredPane.MODAL_LAYER);
 		basePane.add(winArea, JLayeredPane.MODAL_LAYER);
+		
+		this.addMouseListener(this);
 	}
 	
 	private void setUpStatsArea() 
