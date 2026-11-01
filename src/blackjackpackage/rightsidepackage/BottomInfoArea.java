@@ -18,9 +18,10 @@ public class BottomInfoArea extends JPanel{
 	protected int maxCards = EventBus.player.playerDeck.getSize();
 	protected JLabel cardCountLabel = SwingUtils.createJLabel(maxCards + "/" + maxCards, 40, Color.WHITE, SwingUtils.M6XPLUS);
 	protected JLabel currentItemLabel = SwingUtils.createJLabel("Color", 30, Color.WHITE, SwingUtils.M6XPLUS);
-	protected TerminalScreen terminalScreen = new TerminalScreen();
-	protected TerminalButtons buttons = new TerminalButtons(this);
-	protected JPanel itemSelect = SwingUtils.createJPanel(new Dimension(201, 150), Color.cyan);
+	private TerminalScreen terminalScreen = new TerminalScreen();
+	private TerminalButtons buttons = new TerminalButtons(this);
+	private ItemInfoScreen itemInfo = new ItemInfoScreen();
+	private JPanel itemSelect = SwingUtils.createJPanel(new Dimension(201, 150), Color.cyan);
 	
 	public BottomInfoArea() {
 		this.setBounds(new Rectangle(4, 313, 201,398));
@@ -48,9 +49,9 @@ public class BottomInfoArea extends JPanel{
 	{
 		terminal.setLayout(new BorderLayout());
 		terminal.setOpaque(false);
-		itemSelect.setLayout(new BorderLayout());
-		itemSelect.setOpaque(false);
-		itemSelect.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
+		getItemSelect().setLayout(new BorderLayout());
+		getItemSelect().setOpaque(false);
+		getItemSelect().setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
 		
 		JPanel itemLabelContainer = SwingUtils.createJPanel(new Dimension(0,41), Color.cyan);
 		itemLabelContainer.setOpaque(false);
@@ -60,13 +61,25 @@ public class BottomInfoArea extends JPanel{
 		
 		if (!EventBus.player.inventory.isEmpty()) {
 			currentItemLabel.setText(EventBus.player.inventory.get(0).getName());
-			itemSelect.add(EventBus.player.inventory.get(0));
+			getItemSelect().add(EventBus.player.inventory.get(0));
 		}
 		
-		terminal.add(terminalScreen, BorderLayout.CENTER);
+		terminal.add(getTerminalScreen(), BorderLayout.CENTER);
 		terminal.add(itemLabelContainer, BorderLayout.NORTH);
-		terminal.add(buttons, BorderLayout.SOUTH);
+		terminal.add(getButtons(), BorderLayout.SOUTH);
 		
-		terminalScreen.setTerminalScreen(itemSelect);
+		getTerminalScreen().setTerminalScreen(getItemSelect());
 	}
+
+	public TerminalScreen getTerminalScreen() {return terminalScreen;}
+
+	public TerminalButtons getButtons() {return buttons;}
+
+	public void setButtons(TerminalButtons buttons) {this.buttons = buttons;}
+
+	public JPanel getItemSelect() {return itemSelect;}
+
+	public ItemInfoScreen getItemInfo() {return itemInfo;}
+
+
 }

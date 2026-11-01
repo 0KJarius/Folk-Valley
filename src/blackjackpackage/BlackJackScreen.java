@@ -120,7 +120,7 @@ public class BlackJackScreen extends JPanel{
 		} else {
 			blackJack.buttonArea.split.setEnabled(false);
 		}
-		rightArea.bottom.updateCardCountLabel();
+		rightArea.getBottom().updateCardCountLabel();
 		if (deck.getSize() == 0) {
 			MainFrame.getInstance().layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
 		}

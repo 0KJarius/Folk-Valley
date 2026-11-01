@@ -19,6 +19,7 @@ public class TerminalButtons extends JPanel{
 	private final String[] paths = {PREV, INFO, NEXT, USE};
 	private int itemIndex = 0;
 	private BottomInfoArea terminal;
+	private boolean onInfoArea = false;
 
 	private  final JButton[] buttons = new JButton[4];
 	
@@ -29,6 +30,7 @@ public class TerminalButtons extends JPanel{
 		createTerminalButtons();
 		
 		buttons[0].addActionListener(e -> onPrevButtonPressed());
+		buttons[1].addActionListener(e -> onInfoPressed());
 		buttons[2].addActionListener(e -> onNextButtonPressed());
 		buttons[3].addActionListener(e -> onUseButtonPressed());
 	}
@@ -51,9 +53,9 @@ public class TerminalButtons extends JPanel{
 		}
 		
 		
-		terminal.itemSelect.remove(EventBus.player.inventory.get(itemIndex));
+		terminal.getItemSelect().remove(EventBus.player.inventory.get(itemIndex));
 		itemIndex++;
-		terminal.itemSelect.add(EventBus.player.inventory.get(itemIndex));
+		terminal.getItemSelect().add(EventBus.player.inventory.get(itemIndex));
 		terminal.currentItemLabel.setText(EventBus.player.inventory.get(itemIndex).getName());
 		terminal.repaint();
 		terminal.revalidate();
@@ -65,13 +67,32 @@ public class TerminalButtons extends JPanel{
 			return;
 		}
 		
-		terminal.itemSelect.remove(EventBus.player.inventory.get(itemIndex));
+		terminal.getItemSelect().remove(EventBus.player.inventory.get(itemIndex));
 		itemIndex--;
-		terminal.itemSelect.add(EventBus.player.inventory.get(itemIndex));
+		terminal.getItemSelect().add(EventBus.player.inventory.get(itemIndex));
 		terminal.currentItemLabel.setText(EventBus.player.inventory.get(itemIndex).getName());
 		terminal.repaint();
 		terminal.revalidate();
 		System.out.println("Change PREV");
+	}
+	
+	private void onInfoPressed() {
+		if (EventBus.player.inventory.isEmpty()) {
+			return;
+		}
+		
+		if (!onInfoArea) {
+			onInfoArea = true;
+			setButtonActivity(false, buttons[1]);
+			terminal.getTerminalScreen().setTerminalScreen(terminal.getItemInfo());
+			terminal.getItemInfo().infoText.setText(EventBus.player.inventory.get(itemIndex).getDescription());
+		} else {
+			onInfoArea = false;
+			setButtonActivity(true, buttons[1]);
+			terminal.getTerminalScreen().setTerminalScreen(terminal.getItemSelect());
+		}
+		
+		
 	}
 	
 	private void onUseButtonPressed() {
@@ -81,13 +102,22 @@ public class TerminalButtons extends JPanel{
 		
 		boolean isSuccessful = EventBus.player.inventory.get(itemIndex).doTask();
 		if (isSuccessful) {
-			terminal.itemSelect.remove(EventBus.player.inventory.get(itemIndex));
+			terminal.getItemSelect().remove(EventBus.player.inventory.get(itemIndex));
 			EventBus.player.inventory.remove(itemIndex);
 			
-			if (!EventBus.player.inventory.isEmpty()) {
-				terminal.itemSelect.add(EventBus.player.inventory.get(itemIndex));
+			if (!EventBus.player.inventory.isEmpty() && (itemIndex < EventBus.player.inventory.size() - 1 || itemIndex == 0)) {
+				terminal.getItemSelect().add(EventBus.player.inventory.get(itemIndex));
+				terminal.currentItemLabel.setText(EventBus.player.inventory.get(itemIndex).getName());
+				
+			} else if (!EventBus.player.inventory.isEmpty() && itemIndex == EventBus.player.inventory.size() - 1) {
+				itemIndex--;
+				terminal.getItemSelect().add(EventBus.player.inventory.get(itemIndex));
+				terminal.currentItemLabel.setText(EventBus.player.inventory.get(itemIndex).getName());
 			}
-						
+			
+			if (EventBus.player.inventory.isEmpty()) {
+				terminal.currentItemLabel.setText("N/A");
+			}
 			
 			terminal.repaint();
 			terminal.revalidate();
@@ -99,6 +129,14 @@ public class TerminalButtons extends JPanel{
 	public void setButtonActivity(boolean isActive) {
 		for (JButton button : buttons) {
 			button.setEnabled(isActive);
+		}
+	}
+	
+	public void setButtonActivity(boolean isActive, JButton exception) {
+		for (JButton button : buttons) {
+			if (button != exception) {
+				button.setEnabled(isActive);
+			}
 		}
 	}
 }

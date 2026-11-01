@@ -1,7 +1,8 @@
-package itempackage;
+package itempackage.colorpicker;
 
 import javax.swing.ImageIcon;
 
+import itempackage.Item;
 import utilities.EventBus;
 import utilities.SwingUtils;
 
@@ -14,8 +15,11 @@ public class ColorPicker extends Item{
 
 	@Override
 	public boolean doTask() {
-		boolean canDelete = EventBus.currentMatch.blackJack.playerHand.deleteUnoCards();
-		
+		boolean canDelete = !EventBus.currentMatch.blackJack.playerHand.getUnoCards().isEmpty();
+		if (canDelete) {
+			EventBus.currentMatch.rightArea.getBottom().getTerminalScreen().setTerminalScreen(new ColorPickScreen());
+			EventBus.currentMatch.rightArea.getBottom().getButtons().setButtonActivity(false);
+		}
 		
 		return canDelete;
 	}

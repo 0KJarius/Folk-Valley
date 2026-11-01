@@ -190,6 +190,16 @@ public abstract class SwingUtils {
     	
     	return button;
     }
+    
+    public static JButton createJButton(Dimension size, Color buttonColor, int borederThickness, Color outLineColor) 
+    {
+    	JButton button = new JButton();
+    	button.setPreferredSize(size);
+    	button.setBackground(buttonColor);
+    	button.setBorder(BorderFactory.createLineBorder(outLineColor, borederThickness));
+    	
+    	return button;
+    }
 
 
     public static JButton createJButton(String normal, String pressed){

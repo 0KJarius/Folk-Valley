@@ -28,7 +28,8 @@ public class TerminalScreen extends JPanel{
 			this.remove(currentScreen);
 		}
 		this.add(staticTransition);
-		EventBus.executeAfterTime(500, new Signal() {
+		
+		EventBus.executeAfterTime(150, new Signal() {
 			@Override
 			public boolean doTask() {
 				self.remove(staticTransition);

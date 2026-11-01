@@ -16,7 +16,7 @@ import utilities.SwingUtils;
 
 public class RightInfoArea extends JPanel{
 	private JLabel naturalLabel;
-	public BottomInfoArea bottom;
+	protected BottomInfoArea bottom;
 	
 	public RightInfoArea() 
 	{
@@ -34,7 +34,7 @@ public class RightInfoArea extends JPanel{
 		setUpNaturalPanel(naturalPanel);
 		basePane.add(bgGif, JLayeredPane.DEFAULT_LAYER);
 		basePane.add(naturalPanel, JLayeredPane.PALETTE_LAYER);
-		basePane.add(bottom, JLayeredPane.PALETTE_LAYER);
+		basePane.add(getBottom(), JLayeredPane.PALETTE_LAYER);
 	}
 	
 	private void setUpNaturalPanel(JPanel panel) 
@@ -49,4 +49,6 @@ public class RightInfoArea extends JPanel{
 	public void updateNaturalLabel() {
 		naturalLabel.setText("" + EventBus.currentMatch.getNatural());
 	}
+
+	public BottomInfoArea getBottom() {return bottom;}
 }
