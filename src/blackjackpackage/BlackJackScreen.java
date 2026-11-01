@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import blackjackpackage.cardpackage.Card;
 import blackjackpackage.handpackage.Hand;
 import blackjackpackage.handpackage.PlayerHand;
+import blackjackpackage.rightsidepackage.RightInfoArea;
 import entitypackage.Entity;
 import mainpackage.MainFrame;
 import menuPackage.GameOverScreen;
@@ -26,9 +27,9 @@ public class BlackJackScreen extends JPanel{
 	protected MatchInfoArea infoArea;
 	protected BlackJackArea blackJack;
 	protected RightInfoArea rightArea;
-	protected  Deck deck;
+	public  Deck deck;
 	protected int betPool;
-	protected int natural = 21;
+	private int natural = 21;
 	protected int baseNat = 21;
 	private int maxMoney = EventBus.player.getCurrentMoney();
 	private int roundCounter = 0;
@@ -52,7 +53,7 @@ public class BlackJackScreen extends JPanel{
 						SoundBus.playSFX("blackJack/reveal.wav");
 					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 					
-					if (blackJack.enemyHand.getScore() < ((natural * 16) / 21)) {
+					if (blackJack.enemyHand.getScore() < ((getNatural() * 16) / 21)) {
 						doTask();
 					} else {
 						checkTimer();
@@ -91,7 +92,7 @@ public class BlackJackScreen extends JPanel{
 	public BlackJackScreen(Entity enemy, int natural) {
 		this(enemy);
 		baseNat = natural;
-		this.natural = natural;
+		this.setNatural(natural);
 	}
 	
 	private void setTable(){
@@ -118,7 +119,10 @@ public class BlackJackScreen extends JPanel{
 		} else {
 			blackJack.buttonArea.split.setEnabled(false);
 		}
-		System.out.println(deck.getSize());
+		rightArea.bottom.updateCardCountLabel();
+		if (deck.getSize() == 0) {
+			MainFrame.getInstance().layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
+		}
 	}
 	
 	public void reset() {
@@ -160,7 +164,7 @@ public class BlackJackScreen extends JPanel{
     }
 	
 	public void addNatural(int amount) {
-		natural += amount;
+		setNatural(getNatural() + amount);
 		rightArea.updateNaturalLabel();
 	}
 	
@@ -233,7 +237,7 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void checkResults() {
-		if (blackJack.enemyHand.getScore() > EventBus.currentMatch.natural && blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
+		if (blackJack.enemyHand.getScore() > EventBus.currentMatch.getNatural() && blackJack.playerHand.getScore() > EventBus.currentMatch.getNatural()) {
 			if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()) {
 				onRoundOver(false, false, false);
 			} else if (blackJack.enemyHand.getScore() == blackJack.playerHand.getScore()) {
@@ -241,16 +245,16 @@ public class BlackJackScreen extends JPanel{
 			} else {
 				onRoundOver(true, false, true);
 			}
-		} else if (blackJack.enemyHand.getScore() > EventBus.currentMatch.natural || blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
-			if(blackJack.enemyHand.getScore() > EventBus.currentMatch.natural) {
+		} else if (blackJack.enemyHand.getScore() > EventBus.currentMatch.getNatural() || blackJack.playerHand.getScore() > EventBus.currentMatch.getNatural()) {
+			if(blackJack.enemyHand.getScore() > EventBus.currentMatch.getNatural()) {
 				onRoundOver(true, false, true);
 			} else {
 				onRoundOver(false, false, false);
 			}
-		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural || blackJack.playerHand.getScore() == EventBus.currentMatch.natural) {
+		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.getNatural() || blackJack.playerHand.getScore() == EventBus.currentMatch.getNatural()) {
 			if (blackJack.enemyHand.getScore() == blackJack.playerHand.getScore()) {
 				onRoundOver(false, true, true);
-			} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural) {
+			} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.getNatural()) {
 				onRoundOver(false, false, false);
 			} else {
 				onRoundOver(true, false, true);
@@ -279,10 +283,18 @@ public class BlackJackScreen extends JPanel{
 		betPool = 0;
 		blackJack.reset();
 		infoArea.reset();
-		natural = baseNat;
+		setNatural(baseNat);
 		this.removeAll();
 	}
 	
+	public int getNatural() {
+		return natural;
+	}
+
+	public void setNatural(int natural) {
+		this.natural = natural;
+	}
+
 	@Override
 	public void addNotify() {
 		startMatch();

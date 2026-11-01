@@ -2,6 +2,9 @@ package mainpackage;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
+
+import blackjackpackage.BlackJackScreen;
+import entitypackage.Entity;
 import entitypackage.Player;
 
 import menuPackage.startmenu.StartMenu;
@@ -19,9 +22,9 @@ public class Main
     		System.setProperty("awt.useSystemAAFontSettings","off"); 
             System.setProperty("swing.aatext", "false");
     		MainFrame frame = MainFrame.getInstance();
-    		frame.setScreen(new StartMenu());
+    		//frame.setScreen(new StartMenu());
     		//frame.setScreen(StageSelectScreen.getInstance());
-            //frame.setScreen(new BlackJackScreen(new Entity(500, "Protosuer")));
+            frame.setScreen(new BlackJackScreen(new Entity(500, "Protosuer")));
     	});
         
     }
