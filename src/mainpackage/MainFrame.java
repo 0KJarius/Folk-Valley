@@ -1,6 +1,7 @@
 package mainpackage;
 import java.awt.BorderLayout;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -45,15 +46,15 @@ public class MainFrame extends JFrame{
 		
 	}
 	
-	public void layerOnScreen(JPanel panel, Integer layer) 
+	public void layerOnScreen(JComponent component, Integer layer) 
 	{
-		baseLayer.add(panel, layer);
+		baseLayer.add(component, layer);
 		baseLayer.repaint();
 		baseLayer.revalidate();
 	}
 	
-	public void removeLayer(JPanel panel) {
-		baseLayer.remove(panel);
+	public void removeLayer(JComponent component) {
+		baseLayer.remove(component);
 		baseLayer.repaint();
 		baseLayer.revalidate();
 	}

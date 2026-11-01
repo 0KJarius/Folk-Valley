@@ -2,12 +2,14 @@ package blackjackpackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import blackjackpackage.cardpackage.Card;
@@ -21,6 +23,7 @@ import menuPackage.WinScreen;
 import utilities.EventBus;
 import utilities.Signal;
 import utilities.SoundBus;
+import utilities.SwingUtils;
 
 public class BlackJackScreen extends JPanel{
 	
@@ -36,6 +39,7 @@ public class BlackJackScreen extends JPanel{
 	protected int debtCounter = 0;
 	private BetTable betTable = new BetTable();
 	protected Entity enemy;
+	public JLabel scanLines;
 	
 	protected Signal onStand = new Signal() {
 
@@ -283,6 +287,7 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void leaveMatch() {
+		
 		betPool = 0;
 		blackJack.reset();
 		infoArea.reset();
@@ -301,6 +306,8 @@ public class BlackJackScreen extends JPanel{
 	@Override
 	public void addNotify() {
 		startMatch();
+		scanLines = SwingUtils.createImageAt("BlackJack/scanLinesOverlay.png", new Point(0, 0));
+		MainFrame.getInstance().layerOnScreen(scanLines, JLayeredPane.MODAL_LAYER);
 		
 		try {
 			SoundBus.playSong("letsPlay.wav", true);
@@ -311,6 +318,7 @@ public class BlackJackScreen extends JPanel{
 	@Override
 	public void removeNotify() {
 		leaveMatch();
+		
 		SoundBus.closeCurrentSong();
 		super.removeNotify();
 	}

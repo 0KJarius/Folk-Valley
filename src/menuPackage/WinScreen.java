@@ -69,6 +69,7 @@ public class WinScreen extends OverlayMenu{
 		Signal menuTask = new Signal() {
 			@Override
 			public boolean doTask() {
+				MainFrame.getInstance().removeLayer(EventBus.currentMatch.scanLines);
 				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
 				EventBus.selectedStage.completeStage();
 				EventBus.selectedStage = null;
