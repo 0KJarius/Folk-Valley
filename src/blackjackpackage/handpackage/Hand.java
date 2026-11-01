@@ -106,6 +106,38 @@ public abstract class Hand extends JPanel
     	}
     }
     
+    public void deleteUnoCards() {
+    	if (unoCards.isEmpty()) {
+    		return;
+    	}
+    	
+    	for (UnoCard uno : unoCards) {
+    		cards.remove(uno);
+    		uno.removeThis();
+            this.remove(uno);
+            unoCards.remove(uno);
+    	}
+    	repaint();
+    	revalidate();
+    }
+    
+    public void deleteUnoCards(UnoCard.CardColor color) {
+    	if (unoCards.isEmpty()) {
+    		return;
+    	}
+    	
+    	for (UnoCard uno : unoCards) {
+    		if (uno.getColor() == color) {
+    			cards.remove(uno);
+        		uno.removeThis();
+                this.remove(uno);
+                unoCards.remove(uno);
+    		}
+    	}
+    	repaint();
+    	revalidate();
+    }
+    
     public void applySingleUnoCard(UnoCard uno) {
     	for (Card card : cards) 
 		{

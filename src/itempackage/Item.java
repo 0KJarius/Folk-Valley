@@ -11,6 +11,7 @@ public abstract class Item extends JLabel implements Signal{
 	private ImageIcon itemImg;
 	private String itemName;
 	private String itemDescription;
+	protected static final String ITEM_PATH = "Items/";
 	
 	public Item(ImageIcon itemImg, String itemName, String itemDescription) {
 		this.setPreferredSize(new Dimension(itemImg.getIconWidth(), itemImg.getIconHeight()));

@@ -20,7 +20,7 @@ import utilities.GlobalConstants;
 import utilities.Signal;
 import utilities.SwingUtils;
 
-public class GameOverScreen extends JPanel implements MouseListener
+public class GameOverScreen extends OverlayMenu
 {
 	private JPanel statsArea = SwingUtils.createJPanel(new Rectangle(25, 97, 401, 443), Color.BLUE);
 	private JPanel gameOverArea = SwingUtils.createJPanel(new Rectangle(444, 98, 382, 535), Color.RED);
@@ -97,34 +97,5 @@ public class GameOverScreen extends JPanel implements MouseListener
 		gameOverArea.add(mainMenuButton);
 	}
 	
-	@Override
-	public void addNotify() {
-		//this.setLocation(new Point(0, 720));
-		super.addNotify();
-	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		e.consume();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		e.consume();
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		e.consume();
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		e.consume();
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		e.consume();
-	}
 }

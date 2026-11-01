@@ -20,7 +20,7 @@ import utilities.GlobalConstants;
 import utilities.Signal;
 import utilities.SwingUtils;
 
-public class WinScreen extends JPanel implements MouseListener{
+public class WinScreen extends OverlayMenu{
 	private JPanel statsArea = SwingUtils.createJPanel(new Rectangle(25, 97, 401, 443), Color.BLUE);
 	private JPanel winArea = SwingUtils.createJPanel(new Rectangle(444, 98, 382, 535), Color.RED);
 	
@@ -82,32 +82,4 @@ public class WinScreen extends JPanel implements MouseListener{
 		winArea.add(Box.createRigidArea(new Dimension(356, 180)));
 		winArea.add(mainMenuButton);
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		e.consume();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		e.consume();
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		e.consume();
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		e.consume();
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		e.consume();
-	}
-	
-	
-		
 }

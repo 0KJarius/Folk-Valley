@@ -24,9 +24,9 @@ import utilities.SoundBus;
 
 public class BlackJackScreen extends JPanel{
 	
-	protected MatchInfoArea infoArea;
-	protected BlackJackArea blackJack;
-	protected RightInfoArea rightArea;
+	public MatchInfoArea infoArea;
+	public BlackJackArea blackJack;
+	public RightInfoArea rightArea;
 	public  Deck deck;
 	protected int betPool;
 	private int natural = 21;

@@ -19,7 +19,7 @@ import utilities.EventBus;
 import utilities.SwingUtils;
 
 public class BlackJackArea extends JPanel{
-    protected PlayerHand playerHand;
+    public PlayerHand playerHand;
     protected LinkedList<PlayerHand> playerHands;
     protected EnemyHand enemyHand;
     protected ScoreArea scoreArea;
