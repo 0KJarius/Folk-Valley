@@ -1,9 +1,16 @@
 package blackjackpackage.handpackage;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import blackjackpackage.cardpackage.Card;
 import blackjackpackage.cardpackage.PokerCard;
 import blackjackpackage.cardpackage.UnoCard;
+import utilities.SwingUtils;
+
 import java.util.ArrayList;
 
 public abstract class Hand extends JPanel
@@ -13,21 +20,39 @@ public abstract class Hand extends JPanel
     private int score = 0;
     private int debt = 0;
     private ArrayList<UnoCard> unoCards;
+    private Dimension cardPanelSize = new Dimension(804, 130);
+    private JPanel cardPanel = SwingUtils.createJPanel(cardPanelSize, getBackground());
+    private JScrollPane scroller = new JScrollPane(cardPanel);
+    
 
     public Hand()
     {
         cards = new ArrayList<Card>();
         selectedCards= new ArrayList<Card>();
         unoCards = new ArrayList<UnoCard>();
-        this.setPreferredSize(new Dimension(804,145));
+        this.setPreferredSize(new Dimension(804,250));
+        scroller.setPreferredSize(new Dimension(804,250));
+        
+        cardPanel.setOpaque(false);
+        scroller.setColumnHeaderView(scroller.getHorizontalScrollBar());
+        scroller.setOpaque(false);
+        scroller.getViewport().setOpaque(false);
+        scroller.setViewportBorder(null);
+        
+        FlowLayout layout = new FlowLayout();
+        layout.setVgap(0);
+        layout.setHgap(0);
         this.setOpaque(false);
         this.repaint();
+        this.setLayout(layout);
+        
+        this.add(scroller);
     }
     
     public void addNewCard(Card card) 
     {
     	cards.add(card);
-        this.add(card);
+    	cardPanel.add(card);
         
         if (!(card instanceof UnoCard)) {
         	score += card.getCardScore();
@@ -35,8 +60,12 @@ public abstract class Hand extends JPanel
         	unoCards.add((UnoCard) card);
         }
         card.unflipCard();
-        this.revalidate();
-        this.repaint();
+        if (cards.size() > 4) {
+        	cardPanel.setPreferredSize(new Dimension(cardPanel.getPreferredSize().width + 150,130));
+        }
+        
+        cardPanel.revalidate();
+        cardPanel.repaint();
     }
     
     public void removeCard(Card cardToRemove) 
@@ -47,10 +76,17 @@ public abstract class Hand extends JPanel
     		unoCards.remove(cardToRemove);
     	}
     	
+    	if (cards.size() > 4) {
+    		cardPanel.setPreferredSize(new Dimension(cardPanel.getPreferredSize().width - 150,130));
+    	}
+    	
     	cardToRemove.setSelected(false);
     	cards.remove(cardToRemove);
     	cardToRemove.removeThis();
-        this.remove(cardToRemove);
+    	cardPanel.remove(cardToRemove);
+    	
+    	cardPanel.repaint();
+    	cardPanel.revalidate();
     }
     
     public void removeSelectedCards() 
@@ -61,13 +97,14 @@ public abstract class Hand extends JPanel
     		debt += selected.getCardScore();
     	}
     	selectedCards.clear();
-    	this.repaint();
-    	this.revalidate();
+    	cardPanel.repaint();
+    	cardPanel.revalidate();
     }
 
     public void resetHand()
     {
-        this.removeAll();
+    	cardPanel.removeAll();
+    	cardPanel.setPreferredSize(cardPanelSize);
         for (Card card : cards)
         	card.setSelected(false);
         selectedCards.clear();
@@ -75,8 +112,8 @@ public abstract class Hand extends JPanel
         unoCards.clear();
         score = 0;
         debt = 0;
-        this.revalidate();
-        this.repaint();
+        cardPanel.revalidate();
+        cardPanel.repaint();
     }
     
     public void applyDebt() 
@@ -114,12 +151,12 @@ public abstract class Hand extends JPanel
     	for (int i = 0; i < unoCards.size(); i++) {
     		cards.remove(unoCards.get(i));
     		unoCards.get(i).removeThis();
-    		this.remove(unoCards.get(i));
+    		cardPanel.remove(unoCards.get(i));
     		unoCards.remove(unoCards.get(i));
     	}
     	
-    	repaint();
-    	revalidate();
+    	cardPanel.repaint();
+    	cardPanel.revalidate();
     	return true;
     }
     
@@ -138,13 +175,13 @@ public abstract class Hand extends JPanel
     	for (int i = 0; i < toDelete.size(); i++) {
     		cards.remove(toDelete.get(i));
     		toDelete.get(i).removeThis();
-    		this.remove(toDelete.get(i));
+    		cardPanel.remove(toDelete.get(i));
     		unoCards.remove(toDelete.get(i));
     	}
     	
     	
-    	repaint();
-    	revalidate();
+    	cardPanel.repaint();
+    	cardPanel.revalidate();
     	if (toDelete.size() == 0) {
     		return true;
     	} else {

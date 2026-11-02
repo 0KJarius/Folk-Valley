@@ -24,7 +24,7 @@ public class Main
     		MainFrame frame = MainFrame.getInstance();
     		frame.setScreen(new StartMenu());
     		//frame.setScreen(StageSelectScreen.getInstance());
-            //frame.setScreen(new BlackJackScreen(new Entity(500, "Protosuer")));
+            //frame.setScreen(new BlackJackScreen(new Entity(500, "Protosuer"), 200));
     	});
         
     }

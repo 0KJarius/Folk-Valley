@@ -22,7 +22,7 @@ public class StagePage extends JPanel{
 		Stage shopStage = new Stage("Shop", Color.white, "shop.png" ,false, new ShopTable());
 		this.add(testStage);
 		this.add(shopStage);
-		this.add(testStage.copyStage("Thing", true, new BlackJackScreen(new Entity(100, "Protosuer"))));
+		this.add(testStage.copyStage("Thing", true, new BlackJackScreen(new Entity(300, "Protosuer"))));
 		this.add(shopStage.copyStage(true));
 		this.add(testStage.copyStage(true));
 	}

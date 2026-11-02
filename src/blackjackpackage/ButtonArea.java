@@ -39,7 +39,7 @@ public class ButtonArea extends JPanel{
 	{
 		this.blackJack = blackJackArea;
 		this.setPreferredSize(new Dimension(0, 48));
-		this.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
+		//this.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
 		this.setOpaque(false);
 		this.setBackground(Color.RED);
 		
