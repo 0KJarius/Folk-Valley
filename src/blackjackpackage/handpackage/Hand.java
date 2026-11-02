@@ -19,7 +19,7 @@ public abstract class Hand extends JPanel
         cards = new ArrayList<Card>();
         selectedCards= new ArrayList<Card>();
         unoCards = new ArrayList<UnoCard>();
-        this.setPreferredSize(new Dimension(804,130));
+        this.setPreferredSize(new Dimension(804,145));
         this.setOpaque(false);
         this.repaint();
     }
