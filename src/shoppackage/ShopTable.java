@@ -8,6 +8,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import utilities.SwingUtils;
+import javax.swing.*;
+import stageselectpackage.*;
+import mainpackage.*;
+
+
+
 
 public class ShopTable extends JPanel
 {
@@ -28,6 +34,16 @@ public class ShopTable extends JPanel
 		this.add(shopKeeperPanel, BorderLayout.WEST);
 		this.add(inventoryPanel, BorderLayout.CENTER);
 		this.add(dialoguePanel, BorderLayout.SOUTH);
+		
+		JButton returnButton = SwingUtils.createJButton(new Dimension(100, 40), "Back", Color.PINK);
+		
+		returnButton.addActionListener(e -> {
+			MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
+		});
+		
+		dialoguePanel.setLayout(new BorderLayout());
+		dialoguePanel.add(returnButton, BorderLayout.EAST);
+		
 		
 		
 	}
