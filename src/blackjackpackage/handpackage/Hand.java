@@ -1,10 +1,14 @@
 package blackjackpackage.handpackage;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import blackjackpackage.cardpackage.Card;
 import blackjackpackage.cardpackage.PokerCard;
@@ -37,7 +41,37 @@ public abstract class Hand extends JPanel
         scroller.setColumnHeaderView(scroller.getHorizontalScrollBar());
         scroller.setOpaque(false);
         scroller.getViewport().setOpaque(false);
-        scroller.setViewportBorder(null);
+        scroller.setBorder(null);
+        
+        scroller.getHorizontalScrollBar().setUI(new BasicScrollBarUI() {
+        	@Override 
+            protected void configureScrollBarColors(){
+        		this.trackColor = new Color(215, 109, 46);
+        		this.trackHighlightColor = new Color(192, 92, 0);
+        		
+        		
+                this.thumbColor = new Color(253, 200, 53);
+                this.thumbHighlightColor = new Color(255, 250, 77);
+                this.trackHighlightColor = new Color(255, 250, 77);
+            }
+        	
+        	@Override
+        	protected JButton createDecreaseButton(int orientation) {
+        		JButton arrowButton = super.createDecreaseButton(orientation);
+        		arrowButton.setBackground(new Color(253, 200, 53));
+        		arrowButton.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+        		return arrowButton;
+        	}
+        	
+        	@Override
+        	protected JButton createIncreaseButton(int orientation) {
+        		JButton arrowButton = super.createDecreaseButton(orientation);
+        		arrowButton.setBackground(new Color(253, 200, 53));
+        		arrowButton.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+        		return arrowButton;
+        	}
+        });
+        
         
         FlowLayout layout = new FlowLayout();
         layout.setVgap(0);
