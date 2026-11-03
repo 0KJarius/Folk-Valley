@@ -2,6 +2,9 @@ package mainpackage;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
+
+import blackjackpackage.BlackJackScreen;
+import entitypackage.Entity;
 import entitypackage.Player;
 
 import menuPackage.startmenu.StartMenu;

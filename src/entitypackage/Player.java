@@ -1,18 +1,25 @@
 package entitypackage;
+import java.util.ArrayList;
+
 import blackjackpackage.Deck;
 import blackjackpackage.cardpackage.PokerCard;
 import blackjackpackage.cardpackage.PokerCardSpecial;
 import blackjackpackage.cardpackage.UnoCard;
+import itempackage.Item;
+import itempackage.colorpicker.ColorPicker;
 import utilities.EventBus;
 
 public class Player extends Entity{
 	public Deck playerDeck;
+	public ArrayList<Item> inventory = new ArrayList<Item>();
 	
 	public Player(int money, String name) {
 		super(money, name);
 		EventBus.player = this;
 		playerDeck = new Deck();
 		initializeTestDeck();
+		inventory.add(new ColorPicker());
+		inventory.add(new ColorPicker());
 	}
 	
 	private void initializeTestDeck() 

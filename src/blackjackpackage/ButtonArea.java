@@ -39,7 +39,7 @@ public class ButtonArea extends JPanel{
 	{
 		this.blackJack = blackJackArea;
 		this.setPreferredSize(new Dimension(0, 48));
-		this.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
+		//this.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
 		this.setOpaque(false);
 		this.setBackground(Color.RED);
 		
@@ -167,7 +167,7 @@ public class ButtonArea extends JPanel{
 		setButtonsActivated(false);
 		blackJack.enemyHand.reveal();
 		blackJack.scoreArea.updateScoreLabel();
-		if (blackJack.enemyHand.getScore() > ((EventBus.currentMatch.natural * 16) / 21)) {
+		if (blackJack.enemyHand.getScore() > ((EventBus.currentMatch.getNatural() * 16) / 21)) {
 			EventBus.currentMatch.checkTimer();
 		}
 		
@@ -178,11 +178,11 @@ public class ButtonArea extends JPanel{
 
 		blackJack.scoreArea.updateScoreLabel();
 		
-		if (blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
+		if (blackJack.playerHand.getScore() > EventBus.currentMatch.getNatural()) {
 			setButtonsActivated(false);
 			EventBus.currentMatch.checkTimer();		
 			
-		} else if (blackJack.playerHand.getScore() == EventBus.currentMatch.natural && blackJack.playerHand.getDebt() <= 0) {
+		} else if (blackJack.playerHand.getScore() == EventBus.currentMatch.getNatural() && blackJack.playerHand.getDebt() <= 0) {
 			setButtonsActivated(false);
 			EventBus.currentMatch.checkTimer();
 		}

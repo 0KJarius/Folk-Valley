@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -18,7 +20,7 @@ import utilities.GlobalConstants;
 import utilities.Signal;
 import utilities.SwingUtils;
 
-public class GameOverScreen extends JPanel
+public class GameOverScreen extends OverlayMenu
 {
 	private JPanel statsArea = SwingUtils.createJPanel(new Rectangle(25, 97, 401, 443), Color.BLUE);
 	private JPanel gameOverArea = SwingUtils.createJPanel(new Rectangle(444, 98, 382, 535), Color.RED);
@@ -47,6 +49,7 @@ public class GameOverScreen extends JPanel
 		basePane.add(SwingUtils.createImageAt("MenuStuff/gameOverLayout.png", new Point(0, 0)), JLayeredPane.PALETTE_LAYER);
 		basePane.add(statsArea, JLayeredPane.MODAL_LAYER);
 		basePane.add(gameOverArea, JLayeredPane.MODAL_LAYER);
+		this.addMouseListener(this);
 		
 	}
 	
@@ -69,19 +72,23 @@ public class GameOverScreen extends JPanel
 		gameOverArea.setOpaque(false);
 		Signal retryTask = new Signal() {
 			@Override
-			public void doTask() {
+			public boolean doTask() {
 				EventBus.hardResetMatch();
 				MainFrame.getInstance().removeLayer(self);
+				return true;
 			}
 		};
 		
 		Signal menuTask = new Signal() {
 			@Override
-			public void doTask() {
+			public boolean doTask() {
 				EventBus.player.resetWallet();
+				MainFrame.getInstance().removeLayer(EventBus.currentMatch.scanLines);
 				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
 				EventBus.currentMatch = null;
 				MainFrame.getInstance().removeLayer(self);
+				
+				return true;
 			}
 		};
 		
@@ -94,9 +101,5 @@ public class GameOverScreen extends JPanel
 		gameOverArea.add(mainMenuButton);
 	}
 	
-	@Override
-	public void addNotify() {
-		//this.setLocation(new Point(0, 720));
-		super.addNotify();
-	}
+
 }

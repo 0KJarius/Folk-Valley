@@ -12,8 +12,9 @@ private JPanel body;
 private ShopCard card1;
 private ShopCard card2;
 private ShopCard card3;
+private ShopCard card4;
 
-
+private JButton rerollButton;
 
 	public ShopInventory() {
 		super();
@@ -21,32 +22,59 @@ private ShopCard card3;
 		this.setLayout(new BorderLayout());
 		
 		body = SwingUtils.createJPanel(new Dimension(700, 500), BACKGROUND);
-		body.setLayout(new GridLayout(0, 3, 10, 10));
+		body.setLayout(new GridLayout(0, 4, 10, 10));
 		
+        createShopCards();
+
+		
+		rerollButton = SwingUtils.createJButton(new Dimension(120, 40), "Reroll", Color.PINK);
+
+        rerollButton.addActionListener(e -> {
+            reroll();
+        });
+        
+        this.add(body, BorderLayout.CENTER);
+        this.add(rerollButton, BorderLayout.SOUTH);
+		
+	}
 		//TEMPCARDD
 		
+        private void createShopCards() {
+        	ShopPack pack1 = new ShopPack(100);
+            ShopPack pack2 = new ShopPack(100);
+            ShopPack pack3 = new ShopPack(100);
+            ShopPack pack4 = new ShopPack(100);
 
-        ShopPack pack1 = new ShopPack(100);
-        ShopPack pack2 = new ShopPack(150);
-        ShopPack pack3 = new ShopPack(200);
-
-         
-         card1 = new ShopCard(pack1, this);
-         card2 = new ShopCard(pack2, this);
-         card3 = new ShopCard(pack3, this);
-
-
-        body.add(card1);
-        body.add(card2);
-        body.add(card3);
+             
+             card1 = new ShopCard(pack1, this);
+             card2 = new ShopCard(pack2, this);
+             card3 = new ShopCard(pack3, this);
+             card4 = new ShopCard(pack4, this);
 
 
-        this.add(body, BorderLayout.CENTER);
-    }
+            body.add(card1);
+            body.add(card2);
+            body.add(card3);
+            body.add(card4);
+        	
+        	
+        }
+        
+        private void reroll() {
+        	body.removeAll();
+        	createShopCards();
+        	
+        	body.revalidate();
+        	body.repaint();
+        }
+
+
+    
 	
 	
 	public void showSelect(ShopPack pack, Player player) {
 		this.remove(body);
+		this.remove(rerollButton);
 		
 		JPanel selectPanel = SwingUtils.createJPanel(new Dimension(700, 500), BACKGROUND);
 		selectPanel.setLayout(new BorderLayout(10, 10));
@@ -63,6 +91,7 @@ private ShopCard card3;
 				player.playerDeck.addCard(card);
 				this.remove(selectPanel);
 				this.add(body, BorderLayout.CENTER);
+				this.add(rerollButton, BorderLayout.SOUTH);
 				this.revalidate();
 				this.repaint();
 			});

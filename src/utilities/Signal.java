@@ -1,5 +1,5 @@
 package utilities;
 
 public interface Signal {
-	public abstract void doTask();
+	public abstract boolean doTask();
 }

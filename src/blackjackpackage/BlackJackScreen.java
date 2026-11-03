@@ -2,17 +2,20 @@ package blackjackpackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import blackjackpackage.cardpackage.Card;
 import blackjackpackage.handpackage.Hand;
 import blackjackpackage.handpackage.PlayerHand;
+import blackjackpackage.rightsidepackage.RightInfoArea;
 import entitypackage.Entity;
 import mainpackage.MainFrame;
 import menuPackage.GameOverScreen;
@@ -20,25 +23,27 @@ import menuPackage.WinScreen;
 import utilities.EventBus;
 import utilities.Signal;
 import utilities.SoundBus;
+import utilities.SwingUtils;
 
 public class BlackJackScreen extends JPanel{
 	
-	protected MatchInfoArea infoArea;
-	protected BlackJackArea blackJack;
-	protected RightInfoArea rightArea;
-	protected  Deck deck;
+	public MatchInfoArea infoArea;
+	public BlackJackArea blackJack;
+	public RightInfoArea rightArea;
+	public  Deck deck;
 	protected int betPool;
-	protected int natural = 21;
+	private int natural = 21;
 	protected int baseNat = 21;
 	private int maxMoney = EventBus.player.getCurrentMoney();
 	private int roundCounter = 0;
 	protected int debtCounter = 0;
 	private BetTable betTable = new BetTable();
 	protected Entity enemy;
+	public JLabel scanLines;
 	
 	protected Signal onStand = new Signal() {
 
-		public void doTask() {
+		public boolean doTask() {
 			Timer hitTimer = new Timer();
             TimerTask hitTask = new TimerTask() {
 				@Override
@@ -52,7 +57,7 @@ public class BlackJackScreen extends JPanel{
 						SoundBus.playSFX("blackJack/reveal.wav");
 					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 					
-					if (blackJack.enemyHand.getScore() < ((natural * 16) / 21)) {
+					if (blackJack.enemyHand.getScore() < ((getNatural() * 16) / 21)) {
 						doTask();
 					} else {
 						checkTimer();
@@ -61,6 +66,7 @@ public class BlackJackScreen extends JPanel{
             };
             
             hitTimer.scheduleAtFixedRate(hitTask, 1000, 1);
+            return true;
 		}
 	};
 	
@@ -91,7 +97,7 @@ public class BlackJackScreen extends JPanel{
 	public BlackJackScreen(Entity enemy, int natural) {
 		this(enemy);
 		baseNat = natural;
-		this.natural = natural;
+		this.setNatural(natural);
 	}
 	
 	private void setTable(){
@@ -118,7 +124,10 @@ public class BlackJackScreen extends JPanel{
 		} else {
 			blackJack.buttonArea.split.setEnabled(false);
 		}
-		System.out.println(deck.getSize());
+		rightArea.getBottom().updateCardCountLabel();
+		if (deck.getSize() == 0) {
+			MainFrame.getInstance().layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
+		}
 	}
 	
 	public void reset() {
@@ -160,7 +169,7 @@ public class BlackJackScreen extends JPanel{
     }
 	
 	public void addNatural(int amount) {
-		natural += amount;
+		setNatural(getNatural() + amount);
 		rightArea.updateNaturalLabel();
 	}
 	
@@ -222,18 +231,19 @@ public class BlackJackScreen extends JPanel{
 		
 		EventBus.executeAfterTime(2000, new Signal() {
 			@Override
-			public void doTask() {
+			public boolean doTask() {
 				if (isSplit) {
 					splitCheck();
 				} else {
 					reset();
 				}
+				return true;
 			}
 		});
 	}
 	
 	public void checkResults() {
-		if (blackJack.enemyHand.getScore() > EventBus.currentMatch.natural && blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
+		if (blackJack.enemyHand.getScore() > EventBus.currentMatch.getNatural() && blackJack.playerHand.getScore() > EventBus.currentMatch.getNatural()) {
 			if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()) {
 				onRoundOver(false, false, false);
 			} else if (blackJack.enemyHand.getScore() == blackJack.playerHand.getScore()) {
@@ -241,16 +251,16 @@ public class BlackJackScreen extends JPanel{
 			} else {
 				onRoundOver(true, false, true);
 			}
-		} else if (blackJack.enemyHand.getScore() > EventBus.currentMatch.natural || blackJack.playerHand.getScore() > EventBus.currentMatch.natural) {
-			if(blackJack.enemyHand.getScore() > EventBus.currentMatch.natural) {
+		} else if (blackJack.enemyHand.getScore() > EventBus.currentMatch.getNatural() || blackJack.playerHand.getScore() > EventBus.currentMatch.getNatural()) {
+			if(blackJack.enemyHand.getScore() > EventBus.currentMatch.getNatural()) {
 				onRoundOver(true, false, true);
 			} else {
 				onRoundOver(false, false, false);
 			}
-		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural || blackJack.playerHand.getScore() == EventBus.currentMatch.natural) {
+		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.getNatural() || blackJack.playerHand.getScore() == EventBus.currentMatch.getNatural()) {
 			if (blackJack.enemyHand.getScore() == blackJack.playerHand.getScore()) {
 				onRoundOver(false, true, true);
-			} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.natural) {
+			} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.getNatural()) {
 				onRoundOver(false, false, false);
 			} else {
 				onRoundOver(true, false, true);
@@ -268,24 +278,36 @@ public class BlackJackScreen extends JPanel{
 	protected void checkTimer() {
 		EventBus.executeAfterTime(1000, new Signal() {
 			@Override
-			public void doTask() {
-				checkResults();								
+			public boolean doTask() {
+				checkResults();	
+				return true;
 			}
 		});
 		
 	}
 	
 	public void leaveMatch() {
+		
 		betPool = 0;
 		blackJack.reset();
 		infoArea.reset();
-		natural = baseNat;
+		setNatural(baseNat);
 		this.removeAll();
 	}
 	
+	public int getNatural() {
+		return natural;
+	}
+
+	public void setNatural(int natural) {
+		this.natural = natural;
+	}
+
 	@Override
 	public void addNotify() {
 		startMatch();
+		scanLines = SwingUtils.createImageAt("BlackJack/scanLinesOverlay.png", new Point(0, 0));
+		MainFrame.getInstance().layerOnScreen(scanLines, JLayeredPane.MODAL_LAYER);
 		
 		try {
 			SoundBus.playSong("letsPlay.wav", true);
@@ -296,6 +318,7 @@ public class BlackJackScreen extends JPanel{
 	@Override
 	public void removeNotify() {
 		leaveMatch();
+		
 		SoundBus.closeCurrentSong();
 		super.removeNotify();
 	}
