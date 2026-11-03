@@ -18,7 +18,7 @@ public class StagePage extends JPanel{
 		this.setLayout(layout);
 		this.setOpaque(false);
 		
-		Stage testStage = new Stage("protosuer", new Color(255, 177, 177), "fight.png", false, new BlackJackScreen(new Entity(100, "Protosuer")));
+		Stage testStage = new Stage("protosuer", new Color(255, 177, 177), "fight.png", false, new BlackJackScreen(new Entity(300, "Protosuer")));
 		Stage shopStage = new Stage("Shop", Color.white, "shop.png" ,false, new ShopTable());
 		this.add(testStage);
 		this.add(shopStage);
