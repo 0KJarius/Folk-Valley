@@ -74,6 +74,7 @@ public class GameOverScreen extends OverlayMenu
 			@Override
 			public boolean doTask() {
 				EventBus.hardResetMatch();
+				//System.out.println(EventBus.currentMatch.deck.getSize());
 				MainFrame.getInstance().removeLayer(self);
 				return true;
 			}

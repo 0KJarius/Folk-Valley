@@ -73,7 +73,7 @@ public class BlackJackArea extends JPanel{
         getEnemyHand().resetHand();
         playerHand.resetHand();
         getScoreArea().updateScoreLabel();
-        buttonArea.setButtonsActivated(true);
+        buttonArea.setButtonsActivated(true, 2);
         this.revalidate();
         this.repaint();   
     }

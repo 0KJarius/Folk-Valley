@@ -33,6 +33,8 @@ public class ButtonArea extends JPanel{
 	private final String SPLIT_PATH = BUTTON_PATH + "split/";
 	private final String DISCARD_PATH = BUTTON_PATH + "discard/";
 	
+	private JButton[] buttons = new JButton[4];
+	
 	BlackJackArea blackJack;
 	
 	public ButtonArea(BlackJackArea blackJackArea) 
@@ -79,6 +81,11 @@ public class ButtonArea extends JPanel{
 				PRESSED_SFX,
 				RELEASE_SFX
 		);
+		buttons[0] = hit;
+		buttons[1] = stand;
+		buttons[2] = split;
+		buttons[3] = discard;
+		
 		this.add(hit);
 		this.add(stand);
 		this.add(split);
@@ -90,10 +97,17 @@ public class ButtonArea extends JPanel{
 	}
 	
 	public void setButtonsActivated(boolean isEnabled) {
-		hit.setEnabled(isEnabled);
-		stand.setEnabled(isEnabled);
-		split.setEnabled(isEnabled);
-		discard.setEnabled(isEnabled);
+		for (JButton button : buttons) {
+			button.setEnabled(isEnabled);
+		}
+	}
+	
+	public void setButtonsActivated(boolean isEnabled, int exceptionIndex) {
+		for (JButton button : buttons) {
+			if (button != buttons[exceptionIndex]) {
+				button.setEnabled(isEnabled);
+			}
+		}
 	}
 	
 	private void setUpHit() {

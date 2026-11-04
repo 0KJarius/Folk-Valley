@@ -75,7 +75,7 @@ public class BlackJackScreen extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.setBounds(new Rectangle(1280, 720));
 		this.setBackground(new Color(88, 47, 44));
-		fullDeck = deck;
+		fullDeck = deck.cloneDeck();
 		this.deck = deck;
 		this.enemy = enemy;
 		
@@ -138,6 +138,7 @@ public class BlackJackScreen extends JPanel{
 		infoArea.reset();
 		setTable();
 		infoArea.reset();
+		
 	}
 	
 	public void hardResetStats() {
@@ -148,6 +149,7 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void resetDeck() {
+		System.out.println(fullDeck.getSize());
 		deck = fullDeck.cloneDeck();
 	}
 	
@@ -289,10 +291,10 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void leaveMatch() {
-		
 		betPool = 0;
 		blackJack.reset();
 		infoArea.reset();
+		deck = fullDeck.cloneDeck();
 		setNatural(baseNat);
 		this.removeAll();
 	}

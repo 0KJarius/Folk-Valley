@@ -264,5 +264,12 @@ public class TutorialMatch extends BlackJackScreen{
 		prompt.setTutorialText("I'll show you the ropes of a Folk Valley Blackjack game!", new Dimension(800, 200), new Point(265, 500));
 		prompt.setTask(betTablePrompt);
 	}
+
+	@Override
+	public void removeNotify() {
+		super.removeNotify();
+	}
+	
+	
 	
 }
