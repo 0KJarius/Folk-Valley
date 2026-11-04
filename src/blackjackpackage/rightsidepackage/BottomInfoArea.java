@@ -18,7 +18,7 @@ import utilities.SwingUtils;
 public class BottomInfoArea extends JPanel{
 	protected int maxCards = EventBus.currentMatch.deck.getSize();
 	protected JLabel cardCountLabel = SwingUtils.createJLabel(maxCards + "/" + maxCards, 40, Color.WHITE, GlobalConstants.M6XPLUS);
-	protected JLabel currentItemLabel = SwingUtils.createJLabel("Color", 30, Color.WHITE, GlobalConstants.M6XPLUS);
+	protected JLabel currentItemLabel = SwingUtils.createJLabel("N/A", 30, Color.WHITE, GlobalConstants.M6XPLUS);
 	private TerminalScreen terminalScreen = new TerminalScreen();
 	private TerminalButtons buttons = new TerminalButtons(this);
 	private ItemInfoScreen itemInfo = new ItemInfoScreen();

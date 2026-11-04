@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import utilities.GlobalConstants;
+import utilities.Signal;
 
 public class MainFrame extends JFrame{
 	public static final MainFrame FRAME = new MainFrame();
@@ -57,5 +58,10 @@ public class MainFrame extends JFrame{
 		baseLayer.remove(component);
 		baseLayer.repaint();
 		baseLayer.revalidate();
+	}
+	
+	public void removeLayer(JComponent component, Signal removeTask) {
+		removeLayer(component);
+		removeTask.doTask();
 	}
 }

@@ -74,6 +74,7 @@ public class WinScreen extends OverlayMenu{
 				MainFrame.getInstance().removeLayer(EventBus.currentMatch.scanLines);
 				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
 				EventBus.selectedStage.completeStage();
+				EventBus.selectedStage.getNextStage().unlockStage();
 				EventBus.selectedStage = null;
 				EventBus.currentMatch = null;
 				MainFrame.getInstance().removeLayer(self);

@@ -24,6 +24,9 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 import javax.swing.plaf.basic.BasicProgressBarUI;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter.HighlightPainter;
 
 public abstract class SwingUtils {
 	public static final String ASSETS_PATH = "../Assets/";
@@ -228,7 +231,16 @@ public abstract class SwingUtils {
         textArea.setEditable(false);
         textArea.setEnabled(false);
         textArea.setDisabledTextColor(textColor);
-    	
+        textArea.setHighlighter(new DefaultHighlighter() {
+
+			@Override
+			public Object addHighlight(int p0, int p1, HighlightPainter p) throws BadLocationException {return null;}
+			@Override
+			public void changeHighlight(Object tag, int p0, int p1) throws BadLocationException {}
+        });
+        
+        
+        textArea.repaint();
     	return textArea;
     }
     

@@ -147,7 +147,7 @@ public class ButtonArea extends JPanel{
 		blackJack.playerHand.removeSelectedCards();
 		EventBus.currentMatch.infoArea.updateDebtLabel(blackJack.playerHand.getDebt());
 		EventBus.currentMatch.debtCounter =  blackJack.playerHand.getDebt();
-		blackJack.scoreArea.updateScoreLabel();
+		blackJack.getScoreArea().updateScoreLabel();
 		
 		try {
 			SoundBus.playSFX(DISCARD_SFX);
@@ -165,9 +165,9 @@ public class ButtonArea extends JPanel{
 		blackJack.playerHand.applyUnoCards();
 		blackJack.playerHand.setScore(blackJack.playerHand.getScore() - blackJack.playerHand.getDebt());
 		setButtonsActivated(false);
-		blackJack.enemyHand.reveal();
-		blackJack.scoreArea.updateScoreLabel();
-		if (blackJack.enemyHand.getScore() > ((EventBus.currentMatch.getNatural() * 16) / 21)) {
+		blackJack.getEnemyHand().reveal();
+		blackJack.getScoreArea().updateScoreLabel();
+		if (blackJack.getEnemyHand().getScore() > ((EventBus.currentMatch.getNatural() * 16) / 21)) {
 			EventBus.currentMatch.checkTimer();
 		}
 		
@@ -176,7 +176,7 @@ public class ButtonArea extends JPanel{
 	private void onHit() {
 		EventBus.currentMatch.addCard(blackJack.playerHand);
 
-		blackJack.scoreArea.updateScoreLabel();
+		blackJack.getScoreArea().updateScoreLabel();
 		
 		if (blackJack.playerHand.getScore() > EventBus.currentMatch.getNatural()) {
 			setButtonsActivated(false);
@@ -196,12 +196,12 @@ public class ButtonArea extends JPanel{
 		blackJack.playerHands.addLast(new PlayerHand());
 		blackJack.playerHands.getLast().addNewCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
 		blackJack.playerHands.getFirst().removeCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
-		blackJack.scoreArea.setPlayerLabelText("" + EventBus.currentMatch.blackJack.playerHand.getScore());
+		blackJack.getScoreArea().setPlayerLabelText("" + EventBus.currentMatch.blackJack.playerHand.getScore());
 		blackJack.playerHand.revalidate();
 		blackJack.playerHand.repaint();
 		
 		EventBus.currentMatch.infoArea.updateDebtLabel(blackJack.playerHand.getDebt());
-		EventBus.currentMatch.blackJack.scoreArea.updateScoreLabel();
+		EventBus.currentMatch.blackJack.getScoreArea().updateScoreLabel();
 		split.setEnabled(false);
     }
 }

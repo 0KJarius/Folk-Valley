@@ -7,12 +7,8 @@ import mainpackage.MainFrame;
 import stageselectpackage.StageSelectScreen;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-
-import utilities.GlobalConstants;
 import utilities.SwingUtils;
 import java.awt.Dimension;
 

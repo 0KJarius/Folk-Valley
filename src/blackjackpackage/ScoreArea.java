@@ -46,6 +46,6 @@ public class ScoreArea extends JPanel{
 	
 	public void updateScoreLabel() {		 
 		playerLabel.setText("" + EventBus.currentMatch.blackJack.playerHand.getScore());
-		enemyLabel.setText("" + EventBus.currentMatch.blackJack.enemyHand.getScore());
+		enemyLabel.setText("" + EventBus.currentMatch.blackJack.getEnemyHand().getScore());
 	}
 }

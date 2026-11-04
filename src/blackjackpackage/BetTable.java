@@ -213,10 +213,18 @@ public class BetTable extends OverlayMenu
     }
     
     private void confirmBet() {
-    	if (EventBus.currentMatch.betPool >= 0){
+    	if (EventBus.currentMatch.betPool > 0){
             MainFrame.getInstance().removeLayer(this);
         }
         
     }
+
+	@Override
+	public void addNotify() {
+		super.addNotify();
+		
+		this.setVisible(true);
+	}
+    
     
 }

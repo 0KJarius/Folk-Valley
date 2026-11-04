@@ -18,8 +18,7 @@ public class Player extends Entity{
 		EventBus.player = this;
 		playerDeck = new Deck();
 		initializeTestDeck();
-		inventory.add(new ColorPicker());
-		inventory.add(new ColorPicker());
+		
 	}
 	
 	private void initializeTestDeck() 

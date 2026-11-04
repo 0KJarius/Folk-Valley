@@ -31,13 +31,14 @@ public class BlackJackScreen extends JPanel{
 	public BlackJackArea blackJack;
 	public RightInfoArea rightArea;
 	public  Deck deck;
+	public Deck fullDeck;
 	protected int betPool;
 	private int natural = 21;
 	protected int baseNat = 21;
 	private int maxMoney = EventBus.player.getCurrentMoney();
 	private int roundCounter = 0;
 	protected int debtCounter = 0;
-	private BetTable betTable = new BetTable();
+	protected BetTable betTable = new BetTable();
 	protected Entity enemy;
 	public JLabel scanLines;
 	
@@ -49,15 +50,15 @@ public class BlackJackScreen extends JPanel{
 				@Override
 				public void run() {
 					hitTimer.cancel();
-					addCard(blackJack.enemyHand);
+					addCard(blackJack.getEnemyHand());
 					
-					blackJack.scoreArea.setEnemyLabelText("" + blackJack.enemyHand.getScore());
+					blackJack.getScoreArea().setEnemyLabelText("" + blackJack.getEnemyHand().getScore());
 					
 					try {
 						SoundBus.playSFX("blackJack/reveal.wav");
 					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 					
-					if (blackJack.enemyHand.getScore() < ((getNatural() * 16) / 21)) {
+					if (blackJack.getEnemyHand().getScore() < ((getNatural() * 16) / 21)) {
 						doTask();
 					} else {
 						checkTimer();
@@ -74,6 +75,7 @@ public class BlackJackScreen extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.setBounds(new Rectangle(1280, 720));
 		this.setBackground(new Color(88, 47, 44));
+		fullDeck = deck;
 		this.deck = deck;
 		this.enemy = enemy;
 		
@@ -92,8 +94,6 @@ public class BlackJackScreen extends JPanel{
 		rightArea = new RightInfoArea();
 		blackJack = new BlackJackArea();
 		infoArea = new MatchInfoArea();
-		betTable = new BetTable();
-		
 		this.add(infoArea, BorderLayout.WEST);
 		this.add(blackJack, BorderLayout.CENTER);
 		this.add(rightArea, BorderLayout.EAST);
@@ -102,14 +102,14 @@ public class BlackJackScreen extends JPanel{
 	
 	
 	
-	private void setTable(){
-		addCard(blackJack.enemyHand);
-        addCard(blackJack.enemyHand);
+	protected void setTable(){
+		addCard(blackJack.getEnemyHand());
+        addCard(blackJack.getEnemyHand());
         
         addCard(blackJack.playerHand);
         addCard(blackJack.playerHand);
-        blackJack.scoreArea.setPlayerLabelText("" + blackJack.playerHand.getScore());
-        blackJack.scoreArea.setEnemyLabelText("" + blackJack.enemyHand.getScore());
+        blackJack.getScoreArea().setPlayerLabelText("" + blackJack.playerHand.getScore());
+        blackJack.getScoreArea().setEnemyLabelText("" + blackJack.getEnemyHand().getScore());
         
         MainFrame.getInstance().layerOnScreen(betTable, JLayeredPane.PALETTE_LAYER);
     }
@@ -148,7 +148,7 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void resetDeck() {
-		deck = EventBus.player.playerDeck.cloneDeck();
+		deck = fullDeck.cloneDeck();
 	}
 	
 	public void splitCheck() 
@@ -156,13 +156,13 @@ public class BlackJackScreen extends JPanel{
     	if(blackJack.playerHands.size() == 1) {
     		reset();
     	} else {
-    		blackJack.enemyHand.resetHand();
-    		addCard(blackJack.enemyHand);
-            addCard(blackJack.enemyHand);
+    		blackJack.getEnemyHand().resetHand();
+    		addCard(blackJack.getEnemyHand());
+            addCard(blackJack.getEnemyHand());
     		
             blackJack.replacePlayerHand();
     		
-            blackJack.scoreArea.updateScoreLabel();
+            blackJack.getScoreArea().updateScoreLabel();
             blackJack.buttonArea.setButtonsActivated(true);
     		this.repaint();
     		this.revalidate();
@@ -189,8 +189,8 @@ public class BlackJackScreen extends JPanel{
 		if (isTie) {
 			infoArea.addMoney(EventBus.player, playerWin, betPool / 2);
 			infoArea.addMoney(enemy, playerWin, betPool / 2);
-			blackJack.scoreArea.setPlayerLabelText("TIE");
-			blackJack.scoreArea.setEnemyLabelText("TIE");
+			blackJack.getScoreArea().setPlayerLabelText("TIE");
+			blackJack.getScoreArea().setEnemyLabelText("TIE");
 			
 			try {
 				SoundBus.playSFX("blackJack/tie.wav");
@@ -199,8 +199,8 @@ public class BlackJackScreen extends JPanel{
 		
 		if (playerWin && !isTie) {
 			infoArea.addMoney(EventBus.player, playerWin, betPool);
-			blackJack.scoreArea.setPlayerLabelText("WIN");
-			blackJack.scoreArea.setEnemyLabelText("LOSE");
+			blackJack.getScoreArea().setPlayerLabelText("WIN");
+			blackJack.getScoreArea().setEnemyLabelText("LOSE");
 			
 			
 			try {
@@ -209,8 +209,8 @@ public class BlackJackScreen extends JPanel{
 			
 		} else if (!playerWin && !isTie){
 			infoArea.addMoney(enemy, playerWin, betPool);
-			blackJack.scoreArea.setPlayerLabelText("LOSE");
-			blackJack.scoreArea.setEnemyLabelText("WIN");
+			blackJack.getScoreArea().setPlayerLabelText("LOSE");
+			blackJack.getScoreArea().setEnemyLabelText("WIN");
 			
 			try {
 				SoundBus.playSFX("blackJack/loseBoo.wav");
@@ -245,31 +245,31 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void checkResults() {
-		if (blackJack.enemyHand.getScore() > EventBus.currentMatch.getNatural() && blackJack.playerHand.getScore() > EventBus.currentMatch.getNatural()) {
-			if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()) {
+		if (blackJack.getEnemyHand().getScore() > EventBus.currentMatch.getNatural() && blackJack.playerHand.getScore() > EventBus.currentMatch.getNatural()) {
+			if (blackJack.getEnemyHand().getScore() > blackJack.playerHand.getScore()) {
 				onRoundOver(false, false, false);
-			} else if (blackJack.enemyHand.getScore() == blackJack.playerHand.getScore()) {
+			} else if (blackJack.getEnemyHand().getScore() == blackJack.playerHand.getScore()) {
 				onRoundOver(false, true, true);
 			} else {
 				onRoundOver(true, false, true);
 			}
-		} else if (blackJack.enemyHand.getScore() > EventBus.currentMatch.getNatural() || blackJack.playerHand.getScore() > EventBus.currentMatch.getNatural()) {
-			if(blackJack.enemyHand.getScore() > EventBus.currentMatch.getNatural()) {
+		} else if (blackJack.getEnemyHand().getScore() > EventBus.currentMatch.getNatural() || blackJack.playerHand.getScore() > EventBus.currentMatch.getNatural()) {
+			if(blackJack.getEnemyHand().getScore() > EventBus.currentMatch.getNatural()) {
 				onRoundOver(true, false, true);
 			} else {
 				onRoundOver(false, false, false);
 			}
-		} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.getNatural() || blackJack.playerHand.getScore() == EventBus.currentMatch.getNatural()) {
-			if (blackJack.enemyHand.getScore() == blackJack.playerHand.getScore()) {
+		} else if (blackJack.getEnemyHand().getScore() == EventBus.currentMatch.getNatural() || blackJack.playerHand.getScore() == EventBus.currentMatch.getNatural()) {
+			if (blackJack.getEnemyHand().getScore() == blackJack.playerHand.getScore()) {
 				onRoundOver(false, true, true);
-			} else if (blackJack.enemyHand.getScore() == EventBus.currentMatch.getNatural()) {
+			} else if (blackJack.getEnemyHand().getScore() == EventBus.currentMatch.getNatural()) {
 				onRoundOver(false, false, false);
 			} else {
 				onRoundOver(true, false, true);
 			}
-		} else if (blackJack.enemyHand.getScore() > blackJack.playerHand.getScore()){
+		} else if (blackJack.getEnemyHand().getScore() > blackJack.playerHand.getScore()){
 			onRoundOver(false, false, false);
-		} else if (blackJack.enemyHand.getScore() < blackJack.playerHand.getScore()){
+		} else if (blackJack.getEnemyHand().getScore() < blackJack.playerHand.getScore()){
 			onRoundOver(true, false, true);
 		} else {
 			onRoundOver(false, true, true);
@@ -304,6 +304,14 @@ public class BlackJackScreen extends JPanel{
 	public void setNatural(int natural) {
 		this.natural = natural;
 	}
+	
+	public BetTable getBetTable() {
+		return betTable;
+	}
+	
+	public void setBetTable(BetTable betTable) {
+		this.betTable = betTable;
+	}
 
 	@Override
 	public void addNotify() {
@@ -318,6 +326,7 @@ public class BlackJackScreen extends JPanel{
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 	}
 	
+
 	@Override
 	public void removeNotify() {
 		leaveMatch();

@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
 import blackjackpackage.BlackJackScreen;
+import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
 import entitypackage.Entity;
 import entitypackage.Player;
 
@@ -24,7 +25,7 @@ public class Main
             System.setProperty("swing.aatext", "false");
     		MainFrame frame = MainFrame.getInstance();
     		frame.setScreen(new StartMenu());
-            //frame.setScreen(new BlackJackScreen(new Entity(100, "Protosuer")));
+            //frame.setScreen(new TutorialMatch(new Entity(100, "Pursuer")));
     	});
         
     }

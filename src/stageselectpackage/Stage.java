@@ -31,6 +31,7 @@ public class Stage extends JButton implements MouseListener{
 	private boolean isLocked;
 	private boolean isComplete = false;
 	private JPanel destination;
+	private Stage nextStage;
 	
 	public Stage(String stageName, Color textColor, String stageFrameName, boolean isLocked, JPanel destination) {
 		this.setPreferredSize(new Dimension(654, 111));
@@ -43,6 +44,7 @@ public class Stage extends JButton implements MouseListener{
         this.stageFrameName = stageFrameName;
         this.isLocked = isLocked;
         this.destination = destination;
+        this.stageName = stageName;
         
         stageFrame = SwingUtils.getImage(STAGE_BUTTON_PATH + stageFrameName);
         completeStageFrame = SwingUtils.createTintedImage(stageFrame, new Color(100, 255, 100, 200));
@@ -63,9 +65,16 @@ public class Stage extends JButton implements MouseListener{
         this.addMouseListener(this);
 	}
 	
+	public Stage(String stageName, Color textColor, String stageFrameName, boolean isLocked, JPanel destination, Stage nextStage) {
+		this(stageName, textColor, stageFrameName, isLocked, destination);
+		this.nextStage = nextStage; 
+	}
+	
 	public void unlockStage() {
 		this.setIcon(stageFrame);
 		this.setText(stageName);
+		System.out.println(stageName);
+		isLocked = false;
 	}
 	
 	public void completeStage() {
@@ -74,18 +83,29 @@ public class Stage extends JButton implements MouseListener{
 		this.setText("");
 	}
 	
-	public Stage copyStage(String stageName, boolean isLocked, JPanel destination) {
-		return new Stage(stageName, textColor, stageFrameName, isLocked, destination);
+	public Stage copyStage(String stageName, boolean isLocked, JPanel destination, Stage nextStage) {
+		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, nextStage);
 	}
 	
 	public Stage copyStage() {
 		return new Stage(stageName, textColor, stageFrameName, isLocked, destination);
 	}
 	
+	public Stage copyStage(Stage nextStage) {
+		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, nextStage);
+	}
+	
 	public Stage copyStage(boolean isLocked) {
 		return new Stage(stageName, textColor, stageFrameName, isLocked, destination);
 	}
 	
+	public Stage copyStage(boolean isLocked, Stage nextStage) {
+		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, nextStage);
+	}
+	
+	public Stage getNextStage() {
+		return nextStage;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

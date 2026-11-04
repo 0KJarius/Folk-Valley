@@ -58,12 +58,8 @@ public class BlackJackArea extends JPanel{
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 		contentPanel.setOpaque(false);
 		
-		//contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		contentPanel.add(enemyHand);
-		
-		//scoreArea.setBorder(BorderFactory.createEmptyBorder(55, 0, 0, 0));
-		contentPanel.add(scoreArea);
-		//contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		contentPanel.add(getEnemyHand());
+		contentPanel.add(getScoreArea());
 		
 		contentPanel.add(playerHand);
 		contentPanel.add(buttonArea);
@@ -74,17 +70,17 @@ public class BlackJackArea extends JPanel{
         playerHands.clear();
 		playerHands.addLast(playerHand);
 
-        enemyHand.resetHand();
+        getEnemyHand().resetHand();
         playerHand.resetHand();
-        scoreArea.updateScoreLabel();
+        getScoreArea().updateScoreLabel();
         buttonArea.setButtonsActivated(true);
         this.revalidate();
         this.repaint();   
     }
 	
 	public void setTable(){
-        EventBus.currentMatch.addCard(enemyHand);
-        EventBus.currentMatch.addCard(enemyHand);
+        EventBus.currentMatch.addCard(getEnemyHand());
+        EventBus.currentMatch.addCard(getEnemyHand());
         
         EventBus.currentMatch.addCard(playerHand);
         EventBus.currentMatch.addCard(playerHand);
@@ -109,6 +105,14 @@ public class BlackJackArea extends JPanel{
         playerHand.revalidate();
         repaint();
         revalidate();
+	}
+
+	public EnemyHand getEnemyHand() {
+		return enemyHand;
+	}
+
+	public ScoreArea getScoreArea() {
+		return scoreArea;
 	}
 	
 }
