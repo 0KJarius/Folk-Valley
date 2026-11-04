@@ -4,7 +4,7 @@ package shoppackage;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Color;
-import utilites.SwingUtils;
+import utilities.SwingUtils;
 import java.awt.Dimension;
 //import java.awt.BorderLayout;
 //import javax.swing.BorderFactory;
