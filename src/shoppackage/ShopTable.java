@@ -2,36 +2,50 @@ package shoppackage;
 
 
 import javax.swing.JPanel;
+
+import mainpackage.MainFrame;
+import stageselectpackage.StageSelectScreen;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import utilities.GlobalConstants;
 import utilities.SwingUtils;
 import java.awt.Dimension;
-//import java.awt.BorderLayout;
-//import javax.swing.BorderFactory;
-//import javax.swing.JButton;
 
-// valley size Dimension(1280, 720));
-//frame.setScreen(new ShopTable());
 public class ShopTable extends JPanel
 {
 	public ShopTable()
 	{
-		this.setBackground(Color.GRAY);
-		this.setBounds(0, 0, 1280, 720);
-		this.setLayout(null);
+		this.setPreferredSize(new Dimension(1080, 720));
+		this.setBounds(0,0, 1280, 720);
+		this.setLayout(new BorderLayout(10,10));
+		this.setBackground(Color.BLACK);
 		
-		JPanel sellPanel = SwingUtils.createJPanel(new Dimension(740, 720), Color.black);
-		sellPanel.setBounds(540, 0, 740, 720);
-		add(sellPanel);
+		JPanel shopKeeperPanel = SwingUtils.createJPanel(new Dimension(300, 450), Color.GRAY);
 		
-	    JLabel storeTitle = SwingUtils.createJLabel("SHAP!!!", 32, Color.GREEN, GlobalConstants.VCR_MONO);
-	    storeTitle.setBounds(50, 50, 450, 50);
-	    add(storeTitle);
-	    
-		JLabel title = new JLabel("Shop");
-		JLabel name = new JLabel("Shempai");
+		ShopInventory inventoryPanel = new ShopInventory();	
+		
+		JPanel dialoguePanel =	SwingUtils.createJPanel(new Dimension(900, 130), Color.DARK_GRAY);		
+		
+		
+		this.add(shopKeeperPanel, BorderLayout.WEST);
+		this.add(inventoryPanel, BorderLayout.CENTER);
+		this.add(dialoguePanel, BorderLayout.SOUTH);
+		
+		JButton returnButton = SwingUtils.createJButton(new Dimension(100, 40), "Back", Color.PINK);
+		
+		returnButton.addActionListener(e -> {
+			MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
+		});
+		
+		dialoguePanel.setLayout(new BorderLayout());
+		dialoguePanel.add(returnButton, BorderLayout.EAST);
+		
+		
 		
 	}
 }
