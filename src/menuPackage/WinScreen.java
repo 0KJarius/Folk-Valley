@@ -24,9 +24,9 @@ public class WinScreen extends OverlayMenu{
 	private JPanel statsArea = SwingUtils.createJPanel(new Rectangle(25, 97, 401, 443), Color.BLUE);
 	private JPanel winArea = SwingUtils.createJPanel(new Rectangle(444, 98, 382, 535), Color.RED);
 	
-	private JLabel moneyLabel = SwingUtils.createJLabel("V" + EventBus.player.getMaxMoney(), 50, new Color(255, 214, 55), SwingUtils.VCR_MONO);
-	private JLabel debtLabel = SwingUtils.createJLabel("0000", 50, Color.RED, SwingUtils.VCR_MONO);
-	private JLabel roundsLabel = SwingUtils.createJLabel("0", 50, new Color(69, 211, 76), SwingUtils.VCR_MONO);
+	private JLabel moneyLabel = SwingUtils.createJLabel("V" + EventBus.player.getMaxMoney(), 50, new Color(255, 214, 55), GlobalConstants.VCR_MONO);
+	private JLabel debtLabel = SwingUtils.createJLabel("0000", 50, Color.RED, GlobalConstants.VCR_MONO);
+	private JLabel roundsLabel = SwingUtils.createJLabel("0", 50, new Color(69, 211, 76), GlobalConstants.VCR_MONO);
 	
 	public WinScreen(int totalDebt, int roundCount) {
 		this.setBounds(new Rectangle(GlobalConstants.SCREEN_SIZE));

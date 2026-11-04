@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import utilities.EventBus;
+import utilities.GlobalConstants;
 import utilities.SoundBus;
 import utilities.SwingUtils;
 
@@ -61,7 +62,7 @@ public class StageSelectScreen extends JPanel{
 	private void setUpTopHud(JPanel top) {
 		top.setLayout(new BorderLayout());
 		top.setOpaque(false);
-		balanceLabel = SwingUtils.createJLabel("V" + EventBus.player.getCurrentMoney(), 44, Color.decode("#FFD72F"), SwingUtils.VCR_MONO);
+		balanceLabel = SwingUtils.createJLabel("V" + EventBus.player.getCurrentMoney(), 44, Color.decode("#FFD72F"), GlobalConstants.VCR_MONO);
 		balanceLabel.setBorder(BorderFactory.createEmptyBorder(38, 35, 0, 0));
 		top.add(balanceLabel, BorderLayout.WEST);
 	}

@@ -8,10 +8,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
 public class ItemInfoScreen extends JPanel{
-	protected JTextArea infoText = SwingUtils.creatJTextArea(new Dimension(164, 150), SwingUtils.VCR_MONO, 15, 2, Color.WHITE, getBackground());
+	protected JTextArea infoText = SwingUtils.creatJTextArea(new Dimension(164, 150), GlobalConstants.VCR_MONO, 15, 2, Color.WHITE, getBackground());
 	
 	public ItemInfoScreen() {
 		FlowLayout layout = new FlowLayout();

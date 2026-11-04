@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
 public class UnoCard extends Card{
@@ -55,7 +56,7 @@ public class UnoCard extends Card{
 		this.setFocusPainted(false);
 		
 		try {
-			this.setFont(SwingUtils.createFont(SwingUtils.NIKKYOU_SANS, 60));
+			this.setFont(SwingUtils.createFont(GlobalConstants.NIKKYOU_SANS, 60));
 		} catch (FontFormatException | IOException e) {}
 	}
 	

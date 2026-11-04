@@ -27,13 +27,7 @@ import javax.swing.plaf.basic.BasicProgressBarUI;
 
 public abstract class SwingUtils {
 	public static final String ASSETS_PATH = "../Assets/";
-	public static final String FONT_PATH = "../Assets/fonts/";
-	public static final String MARTIAN_MONO = FONT_PATH + "MartianMono-VariableFont_wdth,wght.ttf";
-	public static final String HONK = FONT_PATH + "Honk-Regular-VariableFont_MORF,SHLN.ttf";
-	public static final String VCR_MONO = FONT_PATH + "VCR_OSD_MONO_1.001.ttf";
-	public static final String RUBIC_MONO = FONT_PATH + "RubikMonoOne-Regular.ttf";
-	public static final String NIKKYOU_SANS = FONT_PATH + "NikkyouSans-B6aV.ttf";
-	public static final String M6XPLUS = FONT_PATH + "m6x11plus.ttf";
+	
 	
 	
     public static JPanel createJPanel(Dimension size, Color bgColor) 
@@ -53,7 +47,6 @@ public abstract class SwingUtils {
     
     public static JLabel createJLabel(String text, int size, Color textColor, String font){
         JLabel label = new JLabel(text) {
-        	//ggraohic s2d
         	
         	
         	@Override 
@@ -123,7 +116,7 @@ public abstract class SwingUtils {
     	});
     	
     	try {
-			progressBar.setFont(createFont(RUBIC_MONO, 30));
+			progressBar.setFont(createFont(GlobalConstants.RUBIC_MONO, 30));
 		} catch (FontFormatException | IOException e) {}
     	if(isVertical) {
     		progressBar.setOrientation(JProgressBar.VERTICAL);

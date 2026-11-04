@@ -20,11 +20,12 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import mainpackage.MainFrame;
+import menuPackage.OverlayMenu;
 import utilities.EventBus;
 import utilities.SoundBus;
 import utilities.SwingUtils;
 
-public class BetTable extends JPanel
+public class BetTable extends OverlayMenu
 {
 	private final String BET_TABLE_PATH = "BlackJack/betTable/";
 	private final String CONFIRM_PATH = "BlackJack/confirmButton/";

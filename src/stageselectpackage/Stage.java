@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 
 import mainpackage.MainFrame;
 import utilities.EventBus;
+import utilities.GlobalConstants;
 import utilities.SoundBus;
 import utilities.SwingUtils;
 
@@ -47,7 +48,7 @@ public class Stage extends JButton implements MouseListener{
         completeStageFrame = SwingUtils.createTintedImage(stageFrame, new Color(100, 255, 100, 200));
         
         try {
-			this.setFont(SwingUtils.createFont(SwingUtils.RUBIC_MONO, 60));
+			this.setFont(SwingUtils.createFont(GlobalConstants.RUBIC_MONO, 60));
 		} catch (FontFormatException | IOException e) {}
         
         this.setText(stageName);

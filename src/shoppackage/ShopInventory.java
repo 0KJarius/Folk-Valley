@@ -3,6 +3,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import blackjackpackage.cardpackage.*;
+import utilities.GlobalConstants;
 import utilities.SwingUtils;
 import entitypackage.Player;
 
@@ -79,7 +80,7 @@ private JButton rerollButton;
 		JPanel selectPanel = SwingUtils.createJPanel(new Dimension(700, 500), BACKGROUND);
 		selectPanel.setLayout(new BorderLayout(10, 10));
 		
-		JLabel title = SwingUtils.createJLabel("CHOOSE A CARD", 20, Color.CYAN, SwingUtils.MARTIAN_MONO);
+		JLabel title = SwingUtils.createJLabel("CHOOSE A CARD", 20, Color.CYAN, GlobalConstants.MARTIAN_MONO);
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		selectPanel.add(title, BorderLayout.NORTH);
 		

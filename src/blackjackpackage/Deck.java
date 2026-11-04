@@ -35,6 +35,8 @@ public class Deck {
 	public Card getCard() {
 		if (cardDeck.size() == 0) {
 			return null;
+		} else if (cardDeck.size() == 1) {
+			return getCard(0);
 		}
 		
 		Random rng = new Random();

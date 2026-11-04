@@ -7,9 +7,10 @@ import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 import blackjackpackage.BlackJackScreen;
-import blackjackpackage.custom_matchpackage.TutorialMatch;
+import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
 import entitypackage.Entity;
 import shoppackage.ShopTable;
+import utilities.EventBus;
 
 public class StagePage extends JPanel{
 	public StagePage() {
@@ -19,12 +20,12 @@ public class StagePage extends JPanel{
 		this.setLayout(layout);
 		this.setOpaque(false);
 		
-		Stage testStage = new Stage("protosuer", new Color(255, 177, 177), "fight.png", false, new BlackJackScreen(new Entity(300, "Protosuer")));
+		Stage testStage = new Stage("protosuer", new Color(255, 177, 177), "fight.png", false, new BlackJackScreen(new Entity(300, "Protosuer"), EventBus.player.playerDeck.cloneDeck()));
 		Stage tutorial = new Stage("TUTORIAL", new Color(255, 177, 177), "fight.png", false, new TutorialMatch(new Entity(300, "Pursuer")));
 		Stage shopStage = new Stage("Shop", Color.white, "shop.png" ,false, new ShopTable());
 		this.add(tutorial);
 		this.add(shopStage);
-		this.add(testStage.copyStage("Thing", true, new BlackJackScreen(new Entity(300, "Protosuer"))));
+		//this.add(testStage.copyStage("Thing", true, new BlackJackScreen(new Entity(300, "Protosuer"))));
 		this.add(shopStage.copyStage(true));
 		this.add(testStage.copyStage(true));
 	}

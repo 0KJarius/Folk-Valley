@@ -4,6 +4,8 @@ package shoppackage;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Color;
+
+import utilities.GlobalConstants;
 import utilities.SwingUtils;
 import java.awt.Dimension;
 //import java.awt.BorderLayout;
@@ -24,7 +26,7 @@ public class ShopTable extends JPanel
 		sellPanel.setBounds(540, 0, 740, 720);
 		add(sellPanel);
 		
-	    JLabel storeTitle = SwingUtils.createJLabel("SHAP!!!", 32, Color.GREEN, SwingUtils.VCR_MONO);
+	    JLabel storeTitle = SwingUtils.createJLabel("SHAP!!!", 32, Color.GREEN, GlobalConstants.VCR_MONO);
 	    storeTitle.setBounds(50, 50, 450, 50);
 	    add(storeTitle);
 	    

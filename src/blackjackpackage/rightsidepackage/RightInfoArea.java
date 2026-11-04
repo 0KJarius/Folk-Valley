@@ -12,6 +12,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import utilities.EventBus;
+import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
 public class RightInfoArea extends JPanel{
@@ -34,13 +35,13 @@ public class RightInfoArea extends JPanel{
 		setUpNaturalPanel(naturalPanel);
 		basePane.add(bgGif, JLayeredPane.DEFAULT_LAYER);
 		basePane.add(naturalPanel, JLayeredPane.PALETTE_LAYER);
-		basePane.add(getBottom(), JLayeredPane.PALETTE_LAYER);
+		basePane.add(bottom, JLayeredPane.PALETTE_LAYER);
 	}
 	
 	private void setUpNaturalPanel(JPanel panel) 
 	{
 		panel.setOpaque(false);
-		naturalLabel = SwingUtils.createJLabel("" + EventBus.currentMatch.getNatural(), 200, new Color(255, 214, 55), SwingUtils.M6XPLUS);
+		naturalLabel = SwingUtils.createJLabel("" + EventBus.currentMatch.getNatural(), 200, new Color(255, 214, 55), GlobalConstants.M6XPLUS);
 		naturalLabel.setBorder(BorderFactory.createEmptyBorder(60, 20, 0, 0));
 		
 		panel.add(naturalLabel);

@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import utilities.AnimationUtils;
 import entitypackage.Entity;
 import utilities.EventBus;
+import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
 public class MatchInfoArea extends JPanel{
@@ -55,8 +56,8 @@ public class MatchInfoArea extends JPanel{
 		topPanel.setOpaque(false);
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 		
-		debtLabel = SwingUtils.createJLabel(""+ EventBus.currentMatch.blackJack.playerHand.getDebt(), 40, Color.RED, SwingUtils.VCR_MONO);
-        betPoolLabel = SwingUtils.createJLabel("V" + EventBus.currentMatch.betPool, 40, new Color(255, 214, 55), SwingUtils.VCR_MONO);
+		debtLabel = SwingUtils.createJLabel(""+ EventBus.currentMatch.blackJack.playerHand.getDebt(), 40, Color.RED, GlobalConstants.VCR_MONO);
+        betPoolLabel = SwingUtils.createJLabel("V" + EventBus.currentMatch.betPool, 40, new Color(255, 214, 55), GlobalConstants.VCR_MONO);
         debtLabel.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 0));
         betPoolLabel.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 0));
         
@@ -70,8 +71,8 @@ public class MatchInfoArea extends JPanel{
 		progPanel.setOpaque(false);
 		progPanel.setLayout(new BorderLayout());
 		
-		playerMoney = SwingUtils.createJLabel(EventBus.player.getCurrentMoney() + "/" + EventBus.player.getMaxMoney(), 45, new Color(125, 212, 63), SwingUtils.NIKKYOU_SANS);
-		enemyMoney = SwingUtils.createJLabel(EventBus.currentMatch.enemy.getCurrentMoney() + "/" + EventBus.currentMatch.enemy.getMaxMoney(), 45, new Color(125, 212, 63), SwingUtils.NIKKYOU_SANS);
+		playerMoney = SwingUtils.createJLabel(EventBus.player.getCurrentMoney() + "/" + EventBus.player.getMaxMoney(), 45, new Color(125, 212, 63), GlobalConstants.NIKKYOU_SANS);
+		enemyMoney = SwingUtils.createJLabel(EventBus.currentMatch.enemy.getCurrentMoney() + "/" + EventBus.currentMatch.enemy.getMaxMoney(), 45, new Color(125, 212, 63), GlobalConstants.NIKKYOU_SANS);
 		enemyMoney.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		enemyMoney.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 5));

@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import utilities.SwingUtils;
 import utilities.EventBus;
+import utilities.GlobalConstants;
 
 public class ShopCard extends JPanel{
 
@@ -37,9 +38,9 @@ public class ShopCard extends JPanel{
 		
 		this.add(packLabel, BorderLayout.CENTER);
 		
-		priceLabel = SwingUtils.createJLabel("Price: " + price, 16, Color.RED, SwingUtils.MARTIAN_MONO);
+		priceLabel = SwingUtils.createJLabel("Price: " + price, 16, Color.RED, GlobalConstants.MARTIAN_MONO);
 		messageLabel = SwingUtils.createJLabel(
-			    " ", 12, Color.WHITE, SwingUtils.MARTIAN_MONO
+			    " ", 12, Color.WHITE, GlobalConstants.MARTIAN_MONO
 			);
 
 			messageLabel.setHorizontalAlignment(SwingConstants.CENTER);

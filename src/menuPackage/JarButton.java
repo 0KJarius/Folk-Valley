@@ -14,6 +14,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import utilities.GlobalConstants;
 import utilities.Signal;
 import utilities.SwingUtils;
 
@@ -50,7 +51,7 @@ public class JarButton extends JPanel implements MouseListener{
 		this.add(basePane);
 		
 		buttonImg = SwingUtils.createImageAt(type + "normal.png", new Point(0, 0));
-		buttonText = SwingUtils.createJLabel(text, textSize, Color.BLACK, SwingUtils.NIKKYOU_SANS);
+		buttonText = SwingUtils.createJLabel(text, textSize, Color.BLACK, GlobalConstants.NIKKYOU_SANS);
 		JPanel textContainer = SwingUtils.createJPanel(new Rectangle(size), getBackground());
 		setUpTextContainer(textContainer);
 		

@@ -9,11 +9,12 @@ import javax.swing.JPanel;
 
 import utilities.AnimationUtils;
 import utilities.EventBus;
+import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
 public class ScoreArea extends JPanel{
-	private JLabel playerLabel = SwingUtils.createJLabel("0", 65, new Color(82, 208, 234), SwingUtils.M6XPLUS);
-	private JLabel enemyLabel = SwingUtils.createJLabel("0", 65, new Color(255, 54, 47), SwingUtils.M6XPLUS);
+	private JLabel playerLabel = SwingUtils.createJLabel("0", 65, new Color(82, 208, 234), GlobalConstants.M6XPLUS);
+	private JLabel enemyLabel = SwingUtils.createJLabel("0", 65, new Color(255, 54, 47), GlobalConstants.M6XPLUS);
 	
 	public ScoreArea() {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -26,7 +27,7 @@ public class ScoreArea extends JPanel{
 		JPanel scoreContainer = new JPanel();
 		scoreContainer.setOpaque(false);
 		scoreContainer.add(playerLabel);
-		scoreContainer.add(SwingUtils.createJLabel(":", 55, Color.WHITE, SwingUtils.M6XPLUS));
+		scoreContainer.add(SwingUtils.createJLabel(":", 55, Color.WHITE, GlobalConstants.M6XPLUS));
 		scoreContainer.add(enemyLabel);
 		
 		this.add(scoreLogo);

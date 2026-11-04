@@ -12,12 +12,13 @@ import javax.swing.JPanel;
 
 import utilities.AnimationUtils;
 import utilities.EventBus;
+import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
 public class BottomInfoArea extends JPanel{
-	protected int maxCards = EventBus.player.playerDeck.getSize();
-	protected JLabel cardCountLabel = SwingUtils.createJLabel(maxCards + "/" + maxCards, 40, Color.WHITE, SwingUtils.M6XPLUS);
-	protected JLabel currentItemLabel = SwingUtils.createJLabel("Color", 30, Color.WHITE, SwingUtils.M6XPLUS);
+	protected int maxCards = EventBus.currentMatch.deck.getSize();
+	protected JLabel cardCountLabel = SwingUtils.createJLabel(maxCards + "/" + maxCards, 40, Color.WHITE, GlobalConstants.M6XPLUS);
+	protected JLabel currentItemLabel = SwingUtils.createJLabel("Color", 30, Color.WHITE, GlobalConstants.M6XPLUS);
 	private TerminalScreen terminalScreen = new TerminalScreen();
 	private TerminalButtons buttons = new TerminalButtons(this);
 	private ItemInfoScreen itemInfo = new ItemInfoScreen();

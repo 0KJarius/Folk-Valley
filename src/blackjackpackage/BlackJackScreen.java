@@ -70,19 +70,25 @@ public class BlackJackScreen extends JPanel{
 		}
 	};
 	
-	public BlackJackScreen(Entity enemy) {
+	public BlackJackScreen(Entity enemy, Deck deck) {
 		this.setLayout(new BorderLayout());
 		this.setBounds(new Rectangle(1280, 720));
 		this.setBackground(new Color(88, 47, 44));
+		this.deck = deck;
 		this.enemy = enemy;
 		
 		
 	}
 	
-	private void startMatch() {
+	public BlackJackScreen(Entity enemy, int natural, Deck deck) {
+		this(enemy, deck);
+		baseNat = natural;
+		this.setNatural(natural);
+	}
+	
+	protected void startMatch() {
 		EventBus.currentMatch = this;
 		
-		deck = EventBus.player.playerDeck.cloneDeck();
 		rightArea = new RightInfoArea();
 		blackJack = new BlackJackArea();
 		infoArea = new MatchInfoArea();
@@ -94,11 +100,7 @@ public class BlackJackScreen extends JPanel{
 		setTable();
 	}
 	
-	public BlackJackScreen(Entity enemy, int natural) {
-		this(enemy);
-		baseNat = natural;
-		this.setNatural(natural);
-	}
+	
 	
 	private void setTable(){
 		addCard(blackJack.enemyHand);
@@ -305,6 +307,8 @@ public class BlackJackScreen extends JPanel{
 
 	@Override
 	public void addNotify() {
+		super.addNotify();
+		
 		startMatch();
 		scanLines = SwingUtils.createImageAt("BlackJack/scanLinesOverlay.png", new Point(0, 0));
 		MainFrame.getInstance().layerOnScreen(scanLines, JLayeredPane.MODAL_LAYER);
@@ -312,7 +316,6 @@ public class BlackJackScreen extends JPanel{
 		try {
 			SoundBus.playSong("letsPlay.wav", true);
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
-		super.addNotify();
 	}
 	
 	@Override
