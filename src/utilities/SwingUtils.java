@@ -225,7 +225,6 @@ public abstract class SwingUtils {
 
         textArea.setWrapStyleWord(true);
         textArea.setLineWrap(true);
-        textArea.setOpaque(false);
         textArea.setEditable(false);
         textArea.setEnabled(false);
         textArea.setDisabledTextColor(textColor);
