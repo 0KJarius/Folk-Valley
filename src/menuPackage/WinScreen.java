@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import itempackage.Item;
 import mainpackage.MainFrame;
 import stageselectpackage.StageSelectScreen;
 import utilities.EventBus;
@@ -73,6 +75,9 @@ public class WinScreen extends OverlayMenu{
 			public boolean doTask() {
 				MainFrame.getInstance().removeLayer(EventBus.currentMatch.scanLines);
 				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
+				
+				EventBus.player.setInventory((ArrayList<Item>) EventBus.currentMatch.getPlayerInventoryCopy().clone());
+				
 				EventBus.selectedStage.completeStage();
 				EventBus.selectedStage.getNextStage().unlockStage();
 				EventBus.selectedStage = null;

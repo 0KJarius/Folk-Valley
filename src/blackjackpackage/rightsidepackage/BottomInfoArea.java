@@ -16,7 +16,7 @@ import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
 public class BottomInfoArea extends JPanel{
-	protected int maxCards = EventBus.currentMatch.deck.getSize();
+	protected int maxCards = EventBus.currentMatch.getDeck().getSize();
 	protected JLabel cardCountLabel = SwingUtils.createJLabel(maxCards + "/" + maxCards, 40, Color.WHITE, GlobalConstants.M6XPLUS);
 	protected JLabel currentItemLabel = SwingUtils.createJLabel("N/A", 30, Color.WHITE, GlobalConstants.M6XPLUS);
 	private TerminalScreen terminalScreen = new TerminalScreen();
@@ -42,7 +42,7 @@ public class BottomInfoArea extends JPanel{
 	}
 	
 	public void updateCardCountLabel() {
-		cardCountLabel.setText(EventBus.currentMatch.deck.getSize() + "/" + maxCards);
+		cardCountLabel.setText(EventBus.currentMatch.getDeck().getSize() + "/" + maxCards);
 		AnimationUtils.popup(cardCountLabel, 1.1, 150, 2);
 	}
 	

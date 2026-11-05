@@ -48,36 +48,36 @@ public class TerminalButtons extends JPanel{
 	}
 	
 	private void onNextButtonPressed() {
-		if (EventBus.player.inventory.isEmpty() || itemIndex == EventBus.player.inventory.size() - 1) {
+		if (EventBus.currentMatch.getPlayerInventoryCopy().isEmpty() || itemIndex == EventBus.currentMatch.getPlayerInventoryCopy().size() - 1) {
 			return;
 		}
 		
 		
-		terminal.getItemSelect().remove(EventBus.player.inventory.get(itemIndex));
+		terminal.getItemSelect().remove(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
 		itemIndex++;
-		terminal.getItemSelect().add(EventBus.player.inventory.get(itemIndex));
-		terminal.currentItemLabel.setText(EventBus.player.inventory.get(itemIndex).getName());
+		terminal.getItemSelect().add(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
+		terminal.currentItemLabel.setText(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex).getName());
 		terminal.repaint();
 		terminal.revalidate();
 		System.out.println("Change NEXT");
 	}
 	
 	private void onPrevButtonPressed() {
-		if (EventBus.player.inventory.isEmpty() || itemIndex == 0) {
+		if (EventBus.currentMatch.getPlayerInventoryCopy().isEmpty() || itemIndex == 0) {
 			return;
 		}
 		
-		terminal.getItemSelect().remove(EventBus.player.inventory.get(itemIndex));
+		terminal.getItemSelect().remove(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
 		itemIndex--;
-		terminal.getItemSelect().add(EventBus.player.inventory.get(itemIndex));
-		terminal.currentItemLabel.setText(EventBus.player.inventory.get(itemIndex).getName());
+		terminal.getItemSelect().add(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
+		terminal.currentItemLabel.setText(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex).getName());
 		terminal.repaint();
 		terminal.revalidate();
 		System.out.println("Change PREV");
 	}
 	
 	private void onInfoPressed() {
-		if (EventBus.player.inventory.isEmpty()) {
+		if (EventBus.currentMatch.getPlayerInventoryCopy().isEmpty()) {
 			return;
 		}
 		
@@ -85,7 +85,7 @@ public class TerminalButtons extends JPanel{
 			onInfoArea = true;
 			setButtonActivity(false, buttons[1]);
 			terminal.getTerminalScreen().setTerminalScreen(terminal.getItemInfo());
-			terminal.getItemInfo().infoText.setText(EventBus.player.inventory.get(itemIndex).getDescription());
+			terminal.getItemInfo().infoText.setText(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex).getDescription());
 		} else {
 			onInfoArea = false;
 			setButtonActivity(true, buttons[1]);
@@ -96,25 +96,28 @@ public class TerminalButtons extends JPanel{
 	}
 	
 	private void onUseButtonPressed() {
-		if (EventBus.player.inventory.isEmpty()) {
+		if (EventBus.currentMatch.getPlayerInventoryCopy().isEmpty()) {
 			return;
 		}
 		
-		boolean isSuccessful = EventBus.player.inventory.get(itemIndex).doTask();
+		boolean isSuccessful = EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex).doTask();
 		if (isSuccessful) {
-			terminal.getItemSelect().remove(EventBus.player.inventory.get(itemIndex));
-			EventBus.player.inventory.remove(itemIndex);
+			terminal.getItemSelect().remove(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
+			EventBus.currentMatch.getPlayerInventoryCopy().remove(itemIndex);
 			
-			if (!EventBus.player.inventory.isEmpty() && (itemIndex < EventBus.player.inventory.size() - 1 || itemIndex == 0)) {
-				terminal.getItemSelect().add(EventBus.player.inventory.get(itemIndex));
-				terminal.currentItemLabel.setText(EventBus.player.inventory.get(itemIndex).getName());
-			} else if (!EventBus.player.inventory.isEmpty() && itemIndex > EventBus.player.inventory.size() - 1) {
+			if (!EventBus.currentMatch.getPlayerInventoryCopy().isEmpty() && (itemIndex < EventBus.currentMatch.getPlayerInventoryCopy().size() - 1 || itemIndex == 0)) {
+				
+				terminal.getItemSelect().add(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
+				terminal.currentItemLabel.setText(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex).getName());
+				
+			} else if (!EventBus.currentMatch.getPlayerInventoryCopy().isEmpty() && itemIndex > EventBus.currentMatch.getPlayerInventoryCopy().size() - 1) {
+				
 				itemIndex--;
-				terminal.getItemSelect().add(EventBus.player.inventory.get(itemIndex));
-				terminal.currentItemLabel.setText(EventBus.player.inventory.get(itemIndex).getName());
+				terminal.getItemSelect().add(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
+				terminal.currentItemLabel.setText(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex).getName());
 			}
 			
-			if (EventBus.player.inventory.isEmpty()) {
+			if (EventBus.currentMatch.getPlayerInventoryCopy().isEmpty()) {
 				terminal.currentItemLabel.setText("N/A");
 			}
 			

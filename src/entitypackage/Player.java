@@ -18,7 +18,26 @@ public class Player extends Entity{
 		EventBus.player = this;
 		playerDeck = new Deck();
 		initializeTestDeck();
-		
+		inventory.add(new ColorPicker());
+		inventory.add(new ColorPicker());
+		inventory.add(new ColorPicker());
+	}
+	
+	public void setInventory(ArrayList<Item> items) {
+		inventory.clear();
+		if (!items.isEmpty()) {
+			for (Item item : items) {
+				inventory.add(item);
+			}
+		}
+	}
+	
+	public ArrayList<Item> copyInventory() {
+		ArrayList<Item> inventoryCopy = new ArrayList<Item>();
+		for (Item item : inventory) {
+			inventoryCopy.add(item);	
+		}
+		return inventoryCopy;
 	}
 	
 	private void initializeTestDeck() 

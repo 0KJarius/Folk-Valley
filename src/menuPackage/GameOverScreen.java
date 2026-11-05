@@ -73,8 +73,8 @@ public class GameOverScreen extends OverlayMenu
 		Signal retryTask = new Signal() {
 			@Override
 			public boolean doTask() {
+				EventBus.currentMatch.setPlayerInventoryCopy(EventBus.player.copyInventory());				
 				EventBus.hardResetMatch();
-				//System.out.println(EventBus.currentMatch.deck.getSize());
 				MainFrame.getInstance().removeLayer(self);
 				return true;
 			}

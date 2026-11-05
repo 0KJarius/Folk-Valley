@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.sound.sampled.LineUnavailableException;
@@ -17,6 +18,7 @@ import blackjackpackage.handpackage.Hand;
 import blackjackpackage.handpackage.PlayerHand;
 import blackjackpackage.rightsidepackage.RightInfoArea;
 import entitypackage.Entity;
+import itempackage.Item;
 import mainpackage.MainFrame;
 import menuPackage.GameOverScreen;
 import menuPackage.WinScreen;
@@ -30,8 +32,8 @@ public class BlackJackScreen extends JPanel{
 	public MatchInfoArea infoArea;
 	public BlackJackArea blackJack;
 	public RightInfoArea rightArea;
-	public  Deck deck;
-	public Deck fullDeck;
+	protected Deck deck;
+	private Deck fullDeck;
 	protected int betPool;
 	private int natural = 21;
 	protected int baseNat = 21;
@@ -41,6 +43,7 @@ public class BlackJackScreen extends JPanel{
 	protected BetTable betTable = new BetTable();
 	protected Entity enemy;
 	public JLabel scanLines;
+	protected ArrayList<Item> playerInventoryCopy;
 	
 	protected Signal onStand = new Signal() {
 
@@ -115,8 +118,8 @@ public class BlackJackScreen extends JPanel{
     }
 	
 	public void addCard(Hand hand) {
-		Card addedCard = deck.getCard();
-		deck.removeCard(addedCard);
+		Card addedCard = getDeck().getCard();
+		getDeck().removeCard(addedCard);
 		hand.addNewCard(addedCard);
 		
 		
@@ -127,7 +130,7 @@ public class BlackJackScreen extends JPanel{
 			blackJack.buttonArea.split.setEnabled(false);
 		}
 		rightArea.getBottom().updateCardCountLabel();
-		if (deck.getSize() == 0) {
+		if (getDeck().getSize() == 0) {
 			MainFrame.getInstance().layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
 		}
 	}
@@ -311,6 +314,19 @@ public class BlackJackScreen extends JPanel{
 		return betTable;
 	}
 	
+	public Deck getDeck() {
+		return deck;
+	}
+
+	public ArrayList<Item> getPlayerInventoryCopy() {
+		return playerInventoryCopy;
+	}
+	
+	
+	public void setPlayerInventoryCopy(ArrayList<Item> playerInventoryCopy) {
+		this.playerInventoryCopy = playerInventoryCopy;
+	}
+
 	public void setBetTable(BetTable betTable) {
 		this.betTable = betTable;
 	}
@@ -318,6 +334,8 @@ public class BlackJackScreen extends JPanel{
 	@Override
 	public void addNotify() {
 		super.addNotify();
+		playerInventoryCopy = EventBus.player.copyInventory();
+		
 		
 		startMatch();
 		scanLines = SwingUtils.createImageAt("BlackJack/scanLinesOverlay.png", new Point(0, 0));
