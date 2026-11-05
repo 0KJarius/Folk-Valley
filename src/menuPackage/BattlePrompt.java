@@ -41,6 +41,7 @@ public class BattlePrompt extends OverlayMenu{
 		
 		basePane.add(SwingUtils.createImageAt(BATTLE_PROMPT_PATH + "battlePrompBG.png", new Point(0,0)));
 		basePane.add(contentPanel, JLayeredPane.PALETTE_LAYER);
+		basePane.add(SwingUtils.createImageAt(BATTLE_PROMPT_PATH + "battlePromptScanLines.png", new Point(0,0)), JLayeredPane.MODAL_LAYER);
 	}
 	
 	private void setUpContent(JPanel content) {
