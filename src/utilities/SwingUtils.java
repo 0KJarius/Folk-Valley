@@ -256,8 +256,7 @@ public abstract class SwingUtils {
     	return button;
     }
     
-    public static JButton createJButton(String normal, String highlight, String pressed, String disable, String hoverSFX, String pressedSFX, String releaseSFX) {
-    	JButton button = createJButton(normal, highlight, pressed, disable);
+    public static void addButtonSFX(JButton button, String hoverSFX, String pressedSFX, String releaseSFX) {
     	button.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {}
@@ -288,6 +287,12 @@ public abstract class SwingUtils {
 			@Override
 			public void mouseExited(MouseEvent e) {}
     	});
+    	
+    }
+    
+    public static JButton createJButton(String normal, String highlight, String pressed, String disable, String hoverSFX, String pressedSFX, String releaseSFX) {
+    	JButton button = createJButton(normal, highlight, pressed, disable);
+    	addButtonSFX(button, hoverSFX, pressedSFX, releaseSFX);
     	
     	return button;
     }

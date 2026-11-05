@@ -28,9 +28,15 @@ import utilities.SwingUtils;
 public class StageSelectScreen extends JPanel{
 	private static final StageSelectScreen STAGE_SELECT = new StageSelectScreen();
 	private JLayeredPane basePane = new JLayeredPane();
+	private JPanel centerHud;
 	private JLabel balanceLabel;
 	private JPanel contentPanel = SwingUtils.createJPanel(new Rectangle(1280, 720), getBackground());
+	private StagePage[] pages = {
+			StageCollection.createStagePage(StageCollection.stages.size() - 1, StageCollection.stages.size() - 5),
+			StageCollection.createStagePage(StageCollection.stages.size() - 6, StageCollection.stages.size() - 8)
+	};
 	
+	private StagePage currentPage;
 	private final String DECK_BUTTON_PATH = "stageSelect/deck/";
 	
 	private StageSelectScreen() {
@@ -55,12 +61,15 @@ public class StageSelectScreen extends JPanel{
 		JPanel rightHud = SwingUtils.createJPanel(new Dimension(344, 0), getBackground());
 		setUpRightHud(rightHud);
 		
-		JPanel centerHud = SwingUtils.createJPanel(new Dimension(673, 0), getBackground());
+		centerHud = SwingUtils.createJPanel(new Dimension(673, 0), getBackground());
 		setUpCenterHud(centerHud);
+		
+		JPanel leftHud = SwingUtils.createJPanel(new Dimension(267, 0), getBackground());
+		setUpLeftHud(leftHud);
 		
 		contentPanel.add(topHud, BorderLayout.NORTH);
 		contentPanel.add(rightHud, BorderLayout.EAST);
-		contentPanel.add(Box.createRigidArea(new Dimension(267, 0)), BorderLayout.WEST);
+		contentPanel.add(leftHud, BorderLayout.WEST);
 		contentPanel.add(centerHud, BorderLayout.CENTER);
 	}
 	
@@ -70,6 +79,14 @@ public class StageSelectScreen extends JPanel{
 		balanceLabel = SwingUtils.createJLabel("V" + EventBus.player.getCurrentMoney(), 44, Color.decode("#FFD72F"), GlobalConstants.VCR_MONO);
 		balanceLabel.setBorder(BorderFactory.createEmptyBorder(38, 35, 0, 0));
 		top.add(balanceLabel, BorderLayout.WEST);
+	}
+	
+	private void setUpLeftHud(JPanel left) {
+		left.setLayout(new BorderLayout());
+		left.setOpaque(false);
+		left.add(new PageTurner(), BorderLayout.SOUTH);
+		left.setBorder(BorderFactory.createEmptyBorder(0, 0, 21, 0));
+		
 	}
 	
 	private void setUpRightHud(JPanel right) {
@@ -97,7 +114,19 @@ public class StageSelectScreen extends JPanel{
 	private void setUpCenterHud(JPanel center) {
 		center.setOpaque(false);
 		center.setLayout(new BorderLayout());
-		center.add(StageCollection.createStagePage(2, 0));
+		setStagePage(0);
+	}
+	
+	protected void setStagePage(int index) {
+		if (currentPage != null) {
+			centerHud.remove(currentPage);
+		}
+		currentPage = pages[index];
+		centerHud.add(currentPage);
+		
+		centerHud.repaint();
+		centerHud.revalidate();
+		
 	}
 	
 	public static StageSelectScreen getInstance() {

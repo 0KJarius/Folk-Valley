@@ -10,11 +10,19 @@ import shoppackage.ShopTable;
 import utilities.EventBus;
 
 public class StageCollection {
+	private static int pageCount = 0;
 	static ArrayList<Stage> stages = new ArrayList<Stage>();
 	private static final StageCollection STAGES = new StageCollection();
 	
 	private StageCollection() {
 		stages.add(new Stage("protosuer", new Color(255, 177, 177), "fight.png", false, new BlackJackScreen(new Entity(200, "Protosuer"), EventBus.player.playerDeck.cloneDeck())));
+		stages.add(stages.get(0).copyStage(true));
+		stages.add(stages.get(0).copyStage(true));
+		stages.add(stages.get(0).copyStage(true));
+		stages.add(stages.get(0).copyStage(true));
+		stages.add(stages.get(0).copyStage(true));
+		stages.add(stages.get(0).copyStage(true));
+		stages.add(stages.get(0).copyStage(true));
 		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(0)));
 		stages.add(new Stage("TUTORIAL", new Color(255, 177, 177), "fight.png", false, new TutorialMatch(new Entity(300, "Pursuer")), stages.get(1)));
 	}
@@ -25,11 +33,16 @@ public class StageCollection {
 			page.addStage(stages.get(i));
 		}
 		
-		
+		pageCount++;
 		return page;
 	}
 	
 	public static StageCollection getInstance() {
 		return STAGES;
 	}
+	
+	public static int getPageCount() {
+		return pageCount;
+	}
+	
 }
