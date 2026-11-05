@@ -97,12 +97,7 @@ public class StageSelectScreen extends JPanel{
 	private void setUpCenterHud(JPanel center) {
 		center.setOpaque(false);
 		center.setLayout(new BorderLayout());
-		center.add(new StagePage(
-				StageCollection.getInstance().stages.get(StageCollection.getInstance().stages.size() - 1),
-				StageCollection.getInstance().stages.get(StageCollection.getInstance().stages.size() - 2),
-				StageCollection.getInstance().stages.get(StageCollection.getInstance().stages.size() - 3)
-			)
-		);
+		center.add(StageCollection.createStagePage(2, 0));
 	}
 	
 	public static StageSelectScreen getInstance() {
