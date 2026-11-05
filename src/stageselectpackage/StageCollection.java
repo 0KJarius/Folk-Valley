@@ -3,9 +3,14 @@ package stageselectpackage;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.JLayeredPane;
+
 import blackjackpackage.BlackJackScreen;
 import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
+import entitypackage.Enemy;
+import entitypackage.EnemyCollection;
 import entitypackage.Entity;
+import menuPackage.BattlePrompt;
 import shoppackage.ShopTable;
 import utilities.EventBus;
 
@@ -15,7 +20,15 @@ public class StageCollection {
 	private static final StageCollection STAGES = new StageCollection();
 	
 	private StageCollection() {
-		stages.add(new Stage("protosuer", new Color(255, 177, 177), "fight.png", false, new BlackJackScreen(new Entity(200, "Protosuer"), EventBus.player.playerDeck.cloneDeck())));
+		stages.add(new Stage(
+				"protosuer", 
+				new Color(255, 177, 177), 
+				"fight.png", 
+				false,
+				new BattlePrompt(
+						EnemyCollection.PROTOSUER.getEnemy(), 
+						new BlackJackScreen(EnemyCollection.PROTOSUER.getEnemy(), EventBus.player.playerDeck))
+		));
 		stages.add(stages.get(0).copyStage(true));
 		stages.add(stages.get(0).copyStage(true));
 		stages.add(stages.get(0).copyStage(true));
@@ -23,8 +36,18 @@ public class StageCollection {
 		stages.add(stages.get(0).copyStage(true));
 		stages.add(stages.get(0).copyStage(true));
 		stages.add(stages.get(0).copyStage(true));
-		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(0)));
-		stages.add(new Stage("TUTORIAL", new Color(255, 177, 177), "fight.png", false, new TutorialMatch(new Entity(300, "Pursuer")), stages.get(1)));
+		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 3)));
+		stages.add(new Stage(
+				"TUTORIAL",
+				new Color(255, 177, 177), 
+				"fight.png",
+				false,
+				new BattlePrompt(
+						EnemyCollection.PURSUER.getEnemy(),
+						new TutorialMatch(EnemyCollection.PURSUER.getEnemy())),
+				JLayeredPane.PALETTE_LAYER,
+				stages.get(stages.size() - 1)
+		));
 	}
 	//Stages are stored in reverse order (last level is on index 0)
 	public static StagePage createStagePage(int startIndex, int endIndex) {

@@ -32,6 +32,7 @@ public class Stage extends JButton implements MouseListener{
 	private boolean isComplete = false;
 	private JPanel destination;
 	private Stage nextStage;
+	private Integer layer = null;
 	
 	public Stage(String stageName, Color textColor, String stageFrameName, boolean isLocked, JPanel destination) {
 		this.setPreferredSize(new Dimension(654, 111));
@@ -65,6 +66,16 @@ public class Stage extends JButton implements MouseListener{
         this.addMouseListener(this);
 	}
 	
+	public Stage(String stageName, Color textColor, String stageFrameName, boolean isLocked, JPanel destination, Integer layer) {
+		this(stageName, textColor, stageFrameName, isLocked, destination);
+		this.layer = layer;
+	}
+	
+	public Stage(String stageName, Color textColor, String stageFrameName, boolean isLocked, JPanel destination, Integer layer, Stage nextStage) {
+		this(stageName, textColor, stageFrameName, isLocked, destination, nextStage);
+		this.layer = layer;
+	}
+	
 	public Stage(String stageName, Color textColor, String stageFrameName, boolean isLocked, JPanel destination, Stage nextStage) {
 		this(stageName, textColor, stageFrameName, isLocked, destination);
 		this.nextStage = nextStage; 
@@ -87,8 +98,12 @@ public class Stage extends JButton implements MouseListener{
 		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, nextStage);
 	}
 	
+	public Stage copyStage(String stageName, boolean isLocked, JPanel destination, Integer layer, Stage nextStage) {
+		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer, nextStage);
+	}
+	
 	public Stage copyStage() {
-		return new Stage(stageName, textColor, stageFrameName, isLocked, destination);
+		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer);
 	}
 	
 	public Stage copyStage(Stage nextStage) {
@@ -110,7 +125,12 @@ public class Stage extends JButton implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (!isLocked && !isComplete) {
-			MainFrame.getInstance().setScreen(destination);
+			if (layer == null) {
+				MainFrame.getInstance().setScreen(destination);
+			} else {
+				MainFrame.getInstance().layerOnScreen(destination, layer);
+			}
+			
 			EventBus.selectedStage = this;
 		} else {
 			try {

@@ -60,7 +60,6 @@ public class PageTurner extends JPanel{
 				if (currentPage == 1) {
 					return;
 				}
-				System.out.println("PREV");
 				currentPage--;
 				pageCounter.setText(currentPage + "/" + StageCollection.getPageCount());
 				StageSelectScreen.getInstance().setStagePage(currentPage - 1);
@@ -73,7 +72,6 @@ public class PageTurner extends JPanel{
 				if (currentPage == StageCollection.getInstance().getPageCount()) {
 					return;
 				}
-				System.out.println("NEXT");
 				currentPage++;
 				pageCounter.setText(currentPage + "/" + StageCollection.getPageCount());
 				StageSelectScreen.getInstance().setStagePage(currentPage - 1);

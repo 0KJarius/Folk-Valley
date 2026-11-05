@@ -3,8 +3,11 @@ package utilities;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JPanel;
+
 import blackjackpackage.BlackJackScreen;
 import entitypackage.Player;
+import mainpackage.MainFrame;
 import stageselectpackage.Stage;
 
 public abstract class EventBus {
@@ -31,5 +34,16 @@ public abstract class EventBus {
 		};
 		
 		waitTimer.scheduleAtFixedRate(timeTask, miliSeconds, 1);
+	}
+	
+	public static Signal changeToScreenOnSignal(JPanel screen) {
+		Signal task = new Signal() {
+			@Override
+			public boolean doTask() {
+				MainFrame.getInstance().setScreen(screen);
+				return false;
+			}
+		};
+		return task;
 	}
 }
