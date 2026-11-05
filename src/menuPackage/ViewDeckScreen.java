@@ -51,7 +51,8 @@ public class ViewDeckScreen extends OverlayMenu{
 	public ViewDeckScreen() {
 		this.setLayout(new BorderLayout());
 		this.setBounds(new Rectangle(GlobalConstants.SCREEN_SIZE));
-		this.setOpaque(false);
+		this.setBackground(new Color(0, 0, 0, 200));
+		//this.setOpaque(false);
 		basePane.setPreferredSize(GlobalConstants.SCREEN_SIZE);
 		this.add(basePane);
 		
@@ -88,13 +89,13 @@ public class ViewDeckScreen extends OverlayMenu{
 	
 	private void setUpDeckPreview() {
 		Deck playerDeck =  EventBus.player.playerDeck;
+		int previewRows = playerDeck.getSize() % 4 == 0 ? playerDeck.getSize() / 4 : (playerDeck.getSize() / 4) + (playerDeck.getSize() % 4);
 		
 		deckScroller.setOpaque(false);
 		deckScroller.getViewport().setOpaque(false);
 		deckScroller.setBorder(null);
 		deckPreview.setOpaque(false);
-		deckPreview.setLayout(new GridLayout(playerDeck.getSize() / 4, 4));
-		
+		deckPreview.setLayout(new GridLayout(previewRows, 4));
 		
 		for (int i = 0; i < playerDeck.getSize(); i++) {
 			deckPreview.add(playerDeck.getCard(i));
