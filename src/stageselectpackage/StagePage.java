@@ -13,19 +13,15 @@ import shoppackage.ShopTable;
 import utilities.EventBus;
 
 public class StagePage extends JPanel{
-	public StagePage() {
+	public StagePage(Stage ...stages) {
 		FlowLayout layout = new FlowLayout();
 		layout.setVgap(0);
 		this.setPreferredSize(new Dimension(673, 0));
 		this.setLayout(layout);
 		this.setOpaque(false);
 		
-		Stage testStage = new Stage("protosuer", new Color(255, 177, 177), "fight.png", false, new BlackJackScreen(new Entity(200, "Protosuer"), EventBus.player.playerDeck.cloneDeck()));
-		Stage shopStage = new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(), testStage);
-		Stage tutorial = new Stage("TUTORIAL", new Color(255, 177, 177), "fight.png", false, new TutorialMatch(new Entity(300, "Pursuer")), shopStage);
-		
-		this.add(tutorial);
-		this.add(shopStage);
-		this.add(testStage);
+		for (Stage stage : stages) {
+			this.add(stage);
+		}
 	}
 }

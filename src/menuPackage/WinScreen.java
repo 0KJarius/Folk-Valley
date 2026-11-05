@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import itempackage.Item;
 import mainpackage.MainFrame;
+import stageselectpackage.StageCollection;
 import stageselectpackage.StageSelectScreen;
 import utilities.EventBus;
 import utilities.GlobalConstants;
@@ -76,7 +77,6 @@ public class WinScreen extends OverlayMenu{
 				MainFrame.getInstance().removeLayer(EventBus.currentMatch.scanLines);
 				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
 				EventBus.player.setInventory((ArrayList<Item>) EventBus.currentMatch.getPlayerInventoryCopy().clone());
-				
 				EventBus.selectedStage.completeStage();
 				if (EventBus.selectedStage.getNextStage() != null) {
 					EventBus.selectedStage.getNextStage().unlockStage();

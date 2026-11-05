@@ -1,0 +1,25 @@
+package stageselectpackage;
+
+import java.awt.Color;
+import java.util.ArrayList;
+
+import blackjackpackage.BlackJackScreen;
+import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
+import entitypackage.Entity;
+import shoppackage.ShopTable;
+import utilities.EventBus;
+
+public class StageCollection {
+	ArrayList<Stage> stages = new ArrayList<Stage>();
+	private static final StageCollection STAGES = new StageCollection();
+	
+	private StageCollection() {
+		stages.add(new Stage("protosuer", new Color(255, 177, 177), "fight.png", false, new BlackJackScreen(new Entity(200, "Protosuer"), EventBus.player.playerDeck.cloneDeck())));
+		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(0)));
+		stages.add(new Stage("TUTORIAL", new Color(255, 177, 177), "fight.png", false, new TutorialMatch(new Entity(300, "Pursuer")), stages.get(1)));
+	}
+	
+	public static StageCollection getInstance() {
+		return STAGES;
+	}
+}
