@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -15,6 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
+import mainpackage.MainFrame;
+import menuPackage.ViewDeckScreen;
 import utilities.EventBus;
 import utilities.GlobalConstants;
 import utilities.SoundBus;
@@ -79,6 +84,14 @@ public class StageSelectScreen extends JPanel{
 		);
 		right.add(viewDeckButton, BorderLayout.SOUTH);
 		right.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
+		
+		viewDeckButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getInstance().layerOnScreen(new ViewDeckScreen(), JLayeredPane.MODAL_LAYER);
+			}
+			
+		});
 	}
 	
 	private void setUpCenterHud(JPanel center) {

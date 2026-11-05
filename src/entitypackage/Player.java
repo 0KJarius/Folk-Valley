@@ -21,6 +21,9 @@ public class Player extends Entity{
 		inventory.add(new ColorPicker());
 		inventory.add(new ColorPicker());
 		inventory.add(new ColorPicker());
+		inventory.add(new ColorPicker());
+		inventory.add(new ColorPicker());
+		inventory.add(new ColorPicker());
 	}
 	
 	public void setInventory(ArrayList<Item> items) {

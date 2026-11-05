@@ -7,7 +7,7 @@ import blackjackpackage.BlackJackScreen;
 import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
 import entitypackage.Entity;
 import entitypackage.Player;
-
+import menuPackage.ViewDeckScreen;
 import menuPackage.startmenu.StartMenu;
 import shoppackage.ShopTable;
 
@@ -25,7 +25,7 @@ public class Main
             System.setProperty("swing.aatext", "false");
     		MainFrame frame = MainFrame.getInstance();
     		frame.setScreen(new StartMenu());
-            //frame.setScreen(new TutorialMatch(new Entity(100, "Pursuer")));
+            //frame.setScreen(new ViewDeckScreen());
     	});
         
     }
