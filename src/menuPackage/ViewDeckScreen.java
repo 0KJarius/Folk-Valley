@@ -51,8 +51,8 @@ public class ViewDeckScreen extends OverlayMenu{
 	public ViewDeckScreen() {
 		this.setLayout(new BorderLayout());
 		this.setBounds(new Rectangle(GlobalConstants.SCREEN_SIZE));
-		this.setBackground(new Color(0, 0, 0, 200));
-		//this.setOpaque(false);
+		//this.setBackground(new Color(0, 0, 0, 200));
+		this.setOpaque(false);
 		basePane.setPreferredSize(GlobalConstants.SCREEN_SIZE);
 		this.add(basePane);
 		
@@ -108,6 +108,8 @@ public class ViewDeckScreen extends OverlayMenu{
 		itemScroller.setOpaque(false);
 		itemScroller.getViewport().setOpaque(false);
 		itemScroller.setBorder(null);
+		itemPreview.setLayout(new FlowLayout(FlowLayout.LEFT));
+		itemPreview.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 		
 		itemPreview.setOpaque(false);
 		for (int i = 0; i < EventBus.player.inventory.size(); i++) {

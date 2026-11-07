@@ -146,6 +146,8 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void hardResetStats() {
+		natural = baseNat;
+		rightArea.updateNaturalLabel();
 		enemy.resetWallet();
 		roundCounter = 0;
 		debtCounter = 0;
