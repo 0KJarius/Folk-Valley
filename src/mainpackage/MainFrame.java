@@ -1,10 +1,15 @@
 package mainpackage;
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
+import savepackage.SaveManager;
+import utilities.EventBus;
 import utilities.GlobalConstants;
 import utilities.Signal;
 
@@ -27,6 +32,17 @@ public class MainFrame extends JFrame{
         currentPanel = new JPanel();
         this.add(baseLayer, BorderLayout.CENTER);
         this.pack();
+        
+        this.addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				SaveManager.saveGame(EventBus.player);
+				super.windowClosing(e);
+			}
+        	
+        	
+        });
 	}
 	
 	public static MainFrame getInstance() {

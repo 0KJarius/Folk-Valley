@@ -130,19 +130,20 @@ public abstract class SwingUtils {
     public static ImageIcon getImage(String filePath)
     {
         ImageIcon icon = new ImageIcon(SwingUtils.class.getResource(ASSETS_PATH + filePath));
+        ImageTracker.getImageMap().put(icon, filePath);
         return icon;
     }
     
     
     public static ImageIcon getImage(String filePath, int width, int height)
     {
-        ImageIcon icon = new ImageIcon(SwingUtils.class.getResource(ASSETS_PATH + filePath));
+        ImageIcon icon = getImage(ASSETS_PATH + filePath);
         Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(image);
     }
 
     public static ImageIcon getImage(String filePath, int mult){
-        ImageIcon icon = new ImageIcon(SwingUtils.class.getResource(ASSETS_PATH + filePath));
+        ImageIcon icon = getImage(ASSETS_PATH + filePath);
         Image image = icon.getImage().getScaledInstance(icon.getIconWidth() * mult, icon.getIconHeight() * mult, Image.SCALE_FAST);
         return new ImageIcon(image);
     }

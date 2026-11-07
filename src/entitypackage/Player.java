@@ -15,6 +15,8 @@ import utilities.EventBus;
 public class Player extends Entity{
 	public Deck playerDeck;
 	public ArrayList<Item> inventory = new ArrayList<Item>();
+	public int stagesCompleted = 0;
+	public int stagesUnlocked = 0;
 	
 	public Player(int money, String name) {
 		super(money, name);
@@ -25,6 +27,16 @@ public class Player extends Entity{
 		inventory.add(new ColorPicker());
 		inventory.add(new PlusTwo());
 		inventory.add(new Reverse());
+	}
+	
+	public Player(int money, String name, int currentMoney, int maxMoney, int completedStages, int unlockedStages, Deck deck, ArrayList<Item> items) {
+		super(money, name);
+		setMoney(currentMoney);
+		setMaxMoney(maxMoney);
+		this.stagesCompleted = completedStages;
+		this.stagesUnlocked = unlockedStages;
+		this.playerDeck = deck;
+		this.inventory = items;
 	}
 	
 	public void setInventory(ArrayList<Item> items) {

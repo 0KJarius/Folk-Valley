@@ -4,14 +4,16 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import entitypackage.Player;
 import menuPackage.startmenu.StartMenu;
+import savepackage.SaveManager;
+import utilities.EventBus;
 
 public class Main
 {
 
     public static void main(String[] args)
     {
-    	Player player = new Player(100, "Alejandro");
-    	
+    	Player player = new Player(100, "SAMANTHA");
+    	SaveManager.loadGame();
     	//test pubert for getResource
     	ImageIcon testPubert = new ImageIcon(Main.class.getResource("../Assets/kid-named-pubert.png"));
     	SwingUtilities.invokeLater(()->{
@@ -19,6 +21,7 @@ public class Main
             System.setProperty("swing.aatext", "false");
     		MainFrame frame = MainFrame.getInstance();
     		frame.setScreen(new StartMenu());
+
             //frame.setScreen(new BattlePrompt(new Enemy(100, "Protosuer", "Protosuer.png", "Hey it's me its Verity!")));
     	});
         

@@ -15,7 +15,7 @@ import utilities.SoundBus;
 public abstract class Card extends JToggleButton 
 {
     private int score;
-    private Random rng;
+    private transient Random rng;
     private boolean isFlipped = false;
 
     public Card()

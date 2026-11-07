@@ -62,6 +62,7 @@ public class Stage extends JButton implements MouseListener{
         	this.setText("");
         } else {
         	this.setIcon(stageFrame);
+        	EventBus.player.stagesUnlocked++;
         }
         this.addMouseListener(this);
 	}
@@ -86,12 +87,14 @@ public class Stage extends JButton implements MouseListener{
 		this.setText(stageName);
 		System.out.println(stageName);
 		isLocked = false;
+		EventBus.player.stagesUnlocked++;
 	}
 	
 	public void completeStage() {
 		isComplete = true;
 		this.setIcon(completeStageFrame);
 		this.setText("");
+		EventBus.player.stagesCompleted++;
 	}
 	
 	public Stage copyStage(String stageName, boolean isLocked, JPanel destination, Stage nextStage) {

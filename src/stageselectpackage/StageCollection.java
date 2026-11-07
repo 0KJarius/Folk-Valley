@@ -22,17 +22,12 @@ public class StageCollection {
 				"protosuer", 
 				new Color(255, 177, 177), 
 				"fight.png", 
-				false,
+				true,
 				new BattlePrompt(
 						EnemyCollection.PROTOSUER.getEnemy(), 
 						new BlackJackScreen(EnemyCollection.PROTOSUER.getEnemy(), EventBus.player.playerDeck)),
 				JLayeredPane.PALETTE_LAYER
 		));
-		stages.add(stages.get(0).copyStage(true));
-		stages.add(stages.get(0).copyStage(true));
-		stages.add(stages.get(0).copyStage(true));
-		stages.add(stages.get(0).copyStage(true));
-		stages.add(stages.get(0).copyStage(true));
 		stages.add(stages.get(0).copyStage(true));
 		stages.add(stages.get(0).copyStage(true));
 		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 3)));
@@ -65,6 +60,10 @@ public class StageCollection {
 	
 	public static int getPageCount() {
 		return pageCount;
+	}
+	
+	public static void onGameLoaded() {
+		
 	}
 	
 }
