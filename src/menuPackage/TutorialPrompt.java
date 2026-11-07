@@ -12,9 +12,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EtchedBorder;
-
 import utilities.GlobalConstants;
 import utilities.Signal;
 import utilities.SwingUtils;

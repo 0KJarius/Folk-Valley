@@ -1,7 +1,5 @@
 package itempackage.colorpicker;
 
-import javax.swing.ImageIcon;
-
 import itempackage.Item;
 import utilities.EventBus;
 import utilities.SwingUtils;

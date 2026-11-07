@@ -7,8 +7,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;

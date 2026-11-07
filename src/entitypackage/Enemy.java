@@ -1,9 +1,6 @@
 package entitypackage;
 
 import javax.swing.ImageIcon;
-
-import blackjackpackage.BlackJackScreen;
-import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
 import utilities.SwingUtils;
 
 public class Enemy extends Entity{

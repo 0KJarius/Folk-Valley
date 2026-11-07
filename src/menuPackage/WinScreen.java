@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -16,7 +14,6 @@ import javax.swing.JPanel;
 
 import itempackage.Item;
 import mainpackage.MainFrame;
-import stageselectpackage.StageCollection;
 import stageselectpackage.StageSelectScreen;
 import utilities.EventBus;
 import utilities.GlobalConstants;

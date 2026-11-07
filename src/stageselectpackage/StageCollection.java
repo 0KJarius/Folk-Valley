@@ -7,9 +7,7 @@ import javax.swing.JLayeredPane;
 
 import blackjackpackage.BlackJackScreen;
 import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
-import entitypackage.Enemy;
 import entitypackage.EnemyCollection;
-import entitypackage.Entity;
 import menuPackage.BattlePrompt;
 import shoppackage.ShopTable;
 import utilities.EventBus;

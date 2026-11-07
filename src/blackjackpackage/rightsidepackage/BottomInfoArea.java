@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 

@@ -26,7 +26,6 @@ import javax.swing.JToggleButton;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
-import javax.swing.text.Highlighter.HighlightPainter;
 
 public abstract class SwingUtils {
 	public static final String ASSETS_PATH = "../Assets/";
