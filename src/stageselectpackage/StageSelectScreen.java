@@ -32,7 +32,7 @@ public class StageSelectScreen extends JPanel{
 	private JPanel contentPanel = SwingUtils.createJPanel(new Rectangle(1280, 720), getBackground());
 	private StagePage[] pages = {
 			StageCollection.createStagePage(StageCollection.stages.size() - 1, StageCollection.stages.size() - 5),
-			StageCollection.createStagePage(StageCollection.stages.size() - 6, StageCollection.stages.size() - 8)
+			StageCollection.createStagePage(StageCollection.stages.size() - 6, StageCollection.stages.size() - 10)
 	};
 	
 	private StagePage currentPage;

@@ -175,6 +175,7 @@ public class ButtonArea extends JPanel{
 	}
 	
 	private void onStand() {
+		EventBus.currentMatch.rightArea.getBottom().getButtons().setButtonActivity(false);
 		blackJack.playerHand.applyUnoCards();
 		blackJack.playerHand.setScore(blackJack.playerHand.getScore() - blackJack.playerHand.getDebt());
 		setButtonsActivated(false);

@@ -25,7 +25,8 @@ public class StageCollection {
 				false,
 				new BattlePrompt(
 						EnemyCollection.PROTOSUER.getEnemy(), 
-						new BlackJackScreen(EnemyCollection.PROTOSUER.getEnemy(), EventBus.player.playerDeck))
+						new BlackJackScreen(EnemyCollection.PROTOSUER.getEnemy(), EventBus.player.playerDeck)),
+				JLayeredPane.PALETTE_LAYER
 		));
 		stages.add(stages.get(0).copyStage(true));
 		stages.add(stages.get(0).copyStage(true));

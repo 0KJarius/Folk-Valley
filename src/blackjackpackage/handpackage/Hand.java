@@ -176,6 +176,16 @@ public abstract class Hand extends JPanel
     	}
     }
     
+    public void reverseCards() {
+    	for (Card card : cards) {
+    		if (card.isCardFlipped()) {
+    			card.unflipCard();
+    		} else {
+    			card.flipCard();
+    		}
+    	}
+    }
+    
     public boolean deleteUnoCards() {
     	if (unoCards.isEmpty()) {
     		return false;

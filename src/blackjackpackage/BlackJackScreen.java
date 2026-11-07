@@ -136,6 +136,7 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void reset() {
+		rightArea.reset();
 		betPool = 0;
 		blackJack.reset();
 		infoArea.reset();
@@ -340,7 +341,7 @@ public class BlackJackScreen extends JPanel{
 		
 		startMatch();
 		scanLines = SwingUtils.createImageAt("BlackJack/scanLinesOverlay.png", new Point(0, 0));
-		MainFrame.getInstance().layerOnScreen(scanLines, JLayeredPane.MODAL_LAYER);
+		MainFrame.getInstance().layerOnScreen(scanLines, JLayeredPane.POPUP_LAYER);
 		
 		try {
 			SoundBus.playSong("letsPlay.wav", true);

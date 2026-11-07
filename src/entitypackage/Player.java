@@ -5,6 +5,7 @@ import blackjackpackage.Deck;
 import blackjackpackage.cardpackage.PokerCard;
 import blackjackpackage.cardpackage.PokerCardSpecial;
 import blackjackpackage.cardpackage.UnoCard;
+import itempackage.Flip;
 import itempackage.Item;
 import itempackage.colorpicker.ColorPicker;
 import utilities.EventBus;
@@ -18,7 +19,7 @@ public class Player extends Entity{
 		EventBus.player = this;
 		playerDeck = new Deck();
 		initializeTestDeck();
-		inventory.add(new ColorPicker());
+		inventory.add(new Flip());
 		inventory.add(new ColorPicker());
 		inventory.add(new ColorPicker());
 		inventory.add(new ColorPicker());

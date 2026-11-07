@@ -16,6 +16,7 @@ public abstract class Card extends JToggleButton
 {
     private int score;
     private Random rng;
+    private boolean isFlipped = false;
 
     public Card()
     {
@@ -76,12 +77,14 @@ public abstract class Card extends JToggleButton
     }
 
     public void flipCard(){
+    	isFlipped = true;
         try {
 			SoundBus.playSFX("card/flipCard.wav");
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
     }
 
     public void unflipCard(){
+    	isFlipped = false;
     	try {
 			SoundBus.playSFX("card/flipCard.wav");
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
@@ -91,7 +94,13 @@ public abstract class Card extends JToggleButton
     	this.score = setScore;
     }
     
-    @Override
+    
+    
+    public boolean isCardFlipped() {
+		return isFlipped;
+	}
+
+	@Override
     public void addNotify() {
     	this.setVisible(true);
     	AnimationUtils.popup(this, 4.5, 500, 19);

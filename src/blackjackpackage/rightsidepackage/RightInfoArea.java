@@ -50,6 +50,11 @@ public class RightInfoArea extends JPanel{
 	public void updateNaturalLabel() {
 		naturalLabel.setText("" + EventBus.currentMatch.getNatural());
 	}
+	
+	public void reset() {
+		bottom.getButtons().setButtonActivity(true);
+		updateNaturalLabel();
+	}
 
 	public BottomInfoArea getBottom() {return bottom;}
 }
