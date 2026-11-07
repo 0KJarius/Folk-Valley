@@ -8,6 +8,7 @@ import blackjackpackage.cardpackage.UnoCard;
 import itempackage.Flip;
 import itempackage.Item;
 import itempackage.PlusTwo;
+import itempackage.Reverse;
 import itempackage.colorpicker.ColorPicker;
 import utilities.EventBus;
 
@@ -23,6 +24,7 @@ public class Player extends Entity{
 		inventory.add(new Flip());
 		inventory.add(new ColorPicker());
 		inventory.add(new PlusTwo());
+		inventory.add(new Reverse());
 	}
 	
 	public void setInventory(ArrayList<Item> items) {
