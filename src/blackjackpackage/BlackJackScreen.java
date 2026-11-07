@@ -178,11 +178,6 @@ public class BlackJackScreen extends JPanel{
     	
     }
 	
-	public void addNatural(int amount) {
-		setNatural(getNatural() + amount);
-		rightArea.updateNaturalLabel();
-	}
-	
 	public void addBetPool(int amount) {
 		int enemyBet = enemy.getCurrentMoney() < amount ? enemy.getCurrentMoney() : amount;
 		betPool += amount + enemyBet;

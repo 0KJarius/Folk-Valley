@@ -205,7 +205,7 @@ public class ButtonArea extends JPanel{
 	
 	private void onSplitPressed() {
 		blackJack.playerHand.setDebt(blackJack.playerHand.getDebt() / 2);
-		EventBus.currentMatch.addNatural(blackJack.playerHand.getDebt() % 2);
+		EventBus.currentMatch.rightArea.addNatural(blackJack.playerHand.getDebt() % 2);
 		
 		blackJack.playerHands.addLast(new PlayerHand());
 		blackJack.playerHands.getLast().addNewCard(EventBus.currentMatch.blackJack.playerHands.getFirst().getCards().get(1));
