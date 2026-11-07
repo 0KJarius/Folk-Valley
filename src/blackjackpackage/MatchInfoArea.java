@@ -117,6 +117,7 @@ public class MatchInfoArea extends JPanel{
 	public void addMoney(Entity entity, boolean isPlayer, int amount)
     {
     	entity.addMoney(amount);
+    	
     	updateMoneyBar(entity, isPlayer);
     	
     }
@@ -133,20 +134,19 @@ public class MatchInfoArea extends JPanel{
     		enemyMoneyProgressBar.setString(entity.getName());
     		enemyMoneyProgressBar.repaint();
 		}
-    	
+		if (entity.getCurrentMoney() > entity.getMaxMoney()) {
+    		entity.setMaxMoney(entity.getCurrentMoney());
+    	}
     }
 	
 	public void updateDebtLabel(int debtAmount)
     {
-		
-		 AnimationUtils.popup(debtLabel, 1.15, 100, 5);
-		   
+		AnimationUtils.popup(debtLabel, 1.15, 100, 5);	   
         debtLabel.setText("" + debtAmount);
     }
 	
 	public void updateBetLabel() {
-		 AnimationUtils.popup(betPoolLabel, 1.15, 100, 5);
-		 
+		AnimationUtils.popup(betPoolLabel, 1.15, 100, 5); 
 		betPoolLabel.setText("V" + EventBus.currentMatch.betPool);
 	}
 	

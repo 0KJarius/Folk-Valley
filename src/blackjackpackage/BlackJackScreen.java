@@ -181,9 +181,10 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void addBetPool(int amount) {
-		betPool += amount * 2;
+		int enemyBet = enemy.getCurrentMoney() < amount ? enemy.getCurrentMoney() : amount;
+		betPool += amount + enemyBet;
 		infoArea.updateBetLabel();
-		infoArea.subMoney(enemy, false, amount);
+		infoArea.subMoney(enemy, false, enemyBet);
 		infoArea.subMoney(EventBus.player, true, amount);
 	}
 	

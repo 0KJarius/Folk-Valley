@@ -1,12 +1,14 @@
 package entitypackage;
 
 public class Entity {
+	private int initalMoney;
 	private int maxMoney;
 	private int currentMoney;
 	private String name;
 	
 	public Entity(int money, String name) 
 	{
+		this.initalMoney = money;
 		this.currentMoney = money;
 		this.maxMoney = money;
 		this.name = name;
@@ -44,8 +46,12 @@ public class Entity {
 		this.maxMoney = maxMoney;
 	}
 	
+	public int getInitalMoney() {
+		return initalMoney;
+	}
+
 	public void resetWallet() {
-		currentMoney = maxMoney;
+		currentMoney = initalMoney;
 	}
 	
 	public Entity copy() {
