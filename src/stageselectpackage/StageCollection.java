@@ -19,35 +19,33 @@ public class StageCollection {
 	private static final StageCollection STAGES = new StageCollection();
 	
 	private StageCollection() {
-		stages.add(new Stage(
-				"protosuer", 
-				new Color(255, 177, 177), 
-				"fight.png", 
-				true,
+		StageBuilder builder = new StageBuilder();
+		builder.setStageFrameName("fight.png");
+		builder.setStageName("PROTOSUER");
+		builder.setLayer(JLayeredPane.PALETTE_LAYER);
+		builder.setTextColor(new Color(255, 177, 177));
+		builder.setDestination(
 				new BattlePrompt(
 						EnemyCollection.PROTOSUER.getEnemy(), 
-						new BlackJackScreen(EnemyCollection.PROTOSUER.getEnemy(), EventBus.player.playerDeck)),
-				JLayeredPane.PALETTE_LAYER
-		));
+						new CutsceneDialogue(EnemyCollection.PROTOSUER.getEnemy(), "placeValley.png", 
+						new BlackJackScreen(EnemyCollection.PURSUER.getEnemy(), EventBus.player.playerDeck))
+				)
+		);
+		
+		
+		stages.add(builder.build());
 		stages.add(stages.get(0).copyStage(true));
 		stages.add(stages.get(0).copyStage(true));
 		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 2)));
-		stages.add(new Stage(
-				"TUTORIAL",
-				new Color(255, 177, 177), 
-				"fight.png",
-				false,
-				new BattlePrompt(
-						EnemyCollection.PURSUER.getEnemy(),
-						new CutsceneDialogue(
-								new Pursuer(),
-								"placeValley.png",
-								new TutorialMatch(new Pursuer())
-						)
-				),
-				JLayeredPane.PALETTE_LAYER,
-				stages.get(stages.size() - 1)
-		));
+		
+		builder.setStageName("TUTORIAL");
+		builder.setDestination(new BattlePrompt(
+						EnemyCollection.PURSUER.getEnemy(), 
+						new CutsceneDialogue(EnemyCollection.PURSUER.getEnemy(), "placeValley.png", 
+						new TutorialMatch(EnemyCollection.PURSUER.getEnemy()))
+				));
+		builder.setNextStage(stages.get(stages.size() - 1));
+		stages.add(builder.build());
 	}
 	//Stages are stored in reverse order (last level is on index 0)
 	public static StagePage createStagePage(int startIndex, int endIndex) {
