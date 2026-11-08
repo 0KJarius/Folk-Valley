@@ -10,8 +10,9 @@ import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
 import menuPackage.BattlePrompt;
 import shoppackage.ShopTable;
 import utilities.EventBus;
-import cutscenepackage.cutsceneDialogue;
-import entitypackage.enemypackage.EnemyCollection;
+import cutscenepackage.CutsceneDialogue;
+import entitypackage.enemypackage.*;
+
 public class StageCollection {
 	private static int pageCount = 0;
 	static ArrayList<Stage> stages = new ArrayList<Stage>();
@@ -38,8 +39,10 @@ public class StageCollection {
 				false,
 				new BattlePrompt(
 						EnemyCollection.PURSUER.getEnemy(),
-						new cutsceneDialogue(
-								new TutorialMatch(EnemyCollection.PURSUER.getEnemy())
+						new CutsceneDialogue(
+								new Pursuer(),
+								"placeValley.png",
+								new TutorialMatch(new Pursuer())
 						)
 				),
 				JLayeredPane.PALETTE_LAYER,
