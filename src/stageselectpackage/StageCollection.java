@@ -32,10 +32,12 @@ public class StageCollection {
 				)
 		);
 		
-		
 		stages.add(builder.build());
-		stages.add(stages.get(0).copyStage(true));
-		stages.add(stages.get(0).copyStage(true, stages.get(stages.size() - 1)));
+		builder.setLayer(JLayeredPane.MODAL_LAYER);
+		builder.setNextStage(stages.get(stages.size() - 1));
+		stages.add(builder.build());
+		builder.setNextStage(stages.get(stages.size() - 1));
+		stages.add(builder.build());
 		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 1)));
 		
 		builder.setStageName("TUTORIAL");

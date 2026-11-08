@@ -18,6 +18,7 @@ import blackjackpackage.handpackage.Hand;
 import blackjackpackage.handpackage.PlayerHand;
 import blackjackpackage.rightsidepackage.RightInfoArea;
 import entitypackage.Entity;
+import entitypackage.enemypackage.Enemy;
 import itempackage.Item;
 import mainpackage.MainFrame;
 import menuPackage.GameOverScreen;
@@ -339,10 +340,16 @@ public class BlackJackScreen extends JPanel{
 		startMatch();
 		scanLines = SwingUtils.createImageAt("BlackJack/scanLinesOverlay.png", new Point(0, 0));
 		MainFrame.getInstance().layerOnScreen(scanLines, JLayeredPane.POPUP_LAYER);
+		if (((Enemy) enemy).getBattleTheme() == null) {
+			try {
+				SoundBus.playSong("letsPlay.wav", true);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
+		} else {
+			try {
+				SoundBus.playSong(((Enemy) enemy).getBattleTheme(), true);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
+		}
 		
-		try {
-			SoundBus.playSong("letsPlay.wav", true);
-		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 	}
 	
 

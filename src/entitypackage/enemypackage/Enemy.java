@@ -15,6 +15,7 @@ public class Enemy extends Entity{
 	private String description;
 	private ImageIcon portrait;
 	private CutsceneLines[] lines;
+	private String battleTheme;
 	
 	public Enemy(int money, String name, String battlePromptPortrait, String description) {
 		super(money, name);
@@ -27,6 +28,11 @@ public class Enemy extends Entity{
 		this.lines = lines;
 		this.dialougePortraitPath = DIALOG_PORTRAIT + dialougePortraitPath + "/";
 		this.namePlate = NAME_PLATE + namePlate;
+	}
+	
+	public Enemy(int money, String name, String battlePromptPortrait, String description, CutsceneLines[] lines, String dialougePortraitPath, String namePlate, String battleTheme) {
+		this(money, name, battlePromptPortrait, description, lines, dialougePortraitPath, namePlate);
+		this.battleTheme = battleTheme;
 	}
 	
 
@@ -49,4 +55,10 @@ public class Enemy extends Entity{
 	public String getNamePlate() {
 		return namePlate;
 	}
+
+	public String getBattleTheme() {
+		return battleTheme;
+	}
+	
+	
 }

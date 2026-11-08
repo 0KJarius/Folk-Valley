@@ -1,4 +1,6 @@
 package cutscenepackage;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 import entitypackage.enemypackage.Enemy;
@@ -8,6 +10,7 @@ import java.awt.*;
 import java.io.IOException;
 
 import utilities.GlobalConstants;
+import utilities.SoundBus;
 import utilities.SwingUtils;
 
 
@@ -24,6 +27,7 @@ public class CutsceneDialogue extends JPanel {
 	private boolean isTyping = false;
 	private JPanel nextScreen;
 	private Enemy enemy;
+	private String songPath;
 	
 	// TEMPORARY LINES, ARRAY LINES, WHERE currentLine IS THE INDEX
 	private CutsceneLines[] dialogueLines;
@@ -136,8 +140,20 @@ public class CutsceneDialogue extends JPanel {
 		ImageIcon icon = SwingUtils.getImage(enemy.getDialougePortraitPath() + state + "/" + expression + extension);
 		characterPortrait.setIcon(icon);
 	}
-	
 
 
-
+	@Override
+	public void addNotify() {
+		super.addNotify();
+		if (songPath == null) {
+			try {
+				SoundBus.playSong("GetReadyForAFight.wav", true);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
+		} else {
+			try {
+				SoundBus.playSong(songPath, true);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
+		}
+		
+	}
 }
