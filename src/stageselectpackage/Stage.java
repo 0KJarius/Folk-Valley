@@ -113,7 +113,7 @@ public class Stage extends JButton implements MouseListener{
 	}
 	
 	public Stage copyStage(boolean isLocked) {
-		return new Stage(stageName, textColor, stageFrameName, isLocked, destination);
+		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer);
 	}
 	
 	public Stage copyStage(boolean isLocked, Stage nextStage) {
@@ -128,6 +128,7 @@ public class Stage extends JButton implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		if (!isLocked && !isComplete) {
 			if (layer == null) {
+				System.out.print(layer);
 				MainFrame.getInstance().setScreen(destination);
 			} else {
 				MainFrame.getInstance().layerOnScreen(destination, layer);
