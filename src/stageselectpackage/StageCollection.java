@@ -11,7 +11,7 @@ import entitypackage.EnemyCollection;
 import menuPackage.BattlePrompt;
 import shoppackage.ShopTable;
 import utilities.EventBus;
-
+import cutscenepackage.cutsceneDialogue;
 public class StageCollection {
 	private static int pageCount = 0;
 	static ArrayList<Stage> stages = new ArrayList<Stage>();
@@ -37,8 +37,11 @@ public class StageCollection {
 				"fight.png",
 				false,
 				new BattlePrompt(
-						EnemyCollection.PURSUER.getEnemy(),
-						new TutorialMatch(EnemyCollection.PURSUER.getEnemy())),
+				 EnemyCollection.PURSUER.getEnemy(),
+					new cutsceneDialogue(
+					 new TutorialMatch(EnemyCollection.PURSUER.getEnemy())
+					    )
+					),
 				JLayeredPane.PALETTE_LAYER,
 				stages.get(stages.size() - 1)
 		));
