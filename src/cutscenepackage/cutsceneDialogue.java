@@ -22,6 +22,15 @@ public class cutsceneDialogue extends JPanel {
 	private boolean isTyping = false;
 	private JPanel nextScreen;
 	
+	// TEMPORARY LINES, ARRAY LINES, WHERE currentLine IS THE INDEX
+	private cutsceneLines[] dialogueLines = {
+			new cutsceneLines("", "just add some lines later", "normal"),
+			new cutsceneLines("Protosuer", "Hi! It's me, Protosuer!", "normal"),
+			new cutsceneLines("Protosuer", "Do you want to die?", "angry"),
+			new cutsceneLines("Protosuer", "Sliming you, Sliming me.", "sad")
+				
+	};
+	
 	
 	public cutsceneDialogue(JPanel nextScreen) {
 		super();
@@ -94,14 +103,7 @@ public class cutsceneDialogue extends JPanel {
 		
 	}
 	
-	// TEMPORARY LINES, ARRAY LINES, WHERE currentLine IS THE INDEX
-	private cutsceneLines[] dialogueLines = {
-			new cutsceneLines("", "just add some lines later", "normal"),
-			new cutsceneLines("Protosuer", "Hi! It's me, Protosuer!", "normal"),
-			new cutsceneLines("Protosuer", "Do you want to die?", "angry"),
-			new cutsceneLines("Protosuer", "Sliming you, Sliming me.", "sad")
-			
-	};
+	
 	
 	
 	// TYPES THE LETTERS ONE BY ONE
