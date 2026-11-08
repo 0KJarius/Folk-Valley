@@ -54,6 +54,7 @@ public class SaveManager{
 			EventBus.player = gson.fromJson(reader, Player.class);
 			StageCollection.onGameLoaded();
 			System.out.println("Loaded Game");
+			reader.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Save File Not Found!");
 		} catch (IOException e) {

@@ -3,6 +3,8 @@ package mainpackage;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import entitypackage.Player;
+import menuPackage.startmenu.LoadGameMenu;
+import menuPackage.startmenu.NewGameMenu;
 import menuPackage.startmenu.StartMenu;
 import savepackage.SaveManager;
 import utilities.EventBus;
@@ -21,8 +23,7 @@ public class Main
             System.setProperty("swing.aatext", "false");
     		MainFrame frame = MainFrame.getInstance();
     		frame.setScreen(new StartMenu());
-    		
-            //frame.setScreen(new BattlePrompt(new Enemy(100, "Protosuer", "Protosuer.png", "Hey it's me its Verity!")));
+            //frame.setScreen(new NewGameMenu());
     	});
         
     }

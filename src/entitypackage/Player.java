@@ -23,10 +23,6 @@ public class Player extends Entity{
 		EventBus.player = this;
 		playerDeck = new Deck();
 		initializeTestDeck();
-		inventory.add(new Flip());
-		inventory.add(new ColorPicker());
-		inventory.add(new PlusTwo());
-		inventory.add(new Reverse());
 	}
 	
 	public Player(int money, String name, int currentMoney, int maxMoney, int completedStages, int unlockedStages, Deck deck, ArrayList<Item> items) {

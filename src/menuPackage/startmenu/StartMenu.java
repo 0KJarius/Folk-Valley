@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -50,7 +52,13 @@ public class StartMenu extends JPanel{
 				try {
 					SoundBus.playSFX("playButtonSelect.wav");
 				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
-				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
+				try(FileReader reader = new FileReader("Save.json")){
+					MainFrame.getInstance().layerOnScreen(new LoadGameMenu(), JLayeredPane.DRAG_LAYER);
+					
+				} catch (FileNotFoundException e1) {
+					MainFrame.getInstance().layerOnScreen(new NewGameMenu(), JLayeredPane.DRAG_LAYER);
+				} catch (IOException e1) {}
+				
 			}
 
 			@Override

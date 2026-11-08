@@ -35,8 +35,8 @@ public class StageCollection {
 		
 		stages.add(builder.build());
 		stages.add(stages.get(0).copyStage(true));
-		stages.add(stages.get(0).copyStage(true));
-		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 2)));
+		stages.add(stages.get(0).copyStage(true, stages.get(stages.size() - 1)));
+		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 1)));
 		
 		builder.setStageName("TUTORIAL");
 		builder.setDestination(new BattlePrompt(
@@ -64,6 +64,20 @@ public class StageCollection {
 	
 	public static int getPageCount() {
 		return pageCount;
+	}
+	
+	public static void onNewGame() {
+		for (int i = stages.size() - 1; i >= 0; i--) {
+			stages.get(i).setComplete(false);
+		}
+		
+		for (int i = 0; i < stages.size(); i++) {
+			stages.get(i).lockStage();
+		}
+		
+		stages.get(stages.size() - 1).unlockStage();
+		EventBus.player.stagesCompleted = 0;
+		EventBus.player.stagesUnlocked = 1;
 	}
 	
 	public static void onGameLoaded() {

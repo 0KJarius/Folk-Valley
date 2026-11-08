@@ -96,6 +96,11 @@ public class Stage extends JButton implements MouseListener{
 		EventBus.player.stagesCompleted++;
 	}
 	
+	public void lockStage() {
+		this.setIcon(LOCKED_ICON);
+    	this.setText("");
+	}
+	
 	public Stage copyStage(String stageName, boolean isLocked, JPanel destination, Stage nextStage) {
 		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, nextStage);
 	}
@@ -122,6 +127,18 @@ public class Stage extends JButton implements MouseListener{
 	
 	public Stage getNextStage() {
 		return nextStage;
+	}
+	
+	public void setComplete(boolean isComplete) {
+		this.isComplete = isComplete;
+		if (isComplete) {
+			this.setIcon(completeStageFrame);
+			this.setText("");
+		} else {
+			this.setIcon(stageFrame);
+			this.setText(stageName);
+		}
+		
 	}
 
 	@Override
