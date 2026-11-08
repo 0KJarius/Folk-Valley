@@ -37,11 +37,11 @@ public class StageCollection {
 				"fight.png",
 				false,
 				new BattlePrompt(
-				 EnemyCollection.PURSUER.getEnemy(),
-					new cutsceneDialogue(
-					 new TutorialMatch(EnemyCollection.PURSUER.getEnemy())
-					    )
-					),
+						EnemyCollection.PURSUER.getEnemy(),
+						new cutsceneDialogue(
+								new TutorialMatch(EnemyCollection.PURSUER.getEnemy())
+						)
+				),
 				JLayeredPane.PALETTE_LAYER,
 				stages.get(stages.size() - 1)
 		));

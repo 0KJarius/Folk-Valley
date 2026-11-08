@@ -6,6 +6,7 @@ import mainpackage.MainFrame;
 import java.awt.*;
 import java.io.IOException;
 
+import utilities.GlobalConstants;
 import utilities.SwingUtils;
 
 
@@ -35,52 +36,26 @@ public class cutsceneDialogue extends JPanel {
 	public cutsceneDialogue(JPanel nextScreen) {
 		super();
 		this.nextScreen = nextScreen;
-		this.setPreferredSize(new Dimension(1280, 720));
+		this.setBounds(new Rectangle(1280, 720));
 		this.setLayout(null);
 		this.setBackground(Color.BLACK);
-		System.out.println("Cutscene constructor started!");
 		background = SwingUtils.createImageAt("cutscene/BackGround/placeValley.png", new Point(0, 0), 1);
 
 		
-		textBox = SwingUtils.creatJTextArea(new Dimension(1228, 291), "MartianMono-VariableFont_wdth,wght.ttf", 180, 20, Color.WHITE, new Color(0, 0, 0, 180));
-//for some reason the text font on textbox won't work so i tried this
-		try {
-		    textBox.setFont(SwingUtils.createFont(
-		            "/Assets/fonts/MartianMono-VariableFont_wdth,wght.ttf",
-		            32f
-		        ));
-		} catch (FontFormatException | IOException e) {
-		    e.printStackTrace();
-		}
-		
+		textBox = SwingUtils.creatJTextArea(new Dimension(1228, 291), GlobalConstants.NOTO_LIGHT, 30, 20, Color.WHITE, new Color(19, 19, 19));
 		textBox.setBounds(26, 409, 1228, 291);
 		textBox.setOpaque(true);
-		textBox.setBackground(new Color(35, 35, 35));
-
 
 		this.add(background);
 		this.add(textBox);
-		
-
-
-		
-		namePlate = SwingUtils.createImageAt("cutscene/namePlates/protosuer.png", new Point(26, 365), 1);
-		
+				
+		namePlate = SwingUtils.createImageAt("cutscene/namePlates/protosuer.png", new Point(26, 365));
 		this.add(namePlate);
-
-
-		ImageIcon portraitIcon = new ImageIcon(
-			    SwingUtils.class.getResource("../Assets/cutscene/Portraits/Protosuer/talk/normal.gif")
-			);
-
-			characterPortrait = new JLabel(portraitIcon);
-			characterPortrait.setBounds(290, 10, 700, 400);
-
+		
+		characterPortrait = SwingUtils.createImageAt("cutscene/Portraits/Protosuer/talk/normal.gif", new Point(290, 10));
 		this.add(characterPortrait);
 		
 		nextIcon = SwingUtils.createImageAt("cutscene/nextIndicator.png", new Point(1150, 680), 1);
-
-		
 		this.add(nextIcon);
 		nextIcon.setVisible(false);
 		
@@ -143,21 +118,21 @@ public class cutsceneDialogue extends JPanel {
 	
 	// IF CLICKED, RUNS THE FULL TEXT, THEN IS TYPING BECOMES FALSE, THEN CLICK AGAIN FOR THE NEXT LINE, IF ITS ALREADY FALSE THEN NEXT LINE
 	private void nextDialogue() {
-	if(isTyping) {
-		typingTimer.stop();
-		textBox.setText(fullDialogue);
-		isTyping = false;
-		changePortrait(dialogueLines[currentLine].getExpression(), false);
-		nextIcon.setVisible(true);
-	} else {
-		currentLine++;
-		
-		if (currentLine < dialogueLines.length) {
-			showDialogue();
+		if(isTyping) {
+			typingTimer.stop();
+			textBox.setText(fullDialogue);
+			isTyping = false;
+			changePortrait(dialogueLines[currentLine].getExpression(), false);
+			nextIcon.setVisible(true);
 		} else {
-			MainFrame.FRAME.setScreen(nextScreen);
+			currentLine++;
+		
+			if (currentLine < dialogueLines.length) {
+				showDialogue();
+			} else {
+				MainFrame.FRAME.setScreen(nextScreen);
+			}
 		}
-	}
 		
 	}
 
@@ -165,13 +140,8 @@ public class cutsceneDialogue extends JPanel {
 	private void changePortrait(String expression, boolean talking) {
 		String state = talking ? "talk" : "idle";
 		String extension = talking? ".gif" : ".png";
-		String imagePath = "../Assets/cutscene/Portraits/Protosuer/" + state + "/" + expression + extension;
-		System.out.println(imagePath);
-		System.out.println(SwingUtils.class.getResource(imagePath));
-		ImageIcon icon = new ImageIcon(
-				SwingUtils.class.getResource(imagePath)
-				
-				);
+
+		ImageIcon icon = SwingUtils.getImage("cutscene/Portraits/Protosuer/" + state + "/" + expression + extension);
 		characterPortrait.setIcon(icon);
 	}
 	
