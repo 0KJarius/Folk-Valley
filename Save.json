@@ -58,19 +58,11 @@
         "suit": "DIAMOND"
       },
       {
-        "score": 4,
-        "suit": "SPADE"
-      },
-      {
         "score": 6,
         "suit": "CLUB"
       },
       {
         "score": 4,
-        "suit": "DIAMOND"
-      },
-      {
-        "score": 6,
         "suit": "DIAMOND"
       },
       {
@@ -118,10 +110,6 @@
         "suit": "CLUB"
       },
       {
-        "score": 4,
-        "suit": "CLUB"
-      },
-      {
         "score": 5,
         "suit": "SPADE"
       },
@@ -230,10 +218,6 @@
         "score": 0
       },
       {
-        "color": "YELLOW",
-        "score": 0
-      },
-      {
         "color": "RED",
         "score": 3
       },
@@ -248,14 +232,6 @@
       {
         "color": "YELLOW",
         "score": 7
-      },
-      {
-        "color": "BLUE",
-        "score": 6
-      },
-      {
-        "color": "RED",
-        "score": 4
       },
       {
         "color": "RED",
@@ -298,20 +274,12 @@
         "score": 0
       },
       {
-        "color": "RED",
-        "score": 4
-      },
-      {
         "color": "BLUE",
         "score": 5
       },
       {
         "color": "BLUE",
         "score": 9
-      },
-      {
-        "color": "BLUE",
-        "score": 1
       },
       {
         "color": "RED",
@@ -358,10 +326,6 @@
         "suit": "HEART"
       },
       {
-        "type": "QUEEN",
-        "suit": "HEART"
-      },
-      {
         "type": "KING",
         "suit": "HEART"
       },
@@ -384,6 +348,10 @@
       {
         "type": "JACK",
         "suit": "SPADE"
+      },
+      {
+        "type": "QUEEN",
+        "suit": "DIAMOND"
       }
     ]
   },
@@ -398,10 +366,10 @@
       "name": "Plus Two"
     }
   ],
-  "stagesCompleted": 1,
+  "stagesCompleted": 2,
   "stagesUnlocked": 3,
-  "initalMoney": 300,
-  "maxMoney": 300,
-  "currentMoney": 300,
+  "initalMoney": 200,
+  "maxMoney": 400,
+  "currentMoney": 200,
   "name": "SAMANTHA"
 }

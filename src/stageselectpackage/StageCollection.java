@@ -30,7 +30,7 @@ public class StageCollection {
 		));
 		stages.add(stages.get(0).copyStage(true));
 		stages.add(stages.get(0).copyStage(true));
-		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 3)));
+		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 2)));
 		stages.add(new Stage(
 				"TUTORIAL",
 				new Color(255, 177, 177), 
@@ -63,7 +63,17 @@ public class StageCollection {
 	}
 	
 	public static void onGameLoaded() {
+		int unlock = EventBus.player.stagesUnlocked;
+		int complete = EventBus.player.stagesCompleted;
+		for (int i = unlock; i > 0; i--) {
+			stages.get((stages.size() - 1) - (i-1)).unlockStage();
+		}
 		
+		for (int i = complete; i > 0; i--) {
+			stages.get((stages.size()) - i).completeStage();
+		}
+		EventBus.player.stagesUnlocked -= unlock;
+		EventBus.player.stagesCompleted -= complete;
 	}
 	
 }

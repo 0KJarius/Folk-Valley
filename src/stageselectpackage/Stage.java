@@ -62,7 +62,6 @@ public class Stage extends JButton implements MouseListener{
         	this.setText("");
         } else {
         	this.setIcon(stageFrame);
-        	EventBus.player.stagesUnlocked++;
         }
         this.addMouseListener(this);
 	}

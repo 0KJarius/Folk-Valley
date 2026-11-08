@@ -15,6 +15,7 @@ import blackjackpackage.cardpackage.PokerCardSpecial;
 import blackjackpackage.cardpackage.UnoCard;
 import entitypackage.Player;
 import savepackage.converterpackage.*;
+import stageselectpackage.StageCollection;
 import utilities.EventBus;
 
 
@@ -23,7 +24,7 @@ public class SaveManager{
 	private static Gson gson;
 	
 	private SaveManager() {
-		GsonBuilder buildGson = new GsonBuilder().setPrettyPrinting();
+		GsonBuilder buildGson = new GsonBuilder();
 		buildGson.registerTypeAdapterFactory(new CardAdapterFactory());
 		buildGson.registerTypeAdapterFactory(new ItemAdapterFactory());
 		buildGson.registerTypeAdapter(ImageIcon.class, new ImageIconConverter());
@@ -51,7 +52,7 @@ public class SaveManager{
 	public static void loadGame() {
 		try(FileReader reader = new FileReader("Save.json")){
 			EventBus.player = gson.fromJson(reader, Player.class);
-			
+			StageCollection.onGameLoaded();
 			System.out.println("Loaded Game");
 		} catch (FileNotFoundException e) {
 			System.out.println("Save File Not Found!");

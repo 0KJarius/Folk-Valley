@@ -9,6 +9,8 @@ import stageselectpackage.StageSelectScreen;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.Color;
+
+import utilities.EventBus;
 import utilities.SwingUtils;
 import java.awt.Dimension;
 
@@ -35,13 +37,13 @@ public class ShopTable extends JPanel
 		JButton returnButton = SwingUtils.createJButton(new Dimension(100, 40), "Back", Color.PINK);
 		
 		returnButton.addActionListener(e -> {
+			EventBus.selectedStage.completeStage();
+			EventBus.selectedStage.getNextStage().unlockStage();
+			EventBus.selectedStage = null;
 			MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
 		});
 		
 		dialoguePanel.setLayout(new BorderLayout());
 		dialoguePanel.add(returnButton, BorderLayout.EAST);
-		
-		
-		
-	}
+	}	
 }
