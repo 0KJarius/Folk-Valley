@@ -1,6 +1,8 @@
-package entitypackage;
+package entitypackage.enemypackage;
 
 import javax.swing.ImageIcon;
+
+import entitypackage.Entity;
 import utilities.SwingUtils;
 
 public class Enemy extends Entity{

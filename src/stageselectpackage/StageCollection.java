@@ -7,11 +7,11 @@ import javax.swing.JLayeredPane;
 
 import blackjackpackage.BlackJackScreen;
 import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
-import entitypackage.EnemyCollection;
 import menuPackage.BattlePrompt;
 import shoppackage.ShopTable;
 import utilities.EventBus;
 import cutscenepackage.cutsceneDialogue;
+import entitypackage.enemypackage.EnemyCollection;
 public class StageCollection {
 	private static int pageCount = 0;
 	static ArrayList<Stage> stages = new ArrayList<Stage>();

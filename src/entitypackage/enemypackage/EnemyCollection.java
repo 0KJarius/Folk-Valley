@@ -1,4 +1,4 @@
-package entitypackage;
+package entitypackage.enemypackage;
 
 public enum EnemyCollection {
 	PURSUER(new Enemy(200, "Pursuer", "persuer.png", "Your loving partner, but they won't go easy on you!")),

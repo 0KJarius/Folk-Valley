@@ -12,7 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import entitypackage.Enemy;
+
+import entitypackage.enemypackage.Enemy;
 import mainpackage.MainFrame;
 import utilities.GlobalConstants;
 import utilities.SwingUtils;
