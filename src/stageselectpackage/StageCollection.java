@@ -11,7 +11,7 @@ import entitypackage.EnemyCollection;
 import menuPackage.BattlePrompt;
 import shoppackage.ShopTable;
 import utilities.EventBus;
-
+import cutscenepackage.cutsceneDialogue;
 public class StageCollection {
 	private static int pageCount = 0;
 	static ArrayList<Stage> stages = new ArrayList<Stage>();
