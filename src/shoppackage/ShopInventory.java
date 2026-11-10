@@ -5,6 +5,7 @@ import java.awt.*;
 import blackjackpackage.cardpackage.*;
 import utilities.GlobalConstants;
 import utilities.SwingUtils;
+import utilities.EventBus;
 import entitypackage.Player;
 
 public class ShopInventory extends JPanel{
@@ -16,6 +17,7 @@ private ShopCard card3;
 private ShopCard card4;
 
 private JButton rerollButton;
+private int rerollPrice = 0;
 
 	public ShopInventory() {
 		super();
@@ -29,9 +31,10 @@ private JButton rerollButton;
 
 		
 		rerollButton = SwingUtils.createJButton(new Dimension(120, 40), "Reroll", Color.PINK);
-
         rerollButton.addActionListener(e -> {
-            reroll();
+        	if (EventBus.player.getCurrentMoney() >= rerollPrice) {
+        		reroll();
+        	}
         });
         
         this.add(body, BorderLayout.CENTER);
@@ -67,6 +70,8 @@ private JButton rerollButton;
         	
         	body.revalidate();
         	body.repaint();
+        	EventBus.player.subMoney(rerollPrice);
+        	rerollPrice = rerollPrice == 0 ? 50 : (int) (rerollPrice * 1.5);
         }
 
 
