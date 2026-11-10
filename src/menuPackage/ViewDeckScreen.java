@@ -61,6 +61,7 @@ public class ViewDeckScreen extends OverlayMenu{
 		closeButton.setLocation(1148, 442);
 		
 		deckScroller.setBounds(new Rectangle(549, 49, 685, 324));
+		deckScroller.getVerticalScrollBar().setUnitIncrement(18);
 		itemScroller.setBounds(new Rectangle(537, 507, 576, 181));
 		
 		basePane.add(SwingUtils.createImageAt("MenuStuff/viewDeckLayout.png", new Point(0, 0)), JLayeredPane.DEFAULT_LAYER);
