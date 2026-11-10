@@ -35,6 +35,7 @@ public abstract class Hand extends JPanel
         unoCards = new ArrayList<UnoCard>();
         this.setPreferredSize(new Dimension(804,250));
         scroller.setPreferredSize(new Dimension(804,250));
+        scroller.getHorizontalScrollBar().setUnitIncrement(18);
         
         cardPanel.setOpaque(false);
         scroller.setColumnHeaderView(scroller.getHorizontalScrollBar());
