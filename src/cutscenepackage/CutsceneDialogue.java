@@ -26,22 +26,22 @@ public class CutsceneDialogue extends JPanel {
 	private int charIndex = 0;
 	private boolean isTyping = false;
 	private JPanel nextScreen;
-	private Enemy enemy;
 	private String songPath;
 	
 	// TEMPORARY LINES, ARRAY LINES, WHERE currentLine IS THE INDEX
 	private CutsceneLines[] dialogueLines;
+	private String expressionPath;
 	
-	public CutsceneDialogue(Enemy enemy, String backgroundPath,JPanel nextScreen) {
+	public CutsceneDialogue(CutsceneLines[] dialogueLines, String expressionPath,String namePlatePath,String backgroundPath,JPanel nextScreen, String songPath) {
 		super();
 		this.nextScreen = nextScreen;
 		this.setBounds(new Rectangle(1280, 720));
 		this.setLayout(null);
 		this.setBackground(Color.BLACK);
 		background = SwingUtils.createImageAt("cutscene/BackGround/" + backgroundPath, new Point(0, 0));
-		this.enemy = enemy;
-		dialogueLines = enemy.getLines();
 		
+		this.dialogueLines = dialogueLines;
+		this.expressionPath = expressionPath;
 		textBox = SwingUtils.creatJTextArea(new Dimension(1228, 291), GlobalConstants.NOTO_LIGHT, 30, 20, Color.WHITE, new Color(19, 19, 19));
 		textBox.setBounds(26, 409, 1228, 291);
 		textBox.setOpaque(true);
@@ -49,10 +49,9 @@ public class CutsceneDialogue extends JPanel {
 		this.add(background);
 		this.add(textBox);
 				
-		namePlate = SwingUtils.createImageAt(enemy.getNamePlate(), new Point(26, 365));
+		namePlate = SwingUtils.createImageAt(namePlatePath, new Point(26, 365));
 		this.add(namePlate);
-		
-		characterPortrait = SwingUtils.createImageAt(enemy.getDialougePortraitPath() + "/talk/normal.gif", new Point(290, 10));
+		characterPortrait = SwingUtils.createImageAt(expressionPath + "idle/" + dialogueLines[0].getExpression() + ".png", new Point(290, 10));
 		this.add(characterPortrait);
 		
 		nextIcon = SwingUtils.createImageAt("cutscene/nextIndicator.png", new Point(1150, 680), 1);
@@ -137,7 +136,7 @@ public class CutsceneDialogue extends JPanel {
 		String state = talking ? "talk" : "idle";
 		String extension = talking? ".gif" : ".png";
 
-		ImageIcon icon = SwingUtils.getImage(enemy.getDialougePortraitPath() + state + "/" + expression + extension);
+		ImageIcon icon = SwingUtils.getImage(expressionPath + state + "/" + expression + extension);
 		characterPortrait.setIcon(icon);
 	}
 

@@ -27,10 +27,8 @@ public class StageCollection {
 		builder.setDestination(
 				new BattlePrompt(
 						EnemyCollection.PROTOSUER.getEnemy(), 
-						new CutsceneDialogue(EnemyCollection.PROTOSUER.getEnemy(), "placeValley.png", 
-						new BlackJackScreen(EnemyCollection.PURSUER.getEnemy(), EventBus.player.playerDeck))
-				)
-		);
+						EnemyCollection.PROTOSUER.getEnemy().getEntryCutscene(new BlackJackScreen(EnemyCollection.PURSUER.getEnemy(), EventBus.player.playerDeck)))
+				);
 		
 		stages.add(builder.build());
 		builder.setLayer(JLayeredPane.MODAL_LAYER);
@@ -43,9 +41,9 @@ public class StageCollection {
 		builder.setStageName("TUTORIAL");
 		builder.setDestination(new BattlePrompt(
 						EnemyCollection.PURSUER.getEnemy(), 
-						new CutsceneDialogue(EnemyCollection.PURSUER.getEnemy(), "placeValley.png", 
-						new TutorialMatch(EnemyCollection.PURSUER.getEnemy()))
-				));
+						EnemyCollection.PURSUER.getEnemy().getEntryCutscene(new TutorialMatch(EnemyCollection.PURSUER.getEnemy()))
+					)
+				);
 		builder.setNextStage(stages.get(stages.size() - 1));
 		stages.add(builder.build());
 	}

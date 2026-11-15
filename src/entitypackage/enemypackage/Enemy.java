@@ -1,7 +1,9 @@
 package entitypackage.enemypackage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
+import cutscenepackage.CutsceneDialogue;
 import cutscenepackage.CutsceneLines;
 import entitypackage.Entity;
 import utilities.SwingUtils;
@@ -16,6 +18,7 @@ public class Enemy extends Entity{
 	private ImageIcon portrait;
 	private CutsceneLines[] lines;
 	private String battleTheme;
+	private String dialogTheme;
 	
 	public Enemy(int money, String name, String battlePromptPortrait, String description) {
 		super(money, name);
@@ -30,9 +33,15 @@ public class Enemy extends Entity{
 		this.namePlate = NAME_PLATE + namePlate;
 	}
 	
-	public Enemy(int money, String name, String battlePromptPortrait, String description, CutsceneLines[] lines, String dialougePortraitPath, String namePlate, String battleTheme) {
+	public Enemy(int money, String name, String battlePromptPortrait, String description, CutsceneLines[] lines, String dialougePortraitPath, String namePlate, String battleTheme, String dialogTheme) {
 		this(money, name, battlePromptPortrait, description, lines, dialougePortraitPath, namePlate);
 		this.battleTheme = battleTheme;
+		this.dialogTheme = dialogTheme;
+	}
+	
+	public CutsceneDialogue getEntryCutscene(JPanel nextScreen) {
+		CutsceneDialogue dialog = new CutsceneDialogue(lines, dialougePortraitPath, namePlate, "placeValley.png", nextScreen, dialogTheme);
+		return dialog;
 	}
 	
 

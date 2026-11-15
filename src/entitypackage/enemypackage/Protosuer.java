@@ -1,5 +1,6 @@
 package entitypackage.enemypackage;
 
+import cutscenepackage.CutsceneDialogue;
 import cutscenepackage.CutsceneLines;
 
 public class Protosuer extends Enemy{
