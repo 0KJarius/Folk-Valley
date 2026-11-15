@@ -31,6 +31,7 @@ public class Enemy extends Entity{
 	public Enemy(int money, String name, String battlePromptPortrait, String description, CutsceneLines[] startLines, CutsceneLines[] endLines, String dialougePortraitPath, String namePlate) {
 		this(money, name, battlePromptPortrait, description);
 		this.startLines = startLines;
+		this.endLines = endLines;
 		this.dialougePortraitPath = DIALOG_PORTRAIT + dialougePortraitPath + "/";
 		this.namePlate = NAME_PLATE + namePlate;
 	}

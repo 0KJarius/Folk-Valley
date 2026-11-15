@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import blackjackpackage.Deck;
 import entitypackage.enemypackage.Enemy;
 import itempackage.Item;
 import mainpackage.MainFrame;
@@ -74,6 +75,8 @@ public class WinScreen extends OverlayMenu{
 			public boolean doTask() {
 				MainFrame.getInstance().removeLayer(EventBus.currentMatch.scanLines);
 				MainFrame.getInstance().setScreen(((Enemy)EventBus.currentMatch.getEnemy()).getEndCutscene());
+				
+				EventBus.player.playerDeck = EventBus.currentMatch.getDeck().cloneDeck();
 				EventBus.player.setInventory((ArrayList<Item>) EventBus.currentMatch.getPlayerInventoryCopy().clone());
 				EventBus.selectedStage.completeStage();
 				if (EventBus.selectedStage.getNextStage() != null) {

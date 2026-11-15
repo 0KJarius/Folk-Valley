@@ -55,6 +55,7 @@ public class Deck {
 	{
 		Deck clone = new Deck();
 		for(Card card : cardDeck) {
+			card.unflipCard();
 			clone.addCard(card);
 		}
 		

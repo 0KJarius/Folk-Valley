@@ -26,7 +26,7 @@ public class Pursuer extends Enemy{
 				new CutsceneLines[] {
 						new CutsceneLines("", "Hey", "normal"),
 						new CutsceneLines("", "It's me", "normal"),
-						new CutsceneLines("", "It's Very Tee", "angry")
+						new CutsceneLines("", "It's Very Tee", "normal")
 				}, 
 				"placeHolder", 
 				"pursuer.png"

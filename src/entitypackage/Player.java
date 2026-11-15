@@ -22,7 +22,6 @@ public class Player extends Entity{
 		super(money, name);
 		EventBus.player = this;
 		playerDeck = new Deck();
-		initializeTestDeck();
 	}
 	
 	public Player(int money, String name, int currentMoney, int maxMoney, int completedStages, int unlockedStages, Deck deck, ArrayList<Item> items) {
