@@ -7,6 +7,10 @@ import utilities.GlobalConstants;
 import utilities.SwingUtils;
 import utilities.EventBus;
 import entitypackage.Player;
+import java.util.Random;
+import itempackage.*;
+import java.util.ArrayList;
+
 
 public class ShopInventory extends JPanel{
 private final static Color BACKGROUND = Color.BLACK;
@@ -15,9 +19,78 @@ private ShopCard card1;
 private ShopCard card2;
 private ShopCard card3;
 private ShopCard card4;
-
+private Random random = new Random();
 private JButton rerollButton;
 private int rerollPrice = 0;
+
+private shopItem generateConsumable() {
+
+    ArrayList<Item> items = new ArrayList<>();
+
+    items.add(new Flip());
+    items.add(new PlusTwo());
+    items.add(new Reverse());
+
+    int roll = random.nextInt(3) + 1;
+
+    for (Item item : items) {
+
+        int rarity = 0;
+
+        if (item instanceof Flip) {
+            rarity = 3;
+        } else if (item instanceof PlusTwo) {
+            rarity = 1;
+        } else if (item instanceof Reverse) {
+            rarity = 2;
+        }
+
+        if (roll == rarity) {
+            return new shopConsumable(
+                75,
+                item.getDescription(),
+                rarity,
+                item
+            );
+        }
+    }
+
+    return null;
+}
+	
+
+	
+
+	
+	
+	
+
+
+
+
+private shopItem generateShopItem() {
+	int chance = random.nextInt(4);
+	
+	if(chance == 0) {
+		return generateConsumable();
+	} else {
+		ShopPack pack = new ShopPack(100);
+		
+		
+		return new ShopCardPack(
+				100,
+				"5 Pack",
+				1,
+				pack,
+				this
+				
+				);
+		
+	}
+	
+	
+}
+
 
 	public ShopInventory() {
 		super();
@@ -30,11 +103,12 @@ private int rerollPrice = 0;
         createShopCards();
 
 		
-		rerollButton = SwingUtils.createJButton(new Dimension(120, 40), "Reroll", Color.PINK);
+		rerollButton = SwingUtils.createJButton(new Dimension(120, 40), "Free Reroll", Color.PINK);
         rerollButton.addActionListener(e -> {
-        	if (EventBus.player.getCurrentMoney() >= rerollPrice) {
-        		reroll();
-        	}
+        	if (EventBus.player != null &&
+        		    EventBus.player.getCurrentMoney() >= rerollPrice) {
+        		    reroll();
+        		}
         });
         
         this.add(body, BorderLayout.CENTER);
@@ -44,17 +118,10 @@ private int rerollPrice = 0;
 		//TEMPCARDD
 		
         private void createShopCards() {
-        	ShopPack pack1 = new ShopPack(100);
-            ShopPack pack2 = new ShopPack(100);
-            ShopPack pack3 = new ShopPack(100);
-            ShopPack pack4 = new ShopPack(100);
-
-             
-             card1 = new ShopCard(pack1, this);
-             card2 = new ShopCard(pack2, this);
-             card3 = new ShopCard(pack3, this);
-             card4 = new ShopCard(pack4, this);
-
+            card1 = new ShopCard(generateShopItem(), this);
+            card2 = new ShopCard(generateShopItem(), this);
+            card3 = new ShopCard(generateShopItem(), this);
+            card4 = new ShopCard(generateShopItem(), this);
 
             body.add(card1);
             body.add(card2);
@@ -72,6 +139,7 @@ private int rerollPrice = 0;
         	body.repaint();
         	EventBus.player.subMoney(rerollPrice);
         	rerollPrice = rerollPrice == 0 ? 50 : (int) (rerollPrice * 1.5);
+            rerollButton.setText(rerollPrice == 50 ? "Reroll: 50" : "Reroll: " + rerollPrice);
         }
 
 
@@ -111,7 +179,7 @@ private int rerollPrice = 0;
 		this.repaint();
 	}
 	
-	
+
 	
 	
 	
