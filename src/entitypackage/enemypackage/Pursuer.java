@@ -5,7 +5,6 @@ import cutscenepackage.CutsceneLines;
 public class Pursuer extends Enemy{
 
 	public Pursuer() {
-		//"persuer.png", "Your loving partner, but they won't go easy on you!")
 		super(
 				200, 
 				"Pursuer", 
@@ -23,6 +22,11 @@ public class Pursuer extends Enemy{
 						new CutsceneLines("", "You forgot?", "normal"),
 						new CutsceneLines("", "Oh dear, honey did you hit your head when waking?", "normal"),
 						new CutsceneLines("", "Well... in any case, I'll just have to give you a refresher!", "normal")
+				},
+				new CutsceneLines[] {
+						new CutsceneLines("", "Hey", "normal"),
+						new CutsceneLines("", "It's me", "normal"),
+						new CutsceneLines("", "It's Very Tee", "angry")
 				}, 
 				"placeHolder", 
 				"pursuer.png"

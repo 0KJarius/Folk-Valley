@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import entitypackage.enemypackage.Enemy;
 import itempackage.Item;
 import mainpackage.MainFrame;
 import stageselectpackage.StageSelectScreen;
@@ -72,7 +73,7 @@ public class WinScreen extends OverlayMenu{
 			@Override
 			public boolean doTask() {
 				MainFrame.getInstance().removeLayer(EventBus.currentMatch.scanLines);
-				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
+				MainFrame.getInstance().setScreen(((Enemy)EventBus.currentMatch.getEnemy()).getEndCutscene());
 				EventBus.player.setInventory((ArrayList<Item>) EventBus.currentMatch.getPlayerInventoryCopy().clone());
 				EventBus.selectedStage.completeStage();
 				if (EventBus.selectedStage.getNextStage() != null) {

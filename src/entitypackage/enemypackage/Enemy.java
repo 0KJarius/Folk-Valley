@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import cutscenepackage.CutsceneDialogue;
 import cutscenepackage.CutsceneLines;
 import entitypackage.Entity;
+import stageselectpackage.StageSelectScreen;
 import utilities.SwingUtils;
 
 public class Enemy extends Entity{
@@ -16,7 +17,8 @@ public class Enemy extends Entity{
 	private String namePlate;
 	private String description;
 	private ImageIcon portrait;
-	private CutsceneLines[] lines;
+	private CutsceneLines[] startLines;
+	private CutsceneLines[] endLines;
 	private String battleTheme;
 	private String dialogTheme;
 	
@@ -26,21 +28,26 @@ public class Enemy extends Entity{
 		this.portrait = SwingUtils.getImage(PORTRAIT_PATH + battlePromptPortrait);
 	}
 	
-	public Enemy(int money, String name, String battlePromptPortrait, String description, CutsceneLines[] lines, String dialougePortraitPath, String namePlate) {
+	public Enemy(int money, String name, String battlePromptPortrait, String description, CutsceneLines[] startLines, CutsceneLines[] endLines, String dialougePortraitPath, String namePlate) {
 		this(money, name, battlePromptPortrait, description);
-		this.lines = lines;
+		this.startLines = startLines;
 		this.dialougePortraitPath = DIALOG_PORTRAIT + dialougePortraitPath + "/";
 		this.namePlate = NAME_PLATE + namePlate;
 	}
 	
-	public Enemy(int money, String name, String battlePromptPortrait, String description, CutsceneLines[] lines, String dialougePortraitPath, String namePlate, String battleTheme, String dialogTheme) {
-		this(money, name, battlePromptPortrait, description, lines, dialougePortraitPath, namePlate);
+	public Enemy(int money, String name, String battlePromptPortrait, String description, CutsceneLines[] startLines, CutsceneLines[] endLines, String dialougePortraitPath, String namePlate, String battleTheme, String dialogTheme) {
+		this(money, name, battlePromptPortrait, description, startLines, endLines, dialougePortraitPath, namePlate);
 		this.battleTheme = battleTheme;
 		this.dialogTheme = dialogTheme;
 	}
 	
 	public CutsceneDialogue getEntryCutscene(JPanel nextScreen) {
-		CutsceneDialogue dialog = new CutsceneDialogue(lines, dialougePortraitPath, namePlate, "placeValley.png", nextScreen, dialogTheme);
+		CutsceneDialogue dialog = new CutsceneDialogue(startLines, dialougePortraitPath, namePlate, "placeValley.png", nextScreen, dialogTheme);
+		return dialog;
+	}
+	
+	public CutsceneDialogue getEndCutscene() {
+		CutsceneDialogue dialog = new CutsceneDialogue(endLines, dialougePortraitPath, namePlate, "placeValley.png", StageSelectScreen.getInstance(), dialogTheme);
 		return dialog;
 	}
 	
@@ -54,7 +61,7 @@ public class Enemy extends Entity{
 	}
 
 	public CutsceneLines[] getLines() {
-		return lines;
+		return startLines;
 	}
 
 	public String getDialougePortraitPath() {

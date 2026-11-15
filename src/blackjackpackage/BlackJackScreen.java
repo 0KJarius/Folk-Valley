@@ -149,7 +149,7 @@ public class BlackJackScreen extends JPanel{
 	public void hardResetStats() {
 		natural = baseNat;
 		rightArea.updateNaturalLabel();
-		enemy.resetWallet();
+		getEnemy().resetWallet();
 		roundCounter = 0;
 		debtCounter = 0;
 		maxMoney = EventBus.player.getCurrentMoney();
@@ -180,10 +180,10 @@ public class BlackJackScreen extends JPanel{
     }
 	
 	public void addBetPool(int amount) {
-		int enemyBet = enemy.getCurrentMoney() < amount ? enemy.getCurrentMoney() : amount;
+		int enemyBet = getEnemy().getCurrentMoney() < amount ? getEnemy().getCurrentMoney() : amount;
 		betPool += amount + enemyBet;
 		infoArea.updateBetLabel();
-		infoArea.subMoney(enemy, false, enemyBet);
+		infoArea.subMoney(getEnemy(), false, enemyBet);
 		infoArea.subMoney(EventBus.player, true, amount);
 	}
 	
@@ -193,7 +193,7 @@ public class BlackJackScreen extends JPanel{
 		
 		if (isTie) {
 			infoArea.addMoney(EventBus.player, playerWin, betPool / 2);
-			infoArea.addMoney(enemy, playerWin, betPool / 2);
+			infoArea.addMoney(getEnemy(), playerWin, betPool / 2);
 			blackJack.getScoreArea().setPlayerLabelText("TIE");
 			blackJack.getScoreArea().setEnemyLabelText("TIE");
 			
@@ -213,7 +213,7 @@ public class BlackJackScreen extends JPanel{
 			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 			
 		} else if (!playerWin && !isTie){
-			infoArea.addMoney(enemy, playerWin, betPool);
+			infoArea.addMoney(getEnemy(), playerWin, betPool);
 			blackJack.getScoreArea().setPlayerLabelText("LOSE");
 			blackJack.getScoreArea().setEnemyLabelText("WIN");
 			
@@ -231,7 +231,7 @@ public class BlackJackScreen extends JPanel{
 			return;
 		}
 		
-		if (enemy.getCurrentMoney() <= 0) {
+		if (getEnemy().getCurrentMoney() <= 0) {
 			MainFrame.getInstance().layerOnScreen(new WinScreen(debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
 			return;
 		}
@@ -340,13 +340,13 @@ public class BlackJackScreen extends JPanel{
 		startMatch();
 		scanLines = SwingUtils.createImageAt("BlackJack/scanLinesOverlay.png", new Point(0, 0));
 		MainFrame.getInstance().layerOnScreen(scanLines, JLayeredPane.POPUP_LAYER);
-		if (((Enemy) enemy).getBattleTheme() == null) {
+		if (((Enemy) getEnemy()).getBattleTheme() == null) {
 			try {
 				SoundBus.playSong("letsPlay.wav", true);
 			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		} else {
 			try {
-				SoundBus.playSong(((Enemy) enemy).getBattleTheme(), true);
+				SoundBus.playSong(((Enemy) getEnemy()).getBattleTheme(), true);
 			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		}
 		
@@ -359,5 +359,9 @@ public class BlackJackScreen extends JPanel{
 		
 		SoundBus.closeCurrentSong();
 		super.removeNotify();
+	}
+
+	public Entity getEnemy() {
+		return enemy;
 	}
 }
