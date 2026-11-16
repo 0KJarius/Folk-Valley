@@ -156,7 +156,6 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void resetDeck() {
-		System.out.println(fullDeck.getSize());
 		deck = fullDeck.cloneDeck();
 	}
 	

@@ -8,6 +8,7 @@ import javax.swing.JLayeredPane;
 import blackjackpackage.BetTable;
 import blackjackpackage.BlackJackScreen;
 import entitypackage.Entity;
+import entitypackage.enemypackage.EnemyCollection;
 import mainpackage.MainFrame;
 import menuPackage.TutorialPrompt;
 import utilities.Signal;
@@ -38,14 +39,14 @@ public class TutorialMatch extends BlackJackScreen{
 
 	
 	
-	public TutorialMatch(Entity enemy) {
-		super(enemy, new TutorialDeck());
+	public TutorialMatch() {
+		super(EnemyCollection.PURSUER.getEnemy(), new TutorialDeck());
 		setBetTable(betTable);
 		
 	}
 	
-	public TutorialMatch(Entity enemy, int natural) {
-		super(enemy, natural, new TutorialDeck());
+	public TutorialMatch(int natural) {
+		super(EnemyCollection.PURSUER.getEnemy(), natural, new TutorialDeck());
 	}
 
 

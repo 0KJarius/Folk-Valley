@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JLayeredPane;
 
 import blackjackpackage.BlackJackScreen;
+import blackjackpackage.custom_matchpackage.tutorial.OnoTutorialMatch;
 import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
 import menuPackage.BattlePrompt;
 import shoppackage.ShopTable;
@@ -27,23 +28,32 @@ public class StageCollection {
 		builder.setDestination(
 				new BattlePrompt(
 						EnemyCollection.PROTOSUER.getEnemy(), 
-						EnemyCollection.PROTOSUER.getEnemy().getEntryCutscene(new BlackJackScreen(EnemyCollection.PURSUER.getEnemy(), EventBus.player.playerDeck)))
+						EnemyCollection.PROTOSUER.getEnemy().getEntryCutscene(EnemyCollection.PROTOSUER.getEnemy().getMatch()))
 				);
 		
 		stages.add(builder.build());
 		builder.setLayer(JLayeredPane.MODAL_LAYER);
 		builder.setNextStage(stages.get(stages.size() - 1));
 		stages.add(builder.build());
-		builder.setNextStage(stages.get(stages.size() - 1));
-		stages.add(builder.build());
+		
 		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 1)));
+		
+		builder.setNextStage(stages.get(stages.size() - 1));
+		builder.setStageName("Numer O. Uno");
+		builder.setDestination(
+				new BattlePrompt(
+						EnemyCollection.NUMEROUNO.getEnemy(),
+						EnemyCollection.NUMEROUNO.getEnemy().getEntryCutscene(EnemyCollection.NUMEROUNO.getEnemy().getMatch())
+				)
+		);
+		stages.add(builder.build());
 		
 		builder.setStageName("TUTORIAL");
 		builder.setDestination(new BattlePrompt(
 						EnemyCollection.PURSUER.getEnemy(), 
-						EnemyCollection.PURSUER.getEnemy().getEntryCutscene(new TutorialMatch(EnemyCollection.PURSUER.getEnemy()))
+						EnemyCollection.PURSUER.getEnemy().getEntryCutscene(EnemyCollection.PURSUER.getEnemy().getMatch())
 					)
-				);
+		);
 		builder.setNextStage(stages.get(stages.size() - 1));
 		stages.add(builder.build());
 	}

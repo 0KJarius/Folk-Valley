@@ -3,13 +3,15 @@ package entitypackage.enemypackage;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import blackjackpackage.BlackJackScreen;
 import cutscenepackage.CutsceneDialogue;
 import cutscenepackage.CutsceneLines;
 import entitypackage.Entity;
 import stageselectpackage.StageSelectScreen;
+import utilities.EventBus;
 import utilities.SwingUtils;
 
-public class Enemy extends Entity{
+public abstract class Enemy extends Entity{
 	protected static final String PORTRAIT_PATH = "battlePrompt/portrait/";
 	protected static final String NAME_PLATE = "cutscene/namePlates/";
 	protected static final String DIALOG_PORTRAIT = "cutscene/Portraits/";
@@ -36,10 +38,19 @@ public class Enemy extends Entity{
 		this.namePlate = NAME_PLATE + namePlate;
 	}
 	
+	
 	public Enemy(int money, String name, String battlePromptPortrait, String description, CutsceneLines[] startLines, CutsceneLines[] endLines, String dialougePortraitPath, String namePlate, String battleTheme, String dialogTheme) {
 		this(money, name, battlePromptPortrait, description, startLines, endLines, dialougePortraitPath, namePlate);
 		this.battleTheme = battleTheme;
 		this.dialogTheme = dialogTheme;
+	}
+	
+	public  BlackJackScreen getMatch() {
+		return new BlackJackScreen(this, EventBus.player.playerDeck);
+	}
+	
+	public  BlackJackScreen getMatch(int natural) {
+		return new BlackJackScreen(this, natural, EventBus.player.playerDeck);
 	}
 	
 	public CutsceneDialogue getEntryCutscene(JPanel nextScreen) {

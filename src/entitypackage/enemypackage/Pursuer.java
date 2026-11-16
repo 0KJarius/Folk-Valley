@@ -1,5 +1,9 @@
 package entitypackage.enemypackage;
 
+import blackjackpackage.BlackJackScreen;
+import blackjackpackage.custom_matchpackage.tutorial.OnoTutorialDeck;
+import blackjackpackage.custom_matchpackage.tutorial.OnoTutorialMatch;
+import blackjackpackage.custom_matchpackage.tutorial.TutorialMatch;
 import cutscenepackage.CutsceneLines;
 
 public class Pursuer extends Enemy{
@@ -31,6 +35,16 @@ public class Pursuer extends Enemy{
 				"placeHolder", 
 				"pursuer.png"
 		);
+	}
+
+	@Override
+	public BlackJackScreen getMatch() {
+		return new TutorialMatch();
+	}
+	
+	@Override
+	public BlackJackScreen getMatch(int natural) {
+		return new TutorialMatch(natural);
 	}
 
 }

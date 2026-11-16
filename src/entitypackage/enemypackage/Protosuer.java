@@ -1,5 +1,8 @@
 package entitypackage.enemypackage;
 
+import blackjackpackage.BlackJackScreen;
+import blackjackpackage.custom_matchpackage.tutorial.OnoTutorialDeck;
+import blackjackpackage.custom_matchpackage.tutorial.OnoTutorialMatch;
 import cutscenepackage.CutsceneDialogue;
 import cutscenepackage.CutsceneLines;
 

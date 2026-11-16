@@ -84,7 +84,6 @@ public class Stage extends JButton implements MouseListener{
 	public void unlockStage() {
 		this.setIcon(stageFrame);
 		this.setText(stageName);
-		System.out.println(stageName);
 		isLocked = false;
 		EventBus.player.stagesUnlocked++;
 	}
@@ -145,7 +144,6 @@ public class Stage extends JButton implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		if (!isLocked && !isComplete) {
 			if (layer == null) {
-				System.out.print(layer);
 				MainFrame.getInstance().setScreen(destination);
 			} else {
 				MainFrame.getInstance().layerOnScreen(destination, layer);
