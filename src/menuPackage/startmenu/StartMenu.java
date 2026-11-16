@@ -16,6 +16,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import mainpackage.MainFrame;
 import stageselectpackage.StageSelectScreen;
+import utilities.GlobalConstants;
 import utilities.SoundBus;
 import utilities.SwingUtils;
 
@@ -25,7 +26,7 @@ public class StartMenu extends JPanel{
 	
 	public StartMenu() 
 	{
-		this.setBounds(new Rectangle(1280, 720));
+		this.setBounds(new Rectangle(GlobalConstants.SCREEN_SIZE));
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.GREEN);
 		

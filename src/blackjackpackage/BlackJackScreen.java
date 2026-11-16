@@ -24,6 +24,7 @@ import mainpackage.MainFrame;
 import menuPackage.GameOverScreen;
 import menuPackage.WinScreen;
 import utilities.EventBus;
+import utilities.GlobalConstants;
 import utilities.Signal;
 import utilities.SoundBus;
 import utilities.SwingUtils;
@@ -77,7 +78,7 @@ public class BlackJackScreen extends JPanel{
 	
 	public BlackJackScreen(Entity enemy, Deck deck) {
 		this.setLayout(new BorderLayout());
-		this.setBounds(new Rectangle(1280, 720));
+		this.setBounds(new Rectangle(GlobalConstants.SCREEN_SIZE));
 		this.setBackground(new Color(88, 47, 44));
 		fullDeck = deck.cloneDeck();
 		this.deck = deck;

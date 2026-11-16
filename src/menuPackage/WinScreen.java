@@ -45,7 +45,7 @@ public class WinScreen extends OverlayMenu{
 		
 		setUpStatsArea();
 		setUpWinPanel();
-		basePane.add(SwingUtils.createJPanel(new Rectangle(1280, 720), new Color(0, 0, 0, 100)), JLayeredPane.DEFAULT_LAYER);
+		basePane.add(SwingUtils.createJPanel(new Rectangle(GlobalConstants.SCREEN_SIZE), new Color(0, 0, 0, 100)), JLayeredPane.DEFAULT_LAYER);
 		basePane.add(SwingUtils.createImageAt("MenuStuff/winLayout.png", new Point(0, 0)), JLayeredPane.PALETTE_LAYER);
 		basePane.add(statsArea, JLayeredPane.MODAL_LAYER);
 		basePane.add(winArea, JLayeredPane.MODAL_LAYER);

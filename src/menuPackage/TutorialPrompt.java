@@ -32,14 +32,14 @@ public class TutorialPrompt extends JPanel{
 	
 
 	public TutorialPrompt() {
-		this.setBounds(0, 0, 1280, 720);
+		this.setBounds(new Rectangle(GlobalConstants.SCREEN_SIZE));
 		this.setLayout(new BorderLayout());
 		this.setOpaque(false);
 		basePane = new JLayeredPane();
-		basePane.setPreferredSize(new Dimension(1280, 720));
+		basePane.setPreferredSize(GlobalConstants.SCREEN_SIZE);
 		this.add(basePane);
 		
-		content = SwingUtils.createJPanel(new Rectangle(1280, 720), BLOCKER_COLOR);
+		content = SwingUtils.createJPanel(new Rectangle(GlobalConstants.SCREEN_SIZE), BLOCKER_COLOR);
 		content.setLayout(new BorderLayout());
 		content.setOpaque(false);
 		basePane.add(content, JLayeredPane.DEFAULT_LAYER);

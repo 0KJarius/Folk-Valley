@@ -54,7 +54,7 @@ public abstract class SwingUtils {
         	@Override 
         	protected void paintComponent(java.awt.Graphics g) {
         		   Double scaleObj = (Double) getClientProperty(AnimationUtils.KEY_SCALE);
-        	        Double angleObj = (Double) getClientProperty(AnimationUtils.KEY_ANGLE);
+        	       Double angleObj = (Double) getClientProperty(AnimationUtils.KEY_ANGLE);
         	        
         	        double scale = (scaleObj != null) ? scaleObj : 1.0;
         	        double angle = (angleObj != null) ? angleObj : 0.0;
