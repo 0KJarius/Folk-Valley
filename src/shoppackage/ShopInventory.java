@@ -71,24 +71,33 @@ private shopItem generateConsumable() {
 private shopItem generateShopItem() {
 	int chance = random.nextInt(4);
 	
-	if(chance == 0) {
+	switch (chance) {
+	
+	case 0:
+		// ITEMS / CONSUMABLES
 		return generateConsumable();
-	} else {
-		ShopPack pack = new ShopPack(100);
+	
+	case 1:
+		// JOHN POKER PACK
+		ShopPack pokerPack = new ShopPack(100, ShopPack.PackType.POKER);
 		
+		return new ShopCardPack(100, "Poker Pack", 1, pokerPack, this);
 		
-		return new ShopCardPack(
-				100,
-				"5 Pack",
-				1,
-				pack,
-				this
-				
-				);
+	case 2:
+		// JOHN UNO PACK
+		ShopPack unoPack = new ShopPack(100, ShopPack.PackType.UNO);
+		
+		return new ShopCardPack(100, "UNO Pack", 1, unoPack, this);
+		
+	case 3:
+		// JOHN POKER PACK
+		ShopPack mixedPack = new ShopPack(100, ShopPack.PackType.MIXED);
+		
+		return new ShopCardPack(100, "Mixed Pack", 1, mixedPack, this);
 		
 	}
 	
-	
+	return null;
 }
 
 

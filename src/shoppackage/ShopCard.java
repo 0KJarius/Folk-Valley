@@ -37,14 +37,24 @@ public class ShopCard extends JPanel {
         ImageIcon cardImage = null;
 
         if (shopItem instanceof ShopCardPack) {
-            PokerCard previewCard = (PokerCard)
-                ((ShopCardPack) shopItem).getPack().getCards().get(0);
-
-            cardImage = previewCard.getCardImg();
-
+        	ShopPack pack = ((ShopCardPack) shopItem).getPack();
+        	
+        	switch (pack.getPackType()) {
+        	case POKER:
+        		cardImage = SwingUtils.getImage("Shop/packs/poker.png");
+        		break;
+        	case UNO:
+        		cardImage = SwingUtils.getImage("Shop/packs/ono.png");
+        		break;	
+        	case MIXED:
+        		cardImage = SwingUtils.getImage("Shop/packs/mix.png");
+        		break;
+        		
+        	}
+       
         } else if (shopItem instanceof shopConsumable) {
-            shopConsumable consumable = (shopConsumable) shopItem;
-            cardImage = consumable.getItem().getItemImg();
+        	shopConsumable consumable = (shopConsumable) shopItem;
+        	cardImage = consumable.getItem().getItemImg();
         }
 
         if (cardImage != null) {
