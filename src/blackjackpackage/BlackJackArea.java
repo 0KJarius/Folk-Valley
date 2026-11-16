@@ -76,15 +76,6 @@ public class BlackJackArea extends JPanel{
         this.repaint();   
     }
 	
-	public void setTable(){
-        EventBus.currentMatch.addCard(getEnemyHand());
-        EventBus.currentMatch.addCard(getEnemyHand());
-        
-        EventBus.currentMatch.addCard(playerHand);
-        EventBus.currentMatch.addCard(playerHand);
-        buttonArea.setButtonsActivated(true);
-    }
-	
 	public void replacePlayerHand() {
 		buttonArea.split.setEnabled(false);
 		contentPanel.remove(playerHand);
