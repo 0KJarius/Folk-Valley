@@ -123,7 +123,7 @@ public class BetTable extends OverlayMenu
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (EventBus.player.getCurrentMoney() >= EventBus.player.getCurrentMoney() && EventBus.player.getCurrentMoney() > 0) {
+				if (EventBus.player.getCurrentMoney() > 0) {
 					EventBus.currentMatch.addBetPool(EventBus.player.getCurrentMoney());
 					
 					try {
