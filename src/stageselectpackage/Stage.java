@@ -101,30 +101,6 @@ public class Stage extends JButton implements MouseListener{
     	isLocked = true;
 	}
 	
-	public Stage copyStage() {
-		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer);
-	}
-	
-	public Stage copyStage(String stageName, boolean isLocked, JPanel destination, Stage nextStage) {
-		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, nextStage);
-	}
-	
-	public Stage copyStage(String stageName, boolean isLocked, JPanel destination, Integer layer, Stage nextStage) {
-		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer, nextStage);
-	}
-	
-	public Stage copyStage(Stage nextStage) {
-		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, nextStage);
-	}
-	
-	public Stage copyStage(boolean isLocked) {
-		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer);
-	}
-	
-	public Stage copyStage(boolean isLocked, Stage nextStage) {
-		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, nextStage);
-	}
-	
 	public Stage getNextStage() {
 		return nextStage;
 	}
