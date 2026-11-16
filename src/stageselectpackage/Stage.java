@@ -98,6 +98,11 @@ public class Stage extends JButton implements MouseListener{
 	public void lockStage() {
 		this.setIcon(LOCKED_ICON);
     	this.setText("");
+    	isLocked = true;
+	}
+	
+	public Stage copyStage() {
+		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer);
 	}
 	
 	public Stage copyStage(String stageName, boolean isLocked, JPanel destination, Stage nextStage) {
@@ -106,10 +111,6 @@ public class Stage extends JButton implements MouseListener{
 	
 	public Stage copyStage(String stageName, boolean isLocked, JPanel destination, Integer layer, Stage nextStage) {
 		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer, nextStage);
-	}
-	
-	public Stage copyStage() {
-		return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer);
 	}
 	
 	public Stage copyStage(Stage nextStage) {
