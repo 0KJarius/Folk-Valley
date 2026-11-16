@@ -12,7 +12,7 @@ import javax.swing.JToggleButton;
 import utilities.AnimationUtils;
 import utilities.SoundBus;
 
-public abstract class Card extends JToggleButton 
+public abstract class Card extends JToggleButton implements MouseListener
 {
     private int score;
     private transient Random rng;
@@ -20,43 +20,12 @@ public abstract class Card extends JToggleButton
 
     public Card()
     {
-    	Card self = this;
         rng = new Random();
         score = rng.nextInt(1, 11);
         this.setPreferredSize(new Dimension(150, 200));
         this.repaint();
         
-        this.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					SoundBus.playSFX("card/selectCard.wav");
-				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				self.setLocation(self.getX(), self.getY() - 10);
-				
-				try {
-					SoundBus.playSFX("card/cardHover.wav");
-				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
-				
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {	
-				self.setLocation(self.getX(), self.getY() + 10);
-			}
-        	
-        });
+        this.addMouseListener(this);
         
     }
     
@@ -99,11 +68,38 @@ public abstract class Card extends JToggleButton
     public boolean isCardFlipped() {
 		return isFlipped;
 	}
+    
+    @Override
+	public void mouseClicked(MouseEvent e) {
+		try {
+			SoundBus.playSFX("card/selectCard.wav");
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		this.setLocation(this.getX(), this.getY() - 10);
+		
+		try {
+			SoundBus.playSFX("card/cardHover.wav");
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {	
+		this.setLocation(this.getX(), this.getY() + 10);
+	}
 
 	@Override
     public void addNotify() {
     	this.setVisible(true);
-    	AnimationUtils.popup(this, 4.5, 500, 19);
     	try {
 			SoundBus.playSFX("card/cardSlide.wav");
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}

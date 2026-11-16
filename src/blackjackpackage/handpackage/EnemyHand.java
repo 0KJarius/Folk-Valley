@@ -20,26 +20,26 @@ public class EnemyHand extends Hand{
 
         super.addNewCard(addedCard);
 
-        if (super.getCards().indexOf(addedCard) == 1){
+        if (getCards().indexOf(addedCard) == 1){
             addedCard.flipCard();
-            if (!(addedCard instanceof UnoCard)) {super.setScore(super.getScore() - addedCard.getCardScore());}
+            if (!(addedCard instanceof UnoCard)) {setScore(getScore() - addedCard.getCardScore());}
         }
         
         if (isHitting && addedCard instanceof UnoCard) {
-        	super.applySingleUnoCard((UnoCard)addedCard);
+        	applySingleUnoCard((UnoCard)addedCard);
         }
     }
     
 
     public void reveal(){
-        super.getCards().get(1).unflipCard();
-        if (super.getCards().get(1) instanceof UnoCard) {
+        getCards().get(1).unflipCard();
+        if (getCards().get(1) instanceof UnoCard) {
         	applyUnoCards();
         } else {
-        	super.setScore(super.getScore() + (super.getCards().get(1).getCardScore() - super.getDebt()));
+        	setScore(getScore() + (getCards().get(1).getCardScore() - getDebt()));
         }
         
-        if (super.getScore() <= 16){
+        if (getScore() <= 16){
         	isHitting = true;
             task.doTask();
         }

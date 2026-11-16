@@ -167,6 +167,17 @@ public abstract class Hand extends JPanel
     	return false;
     }
     
+    public void applySingleUnoCard(UnoCard uno) {
+    	for (Card card : cards) 
+		{
+			if (card instanceof PokerCard && ((PokerCard) card).getSuit() == uno.getColor().getEquivalent() ||
+				card instanceof UnoCard && uno != card && ((UnoCard)card).getColor() == uno.getColor() || card.getCardScore() == uno.getCardScore() && uno != card) {
+				score += uno.getCardScore();
+				break;
+			}
+		}
+    }
+    
     public void applyUnoCards() {
     	if (unoCards.isEmpty()) {
     		return;
@@ -186,24 +197,7 @@ public abstract class Hand extends JPanel
     		}
     	}
     }
-    
-    public boolean deleteUnoCards() {
-    	if (unoCards.isEmpty()) {
-    		return false;
-    	}
-    	
-    	for (int i = 0; i < unoCards.size(); i++) {
-    		cards.remove(unoCards.get(i));
-    		unoCards.get(i).removeThis();
-    		cardPanel.remove(unoCards.get(i));
-    		unoCards.remove(unoCards.get(i));
-    	}
-    	
-    	cardPanel.repaint();
-    	cardPanel.revalidate();
-    	return true;
-    }
-    
+        
     public boolean deleteUnoCards(UnoCard.CardColor color) {
     	if (unoCards.isEmpty()) {
     		return false;
@@ -215,7 +209,7 @@ public abstract class Hand extends JPanel
     			toDelete.add(unoCards.get(i));
     		}
     	}
-    	System.out.println(toDelete.size());
+    	
     	for (int i = 0; i < toDelete.size(); i++) {
     		cards.remove(toDelete.get(i));
     		toDelete.get(i).removeThis();
@@ -234,16 +228,6 @@ public abstract class Hand extends JPanel
     	
     }
     
-    public void applySingleUnoCard(UnoCard uno) {
-    	for (Card card : cards) 
-		{
-			if (card instanceof PokerCard && ((PokerCard) card).getSuit() == uno.getColor().getEquivalent() ||
-				card instanceof UnoCard && uno != card && ((UnoCard)card).getColor() == uno.getColor() || card.getCardScore() == uno.getCardScore() && uno != card) {
-				score += uno.getCardScore();
-				break;
-			}
-		}
-    }
     
     public ArrayList<Card> getCards() {return cards;}
     
