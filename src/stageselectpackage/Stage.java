@@ -114,6 +114,7 @@ public class Stage extends JButton implements MouseListener{
 			this.setIcon(stageFrame);
 			this.setText(stageName);
 		}
+		
 	}
 
 	@Override

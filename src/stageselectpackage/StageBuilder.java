@@ -34,10 +34,9 @@ public class StageBuilder {
 	}
 	
 	public Stage build() {
-		if (layer != null && nextStage == null) {
-			return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer);
-		} 
-		if (nextStage != null) {
+		if (layer != null) {
+			return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer, nextStage);
+		} if (nextStage != null) {
 			if (layer != null) {
 				return new Stage(stageName, textColor, stageFrameName, isLocked, destination, layer, nextStage);
 			}
