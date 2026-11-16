@@ -8,11 +8,6 @@ public class ImageTracker {
 	private static ImageTracker TRACKER = new ImageTracker();
 	private static HashMap<ImageIcon, String> ImageMap = new HashMap<ImageIcon, String>();
 	
-	
-	private ImageTracker() {	
-	}
-
-
 	public static ImageTracker getInstance() {
 		return TRACKER;
 	}
