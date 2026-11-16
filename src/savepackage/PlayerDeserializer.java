@@ -67,18 +67,21 @@ public class PlayerDeserializer implements JsonDeserializer<Player>{
 	private Item itemDecoder(JsonObject jItem) {
 		Item item = null;
 		switch(jItem.get("name").getAsString()) {
-		case "Flip Cards":
-			item = new Flip();
-			break;
-		case "Plus Two":
-			item = new PlusTwo();
-			break;
-		case "Reverse":
-			item = new Reverse();
-			break;
-		case "Color Picker":
-			item = new ColorPicker();
-			break;
+			case "Flip Cards":
+				item = new Flip();
+				break;
+			case "Plus Two":
+				item = new PlusTwo();
+				break;
+			case "Reverse":
+				item = new Reverse();
+				break;
+			case "Color Picker":
+				item = new ColorPicker();
+				break;
+			default:
+				item = new ColorPicker();
+				break;
 		}
 		
 		return item;

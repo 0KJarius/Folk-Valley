@@ -39,7 +39,7 @@ public class StageSelectScreen extends JPanel{
 	private final String DECK_BUTTON_PATH = "stageSelect/deck/";
 	
 	private StageSelectScreen() {
-		this.setBounds(new Rectangle(1280, 720));
+		this.setBounds(new Rectangle(GlobalConstants.SCREEN_SIZE));
 		this.setLayout(new BorderLayout());
 		basePane.setPreferredSize(this.getSize());
 		this.add(basePane);
