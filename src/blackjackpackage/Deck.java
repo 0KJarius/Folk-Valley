@@ -17,10 +17,10 @@ public class Deck {
 		cardDeck.addLast(newCard);
 	}
 	
-	public void removeCard(Card newCard) 
+	public void removeCard(Card card) 
 	{
-		if (cardDeck.contains(newCard)) {
-			cardDeck.remove(newCard);
+		if (cardDeck.contains(card)) {
+			cardDeck.remove(card);
 		}
 	}
 	
