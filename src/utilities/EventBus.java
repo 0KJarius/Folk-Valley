@@ -35,15 +35,4 @@ public abstract class EventBus {
 		
 		waitTimer.scheduleAtFixedRate(timeTask, miliSeconds, 1);
 	}
-	
-	public static Signal changeToScreenOnSignal(JPanel screen) {
-		Signal task = new Signal() {
-			@Override
-			public boolean doTask() {
-				MainFrame.getInstance().setScreen(screen);
-				return false;
-			}
-		};
-		return task;
-	}
 }
