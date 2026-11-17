@@ -75,9 +75,4 @@ public class MainFrame extends JFrame{
 		baseLayer.repaint();
 		baseLayer.revalidate();
 	}
-	
-	public void removeLayer(JComponent component, Signal removeTask) {
-		removeLayer(component);
-		removeTask.doTask();
-	}
 }
