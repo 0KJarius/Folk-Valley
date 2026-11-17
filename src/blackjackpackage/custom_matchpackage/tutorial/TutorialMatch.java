@@ -265,11 +265,6 @@ public class TutorialMatch extends BlackJackScreen{
 		prompt.setTask(betTablePrompt);
 	}
 
-	@Override
-	public void removeNotify() {
-		super.removeNotify();
-	}
-	
 	
 	
 }
