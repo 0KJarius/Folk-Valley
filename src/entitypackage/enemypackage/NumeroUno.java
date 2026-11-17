@@ -40,7 +40,9 @@ public class NumeroUno extends Enemy{
 						new CutsceneLines("", "In any case, you should get going now. See around!", "normal"),
 				}, 
 				"numero", 
-				"numeroUno.png"
+				"numeroUno.png",
+				"somethingOwesome.wav",
+				null
 		);
 	}
 

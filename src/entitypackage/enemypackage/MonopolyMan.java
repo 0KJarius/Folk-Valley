@@ -27,7 +27,9 @@ public class MonopolyMan extends Enemy{
 						new CutsceneLines("", "NOOOOOOOOOOOOOOOOOOOO", "sad")
 				},
 				"monopolee",
-				"monopoly.png"
+				"monopoly.png",
+				"AgainstTheMonopolee.wav",
+				"evilahhbeat.wav"
 		);
 	}
 }

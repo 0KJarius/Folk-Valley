@@ -55,6 +55,7 @@ public abstract class Enemy extends Entity{
 	
 	public CutsceneDialogue getEntryCutscene(JPanel nextScreen) {
 		CutsceneDialogue dialog = new CutsceneDialogue(startLines, dialougePortraitPath, namePlate, "placeValley.png", nextScreen, dialogTheme);
+		System.out.println(dialogTheme);
 		return dialog;
 	}
 	
