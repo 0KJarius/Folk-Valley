@@ -98,10 +98,12 @@ public class ShopInventory extends JPanel{
 
 	public ShopInventory() {
 		super();
-		
+		this.setPreferredSize(new Dimension(967, 530));
 		this.setLayout(new BorderLayout());
-		
-		body = SwingUtils.createJPanel(new Dimension(700, 500), BACKGROUND);
+		this.setOpaque(false);
+		this.setBorder(BorderFactory.createEmptyBorder(10, 4, 10, 10));
+		body = SwingUtils.createJPanel(new Dimension(0, 0), BACKGROUND);
+		body.setOpaque(false);
 		body.setLayout(new GridLayout(0, 4, 10, 10));
 		
         createShopCards();
@@ -143,6 +145,7 @@ public class ShopInventory extends JPanel{
         	this.remove(body);
 		
         	JPanel selectPanel = SwingUtils.createJPanel(new Dimension(700, 500), BACKGROUND);
+        	selectPanel.setOpaque(false);
         	selectPanel.setLayout(new BorderLayout(10, 10));
 		
         	JLabel title = SwingUtils.createJLabel("CHOOSE A CARD", 20, Color.CYAN, GlobalConstants.MARTIAN_MONO);
@@ -150,6 +153,7 @@ public class ShopInventory extends JPanel{
         	selectPanel.add(title, BorderLayout.NORTH);
 		
         	JPanel cardPanel = SwingUtils.createJPanel(new Dimension(700, 400), BACKGROUND);
+        	cardPanel.setOpaque(false);
         	cardPanel.setLayout(new GridLayout(1,5,10,10));
 		
         	for (Card card : pack.getCards()) {

@@ -31,6 +31,7 @@ public class ShopCard extends JPanel {
 
         this.setLayout(new BorderLayout(5, 5));
         this.setBackground(BACKGROUND_COLOR);
+        this.setOpaque(false);
         this.setPreferredSize(new Dimension(150, 240));
 
         // Display item image
@@ -58,14 +59,8 @@ public class ShopCard extends JPanel {
         }
 
         if (cardImage != null) {
-            int imageWidth = shopItem instanceof shopConsumable ? 130 : 100;
-            int imageHeight = 140;
 
-            Image scaledImage = cardImage.getImage().getScaledInstance(
-                imageWidth, imageHeight, Image.SCALE_SMOOTH
-            );
-
-            JLabel packLabel = new JLabel(new ImageIcon(scaledImage));
+            JLabel packLabel = new JLabel(cardImage);
             packLabel.setHorizontalAlignment(SwingConstants.CENTER);
             packLabel.setToolTipText(description);
 
@@ -91,22 +86,23 @@ public class ShopCard extends JPanel {
 
         // BUY BTN
         buyButton = SwingUtils.createJButton(
-            new Dimension(150, 30), "Buy >.<", Color.PINK
+            new Dimension(235, 56), "Buy >.<", Color.PINK
         );
 
         buyButton.setToolTipText(description);
+        
 
         buyButton.addActionListener(e -> {
 
             if (EventBus.player == null) {
-                messageLabel.setForeground(Color.RED);
-                messageLabel.setText("Ur not found");
+            	priceLabel.setForeground(Color.RED);
+            	priceLabel.setText("Ur not found");
                 return;
             }
 
             if (purchased) {
-                messageLabel.setForeground(Color.YELLOW);
-                messageLabel.setText("u bought tis already");
+            	priceLabel.setForeground(Color.YELLOW);
+            	priceLabel.setText("u bought tis already");
                 return;
             }
 
@@ -116,25 +112,26 @@ public class ShopCard extends JPanel {
                 purchased = true;
                 buyButton.setEnabled(false);
 
-                messageLabel.setForeground(Color.GREEN);
-                messageLabel.setText("Bought!");
+                priceLabel.setForeground(Color.GREEN);
+                priceLabel.setText("Bought!");
 
                 shopItem.buy();
-
+                ShopTable.onBuySomething();
             } else {
-                messageLabel.setForeground(Color.RED);
-                messageLabel.setText("Not enough money!");
+            	priceLabel.setForeground(Color.RED);
+            	priceLabel.setText("Not enough money!");
             }
+            ShopTable.moneyLabel.setText("V" + EventBus.player.getCurrentMoney());
         });
 
         JPanel bottomPanel = SwingUtils.createJPanel(
             new Dimension(150, 80), BACKGROUND_COLOR
         );
+        bottomPanel.setOpaque(false);
 
-        bottomPanel.setLayout(new GridLayout(3, 1));
-        bottomPanel.add(priceLabel);
+        bottomPanel.setLayout(new BorderLayout());
+        bottomPanel.add(priceLabel, BorderLayout.NORTH);
         bottomPanel.add(buyButton);
-        bottomPanel.add(messageLabel);
 
         this.add(bottomPanel, BorderLayout.SOUTH);
 
