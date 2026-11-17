@@ -9,6 +9,8 @@ import utilities.EventBus;
 import entitypackage.Player;
 import java.util.Random;
 import itempackage.*;
+import itempackage.colorpicker.ColorPicker;
+
 import java.util.ArrayList;
 
 
@@ -20,7 +22,6 @@ public class ShopInventory extends JPanel{
 	private ShopCard card3;
 	private ShopCard card4;
 	private Random random = new Random();
-	private JButton rerollButton;
 	private int rerollPrice = 0;
 
 	private shopItem generateConsumable() {
@@ -30,8 +31,9 @@ public class ShopInventory extends JPanel{
 		items.add(new Flip());
 		items.add(new PlusTwo());
 		items.add(new Reverse());
+		items.add(new ColorPicker());
 
-		int roll = random.nextInt(3) + 1;
+		int roll = random.nextInt(4) + 1;
     
 		for (Item item : items) {
 
@@ -43,6 +45,8 @@ public class ShopInventory extends JPanel{
 				rarity = 1;
 			} else if (item instanceof Reverse) {
 				rarity = 2;
+			} else if (item instanceof ColorPicker) {
+				rarity = 4;
 			}
 
 			if (roll == rarity) {
@@ -102,18 +106,8 @@ public class ShopInventory extends JPanel{
 		
         createShopCards();
 
-		
-		rerollButton = SwingUtils.createJButton(new Dimension(120, 40), "Free Reroll", Color.PINK);
-        rerollButton.addActionListener(e -> {
-        	if (EventBus.player != null &&
-        		    EventBus.player.getCurrentMoney() >= rerollPrice) {
-        		    reroll();
-        		}
-        });
         
         this.add(body, BorderLayout.CENTER);
-        this.add(rerollButton, BorderLayout.SOUTH);
-		
 	}
 		//TEMPCARDD
 		
@@ -131,15 +125,14 @@ public class ShopInventory extends JPanel{
         	
         }
         
-        private void reroll() {
+        public void reroll() {
         	body.removeAll();
         	createShopCards();
         	
         	body.revalidate();
         	body.repaint();
-        	EventBus.player.subMoney(rerollPrice);
-        	rerollPrice = rerollPrice == 0 ? 50 : (int) (rerollPrice * 1.5);
-            rerollButton.setText(rerollPrice == 50 ? "Reroll: 50" : "Reroll: " + rerollPrice);
+        	EventBus.player.subMoney(getRerollPrice());
+        	rerollPrice = getRerollPrice() == 0 ? 50 : (int) (getRerollPrice() * 1.5);
         }
 
 
@@ -148,7 +141,6 @@ public class ShopInventory extends JPanel{
 	
         public void showSelect(ShopPack pack, Player player) {
         	this.remove(body);
-        	this.remove(rerollButton);
 		
         	JPanel selectPanel = SwingUtils.createJPanel(new Dimension(700, 500), BACKGROUND);
         	selectPanel.setLayout(new BorderLayout(10, 10));
@@ -165,7 +157,6 @@ public class ShopInventory extends JPanel{
         			player.playerDeck.addCard(card);
         			this.remove(selectPanel);
         			this.add(body, BorderLayout.CENTER);
-        			this.add(rerollButton, BorderLayout.SOUTH);
         			this.revalidate();
         			this.repaint();
 			});
@@ -177,6 +168,11 @@ public class ShopInventory extends JPanel{
 		this.add(selectPanel, BorderLayout.CENTER);
 		this.revalidate();
 		this.repaint();
+	}
+
+
+	public int getRerollPrice() {
+		return rerollPrice;
 	}
 	
 
