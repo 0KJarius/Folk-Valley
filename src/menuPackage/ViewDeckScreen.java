@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import blackjackpackage.Deck;
@@ -119,44 +120,17 @@ public class ViewDeckScreen extends OverlayMenu{
 		
 	}
 	
-	private void setUpDeckCountPanel() {
-		int[] pokerCardCount = {aceCounter, faceCounter, numberCounter, spadeCounter, clubCounter, heartCounter, diamondCounter};
-		int[] unoCardCount = {redCounter, blueCounter, yellowCounter, greenCounter};
-		
+	private void setUpDeckCountPanel() {		
 		deckCountPanel.setOpaque(false);
-		deckCountPanel.setLayout(new BorderLayout());
+		deckCountPanel.setLayout(new FlowLayout());
+		((FlowLayout)deckCountPanel.getLayout()).setVgap(110);
+		JTextArea textArea = SwingUtils.creatJTextArea(new Dimension(437, 563), GlobalConstants.VCR_MONO, 40, 10, Color.white, new Color(9, 10, 21));
+		String formatString = String.format("ACE COUNT: %d%nFACE COUNT: %d%nNUMBER COUNT: %d%n", aceCounter, faceCounter, numberCounter);
+		formatString += String.format("SPADE COUNT: %d%nCLUB COUNT: %d%nHEART COUNT: %d%nDIAMOND COUNT: %d%n", spadeCounter, clubCounter, heartCounter, diamondCounter);
+		formatString += String.format("RED COUNT: %d%nBLUE COUNT: %d%nYELLOW COUNT: %d%nGREEN COUNT: %d%n", redCounter, blueCounter, yellowCounter, greenCounter);
+		textArea.setText(formatString);
 		
-		JPanel center = new JPanel();
-		JPanel bottom = SwingUtils.createJPanel(new Dimension(0, 116), getBackground());
-		bottom.setBorder(BorderFactory.createEmptyBorder(20, 25, 0, 0));
-		FlowLayout bottomLayout = new FlowLayout();
-		bottomLayout.setHgap(50);
-		bottom.setLayout(bottomLayout);
-		bottom.setOpaque(false);
-		center.setOpaque(false);
-		
-		FlowLayout centerLayout = new FlowLayout();
-		centerLayout.setHgap(63);
-		center.setLayout(centerLayout);
-		
-		for (int i = 0; i < pokerCardCount.length; i++) {
-			JLabel countLabel = SwingUtils.createJLabel("" + pokerCardCount[i], 60, Color.white, GlobalConstants.VCR_MONO);
-			countLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 65, 0));
-			center.add(countLabel);
-			
-		}
-		
-		for (int i = 0; i < unoCardCount.length; i++) {
-			JLabel countLabel = SwingUtils.createJLabel("" + unoCardCount[i], 60, UnoCard.CardColor.values()[i].getColor(), GlobalConstants.VCR_MONO);
-			countLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-			bottom.add(countLabel);
-
-		}
-		
-		
-		deckCountPanel.add(Box.createRigidArea(new Dimension(0, 170)), BorderLayout.NORTH);
-		deckCountPanel.add(bottom, BorderLayout.SOUTH);
-		deckCountPanel.add(center);
+		deckCountPanel.add(textArea);
 	}
 	
 	private void checkCard(Deck playerDeck, int i) {

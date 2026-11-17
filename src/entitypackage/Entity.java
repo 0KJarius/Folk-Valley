@@ -1,7 +1,7 @@
 package entitypackage;
 
 public class Entity {
-	private int initalMoney;
+	public int initalMoney;
 	private int maxMoney;
 	private int currentMoney;
 	private String name;

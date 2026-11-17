@@ -45,8 +45,6 @@ public class StageCollection {
 		);
 		
 		stages.add(builder.build());
-		
-		stages.add(builder.build());
 		builder.setStageName("BUSINESS MAN");
 		builder.setLayer(JLayeredPane.MODAL_LAYER);
 		builder.setNextStage(stages.get(stages.size() - 1));

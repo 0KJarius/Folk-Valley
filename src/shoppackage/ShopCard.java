@@ -120,7 +120,7 @@ public class ShopCard extends JPanel {
                 priceLabel.setText("Bought!");
                 
                 shopItem.buy();
-                ShopTable.onBuySomething();
+				EventBus.currentShop.onBuySomething();
             } else {
             	priceLabel.setForeground(Color.RED);
             	priceLabel.setText("Not enough money!");
@@ -128,14 +128,13 @@ public class ShopCard extends JPanel {
 					SoundBus.playSFX("button/decline.wav");
 				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
             }
-            ShopTable.moneyLabel.setText("V" + EventBus.player.getCurrentMoney());
         });
 
         JPanel bottomPanel = SwingUtils.createJPanel(
             new Dimension(150, 80), BACKGROUND_COLOR
         );
         bottomPanel.setOpaque(false);
-
+        
         bottomPanel.setLayout(new BorderLayout());
         bottomPanel.add(priceLabel, BorderLayout.NORTH);
         bottomPanel.add(buyButton);

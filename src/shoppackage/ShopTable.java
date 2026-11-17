@@ -34,8 +34,8 @@ public class ShopTable extends JPanel
 	private final String SHOP_REROLL = SHOP_PATH + "shopReroll/";
 	private final static String KEEPER = SHOP_PATH  + "keeper/";
 	
-	protected static JLabel moneyLabel = SwingUtils.createJLabel("V" + EventBus.player.getCurrentMoney(), 46, Color.decode("#FFD72F"), GlobalConstants.VCR_MONO);
-	private static JLabel shopKeep = new JLabel(SwingUtils.getImage(KEEPER + "normal.png"));
+	protected JLabel moneyLabel = SwingUtils.createJLabel("V" + EventBus.player.getCurrentMoney(), 46, Color.decode("#FFD72F"), GlobalConstants.VCR_MONO);;
+	private JLabel shopKeep = new JLabel(SwingUtils.getImage(KEEPER + "normal.png"));
 	
 	public ShopTable()
 	{
@@ -44,7 +44,7 @@ public class ShopTable extends JPanel
 		JLayeredPane baseLayer = new JLayeredPane();
 		baseLayer.setPreferredSize(GlobalConstants.SCREEN_SIZE);
 		this.add(baseLayer);
-		
+		shopKeep = new JLabel(SwingUtils.getImage(KEEPER + "normal.png"));
 		JPanel contentPanel = SwingUtils.createJPanel(new Rectangle(GlobalConstants.SCREEN_SIZE), getBackground());
 		contentPanel.setLayout(new BorderLayout());
 		contentPanel.setOpaque(false);
@@ -72,6 +72,7 @@ public class ShopTable extends JPanel
 			EventBus.selectedStage.completeStage();
 			EventBus.selectedStage.getNextStage().unlockStage();
 			EventBus.selectedStage = null;
+			EventBus.currentShop = null;
 			MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
 		});
 		
@@ -103,8 +104,10 @@ public class ShopTable extends JPanel
 		keeper.add(shopKeep);
 	}
 	
-	public static void onBuySomething() {
+	public void onBuySomething() {
 		shopKeep.setIcon(SwingUtils.getImage(KEEPER + "happy.png"));
+		moneyLabel.setText("V" + EventBus.player.getCurrentMoney());
+
 		try {
 			SoundBus.playSFX("shop/buy.wav");
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
@@ -116,5 +119,11 @@ public class ShopTable extends JPanel
 				return false;
 			}
 		});
+	}
+	
+	@Override
+	public void addNotify() {
+		EventBus.currentShop = this;
+		super.addNotify();
 	}
 }

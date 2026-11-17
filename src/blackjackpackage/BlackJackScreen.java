@@ -154,6 +154,7 @@ public class BlackJackScreen extends JPanel{
 		roundCounter = 0;
 		debtCounter = 0;
 		maxMoney = EventBus.player.getCurrentMoney();
+		infoArea.updateMoneyBar(enemy, false);
 	}
 	
 	public void resetDeck() {

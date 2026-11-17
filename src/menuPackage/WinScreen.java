@@ -75,7 +75,7 @@ public class WinScreen extends OverlayMenu{
 			public boolean doTask() {
 				MainFrame.getInstance().removeLayer(EventBus.currentMatch.scanLines);
 				MainFrame.getInstance().setScreen(((Enemy)EventBus.currentMatch.getEnemy()).getEndCutscene());
-				
+				EventBus.player.initalMoney = EventBus.player.getCurrentMoney();
 				EventBus.player.playerDeck = EventBus.currentMatch.getDeck().cloneDeck();
 				EventBus.player.setInventory((ArrayList<Item>) EventBus.currentMatch.getPlayerInventoryCopy().clone());
 				EventBus.selectedStage.completeStage();

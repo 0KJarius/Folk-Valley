@@ -8,12 +8,14 @@ import javax.swing.JPanel;
 import blackjackpackage.BlackJackScreen;
 import entitypackage.Player;
 import mainpackage.MainFrame;
+import shoppackage.ShopTable;
 import stageselectpackage.Stage;
 
 public abstract class EventBus {
 	public static Player player;
 	public static BlackJackScreen currentMatch;
 	public static Stage selectedStage;
+	public static ShopTable currentShop;
 	
 	public static void hardResetMatch() 
 	{
