@@ -124,6 +124,9 @@ public class ShopTable extends JPanel
 	@Override
 	public void addNotify() {
 		EventBus.currentShop = this;
+		try {
+			SoundBus.playSong("ReShop.wav", true);
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		super.addNotify();
 	}
 }
