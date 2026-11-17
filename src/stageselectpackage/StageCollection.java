@@ -22,18 +22,62 @@ public class StageCollection {
 	private StageCollection() {
 		StageBuilder builder = new StageBuilder();
 		builder.setStageFrameName("fight.png");
-		builder.setStageName("PROTOSUER");
+		builder.setStageName("MONOPOLY MAN");
 		builder.setLayer(JLayeredPane.PALETTE_LAYER);
 		builder.setTextColor(new Color(255, 177, 177));
 		builder.setDestination(
 				new BattlePrompt(
-						EnemyCollection.PROTOSUER.getEnemy(), 
-						EnemyCollection.PROTOSUER.getEnemy().getEntryCutscene(EnemyCollection.PROTOSUER.getEnemy().getMatch()))
-				);
+						EnemyCollection.MONOPOLEE.getEnemy(), 
+						EnemyCollection.MONOPOLEE.getEnemy().getEntryCutscene(EnemyCollection.MONOPOLEE.getEnemy().getMatch()))
+		);
+		
+		
 		
 		stages.add(builder.build());
+		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 1)));
+		builder.setStageName("THE IRS");
 		builder.setLayer(JLayeredPane.MODAL_LAYER);
 		builder.setNextStage(stages.get(stages.size() - 1));
+		builder.setDestination(
+				new BattlePrompt(
+						EnemyCollection.IRS.getEnemy(), 
+						EnemyCollection.IRS.getEnemy().getEntryCutscene(EnemyCollection.IRS.getEnemy().getMatch()))
+		);
+		
+		stages.add(builder.build());
+		
+		stages.add(builder.build());
+		builder.setStageName("BUSINESS MAN");
+		builder.setLayer(JLayeredPane.MODAL_LAYER);
+		builder.setNextStage(stages.get(stages.size() - 1));
+		builder.setDestination(
+				new BattlePrompt(
+						EnemyCollection.BUSINESS.getEnemy(), 
+						EnemyCollection.BUSINESS.getEnemy().getEntryCutscene(EnemyCollection.BUSINESS.getEnemy().getMatch()))
+		);
+		
+		stages.add(builder.build());
+		
+		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 1)));
+		
+		builder.setStageName("REFEREE");
+		builder.setLayer(JLayeredPane.MODAL_LAYER);
+		builder.setNextStage(stages.get(stages.size() - 1));
+		builder.setDestination(
+				new BattlePrompt(
+						EnemyCollection.REFEREE.getEnemy(), 
+						EnemyCollection.REFEREE.getEnemy().getEntryCutscene(EnemyCollection.REFEREE.getEnemy().getMatch()))
+		);
+		stages.add(builder.build());
+		
+		builder.setStageName("Sir Goodu");
+		builder.setLayer(JLayeredPane.MODAL_LAYER);
+		builder.setNextStage(stages.get(stages.size() - 1));
+		builder.setDestination(
+				new BattlePrompt(
+						EnemyCollection.GOODU.getEnemy(), 
+						EnemyCollection.GOODU.getEnemy().getEntryCutscene(EnemyCollection.GOODU.getEnemy().getMatch()))
+		);
 		stages.add(builder.build());
 		
 		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 1)));
@@ -56,6 +100,7 @@ public class StageCollection {
 		);
 		builder.setNextStage(stages.get(stages.size() - 1));
 		stages.add(builder.build());
+		System.out.print(stages.size());
 	}
 	//Stages are stored in reverse order (last level is on index 0)
 	public static StagePage createStagePage(int startIndex, int endIndex) {
