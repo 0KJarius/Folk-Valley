@@ -35,6 +35,7 @@ public class CutsceneDialogue extends JPanel {
 	public CutsceneDialogue(CutsceneLines[] dialogueLines, String expressionPath,String namePlatePath,String backgroundPath,JPanel nextScreen, String songPath) {
 		super();
 		this.nextScreen = nextScreen;
+		this.songPath = songPath;
 		this.setBounds(new Rectangle(1280, 720));
 		this.setLayout(null);
 		this.setBackground(Color.BLACK);
