@@ -14,6 +14,7 @@ import menuPackage.TutorialPrompt;
 import utilities.Signal;
 
 public class TutorialMatch extends BlackJackScreen{
+	private int roundCount = 1;
 	private TutorialPrompt prompt = new TutorialPrompt();
 	BetTable betTable = new BetTable() {
 
@@ -47,6 +48,13 @@ public class TutorialMatch extends BlackJackScreen{
 		super(EnemyCollection.PURSUER.getEnemy(), natural, new TutorialDeck());
 	}
 
+
+	@Override
+	public void checkResults() {
+		roundCount ++;
+		super.checkResults();
+	}
+	
 	private Signal betTablePrompt = new Signal() {
 		@Override
 		public boolean doTask() {
