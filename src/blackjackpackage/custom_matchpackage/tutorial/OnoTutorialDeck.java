@@ -16,5 +16,6 @@ public class OnoTutorialDeck extends Deck{
 				this.addCard(new UnoCard(UnoCard.CardColor.values()[j], i));
 			}
 		}
+		printCards();
 	}
 }

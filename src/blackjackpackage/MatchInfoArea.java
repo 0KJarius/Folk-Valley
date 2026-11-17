@@ -134,9 +134,7 @@ public class MatchInfoArea extends JPanel{
     		enemyMoneyProgressBar.setString(entity.getName());
     		enemyMoneyProgressBar.repaint();
 		}
-		if (entity.getCurrentMoney() > entity.getMaxMoney()) {
-    		entity.setMaxMoney(entity.getCurrentMoney());
-    	}
+		
     }
 	
 	public void updateDebtLabel(int debtAmount)
