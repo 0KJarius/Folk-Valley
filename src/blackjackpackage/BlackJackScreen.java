@@ -133,7 +133,7 @@ public class BlackJackScreen extends JPanel{
 		}
 		rightArea.getBottom().updateCardCountLabel();
 		if (getDeck().getSize() == 0) {
-			MainFrame.getInstance().layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
+			MainFrame.getInstance().layerOnScreen(new GameOverScreen(maxMoney, debtCounter, getRoundCounter()), JLayeredPane.POPUP_LAYER);
 		}
 	}
 	
@@ -188,7 +188,7 @@ public class BlackJackScreen extends JPanel{
 	}
 	
 	public void onRoundOver(boolean playerWin, boolean isTie, boolean isSplit) {
-		roundCounter++;
+		roundCounter = getRoundCounter() + 1;
 		
 		if (isTie) {
 			infoArea.addMoney(EventBus.player, playerWin, betPool / 2);
@@ -226,12 +226,12 @@ public class BlackJackScreen extends JPanel{
 		}
 		
 		if (EventBus.player.getCurrentMoney() <= 0) {
-			MainFrame.getInstance().layerOnScreen(new GameOverScreen(maxMoney, debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
+			MainFrame.getInstance().layerOnScreen(new GameOverScreen(maxMoney, debtCounter, getRoundCounter()), JLayeredPane.POPUP_LAYER);
 			return;
 		}
 		
 		if (getEnemy().getCurrentMoney() <= 0) {
-			MainFrame.getInstance().layerOnScreen(new WinScreen(debtCounter, roundCounter), JLayeredPane.POPUP_LAYER);
+			MainFrame.getInstance().layerOnScreen(new WinScreen(debtCounter, getRoundCounter()), JLayeredPane.POPUP_LAYER);
 			return;
 		}
 		
@@ -362,5 +362,9 @@ public class BlackJackScreen extends JPanel{
 
 	public Entity getEnemy() {
 		return enemy;
+	}
+
+	public int getRoundCounter() {
+		return roundCounter;
 	}
 }

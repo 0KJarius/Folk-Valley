@@ -14,16 +14,14 @@ import menuPackage.TutorialPrompt;
 import utilities.Signal;
 
 public class TutorialMatch extends BlackJackScreen{
-	private int roundCount = 1;
 	private TutorialPrompt prompt = new TutorialPrompt();
-	private TutorialMatch self = this;
 	BetTable betTable = new BetTable() {
 
 		@Override
 		public void removeNotify() {
 			super.removeNotify();
 			
-			if (roundCount == 1) {
+			if (getRoundCounter() == 1) {
 				MainFrame.getInstance().layerOnScreen(prompt, JLayeredPane.DRAG_LAYER);
 				prompt.setBlockers(653, 14, 277, 242);
 				prompt.activeBlock.setOpaque(false);
@@ -49,13 +47,6 @@ public class TutorialMatch extends BlackJackScreen{
 		super(EnemyCollection.PURSUER.getEnemy(), natural, new TutorialDeck());
 	}
 
-
-	@Override
-	public void checkResults() {
-		roundCount ++;
-		super.checkResults();
-	}
-	
 	private Signal betTablePrompt = new Signal() {
 		@Override
 		public boolean doTask() {
