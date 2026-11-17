@@ -81,7 +81,9 @@ public class GameOverScreen extends OverlayMenu
 			@Override
 			public boolean doTask() {
 				EventBus.player.resetWallet();
-				MainFrame.getInstance().removeLayer(EventBus.currentMatch.scanLines);
+				if (EventBus.currentMatch.scanLines != null) {
+					MainFrame.getInstance().removeLayer(EventBus.currentMatch.scanLines);
+				}
 				MainFrame.getInstance().setScreen(StageSelectScreen.getInstance());
 				EventBus.currentMatch = null;
 				MainFrame.getInstance().removeLayer(self);
