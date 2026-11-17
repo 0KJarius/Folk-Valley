@@ -15,24 +15,23 @@ public class Pursuer extends Enemy{
 				"persuer.png", 
 				"Your loving partner, but they won't go easy on you!", 
 				new CutsceneLines[] {
-						new CutsceneLines("", "Oh, good morning honey!", "normal"),
-						new CutsceneLines("", "Up so early today I see.", "normal"),
-						new CutsceneLines("", "What's for breakfast, you ask?", "normal"),
-						new CutsceneLines("", "Why, FRESH MEAT, of course!", "normal"),
-						new CutsceneLines("", "It's still cooking though... So you're gonna have to wait for a bit", "normal"),
-						new CutsceneLines("", "Say! Why don't we play some good old Folk Valley style Blackjack while we wait.", "normal"),
-						new CutsceneLines("", "Just like the old times!", "normal"),
-						new CutsceneLines("", "What?", "normal"),
-						new CutsceneLines("", "You forgot?", "normal"),
-						new CutsceneLines("", "Oh dear, honey did you hit your head when waking?", "normal"),
-						new CutsceneLines("", "Well... in any case, I'll just have to give you a refresher!", "normal")
+						new CutsceneLines("", "Wakey, Wakey!", "normal"),
+						new CutsceneLines("", "Oh Great! I thought you were PURSUED and DIED in your sleep! I got anxious, if you couldnt tell", "sad"),
+						new CutsceneLines("", "I hope you're hungry for some FRESH MEAT for breakfast!", "normal"),
+						new CutsceneLines("", "or else.", "angry"),
+						new CutsceneLines("", "But first! Its never a bad Idea to start the day with our very own game in this FOLK VALLEY.", "normal"),
+						new CutsceneLines("", "Hm?", "normal"),
+						new CutsceneLines("", "Dont Tell me you forgot...", "sad"),
+						new CutsceneLines("", "After all those times, you always won against me.", "angry"),
+						new CutsceneLines("", "I guess we cannot help it, allow me to reFRESH your recollection", "normal")
 				},
 				new CutsceneLines[] {
-						new CutsceneLines("", "Hey", "normal"),
-						new CutsceneLines("", "It's me", "normal"),
-						new CutsceneLines("", "It's Very Tee", "normal")
+						new CutsceneLines("", "GAHH", "angry"),
+						new CutsceneLines("", "Beat me again, are you sure you werent just joking when you said you forgot?", "sad"),
+						new CutsceneLines("", "anyways, all this LOSING has be hungry for some FRESH MEAT.", "normal"),
+						new CutsceneLines("", "Its time to PURSUE the day ahead of us.", "normal")
 				}, 
-				"placeHolder", 
+				"Pursuer", 
 				"pursuer.png"
 		);
 	}

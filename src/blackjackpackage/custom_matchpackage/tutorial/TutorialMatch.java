@@ -22,7 +22,7 @@ public class TutorialMatch extends BlackJackScreen{
 		public void removeNotify() {
 			super.removeNotify();
 			
-			if (getRoundCounter() == 1) {
+			if (roundCount == 1) {
 				MainFrame.getInstance().layerOnScreen(prompt, JLayeredPane.DRAG_LAYER);
 				prompt.setBlockers(653, 14, 277, 242);
 				prompt.activeBlock.setOpaque(false);

@@ -29,7 +29,7 @@ public class UnoCard extends Card{
 	private CardColor color;
 	
 	private final String UNO_PATH = "Cards/Uno Cards/";
-	private String currentSkin = UNO_PATH + "placeHolder/";
+	private String currentSkin = UNO_PATH + "mainOnoCards/";
 	private final String FRAME_PATH = currentSkin + "frame.png";
 	private final String FRAME_SELECT_PATH = currentSkin + "frameSelect.png";
 	private final String BACK_PATH = currentSkin + "back.png";
