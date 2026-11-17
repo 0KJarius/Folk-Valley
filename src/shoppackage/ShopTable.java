@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import mainpackage.MainFrame;
 import stageselectpackage.StageSelectScreen;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,11 +19,13 @@ import java.awt.Color;
 import utilities.EventBus;
 import utilities.GlobalConstants;
 import utilities.Signal;
+import utilities.SoundBus;
 import utilities.SwingUtils;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.IOException;
 
 public class ShopTable extends JPanel
 {
@@ -77,7 +81,8 @@ public class ShopTable extends JPanel
 				moneyLabel.setText("V" + EventBus.player.getCurrentMoney());
 			}
 		});
-		
+		SwingUtils.addButtonSFX(rerollButton, "button/hover.wav", "shop/rerollpress.wav", "shop/rerollrelease.wav");
+		SwingUtils.addButtonSFX(returnButton, "button/hover.wav", "button/pressed.wav", "button/release.wav");
 		dialoguePanel.setLayout(new BorderLayout());
 		dialoguePanel.add(returnButton, BorderLayout.WEST);
 		dialoguePanel.add(rerollButton, BorderLayout.CENTER);
@@ -100,6 +105,9 @@ public class ShopTable extends JPanel
 	
 	public static void onBuySomething() {
 		shopKeep.setIcon(SwingUtils.getImage(KEEPER + "happy.png"));
+		try {
+			SoundBus.playSFX("shop/buy.wav");
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
 		
 		EventBus.executeAfterTime(2000, new Signal() {
 			@Override

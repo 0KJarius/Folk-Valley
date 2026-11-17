@@ -94,6 +94,8 @@ public class BattlePrompt extends OverlayMenu{
 		
 		container.add(acceptButton);
 		container.add(declineButton);
+		SwingUtils.addButtonSFX(declineButton, "button/hover.wav", "button/pressed.wav", "button/decline.wav");
+		SwingUtils.addButtonSFX(acceptButton, "button/hover.wav", "button/pressed.wav", "button/accept.wav");
 	}
 	
 	private void setUpHeader(JPanel header) {

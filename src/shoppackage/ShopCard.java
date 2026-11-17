@@ -2,12 +2,16 @@ package shoppackage;
 
 import blackjackpackage.cardpackage.*;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 import utilities.SwingUtils;
 import utilities.EventBus;
 import utilities.GlobalConstants;
+import utilities.SoundBus;
 
 public class ShopCard extends JPanel {
 
@@ -90,7 +94,7 @@ public class ShopCard extends JPanel {
         );
 
         buyButton.setToolTipText(description);
-        
+        SwingUtils.addButtonSFX(buyButton, "shop/hover.wav", "", "");
 
         buyButton.addActionListener(e -> {
 
@@ -106,7 +110,7 @@ public class ShopCard extends JPanel {
                 return;
             }
 
-            if (EventBus.player.getCurrentMoney() >= price) {
+            if (EventBus.player.getCurrentMoney() > price) {
                 EventBus.player.subMoney(price);
 
                 purchased = true;
@@ -114,12 +118,15 @@ public class ShopCard extends JPanel {
 
                 priceLabel.setForeground(Color.GREEN);
                 priceLabel.setText("Bought!");
-
+                
                 shopItem.buy();
                 ShopTable.onBuySomething();
             } else {
             	priceLabel.setForeground(Color.RED);
             	priceLabel.setText("Not enough money!");
+            	try {
+					SoundBus.playSFX("button/decline.wav");
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {}
             }
             ShopTable.moneyLabel.setText("V" + EventBus.player.getCurrentMoney());
         });

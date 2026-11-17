@@ -52,6 +52,7 @@ public class NewGameMenu extends OverlayMenu{
 		this.addMouseListener(this);
 		
 		newGame.addActionListener(e -> onConfirmPressed());
+		SwingUtils.addButtonSFX(newGame, "button/hover.wav", "button/pressed.wav", "button/release.wav");
 	}
 	
 	private void setUpContentPanel(JPanel content) {

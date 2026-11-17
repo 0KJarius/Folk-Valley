@@ -48,7 +48,9 @@ public class LoadGameMenu extends OverlayMenu{
 		deleteButton.addActionListener(e -> onDeletePressed());
 		nukeButton.addActionListener(e -> onNukePressed());
 		loadButton.addActionListener(e -> onLoadPressed());
-		
+		SwingUtils.addButtonSFX(nukeButton, "button/hover.wav", "button/nuke/pressed.wav", "button/nuke/release.wav");
+		SwingUtils.addButtonSFX(deleteButton, "button/hover.wav", "button/pressed.wav", "button/release.wav");
+		SwingUtils.addButtonSFX(loadButton, "button/hover.wav", "button/pressed.wav", "button/release.wav");
 	}
 	
 	private void setUpContentPanel(JPanel content) {

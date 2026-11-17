@@ -3,12 +3,16 @@ package blackjackpackage.rightsidepackage;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import utilities.EventBus;
 import utilities.Signal;
+import utilities.SoundBus;
 import utilities.SwingUtils;
 
 public class TerminalScreen extends JPanel{
@@ -28,6 +32,10 @@ public class TerminalScreen extends JPanel{
 			this.remove(currentScreen);
 		}
 		this.add(staticTransition);
+		
+		try {
+			SoundBus.playSFX("blackJack/terminal.wav");
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		
 		EventBus.executeAfterTime(150, new Signal() {
 			@Override

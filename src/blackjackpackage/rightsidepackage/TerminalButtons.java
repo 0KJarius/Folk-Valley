@@ -1,9 +1,14 @@
 package blackjackpackage.rightsidepackage;
 
 import java.awt.Dimension;
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import utilities.EventBus;
+import utilities.SoundBus;
 import utilities.SwingUtils;
 
 public class TerminalButtons extends JPanel{
@@ -29,6 +34,8 @@ public class TerminalButtons extends JPanel{
 		buttons[1].addActionListener(e -> onInfoPressed());
 		buttons[2].addActionListener(e -> onNextButtonPressed());
 		buttons[3].addActionListener(e -> onUseButtonPressed());
+		
+		
 	}
 	
 	private void createTerminalButtons() {
@@ -45,35 +52,47 @@ public class TerminalButtons extends JPanel{
 	
 	private void onNextButtonPressed() {
 		if (EventBus.currentMatch.getPlayerInventoryCopy().isEmpty() || itemIndex == EventBus.currentMatch.getPlayerInventoryCopy().size() - 1) {
+			try {
+				SoundBus.playSFX("button/no.wav");
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 			return;
 		}
 		
-		
+		try {
+			SoundBus.playSFX("blackJack/change.wav");
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		terminal.getItemSelect().remove(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
 		itemIndex++;
 		terminal.getItemSelect().add(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
 		terminal.currentItemLabel.setText(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex).getName());
 		terminal.repaint();
 		terminal.revalidate();
-		System.out.println("Change NEXT");
 	}
 	
 	private void onPrevButtonPressed() {
 		if (EventBus.currentMatch.getPlayerInventoryCopy().isEmpty() || itemIndex == 0) {
+			try {
+				SoundBus.playSFX("button/no.wav");
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 			return;
 		}
 		
+		try {
+			SoundBus.playSFX("blackJack/change.wav");
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		terminal.getItemSelect().remove(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
 		itemIndex--;
 		terminal.getItemSelect().add(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
 		terminal.currentItemLabel.setText(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex).getName());
 		terminal.repaint();
 		terminal.revalidate();
-		System.out.println("Change PREV");
 	}
 	
 	private void onInfoPressed() {
 		if (EventBus.currentMatch.getPlayerInventoryCopy().isEmpty()) {
+			try {
+				SoundBus.playSFX("button/no.wav");
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 			return;
 		}
 		
@@ -93,11 +112,18 @@ public class TerminalButtons extends JPanel{
 	
 	private void onUseButtonPressed() {
 		if (EventBus.currentMatch.getPlayerInventoryCopy().isEmpty()) {
+			try {
+				SoundBus.playSFX("button/no.wav");
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 			return;
 		}
 		
 		boolean isSuccessful = EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex).doTask();
 		if (isSuccessful) {
+			try {
+				SoundBus.playSFX("blackJack/use.wav");
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
+			
 			terminal.getItemSelect().remove(EventBus.currentMatch.getPlayerInventoryCopy().get(itemIndex));
 			EventBus.currentMatch.getPlayerInventoryCopy().remove(itemIndex);
 			
@@ -120,6 +146,9 @@ public class TerminalButtons extends JPanel{
 			terminal.repaint();
 			terminal.revalidate();
 		} else {
+			try {
+				SoundBus.playSFX("button/no.wav");
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 			System.out.println("UNUSED");
 		}
 	}

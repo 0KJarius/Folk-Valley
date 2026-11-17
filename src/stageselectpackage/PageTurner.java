@@ -38,6 +38,8 @@ public class PageTurner extends JPanel{
 		basePane.add(SwingUtils.createImageAt("stageSelect/pageTerminal.png", new Point(0, 0)), JLayeredPane.DEFAULT_LAYER);
 		basePane.add(content, JLayeredPane.PALETTE_LAYER);
 		setUpButtons();
+		SwingUtils.addButtonSFX(nextButton, "button/hover.wav", "button/pressed.wav", "button/pageTurn/pressed.wav");
+		SwingUtils.addButtonSFX(prevButton, "button/hover.wav", "button/pressed.wav", "button/pageTurn/pressed.wav");
 	}
 	
 	private void setUpContent(JPanel content) {
