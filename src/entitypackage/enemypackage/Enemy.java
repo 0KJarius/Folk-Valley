@@ -46,6 +46,7 @@ public abstract class Enemy extends Entity{
 	}
 	
 	public  BlackJackScreen getMatch() {
+		System.out.println(this.getName());
 		return new BlackJackScreen(this, EventBus.player.playerDeck);
 	}
 	

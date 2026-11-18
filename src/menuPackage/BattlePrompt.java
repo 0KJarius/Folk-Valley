@@ -85,7 +85,7 @@ public class BattlePrompt extends OverlayMenu{
 		
 		acceptButton.addActionListener(e -> {
 			MainFrame.getInstance().removeLayer(this);
-			MainFrame.getInstance().setScreen(screenTransition);
+			MainFrame.getInstance().setScreen(opp.getEntryCutscene(opp.getMatch()));
 		});
 		
 		declineButton.addActionListener(e -> {
