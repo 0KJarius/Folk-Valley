@@ -21,11 +21,9 @@ import utilities.SwingUtils;
 public class BattlePrompt extends OverlayMenu{
 	private final String BATTLE_PROMPT_PATH = "battlePrompt/";
 	private Enemy opp;
-	private JPanel screenTransition;
 	
-	public BattlePrompt(Enemy opp, JPanel screenTransition) {
+	public BattlePrompt(Enemy opp) {
 		this.opp = opp;
-		this.screenTransition = screenTransition;
 		this.setOpaque(false);
 		this.setBounds(new Rectangle(GlobalConstants.SCREEN_SIZE));
 		this.setLayout(new BorderLayout());

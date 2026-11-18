@@ -25,11 +25,7 @@ public class StageCollection {
 		builder.setStageName("MONOPOLY MAN");
 		builder.setLayer(JLayeredPane.PALETTE_LAYER);
 		builder.setTextColor(new Color(255, 177, 177));
-		builder.setDestination(
-				new BattlePrompt(
-						EnemyCollection.MONOPOLEE.getEnemy(), 
-						EnemyCollection.MONOPOLEE.getEnemy().getEntryCutscene(EnemyCollection.MONOPOLEE.getEnemy().getMatch()))
-		);
+		builder.setDestination(new BattlePrompt(EnemyCollection.MONOPOLEE.getEnemy()));
 		
 		
 		
@@ -38,21 +34,13 @@ public class StageCollection {
 		builder.setStageName("THE IRS");
 		builder.setLayer(JLayeredPane.MODAL_LAYER);
 		builder.setNextStage(stages.get(stages.size() - 1));
-		builder.setDestination(
-				new BattlePrompt(
-						EnemyCollection.IRS.getEnemy(), 
-						EnemyCollection.IRS.getEnemy().getEntryCutscene(EnemyCollection.IRS.getEnemy().getMatch()))
-		);
+		builder.setDestination(new BattlePrompt(EnemyCollection.IRS.getEnemy()));
 		
 		stages.add(builder.build());
 		builder.setStageName("BUSINESS MAN");
 		builder.setLayer(JLayeredPane.MODAL_LAYER);
 		builder.setNextStage(stages.get(stages.size() - 1));
-		builder.setDestination(
-				new BattlePrompt(
-						EnemyCollection.BUSINESS.getEnemy(), 
-						EnemyCollection.BUSINESS.getEnemy().getEntryCutscene(EnemyCollection.BUSINESS.getEnemy().getMatch()))
-		);
+		builder.setDestination(new BattlePrompt(EnemyCollection.BUSINESS.getEnemy()));
 		
 		stages.add(builder.build());
 		
@@ -61,41 +49,25 @@ public class StageCollection {
 		builder.setStageName("REFEREE");
 		builder.setLayer(JLayeredPane.MODAL_LAYER);
 		builder.setNextStage(stages.get(stages.size() - 1));
-		builder.setDestination(
-				new BattlePrompt(
-						EnemyCollection.REFEREE.getEnemy(), 
-						EnemyCollection.REFEREE.getEnemy().getEntryCutscene(EnemyCollection.REFEREE.getEnemy().getMatch()))
-		);
+		builder.setDestination(new BattlePrompt(EnemyCollection.REFEREE.getEnemy()));
 		stages.add(builder.build());
 		
 		builder.setStageName("Sir Goodu");
 		builder.setLayer(JLayeredPane.MODAL_LAYER);
 		builder.setNextStage(stages.get(stages.size() - 1));
-		builder.setDestination(
-				new BattlePrompt(
-						EnemyCollection.GOODU.getEnemy(), 
-						EnemyCollection.GOODU.getEnemy().getEntryCutscene(EnemyCollection.GOODU.getEnemy().getMatch()))
-		);
+		builder.setDestination(new BattlePrompt(EnemyCollection.GOODU.getEnemy()));
 		stages.add(builder.build());
 		
 		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 1)));
 		
 		builder.setNextStage(stages.get(stages.size() - 1));
 		builder.setStageName("Numer O. Uno");
-		builder.setDestination(
-				new BattlePrompt(
-						EnemyCollection.NUMEROUNO.getEnemy(),
-						EnemyCollection.NUMEROUNO.getEnemy().getEntryCutscene(EnemyCollection.NUMEROUNO.getEnemy().getMatch())
-				)
-		);
+		builder.setDestination(new BattlePrompt(EnemyCollection.NUMEROUNO.getEnemy()));
 		stages.add(builder.build());
 		
 		builder.setStageName("TUTORIAL");
-		builder.setDestination(new BattlePrompt(
-						EnemyCollection.PURSUER.getEnemy(), 
-						EnemyCollection.PURSUER.getEnemy().getEntryCutscene(EnemyCollection.PURSUER.getEnemy().getMatch())
-					)
-		);
+		builder.setDestination(new BattlePrompt(EnemyCollection.PURSUER.getEnemy())
+);
 		builder.setNextStage(stages.get(stages.size() - 1));
 		stages.add(builder.build());
 		System.out.print(stages.size());
