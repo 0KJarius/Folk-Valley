@@ -30,7 +30,9 @@ public class StageCollection {
 		
 		
 		stages.add(builder.build());
+		
 		stages.add(new Stage("Shop", Color.white, "shop.png" ,true, new ShopTable(),  stages.get(stages.size() - 1)));
+		
 		builder.setStageName("THE IRS");
 		builder.setLayer(JLayeredPane.MODAL_LAYER);
 		builder.setNextStage(stages.get(stages.size() - 1));
