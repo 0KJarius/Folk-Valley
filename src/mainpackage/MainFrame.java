@@ -37,7 +37,7 @@ public class MainFrame extends JFrame{
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				SaveManager.saveGame(EventBus.player);
+				SaveManager.saveGame();
 				super.windowClosing(e);
 			}
         	

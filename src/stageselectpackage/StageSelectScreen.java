@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import mainpackage.MainFrame;
 import menuPackage.ViewDeckScreen;
+import savepackage.SaveManager;
 import utilities.EventBus;
 import utilities.GlobalConstants;
 import utilities.SoundBus;
@@ -139,6 +140,7 @@ public class StageSelectScreen extends JPanel{
 			SoundBus.playSong("waiting.wav", true);
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {}
 		balanceLabel.setText("V" + EventBus.player.getCurrentMoney());
+		SaveManager.writeCurrentPlayerState(EventBus.player);
 		super.addNotify();
 	}
 }

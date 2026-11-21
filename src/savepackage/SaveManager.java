@@ -22,6 +22,7 @@ import utilities.EventBus;
 public class SaveManager{
 	private static SaveManager MANAGER = new SaveManager();
 	private static Gson gson;
+	private static String playerInfo;
 	
 	private SaveManager() {
 		GsonBuilder buildGson = new GsonBuilder();
@@ -39,13 +40,21 @@ public class SaveManager{
 		return MANAGER;
 	}
 	
-	public static void saveGame(Player player) {
-		String playerInfo = gson.toJson(player);
+	public static void saveGame() {
+		if (playerInfo == null) {
+			return;
+		}
 		try (FileWriter writer = new FileWriter("Save.json")){
 			writer.write(playerInfo);
 			System.out.println("SAVED GAME");
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static void writeCurrentPlayerState(Player player) {
+		if (player != null) {
+			playerInfo = gson.toJson(player);
 		}
 	}
 	
