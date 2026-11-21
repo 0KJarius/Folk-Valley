@@ -7,6 +7,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import savepackage.SaveManager;
 import utilities.EventBus;
@@ -23,7 +25,11 @@ public class MainFrame extends JFrame{
 		this.setTitle("Folk Valley 2: Reign Of The Monopoly Man");
 		this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.setLocationRelativeTo(null);
+        try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {}
+
         this.setResizable(false);
         this.setLayout(new BorderLayout());
         
